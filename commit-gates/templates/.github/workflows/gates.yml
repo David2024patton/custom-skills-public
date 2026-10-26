@@ -1,0 +1,146 @@
+# Commit Gates: CI proof layer.
+#
+# WHAT THIS IS: the GitHub Actions workflow that makes the gates
+# proof instead of local opinion. Copy this file into a repo at
+# .github/workflows/gates.yml (the github-repo-standard machinery set
+# carries the same file). It runs the commit-gates entry point,
+# scripts/run-gates.sh, whole-tree on every pull request and on every
+# push to the default branch, lints the workflow files themselves
+# with actionlint, and re-checks commit message form over the pull
+# request commit range with the shipped commitlint config
+# (commitlint.config.js at the repo root).
+#
+# ENFORCEMENT: this workflow is the proof layer, not the enforcement
+# by itself. Turn on branch protection for the default branch and
+# require the checks from this workflow (gates, actionlint, and the
+# commit message check) before merging. See the Enforcement layers
+# section of commit-gates/SKILL.md.
+#
+# PINS: every GitHub action below is pinned to a full commit SHA with
+# its version in a comment. The tools run-gates.sh needs are installed
+# at pinned versions in the gates job: gitleaks 8.30.1 and osv-scanner
+# 2.7.0, each verified against the sha256 checksums file published
+# with its release. actionlint 1.7.12 is installed the same way in
+# the actionlint job, verified against the sha256 checksums file
+# published with the actionlint release. No installer is piped into a
+# shell and no tool is fetched from a moving branch.
+#
+# ADOPTING: the push trigger below names main as the default branch;
+# change it if the repo's default branch has another name. The gates
+# step looks for run-gates.sh in the locations listed in its loop;
+# if the repo vendors the scripts library somewhere else, add that
+# path to the loop. The tool downloads below are the linux x86_64
+# builds for the stock ubuntu-latest runner; change the asset names
+# if the runner image changes architecture.
+
+name: gates
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  actionlint:
+    name: actionlint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Install actionlint 1.7.12 (pinned, checksum verified)
+        run: |
+          set -eu
+          version="1.7.12"
+          asset="actionlint_${version}_linux_amd64.tar.gz"
+          base="https://github.com/rhysd/actionlint/releases/download/v${version}"
+          curl -sSfL -o "$asset" "$base/$asset"
+          curl -sSfL -o "actionlint_${version}_checksums.txt" "$base/actionlint_${version}_checksums.txt"
+          grep "  $asset\$" "actionlint_${version}_checksums.txt" | sha256sum -c -
+          tar -xzf "$asset" actionlint
+          echo "DIAG: actionlint version: $(./actionlint --version)"
+      - name: Lint the workflow files
+        run: ./actionlint -color
+
+  gates:
+    name: gates
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Install gitleaks 8.30.1 (pinned, checksum verified)
+        run: |
+          set -eu
+          version="8.30.1"
+          asset="gitleaks_${version}_linux_x64.tar.gz"
+          base="https://github.com/gitleaks/gitleaks/releases/download/v${version}"
+          mkdir -p "$RUNNER_TEMP/gate-tools"
+          curl -sSfL -o "$RUNNER_TEMP/$asset" "$base/$asset"
+          curl -sSfL -o "$RUNNER_TEMP/gitleaks_${version}_checksums.txt" "$base/gitleaks_${version}_checksums.txt"
+          grep "  $asset\$" "$RUNNER_TEMP/gitleaks_${version}_checksums.txt" | (cd "$RUNNER_TEMP" && sha256sum -c -)
+          tar -xzf "$RUNNER_TEMP/$asset" -C "$RUNNER_TEMP/gate-tools" gitleaks
+          echo "$RUNNER_TEMP/gate-tools" >> "$GITHUB_PATH"
+          echo "DIAG: gitleaks install staged"
+      - name: Install osv-scanner 2.7.0 (pinned, checksum verified)
+        run: |
+          set -eu
+          version="2.7.0"
+          asset="osv-scanner_linux_amd64"
+          base="https://github.com/google/osv-scanner/releases/download/v${version}"
+          mkdir -p "$RUNNER_TEMP/gate-tools"
+          curl -sSfL -o "$RUNNER_TEMP/gate-tools/osv-scanner" "$base/$asset"
+          curl -sSfL -o "$RUNNER_TEMP/osv-scanner_SHA256SUMS" "$base/osv-scanner_SHA256SUMS"
+          grep "  $asset\$" "$RUNNER_TEMP/osv-scanner_SHA256SUMS" | sed "s|$asset|gate-tools/osv-scanner|" | (cd "$RUNNER_TEMP" && sha256sum -c -)
+          chmod +x "$RUNNER_TEMP/gate-tools/osv-scanner"
+          echo "$RUNNER_TEMP/gate-tools" >> "$GITHUB_PATH"
+          echo "DIAG: osv-scanner install staged"
+      - name: Verify the gate tools are on PATH
+        run: |
+          set -eu
+          command -v gitleaks
+          gitleaks version
+          command -v osv-scanner
+          osv-scanner --version
+      - name: Run the commit gates whole-tree
+        run: |
+          set -eu
+          script=""
+          for candidate in tools/commit-gates/scripts/run-gates.sh commit-gates/scripts/run-gates.sh scripts/run-gates.sh; do
+            if [ -f "$candidate" ]; then
+              script="$candidate"
+              break
+            fi
+          done
+          if [ -z "$script" ]; then
+            echo "DIAG: run-gates.sh not found in any known location." >&2
+            echo "DIAG: looked for tools/commit-gates/scripts/run-gates.sh, commit-gates/scripts/run-gates.sh, scripts/run-gates.sh" >&2
+            exit 2
+          fi
+          echo "DIAG: running gates via $script"
+          bash "$script"
+
+  commit-messages:
+    name: commit messages
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the pull request with full history
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          fetch-depth: 0
+      - name: Set up Node
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: "20"
+      - name: Check commit messages over the PR range
+        run: |
+          set -eu
+          if [ ! -f commitlint.config.js ]; then
+            echo "DIAG: commitlint.config.js missing at the repo root; copy it from the commit-gates templates." >&2
+            exit 2
+          fi
+          npm install --no-save @commitlint/cli @commitlint/config-conventional
+          npx commitlint --config commitlint.config.js --from "${{ github.event.pull_request.base.sha }}" --to "${{ github.event.pull_request.head.sha }}" --verbose

@@ -1,0 +1,14 @@
+name: local_golang_refactoring
+title: Local golang refactoring
+description: 'Golang refactoring, safe, at-scale restructuring of existing Go code: a coverage-adaptive safety net, behavior-preserving transforms (gopls Rename/Extract, `gofmt -r`, `gopatch`), the Fowler catalog mapped to Go, breaking import cycles, and small stacked PRs. Apply when a function or type has grown too large, a code smell blocks a feature, or the user asks to refactor Go code, also for renaming at scale, extracting functions or interfaces, moving code between packages, or planning a multi-step refactor. Target styles owned elsewhere → See `samber/cc-skills-golang@golang-naming` (renames), `samber/cc-skills-golang@golang-project-layout` (splits), `samber/cc-skills-golang@golang-modernize` (idioms), `samber/cc-skills-golang@golang-code-style` (control flow), `samber/cc-skills-golang@golang-design-patterns` (patterns/DI).'
+include_in_prompt: true
+availability:
+  confidential_vm: true
+  needs_speech: false
+skill_improvement:
+  managed: true
+  needs_review: true
+license: MIT
+author: samber
+upstream_version: "1.1.1"
+derived_from: samber/cc-skills-golang (golang-refactoring)

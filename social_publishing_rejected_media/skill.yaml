@@ -1,0 +1,27 @@
+name: social_publishing_rejected_media
+title: Rejected Source Media in Social Publishing
+description: Keeps a user rejection of source footage or images in force across re-renders, so approving a template or caption never revives media the user already rejected.
+category: Media
+include_in_prompt: false
+amends:
+  skill: social_publishing
+  reviewed_revision: 84f002fefdc91266909acac585074a254484e17609759ee4872409f43fee7d4d
+skill_improvement:
+  managed: true
+  status: active
+  evidence_handles:
+  - system skill social_publishing revision 84f002fefdc91266909acac585074a254484e17609759ee4872409f43fee7d4d
+  - social_publishing_rejected_media inventory revision 97887f2ab3ee0587f3dee89368f612dce6e621ddaafe4e796984a88b3457654e
+  - 'user message b921a5e6: ''You literally posted a video I told you not to post. It is still the same one as yesterday'''
+  - Instagram post 18144792166606522
+  - Threads post 18023486687708055
+  - user messages c355ad90 and 7962dad3 approving the banner template
+  measurement:
+    proxy_metric_id: objective_success_rate
+    success_criterion: Across the window, no social publishing run publishes or schedules a post whose source media the user previously rejected, and no user correction reports a rejected asset being posted again.
+    window_days: 30
+  needs_review: false
+  rationale: 'The evidence gate woke this run for amendment_base_changed. The social_publishing base moved from reviewed revision 3448d2facfa7487ed1093d2efa8d36e129df775a64eda3ed5107bb49fb9d39a7 to 84f002fefdc91266909acac585074a254484e17609759ee4872409f43fee7d4d, marking social_publishing_rejected_media needs_review. Reading the new base in full shows its Get approval section still covers only what the user saw and its Publish and verify section still separates acceptance from publication, but neither states the source versus treatment versus copy separation that failed in the original incident (user b921a5e6, Instagram 18144792166606522, Threads 18023486687708055). The amendment is therefore still needed unchanged, and renewing its reviewed_revision clears the review without adding a new behavior change. No other proposal is made: the lead alert SMS retraction (Twilio error 30034, messages 3f5d4124, a1101c0b, assistant-msg-caf902a6) is already covered in principle by messaging and customer_outreach, which both state accepted is not delivered, and its remaining F178 and F179 items are code fixes in lead_alert.go, not a reusable skill method; the single failed hourly-project-sweep cron run 08ae1f96 and the generic exec failures in the packet carry no detail tying them to a reusable method; and the roughly 46 local golang skills remain an intentional on demand third party collection behind the local_golang_how_to orchestrator, with no failure evidence in this window tying them to a consolidation need, as recorded in the local_pulse learning rationale.'
+  review_after: 2026-11-16T22:29:48.219430+00:00
+  reviewed_at: 2026-10-17T22:29:48.219430+00:00
+  run_id: sirun_847d36da759942579dbf79aa182db1ea

@@ -1,0 +1,266 @@
+{
+ "structure_format_version": 1,
+ "template_version": "1.0.0",
+ "standard_skill": "github-repo-standard",
+ "manifest_purpose": "Machine readable form of the github-repo-standard planned file standard. Authored in the standard's own skill; consumed by the github skill's repo structure workflow (scripts/repo-structure.py). Content owner: github-repo-standard/SKILL.md; if this file and that skill disagree, the skill wins and this file has a bug.",
+ "instruction_header_marker": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "standard_files": [
+ {
+ "path": "TODO.md",
+ "template": "templates/TODO.md",
+ "location": "root",
+ "class": "required",
+ "title": "TODO: <Project Name>",
+ "header": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "instruction_header_marker": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "source_section": "The standard set (non-negotiable), item 1",
+ "cross_refs": [
+ "PLAN.md (every item ends with (PLAN S<n>))",
+ "ENDGOAL.md"
+ ]
+ },
+ {
+ "path": "IDEA.md",
+ "template": "templates/IDEA.md",
+ "location": "root",
+ "class": "required",
+ "title": "IDEA: <Project Name>",
+ "header": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "instruction_header_marker": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "source_section": "The standard set (non-negotiable), item 2",
+ "cross_refs": [
+ "TODO.md (moved ideas carry the TODO item id)"
+ ]
+ },
+ {
+ "path": "PLAN.md",
+ "template": "templates/PLAN.md",
+ "location": "root",
+ "class": "required",
+ "title": "PLAN: <Project Name>",
+ "header": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "instruction_header_marker": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "source_section": "The standard set (non-negotiable), item 3",
+ "cross_refs": [
+ "TODO.md (every section names its TODO phase)",
+ "ENDGOAL.md"
+ ]
+ },
+ {
+ "path": "ENDGOAL.md",
+ "template": "templates/ENDGOAL.md",
+ "location": "root",
+ "class": "required",
+ "title": "ENDGOAL: <Project Name>",
+ "header": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "instruction_header_marker": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "source_section": "The standard set (non-negotiable), item 4",
+ "cross_refs": [
+ "TODO.md",
+ "PLAN.md"
+ ]
+ },
+ {
+ "path": "README.md",
+ "template": "templates/README.md",
+ "location": "root",
+ "class": "required",
+ "title": "<Project Name in exact brand casing>",
+ "header": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "instruction_header_marker": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "source_section": "README standard",
+ "cross_refs": [
+ "TODO.md",
+ "PLAN.md",
+ "IDEA.md",
+ "docs/RULES.md"
+ ]
+ },
+ {
+ "path": "docs/RULES.md",
+ "template": "templates/RULES.md",
+ "location": "docs",
+ "class": "required",
+ "title": "RULES: how this project gets built",
+ "header": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "instruction_header_marker": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "source_section": "The rules page",
+ "cross_refs": []
+ },
+ {
+ "path": "STATUS.md",
+ "template": "templates/STATUS.md",
+ "location": "root",
+ "class": "jump-back-in",
+ "title": "STATUS: <Project Name>",
+ "header": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "instruction_header_marker": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "source_section": "The jump-back-in files, item 5",
+ "cross_refs": [
+ "TODO.md (next moves carry TODO ids)"
+ ]
+ },
+ {
+ "path": "DECISIONS.md",
+ "template": "templates/DECISIONS.md",
+ "location": "root",
+ "class": "jump-back-in",
+ "title": "DECISIONS: <Project Name>",
+ "header": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "instruction_header_marker": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "source_section": "The jump-back-in files, item 6",
+ "cross_refs": []
+ },
+ {
+ "path": "docs/RUNBOOK.md",
+ "template": "templates/RUNBOOK.md",
+ "location": "docs",
+ "class": "jump-back-in",
+ "title": "RUNBOOK: <Project Name>",
+ "header": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "instruction_header_marker": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "source_section": "The jump-back-in files, item 7",
+ "cross_refs": []
+ },
+ {
+ "path": "CHANGELOG.md",
+ "template": "templates/CHANGELOG.md",
+ "location": "root",
+ "class": "jump-back-in",
+ "title": "CHANGELOG: <Project Name>",
+ "header": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "instruction_header_marker": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "source_section": "The jump-back-in files, item 8",
+ "cross_refs": []
+ },
+ {
+ "path": "docs/MAP.md",
+ "template": "templates/MAP.md",
+ "location": "docs",
+ "class": "jump-back-in",
+ "title": "MAP: <Project Name>",
+ "header": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "instruction_header_marker": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "source_section": "The jump-back-in files, item 9",
+ "cross_refs": []
+ },
+ {
+ "path": "REFERENCES.md",
+ "template": "templates/REFERENCES.md",
+ "location": "root",
+ "class": "jump-back-in",
+ "title": "REFERENCES: <Project Name>",
+ "header": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "instruction_header_marker": "INSTRUCTIONS FOR THIS FILE (user and AI: read before editing. Keep this header.)",
+ "source_section": "The jump-back-in files, item 10",
+ "cross_refs": [
+ "TODO.md",
+ "IDEA.md"
+ ]
+ }
+ ],
+ "jump_back_in_files": [
+ "STATUS.md",
+ "DECISIONS.md",
+ "docs/RUNBOOK.md",
+ "CHANGELOG.md",
+ "docs/MAP.md",
+ "REFERENCES.md"
+ ],
+ "machinery_files": [
+ {
+ "path": ".gitignore",
+ "template": "templates/.gitignore",
+ "location": "root",
+ "class": "machinery",
+ "title": "Standard .gitignore for repos under the github-repo-standard.",
+ "header": null,
+ "instruction_header_marker": null,
+ "source_section": "Standard machinery files",
+ "cross_refs": []
+ },
+ {
+ "path": ".editorconfig",
+ "template": "templates/.editorconfig",
+ "location": "root",
+ "class": "machinery",
+ "title": "Standard .editorconfig for repos under the github-repo-standard.",
+ "header": null,
+ "instruction_header_marker": null,
+ "source_section": "Standard machinery files",
+ "cross_refs": []
+ },
+ {
+ "path": ".gitattributes",
+ "template": "templates/.gitattributes",
+ "location": "root",
+ "class": "machinery",
+ "title": "Standard .gitattributes for repos under the github-repo-standard.",
+ "header": null,
+ "instruction_header_marker": null,
+ "source_section": "Standard machinery files",
+ "cross_refs": []
+ },
+ {
+ "path": "CODEOWNERS",
+ "template": "templates/CODEOWNERS",
+ "location": "root",
+ "class": "machinery",
+ "title": "Standard CODEOWNERS for repos under the github-repo-standard.",
+ "header": null,
+ "instruction_header_marker": null,
+ "source_section": "Standard machinery files",
+ "cross_refs": [
+ "docs/RULES.md",
+ ".github/workflows/gates.yml"
+ ]
+ },
+ {
+ "path": "SECURITY.md",
+ "template": "templates/SECURITY.md",
+ "location": "root",
+ "class": "machinery",
+ "title": "Security Policy",
+ "header": null,
+ "instruction_header_marker": null,
+ "source_section": "Standard machinery files",
+ "cross_refs": []
+ },
+ {
+ "path": ".github/pull_request_template.md",
+ "template": "templates/.github/pull_request_template.md",
+ "location": "root",
+ "class": "machinery",
+ "title": "",
+ "header": null,
+ "instruction_header_marker": null,
+ "source_section": "Standard machinery files",
+ "cross_refs": [
+ "CHANGELOG.md"
+ ]
+ },
+ {
+ "path": ".github/workflows/gates.yml",
+ "template": "templates/.github/workflows/gates.yml",
+ "location": "root",
+ "class": "machinery",
+ "title": "Commit Gates: CI proof layer.",
+ "header": null,
+ "instruction_header_marker": null,
+ "source_section": "Standard machinery files",
+ "cross_refs": []
+ }
+ ],
+ "todo_id_pattern": "T-<phase>.<n>",
+ "todo_id_regex": "^T-\\d+\\.\\d+$",
+ "plan_section_pattern": "S<n>",
+ "plan_section_regex": "^S\\d+$",
+ "cross_reference_law": "Every TODO item carries a stable ID matching todo_id_pattern and ends with (PLAN S<n>) naming the PLAN section it serves. PLAN sections are numbered S1, S2, and following, and each build step section names its TODO phase.",
+ "brand_casing": [
+ "AlphaVision",
+ "AlphaFlux",
+ "iTaK",
+ "the harness",
+ "Patriot Pest Control"
+ ]
+}

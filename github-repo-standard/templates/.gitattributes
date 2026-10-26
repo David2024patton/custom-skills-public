@@ -1,0 +1,24 @@
+# Standard .gitattributes for repos under the github-repo-standard.
+# Copy to the repo root as .gitattributes. Text files normalize to LF
+# in the repo so diffs and gates behave the same on every machine.
+
+* text=auto eol=lf
+
+*.sh text eol=lf
+*.bash text eol=lf
+*.md text
+*.yml text
+*.yaml text
+*.json text
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.woff binary
+*.woff2 binary

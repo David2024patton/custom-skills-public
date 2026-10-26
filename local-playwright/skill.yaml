@@ -1,0 +1,10 @@
+name: local_playwright
+title: Local playwright
+description: 'Drive a real headless Chromium with Playwright from this VM: screenshots, clicks, mobile viewport emulation, console error capture. Use when you need to see or interact with a live page, verify a UI change, or test desktop and mobile layouts.'
+include_in_prompt: true
+availability:
+  confidential_vm: true
+  needs_speech: false
+skill_improvement:
+  managed: true
+  needs_review: true
