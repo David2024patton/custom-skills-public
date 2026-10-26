@@ -1,0 +1,71 @@
+# Standard .gitignore for repos under the github-repo-standard.
+# Combined template covering the stacks this standard serves (Go,
+# Rust, Dart and Flutter, JS and TS, Python, shell). Copy to the repo
+# root as .gitignore and delete the sections the repo does not use.
+# Rule: never commit secrets, build output, or local state. Lockfiles
+# are committed on purpose and are never listed here.
+
+# Operating system and editors
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Local environment and secrets (values live in secure storage only)
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+id_rsa*
+credentials*
+*secret*
+
+# Logs and local state
+*.log
+tmp/
+*.tmp
+.local/
+
+# Go
+/bin/
+*.test
+*.out
+coverage.out
+
+# Rust
+/target/
+**/*.rs.bk
+
+# Dart and Flutter
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+doc/api/
+
+# JS and TS
+node_modules/
+dist/
+.next/
+.turbo/
+*.tsbuildinfo
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# Coverage and test output
+coverage/
+.nyc_output/
+test-results/
