@@ -1,0 +1,10 @@
+name: local_golang_project_layout
+title: Local golang project layout
+description: Golang project layout and workspace setup — cmd/internal/pkg directory conventions, module and package naming, go.work workspaces, and essential configuration files. Use when starting a new Go project, organizing an existing codebase, setting up a monorepo with multiple packages, creating CLI tools with multiple main packages, or discussing package restructuring, package splits, or module splits. Not for restructuring existing code without a layout change (→ See `samber/cc-skills-golang@golang-refactoring` skill).
+include_in_prompt: true
+availability:
+  confidential_vm: true
+  needs_speech: false
+skill_improvement:
+  managed: true
+  needs_review: true

@@ -1,0 +1,5 @@
+name: tiny-go-web-tool
+title: Tiny Go Web Tool (David's Pattern)
+description: Build a small single-purpose website or web tool for David on his own server: an upload page, a photo drop, a simple form, a viewer, a one-job dashboard. Go standard library only, hand-written HTML and CSS with no framework (that is why the taps answer instantly), a code login with a sliding inactivity session, Dokploy deployment on his box, and an automatic pull so whatever the tool collects reaches Lulu without his computer in the path. Distilled from the proven upload.itak.live build (2026-10-19). Use whenever David asks for a small site, page, or tool of his own, or wants the upload-site pattern applied to another site.
+category: "Work and knowledge"
+include_in_prompt: true
