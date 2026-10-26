@@ -1,0 +1,63 @@
+# Commit Gates trigger layer: pre-commit framework configuration.
+#
+# WHAT THIS IS: the local hook wiring for the commit-gates scripts
+# library. Copy this file to the repo root as .pre-commit-config.yaml,
+# copy commitlint.config.js from the same templates folder to the repo
+# root, and install the hooks once per clone:
+#   pre-commit install
+#   pre-commit install --hook-type commit-msg
+#   pre-commit install --hook-type pre-push
+#
+# STAGE MAPPING (derived from commit-gates/SKILL.md and scripts/):
+#   commit stage: format check and lint on the tree, the debug check,
+#     and the secret scan, all via run-gates.sh --quick (quick skips
+#     tests; see scripts/run-gates.sh). The scripts library is
+#     tree-scoped, so these hooks run whole-tree with pass_filenames
+#     off instead of per changed file.
+#   commit-msg stage: commit message form (commitlint). Hook-only
+#     gate: the message is fixed at commit time, so CI is too late
+#     to be the first check (CI re-checks the PR range as proof).
+#   push stage: the full gate set, tests and the vulnerability scan
+#     included, via run-gates.sh with no flags.
+# Secret scanning also sits in the commit stage on purpose: a secret
+# that reaches history is already leaked when CI catches it, so the
+# first scan must happen before the commit exists.
+#
+# SCRIPTS PATH: the local hook entries below expect the commit-gates
+# scripts library vendored in the repo at tools/commit-gates/scripts/
+# (copy it there or add it as a submodule). If the repo keeps the
+# library at a different path, change the two run-gates.sh entry
+# lines and nothing else.
+#
+# PINNED REVISIONS: external hook repos below carry a placeholder
+# revision on purpose. No revision is knowable from this skill repo,
+# so pin a real release tag or commit SHA when adopting this template
+# and never treat the placeholder as a working pin.
+
+repos:
+  - repo: local
+    hooks:
+      - id: commit-gates-commit-stage
+        name: "commit gates, commit stage: format, lint, debug check, secret scan"
+        entry: tools/commit-gates/scripts/run-gates.sh --quick
+        language: system
+        pass_filenames: false
+        stages: [commit]
+      - id: commit-gates-push-stage
+        name: "commit gates, push stage: tests, vulnerability scan, full set"
+        entry: tools/commit-gates/scripts/run-gates.sh
+        language: system
+        pass_filenames: false
+        stages: [push]
+      - id: commitlint
+        name: "commit message form: commitlint"
+        entry: npx --yes @commitlint/cli --config commitlint.config.js --edit
+        language: system
+        stages: [commit-msg]
+  - repo: https://github.com/gitleaks/gitleaks
+    # PLACEHOLDER REVISION: replace with a pinned release tag or SHA.
+    rev: "PLACEHOLDER-PIN-BEFORE-USE"
+    hooks:
+      - id: gitleaks
+        name: "secret scan: gitleaks (commit stage)"
+        stages: [commit]

@@ -1,0 +1,96 @@
+# Commit Gates: CI proof layer.
+#
+# WHAT THIS IS: the GitHub Actions workflow that makes the gates
+# proof instead of local opinion. Copy this file into a repo at
+# .github/workflows/gates.yml (the github-repo-standard machinery set
+# carries the same file). It runs the commit-gates entry point,
+# scripts/run-gates.sh, whole-tree on every pull request and on every
+# push to the default branch, lints the workflow files themselves
+# with actionlint, and re-checks commit message form over the pull
+# request commit range with the shipped commitlint config
+# (commitlint.config.js at the repo root).
+#
+# ENFORCEMENT: this workflow is the proof layer, not the enforcement
+# by itself. Turn on branch protection for the default branch and
+# require the checks from this workflow (gates, actionlint, and the
+# commit message check) before merging. See the Enforcement layers
+# section of commit-gates/SKILL.md.
+#
+# ADOPTING: the push trigger below names main as the default branch;
+# change it if the repo's default branch has another name. The gates
+# step looks for run-gates.sh in the locations listed in its loop;
+# if the repo vendors the scripts library somewhere else, add that
+# path to the loop. Pin the actions below to full commit SHAs in a
+# real repo if that repo's policy requires it.
+
+name: gates
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  actionlint:
+    name: actionlint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+      - name: Install actionlint
+        run: |
+          bash <(curl -sSfL https://raw.githubusercontent.com/rhysd/actionlint/main/scripts/download-actionlint.bash)
+          echo "DIAG: actionlint version: $(./actionlint --version)"
+      - name: Lint the workflow files
+        run: ./actionlint -color
+
+  gates:
+    name: gates
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+      - name: Run the commit gates whole-tree
+        run: |
+          set -eu
+          script=""
+          for candidate in tools/commit-gates/scripts/run-gates.sh commit-gates/scripts/run-gates.sh scripts/run-gates.sh; do
+            if [ -f "$candidate" ]; then
+              script="$candidate"
+              break
+            fi
+          done
+          if [ -z "$script" ]; then
+            echo "DIAG: run-gates.sh not found in any known location." >&2
+            echo "DIAG: looked for tools/commit-gates/scripts/run-gates.sh, commit-gates/scripts/run-gates.sh, scripts/run-gates.sh" >&2
+            exit 2
+          fi
+          echo "DIAG: running gates via $script"
+          bash "$script"
+
+  commit-messages:
+    name: commit messages
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the pull request with full history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Check commit messages over the PR range
+        run: |
+          set -eu
+          if [ ! -f commitlint.config.js ]; then
+            echo "DIAG: commitlint.config.js missing at the repo root; copy it from the commit-gates templates." >&2
+            exit 2
+          fi
+          npm install --no-save @commitlint/cli @commitlint/config-conventional
+          npx commitlint --config commitlint.config.js --from "${{ github.event.pull_request.base.sha }}" --to "${{ github.event.pull_request.head.sha }}" --verbose
