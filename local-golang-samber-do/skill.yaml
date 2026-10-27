@@ -1,0 +1,14 @@
+name: local_golang_samber_do
+title: Local golang samber do
+description: Dependency injection in Golang using samber/do, service containers, lifecycle management, scopes, health checks, graceful shutdown, and module organization. Apply when using or adopting samber/do, when the codebase imports github.com/samber/do or github.com/samber/do/v2, or when refactoring manual constructor injection into a DI container.
+include_in_prompt: true
+availability:
+  confidential_vm: true
+  needs_speech: false
+skill_improvement:
+  managed: true
+  needs_review: true
+license: MIT
+author: samber
+upstream_version: "1.3.2"
+derived_from: samber/cc-skills-golang (golang-samber-do)

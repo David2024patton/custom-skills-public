@@ -1,0 +1,21 @@
+# Standard CODEOWNERS for repos under the github-repo-standard.
+# Copy to the repo root as CODEOWNERS (or to .github/CODEOWNERS if
+# the repo prefers it there; GitHub reads either location).
+#
+# Format: one line per pattern, pattern first, then the owners who
+# must review changes under it. Owners are GitHub usernames or team
+# names. Replace every placeholder below with the real owners for
+# the repo before relying on this file: placeholder owners do not
+# resolve, and an unresolved CODEOWNERS file enforces nothing.
+#
+# Keep the sensitive paths explicit: gate scripts, workflow files,
+# and the rules page are the enforcement surface of the repo, so
+# they carry named owners even when the default owner covers them.
+
+# Default owner for everything not listed below.
+* @PLACEHOLDER-OWNER
+
+# Build law and gates: review required from the owning maintainer.
+/docs/RULES.md @PLACEHOLDER-OWNER
+/.github/workflows/ @PLACEHOLDER-OWNER
+/tools/commit-gates/ @PLACEHOLDER-OWNER
