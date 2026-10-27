@@ -1,0 +1,14 @@
+name: local_golang_google_wire
+title: Local golang google wire
+description: Compile-time dependency injection in Golang using google/wire, wire.NewSet, wire.Build, wire.Bind (interface→concrete), wire.Struct, wire.Value, wire.InterfaceValue, wire.FieldsOf, cleanup functions, //go:build wireinject injector files, and generated wire_gen.go. Apply when using or adopting google/wire, when the codebase imports `github.com/google/wire`, or when wiring an application graph at compile time via `wire.Build`. For runtime DI with reflection, see `samber/cc-skills-golang@golang-uber-dig` skill.
+include_in_prompt: true
+availability:
+  confidential_vm: true
+  needs_speech: false
+skill_improvement:
+  managed: true
+  needs_review: true
+license: MIT
+author: samber
+upstream_version: "1.1.2"
+derived_from: samber/cc-skills-golang (golang-google-wire)
