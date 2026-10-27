@@ -1,0 +1,5 @@
+name: game_creation
+title: Game Creation
+description: Create games end to end: original games, revivals of defunct games, and retro emulation platforms. Covers rights and licenses, design, revival research, prototyping, production, emulator engineering, playtesting, launch, and live ops. Use for any game making, remaking, reviving, or emulator work.
+category: "Work and knowledge"
+include_in_prompt: true

@@ -1,0 +1,5 @@
+name: audit_code
+title: audit_code
+description: Hostile self-review, debug-first instrumentation, and verification gates for Mojo, Rust, Go, Flutter/Dart, and JavaScript/TypeScript. BUILD mode bakes logging and debug hooks into every module from the start; AUDIT mode attacks the real diff with evidence-based findings, a fix loop, full gate runs, a secret history scan, a tenancy sweep for multi-tenant code, and a claims ledger that separates what was executed from what was merely accepted. Use when writing or modifying code in these languages, and always before declaring a coding task done.
+category: "Work and knowledge"
+include_in_prompt: true

@@ -1,0 +1,44 @@
+# Routing overrides for the collection router.
+# This is the only hand written routing data in the collection. The registry
+# (registry.json) is machine generated; this file holds the judgment calls a
+# generator cannot make: pinned routes for known collisions, banned routes,
+# and gate assignments. The router reads pins first (stage 1 of the cascade).
+# Format version: 1. Bump the version when the shape changes.
+
+overrides_format_version: 1
+
+pinned_routes:
+  - task_pattern: "github operations on one specific repository (pull requests, issues, reviews, releases, actions, security scanning, repo settings)"
+    route_to: github
+    note: "Single-repo operations belong to the github router skill, never to github-research."
+  - task_pattern: "landscape, prior art, or how-do-others-do-it research across many repositories"
+    route_to: github-research
+    note: "Research across repos is github-research; it hands single-repo operations back to the github skill."
+  - task_pattern: "applying the planned file structure (standard repo files) to a repository"
+    route_to: github
+    note: "The github skill's repo structure workflow applies the standard; github-repo-standard owns the content and the templates."
+  - task_pattern: "deep or exhaustive research run on any topic"
+    route_to: deep-research
+    note: "Gate G inside deep-research makes the GitHub step mandatory; do not route the GitHub step separately."
+  - task_pattern: "adversarial review of a code artifact before it ships"
+    route_to: critic
+    note: "Critic family protocol: code lens plus claims lens plus the skeptic persona, three decorrelated passes."
+  - task_pattern: "committing or pushing finished work in any repo"
+    route_to: commit-gates
+    note: "Nothing lands on red: debugging, lint, test, and security gates run first, per the commit-gates skill."
+
+banned_routes:
+  - match: "any local-golang-* id"
+    reason: "Recovered duplicates of the canonical golang-* skills. Aliases resolve to the canonical golang-* record; never route to the duplicate itself."
+  - match: "any record with role pointer"
+    reason: "Pointer files carry no method. The registry resolves a pointer to its canonical record before routing."
+  - match: "any record with license_status private-only, when the destination is outside the owner's environment"
+    reason: "Private-only units never leave the owner's custody."
+
+gate_assignments:
+  - workflow: "publishing or mirroring this collection"
+    gates: [commit-gates, sanitize]
+    note: "The publish gate (scripts/sanitize_snapshot.py) and the commit gates both run; the sanitizer is a script gate, not a skill."
+  - workflow: "shipping a research deliverable"
+    gates: [critic]
+    note: "The critic family reviews research claims before delivery, per the deep-research delivery checklist."

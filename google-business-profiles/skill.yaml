@@ -1,0 +1,7 @@
+name: google_business_profiles
+title: Google Business Profiles
+description: Run a Google Business Profile end to end: audit, phone and description edits, services cleanup, service areas at the 20 cap, photo cadence, policy-safe posts, reviews, and the appeal when posting gets turned off. Use for any Google Business Profile or Google Maps listing work.
+category: "Work and knowledge"
+include_in_prompt: true
+author: David Patton
+license: MIT
