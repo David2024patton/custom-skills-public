@@ -1,0 +1,259 @@
+{
+ "schemaVersion": 1,
+ "lens": "compliance",
+ "version": "1.0.0",
+ "sourceOfTruth": "This JSON is the source of truth. The prose lens in skills/software-development/critic-lens-compliance/SKILL.md is a human readable view; checklist-lint rejects duplicate IDs and SARIF ruleIds that do not resolve here.",
+ "idMigration": {},
+ "items": [
+  {
+   "id": "COMPLIANCE-TME-001",
+   "title": "Scope first. Name the frameworks in play for THIS artifact or system from",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:tme",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Scope first. Name the frameworks in play for THIS artifact or system from",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Scope first. Name the frameworks in play for THIS artifact or system from",
+   "howToTest": "the product table below, and the personal or regulated data types in scope (emails, customer records, payments, student data, health, none). Never audit \"all frameworks\" by default.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-TME-002",
+   "title": "Evidence per control. For every control in the library: cite the enforcing",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:tme",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Evidence per control. For every control in the library: cite the enforcing",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Evidence per control. For every control in the library: cite the enforcing",
+   "howToTest": "code with file:line, the config with its file, the live check with its output, or mark it ABSENT. A policy document with no enforcing code is a finding, not evidence. Never grade a control PASS on intent.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-TME-003",
+   "title": "One matrix, many frameworks. Use the shared library so each verified",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:tme",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: One matrix, many frameworks. Use the shared library so each verified",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: One matrix, many frameworks. Use the shared library so each verified",
+   "howToTest": "control fills every framework column it maps to (the EasyAudit lesson, their own docs: implement a control once, it satisfies every framework that asks). Verdicts per framework column: PASS, GAP, INHERITED (cloud provider, named), NOT-APPLICABLE (with the reason).",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-TME-004",
+   "title": "Severity, deterministic. Critical: regulated or personal data processed",
+   "level": 2,
+   "severityIfFailed": "high",
+   "rubricRef": "rubric:compliance:tme",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Severity, deterministic. Critical: regulated or personal data processed",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Severity, deterministic. Critical: regulated or personal data processed",
+   "howToTest": "with the governing control ABSENT (no consent, no deletion path, no access control). High: control exists but is unenforced or unmonitored. Medium: enforced but leaves no evidence trail. Low: documentation drift.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-TME-005",
+   "title": "Smallest fix per gap, tied to a module seam, plus the owner. Every GAP",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:tme",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Smallest fix per gap, tied to a module seam, plus the owner. Every GAP",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Smallest fix per gap, tied to a module seam, plus the owner. Every GAP",
+   "howToTest": "line says which framework columns it closes when fixed.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-TME-006",
+   "title": "Honest labeling, every report: \"readiness audit, not certification; an",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:tme",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Honest labeling, every report: \"readiness audit, not certification; an",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Honest labeling, every report: \"readiness audit, not certification; an",
+   "howToTest": "independent auditor issues the certificate.\" Never imply a passed audit here equals compliance.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-PSD-001",
+   "title": "AlphaFlux (multi-tenant SaaS, payments, customer data): SOC 2, GDPR,",
+   "level": 2,
+   "severityIfFailed": "high",
+   "rubricRef": "rubric:compliance:psd",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: AlphaFlux (multi-tenant SaaS, payments, customer data): SOC 2, GDPR,",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: AlphaFlux (multi-tenant SaaS, payments, customer data): SOC 2, GDPR,",
+   "howToTest": "CCPA now; PCI-DSS scope via the hosted processor (SAQ-A) documented; ISO 27001 and NIST CSF 2.0 as the maturity frame.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-PSD-002",
+   "title": "iTaK Learn (student data): FERPA, COPPA for minors; add the student-data",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:psd",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: iTaK Learn (student data): FERPA, COPPA for minors; add the student-data",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: iTaK Learn (student data): FERPA, COPPA for minors; add the student-data",
+   "howToTest": "controls to the same library, never a separate system.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-PSD-003",
+   "title": "Patriot Pest Control (customer contacts, SMS): CCPA basics; A2P 10DLC",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:psd",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Patriot Pest Control (customer contacts, SMS): CCPA basics; A2P 10DLC",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Patriot Pest Control (customer contacts, SMS): CCPA basics; A2P 10DLC",
+   "howToTest": "registration state as an operational control.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-PSD-004",
+   "title": "HIPAA and CMMC: named slots, activated only if health data or defense",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:psd",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: HIPAA and CMMC: named slots, activated only if health data or defense",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: HIPAA and CMMC: named slots, activated only if health data or defense",
+   "howToTest": "contracting enters scope; never claimed without it.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  }
+ ]
+}

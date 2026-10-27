@@ -1,0 +1,48 @@
+# watchlist.yaml - per-stack vulnerability watchlist, v1 (P-15).
+# Pattern-first entries: each names the pattern the critic greps or
+# checks, not just a CVE number. Every entry carries verified_as_of and
+# expires 90 days later; an entry unverified past expiry is flagged in
+# the report header and the law text that cites it is treated as stale.
+version: 1
+verified_as_of: "2026-10-27"
+entries:
+  - id: WATCH-NPM-SHAI-HULUD
+    stack: npm
+    pattern: "Dependency-bump diff changes behavior: new or changed install scripts (preinstall, install, postinstall), new workflow files that register self-hosted runners, or new network egress in package code."
+    lesson: "Provenance proves who published a package, not intent. The Shai-Hulud worm (Sep 2025, 2.0 Nov 2025) shipped with valid provenance."
+    check: "On any dependency bump, diff install scripts and workflow files alongside the version check; a behavior change is a finding even when the version is clean."
+    source: "Cluster B research, critic-deepening 2026-10-27"
+    verified_as_of: "2026-10-27"
+    expires: "2027-01-25"
+  - id: WATCH-PY-UNSAFE-LOADERS
+    stack: python
+    pattern: "Unsafe deserialization loaders in source: torch.load without weights_only, pickle.load or pickle.loads, yaml.load without SafeLoader."
+    lesson: "PyTorch CVE-2025-32434 taught that safe-mode flags are code with versions; a mitigation claim is not a check."
+    check: "Grep for the loader patterns and verify the installed version is at or past the patched release; never accept a mitigation claim in prose as a pass."
+    source: "Cluster B research, critic-deepening 2026-10-27"
+    verified_as_of: "2026-10-27"
+    expires: "2027-01-25"
+  - id: WATCH-RUST-TAR-AND-ABANDONED
+    stack: rust
+    pattern: "Archive extraction from untrusted input via tokio-tar or similar crates (RUSTSEC-2025-0111 class), and unmaintained or abandoned crates anywhere in the dependency tree."
+    lesson: "An unmaintained crate in the tree is a finding class of its own, separate from any single advisory."
+    check: "Check the advisory database for the extraction crates in use, and flag crates with no maintenance signal; verify aggregator details against the RustSec database before locking a verdict."
+    source: "Cluster B research, critic-deepening 2026-10-27 (aggregator details flagged for RustSec verification)"
+    verified_as_of: "2026-10-27"
+    expires: "2027-01-25"
+  - id: WATCH-PHP-RUNTIME-STATE
+    stack: php
+    pattern: "The PHP version that serves requests is below the fixed release for its branch, or its patch state is unknown. Full signature: signatures/SIG-PHP-2026-001.yaml."
+    lesson: "Distro backports can fix a flaw without changing the version string, so runtime state, not the version string alone, decides the verdict."
+    check: "Run the SIG-PHP-2026-001 three-state check (OK 0, VULNERABLE 1, UNKNOWN 3) against the serving runtime, not the CLI and not composer constraints."
+    source: "Cluster B research, critic-deepening 2026-10-27"
+    verified_as_of: "2026-10-27"
+    expires: "2027-01-25"
+  - id: WATCH-GO-TOOLCHAIN-REACHABILITY
+    stack: go
+    pattern: "A built Go binary whose toolchain version carries a known compiler or standard library flaw, or a vulnerable package that govulncheck reachability shows is actually called."
+    lesson: "A version listing is not a finding; reachability is what makes a toolchain or dependency flaw real."
+    check: "Read the build info with go version -m on the shipped binary, and run govulncheck in text mode for the verdict with the JSON run parsed only for findings whose affects list is non-empty."
+    source: "Cluster B research, critic-deepening 2026-10-27"
+    verified_as_of: "2026-10-27"
+    expires: "2027-01-25"

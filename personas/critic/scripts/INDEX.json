@@ -1,0 +1,376 @@
+{
+ "schemaVersion": 1,
+ "generatedBy": "scripts/index-gen.py",
+ "scripts": [
+  {
+   "question": "Can a run directory be sealed into a verifiable evidence bundle?",
+   "stackDetection": "none.",
+   "inputs": "--run-dir DIR (findings.sarif, verdict.json, capabilities.json, coverage.json, logs/, evidence/), --manifest critic.manifest.json, --out bundle dir",
+   "effects": "mutating (creates the --out bundle directory only)",
+   "exits": "0 bundle built and hashes verified; 1 a required run file is missing; 4 input invalid",
+   "output": "summary line first; bundle manifest at <out>/manifest.json",
+   "file": "bundle-evidence.py",
+   "legacyHeader": false,
+   "path": "bundle-evidence.py"
+  },
+  {
+   "question": "Which required tools and gates can actually run here, and what verdict ceiling does that impose?",
+   "stackDetection": "probes come from critic.manifest.json tool entries (command, version regex, minimum).",
+   "inputs": "--manifest PATH, --mode quick|full, --out capabilities.json, --root DIR",
+   "effects": "read-only, except a pinned install attempt in full mode where the manifest declares one (attempt is logged).",
+   "exits": "0 all required tools present; 1 findings-fail (reserved); 2 a required tool is missing; 3 tool error; 4 manifest invalid; 124 timeout",
+   "output": "summary line first; full record written to the --out path (default capabilities.json)",
+   "file": "capabilities.py",
+   "legacyHeader": false,
+   "path": "capabilities.py"
+  },
+  {
+   "question": "Are the checklist JSON files well formed, uniquely identified, and consistent with prose and SARIF?",
+   "stackDetection": "none.",
+   "inputs": "--checklists DIR, --prose DIR (lens SKILL.md folders, optional), --sarif FILE (optional)",
+   "effects": "read-only",
+   "exits": "0 clean; 1 violations; 2 inputs missing; 4 a checklist is invalid JSON or wrong schemaVersion",
+   "output": "summary line first, then one violation per line; also writes nothing",
+   "file": "checklist-lint.py",
+   "legacyHeader": false,
+   "path": "checklist-lint.py"
+  },
+  {
+   "file": "secrets-scan.sh",
+   "legacyHeader": true,
+   "question": "Scan the working tree for secrets before any commit. Uses",
+   "path": "common/secrets-scan.sh"
+  },
+  {
+   "file": "vuln-scan.sh",
+   "legacyHeader": true,
+   "question": "Check dependencies against known vulnerabilities (osv.dev",
+   "path": "common/vuln-scan.sh"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard Flutter diagnostic pattern (and scaffold",
+   "path": "dart-flutter/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check the app HAS its debugging built in: a logging or",
+   "path": "dart-flutter/debug-check.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "Dart/Flutter lint gate: format check plus analyzer with",
+   "path": "dart-flutter/lint.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "Dart/Flutter test gate.",
+   "path": "dart-flutter/test.sh"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Scaffold the standard Go diagnostic seam into a module that",
+   "path": "go/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check that this Go module HAS its debugging built in: a",
+   "path": "go/debug-check.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "Go lint gate: format, vet, and (when installed) golangci-lint",
+   "path": "go/lint.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "Go test gate: full test suite with the race detector.",
+   "path": "go/test.sh"
+  },
+  {
+   "question": "What scripts does the critic bundle ship, in manifest-header shape?",
+   "stackDetection": "none.",
+   "inputs": "--scripts DIR, --out INDEX.json",
+   "effects": "mutating (writes the generated --out index only; never hand-kept)",
+   "exits": "0 ok; 2 scripts dir missing",
+   "output": "summary line first; generated index at --out",
+   "file": "index-gen.py",
+   "legacyHeader": false,
+   "path": "index-gen.py"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard plain-JavaScript (ESM) diagnostic",
+   "path": "javascript/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check a plain JavaScript (ESM) project HAS a diagnostic",
+   "path": "javascript/debug-check.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "JavaScript (plain ESM Node, \"type\": \"module\") lint gate.",
+   "path": "javascript/lint.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "JavaScript (plain ESM Node) test gate.",
+   "path": "javascript/test.sh"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard JS/TS diagnostic pattern: one logger",
+   "path": "js-ts/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check the project HAS a logging/diagnostic path (a logger",
+   "path": "js-ts/debug-check.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "JS/TS lint gate, driven by what the TARGET repo declares",
+   "path": "js-ts/lint.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "JS/TS test gate: run the project's test script. The",
+   "path": "js-ts/test.sh"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard Mojo diagnostic pattern, and (when",
+   "path": "mojo/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check that this Mojo tree HAS its debugging built in: a",
+   "path": "mojo/debug-check.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "Mojo lint gate: format check plus a compile check with",
+   "path": "mojo/lint.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "Mojo test gate, rebuilt on the TestSuite pattern.",
+   "path": "mojo/test.sh"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard Next.js diagnostic pattern.",
+   "path": "nextjs/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check a Next.js project HAS a diagnostic path, and ships",
+   "path": "nextjs/debug-check.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "Next.js lint + typecheck gate. Lint is ESLint DIRECTLY,",
+   "path": "nextjs/lint.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "Next.js heavy gate: production build, then project tests.",
+   "path": "nextjs/test.sh"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard Prisma diagnostic pattern.",
+   "path": "prisma/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Prisma debug check, at the level a schema honestly has",
+   "path": "prisma/debug-check.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "Prisma lint gate: the schema is the code, so the checks",
+   "path": "prisma/lint.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "Prisma build-proof gate: client generation, then tests.",
+   "path": "prisma/test.sh"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard Python diagnostic pattern: logging",
+   "path": "python/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check the project HAS its debugging built in: the logging",
+   "path": "python/debug-check.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "Python lint gate: ruff when installed (format check + lint),",
+   "path": "python/lint.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "Python test gate: pytest when a suite exists.",
+   "path": "python/test.sh"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard React diagnostic pattern.",
+   "path": "react/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check a React project HAS a diagnostic path components",
+   "path": "react/debug-check.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "React component-stack lint gate, detection-driven.",
+   "path": "react/lint.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "React test gate.",
+   "path": "react/test.sh"
+  },
+  {
+   "question": "Do all applicable commit gates pass for this repo?",
+   "stackDetection": "manifest detector (personas/critic/scripts/stack-detect.py reading critic.manifest.json) when available; legacy inline detection below is the fallback only when the detector is absent, and the run says so.",
+   "inputs": "[--quick] (quick skips tests and the vulnerability scan)",
+   "effects": "read-only, except gate scripts may write their own logs under the target repo",
+   "exits": "0 all gates green; 1 a gate failed; 2 a required tool is missing",
+   "output": "summary line first (GATES: ALL GREEN or GATES: RED last line kept for compatibility); full gate output on stdout",
+   "file": "run-gates.sh",
+   "legacyHeader": false,
+   "path": "run-gates.sh"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard Rust diagnostic pattern for this project",
+   "path": "rust/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check that this Rust tree HAS its debugging built in: a",
+   "path": "rust/debug-check.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "Rust lint gate: rustfmt check plus clippy with warnings",
+   "path": "rust/lint.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "Rust test gate: workspace tests on the host target.",
+   "path": "rust/test.sh"
+  },
+  {
+   "question": "How are findings emitted as SARIF 2.1.0 under the frozen critic profile?",
+   "stackDetection": "none; ruleIds resolve against checklists/*.checklist.json when present.",
+   "inputs": "findings JSON file (array of finding objects), --out findings.sarif, --baseline present|absent",
+   "effects": "mutating (writes the --out file only)",
+   "exits": "0 ok; 1 a finding lacks evidence (invalid under the profile); 4 input invalid",
+   "output": "summary line first; SARIF written to --out",
+   "file": "sarif-emit.py",
+   "legacyHeader": false,
+   "path": "sarif-emit.py"
+  },
+  {
+   "question": "Does a SARIF file satisfy SARIF 2.1.0 structure and the frozen critic profile?",
+   "stackDetection": "none.",
+   "inputs": "findings.sarif, --schema PATH (official SARIF 2.1.0 JSON Schema), --checklists DIR",
+   "effects": "read-only",
+   "exits": "0 valid; 1 profile or schema violation; 2 validator dependency missing (jsonschema or schema file); 4 input invalid",
+   "output": "summary line first, then one violation per line",
+   "file": "sarif-validate.py",
+   "legacyHeader": false,
+   "path": "sarif-validate.py"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "Shell lint gate: shellcheck over every .sh file, plus a",
+   "path": "shell/lint.sh"
+  },
+  {
+   "question": "Which stacks, tools, and gates does this target declare, and which stacks are present in a target tree?",
+   "stackDetection": "reads personas/critic/critic.manifest.json; no detection logic lives in code.",
+   "inputs": "--root DIR, --manifest PATH, --format json|legacy-audit|shell-vars, --lint-manifest",
+   "effects": "read-only",
+   "exits": "0 ok; 2 tool or manifest missing; 4 manifest invalid",
+   "output": "summary line first, then one record per line (json mode prints one JSON document after the summary on stderr separation: summary to stderr)",
+   "file": "stack-detect.py",
+   "legacyHeader": false,
+   "path": "stack-detect.py"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard TypeScript diagnostic pattern. The",
+   "path": "typescript/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check a TypeScript project HAS a diagnostic seam and",
+   "path": "typescript/debug-check.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "TypeScript lint/typecheck gate. Core step: `tsc --noEmit`.",
+   "path": "typescript/lint.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "TypeScript test gate.",
+   "path": "typescript/test.sh"
+  }
+ ]
+}

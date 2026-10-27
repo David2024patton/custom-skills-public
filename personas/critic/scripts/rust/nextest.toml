@@ -1,0 +1,7 @@
+# cargo-nextest configuration template (report L1-09).
+# Copy to the project at .config/nextest.toml.
+[profile.default]
+retries = 2
+slow-timeout = { period = "60s", terminate-after = 2 }
+# A test that passes only on retry is a flaky finding: nextest
+# reports it in the run summary even when the lane exits green.

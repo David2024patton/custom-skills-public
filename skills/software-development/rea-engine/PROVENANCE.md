@@ -1,0 +1,5 @@
+# Provenance
+
+The SKILL.md in this folder is an original wrapper written for this repo by David Patton (MIT, this repo's license). It wraps the external engine REA (https://github.com/morluto/rea), which is NOT vendored here: no engine code is copied into this repo, the engine stays an external pinned process, and its THIRD_PARTY_NOTICES tail is deliberately not inherited. Pinned pair at intake: server rea-agents 6.8.0 on npm (latest verified 2026-10-27) with skill bundle version 50.
+
+references/bundle/ holds REA's instructions-only skill bundle, imported from the upstream repo morluto/rea (https://github.com/morluto/rea), folder .agents/skills, at commit 65f1c447344a423fa2785847dbcea1e9a9e2454a (main, fetched 2026-10-27): the skills reverse-engineer-anything (bundle version 50, per its frontmatter), rea-analysis-optimization, and rea-changelog-update, byte-identical, with no local changes. License: MIT, see references/bundle/LICENSE (the upstream LICENSE, copyright morluto). Two further bundle skills are not duplicated here because they live in this library as standalone units: rea-ci-tests-audit and rea-tool-design, under skills/software-development/.

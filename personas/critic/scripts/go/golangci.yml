@@ -1,0 +1,31 @@
+# golangci-lint configuration template (report L1-03).
+# Copy to the project root as .golangci.yml. Format is golangci-lint
+# v2 (v2.0.0 changed the config schema; a v1 config is rejected).
+# Design: linters.default is none and every linter is named, so a
+# tool upgrade can never silently widen or narrow the gate.
+version: "2"
+linters:
+  default: none
+  enable:
+    - errcheck
+    - govet
+    - ineffassign
+    - staticcheck
+    - unused
+    - bodyclose
+    - contextcheck
+    - errorlint
+    - exhaustive
+    - gocritic
+    - gosec
+    - misspell
+    - noctx
+    - prealloc
+    - sloglint
+    - unconvert
+    - whitespace
+formatters:
+  enable:
+    - gofumpt
+    - goimports
+    - gci

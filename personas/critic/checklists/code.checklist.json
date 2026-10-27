@@ -1,0 +1,884 @@
+{
+ "schemaVersion": 1,
+ "lens": "code",
+ "version": "1.0.0",
+ "sourceOfTruth": "This JSON is the source of truth. The prose lens in skills/software-development/critic-lens-code/SKILL.md is a human readable view; checklist-lint rejects duplicate IDs and SARIF ruleIds that do not resolve here.",
+ "idMigration": {},
+ "items": [
+ {
+ "id": "CODE-1TA-001",
+ "title": "For every query, cache, file path, queue message, search index, and log: does tenant A reach tenant B? One missed filter is a breach, not a ",
+ "level": 2,
+ "severityIfFailed": "high",
+ "rubricRef": "rubric:code:1ta",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: For every query, cache, file path, queue message, search index, and log: does tenant A reach tenant ",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: For every query, cache, file path, queue message, search index, and log: does tenant A reach tenant ",
+ "howToTest": "Inspect the artifact against: For every query, cache, file path, queue message, search index, and log: does tenant A reach tenant B? One missed filter is a breach, not a nit",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-1TA-002",
+ "title": "Identity from the verified session only, never a client-supplied header or body field",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:1ta",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Identity from the verified session only, never a client-supplied header or body field",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Identity from the verified session only, never a client-supplied header or body field",
+ "howToTest": "Inspect the artifact against: Identity from the verified session only, never a client-supplied header or body field",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-1TA-003",
+ "title": "Scoping inside the query, not a WHERE clause a builder can forget",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:1ta",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Scoping inside the query, not a WHERE clause a builder can forget",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Scoping inside the query, not a WHERE clause a builder can forget",
+ "howToTest": "Inspect the artifact against: Scoping inside the query, not a WHERE clause a builder can forget",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-1TA-004",
+ "title": "Foreign-object responses match the nonexistent-object shape so existence cannot be probed",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:1ta",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Foreign-object responses match the nonexistent-object shape so existence cannot be probed",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Foreign-object responses match the nonexistent-object shape so existence cannot be probed",
+ "howToTest": "Inspect the artifact against: Foreign-object responses match the nonexistent-object shape so existence cannot be probed",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-1TA-005",
+ "title": "Deny by default on new routes",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:1ta",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Deny by default on new routes",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Deny by default on new routes",
+ "howToTest": "Inspect the artifact against: Deny by default on new routes",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-2SO-001",
+ "title": "A01 Broken Access Control (SSRF folded in), A02 Misconfiguration, A03 Supply Chain, A04 Crypto, A05 Injection, A06 Insecure Design, A07 Auth",
+ "level": 2,
+ "severityIfFailed": "high",
+ "rubricRef": "rubric:code:2so",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: A01 Broken Access Control (SSRF folded in), A02 Misconfiguration, A03 Supply Chain, A04 Crypto, A05 ",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: A01 Broken Access Control (SSRF folded in), A02 Misconfiguration, A03 Supply Chain, A04 Crypto, A05 ",
+ "howToTest": "Inspect the artifact against: A01 Broken Access Control (SSRF folded in), A02 Misconfiguration, A03 Supply Chain, A04 Crypto, A05 Injection, A06 Insecure Design, A07 Auth, A08 Inte",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-2SO-002",
+ "title": "Injection sinks parameterized or allowlisted: SQL, command, template, path, deserialization, log/CSV",
+ "level": 2,
+ "severityIfFailed": "high",
+ "rubricRef": "rubric:code:2so",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Injection sinks parameterized or allowlisted: SQL, command, template, path, deserialization, log/CSV",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Injection sinks parameterized or allowlisted: SQL, command, template, path, deserialization, log/CSV",
+ "howToTest": "Inspect the artifact against: Injection sinks parameterized or allowlisted: SQL, command, template, path, deserialization, log/CSV",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-2SO-003",
+ "title": "Secrets never in code, logs, images, or git history. Error and panic paths do not fail open or leak state across requests",
+ "level": 2,
+ "severityIfFailed": "high",
+ "rubricRef": "rubric:code:2so",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Secrets never in code, logs, images, or git history. Error and panic paths do not fail open or leak ",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Secrets never in code, logs, images, or git history. Error and panic paths do not fail open or leak ",
+ "howToTest": "Inspect the artifact against: Secrets never in code, logs, images, or git history. Error and panic paths do not fail open or leak state across requests",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-2PI-001",
+ "title": "Prompt injection is a named, hunted class, not a footnote. For any artifact with an AI surface or a user-content surface, trace every path w",
+ "level": 2,
+ "severityIfFailed": "high",
+ "rubricRef": "rubric:code:2pi",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Prompt injection is a named, hunted class, not a footnote. For any artifact with an AI surface or a ",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Prompt injection is a named, hunted class, not a footnote. For any artifact with an AI surface or a ",
+ "howToTest": "Inspect the artifact against: Prompt injection is a named, hunted class, not a footnote. For any artifact with an AI surface or a user-content surface, trace every path where untru",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-2PI-002",
+ "title": "Untrusted content must never be able to issue instructions, widen tool permissions, exfiltrate secrets or other tenants' data, or override t",
+ "level": 2,
+ "severityIfFailed": "high",
+ "rubricRef": "rubric:code:2pi",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Untrusted content must never be able to issue instructions, widen tool permissions, exfiltrate secre",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Untrusted content must never be able to issue instructions, widen tool permissions, exfiltrate secre",
+ "howToTest": "Inspect the artifact against: Untrusted content must never be able to issue instructions, widen tool permissions, exfiltrate secrets or other tenants' data, or override the operato",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-2PI-003",
+ "title": "A path where injected text can drive a tool call, a write, or a send is a security finding with the injection path as its exploit path, seve",
+ "level": 2,
+ "severityIfFailed": "high",
+ "rubricRef": "rubric:code:2pi",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: A path where injected text can drive a tool call, a write, or a send is a security finding with the ",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: A path where injected text can drive a tool call, a write, or a send is a security finding with the ",
+ "howToTest": "Inspect the artifact against: A path where injected text can drive a tool call, a write, or a send is a security finding with the injection path as its exploit path, severity score",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-3CA-001",
+ "title": "Happy path, negative path, and boundary tested. Empty, zero, one-past-max, unicode, huge payload, DST and month-end, double-submit",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:3ca",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Happy path, negative path, and boundary tested. Empty, zero, one-past-max, unicode, huge payload, DS",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Happy path, negative path, and boundary tested. Empty, zero, one-past-max, unicode, huge payload, DS",
+ "howToTest": "Inspect the artifact against: Happy path, negative path, and boundary tested. Empty, zero, one-past-max, unicode, huge payload, DST and month-end, double-submit",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-3CA-002",
+ "title": "Error handled explicitly, never swallowed. No silent failures, no dead code",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:3ca",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Error handled explicitly, never swallowed. No silent failures, no dead code",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Error handled explicitly, never swallowed. No silent failures, no dead code",
+ "howToTest": "Inspect the artifact against: Error handled explicitly, never swallowed. No silent failures, no dead code",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-3CA-003",
+ "title": "Race conditions and goroutine/thread leaks on concurrent paths",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:3ca",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Race conditions and goroutine/thread leaks on concurrent paths",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Race conditions and goroutine/thread leaks on concurrent paths",
+ "howToTest": "Inspect the artifact against: Race conditions and goroutine/thread leaks on concurrent paths",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-4PA-001",
+ "title": "N+1 query patterns, unbounded queries, missing pagination, missing indexes on the hot path",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:4pa",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: N+1 query patterns, unbounded queries, missing pagination, missing indexes on the hot path",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: N+1 query patterns, unbounded queries, missing pagination, missing indexes on the hot path",
+ "howToTest": "Inspect the artifact against: N+1 query patterns, unbounded queries, missing pagination, missing indexes on the hot path",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-4PA-002",
+ "title": "Connection and resource pools, timeouts, backpressure",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:4pa",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Connection and resource pools, timeouts, backpressure",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Connection and resource pools, timeouts, backpressure",
+ "howToTest": "Inspect the artifact against: Connection and resource pools, timeouts, backpressure",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-4PA-003",
+ "title": "Does it hold at 1000x tenants or traffic, or does one tenant starve the rest",
+ "level": 2,
+ "severityIfFailed": "high",
+ "rubricRef": "rubric:code:4pa",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Does it hold at 1000x tenants or traffic, or does one tenant starve the rest",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Does it hold at 1000x tenants or traffic, or does one tenant starve the rest",
+ "howToTest": "Inspect the artifact against: Does it hold at 1000x tenants or traffic, or does one tenant starve the rest",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-5M-001",
+ "title": "Module isolation, one responsibility, tight scope. No monolith or spaghetti",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:5m",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Module isolation, one responsibility, tight scope. No monolith or spaghetti",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Module isolation, one responsibility, tight scope. No monolith or spaghetti",
+ "howToTest": "Inspect the artifact against: Module isolation, one responsibility, tight scope. No monolith or spaghetti",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-5M-002",
+ "title": "Interface seams at provider, executor, storage, transport boundaries",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:5m",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Interface seams at provider, executor, storage, transport boundaries",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Interface seams at provider, executor, storage, transport boundaries",
+ "howToTest": "Inspect the artifact against: Interface seams at provider, executor, storage, transport boundaries",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-5M-003",
+ "title": "Debugging and logging built in from birth: can you pull the bug information out when it misbehaves",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:5m",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Debugging and logging built in from birth: can you pull the bug information out when it misbehaves",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Debugging and logging built in from birth: can you pull the bug information out when it misbehaves",
+ "howToTest": "Inspect the artifact against: Debugging and logging built in from birth: can you pull the bug information out when it misbehaves",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-WTC-001",
+ "title": "Evidence over claims. \"It compiles\" is not \"it works\". \"Tests pass\" requires the command and the raw output, run this session, not a paraphr",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:wtc",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Evidence over claims. \"It compiles\" is not \"it works\". \"Tests pass\" requires the command and the raw",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Evidence over claims. \"It compiles\" is not \"it works\". \"Tests pass\" requires the command and the raw",
+ "howToTest": "Inspect the artifact against: Evidence over claims. \"It compiles\" is not \"it works\". \"Tests pass\" requires the command and the raw output, run this session, not a paraphrase",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-WTC-002",
+ "title": "The diff, not the summary. Review the real changed lines. A summary of a diff is a claim about a diff",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:wtc",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: The diff, not the summary. Review the real changed lines. A summary of a diff is a claim about a dif",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: The diff, not the summary. Review the real changed lines. A summary of a diff is a claim about a dif",
+ "howToTest": "Inspect the artifact against: The diff, not the summary. Review the real changed lines. A summary of a diff is a claim about a diff",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-WTC-003",
+ "title": "The class, not the instance. For every bug found, ask the sibling call paths. Fix the class, note the audit",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:wtc",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: The class, not the instance. For every bug found, ask the sibling call paths. Fix the class, note th",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: The class, not the instance. For every bug found, ask the sibling call paths. Fix the class, note th",
+ "howToTest": "Inspect the artifact against: The class, not the instance. For every bug found, ask the sibling call paths. Fix the class, note the audit",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-OAA-001",
+ "title": "Defect ledger. Numbered by severity (Critical, High, Medium, Low). Each: file:line, the defect, the exploit or failure path, the smallest fi",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:oaa",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Defect ledger. Numbered by severity (Critical, High, Medium, Low). Each: file:line, the defect, the ",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Defect ledger. Numbered by severity (Critical, High, Medium, Low). Each: file:line, the defect, the ",
+ "howToTest": "Inspect the artifact against: Defect ledger. Numbered by severity (Critical, High, Medium, Low). Each: file:line, the defect, the exploit or failure path, the smallest fix",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-OAA-002",
+ "title": "Untested surface. What was claimed but has no runnable proof attached",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:oaa",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Untested surface. What was claimed but has no runnable proof attached",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Untested surface. What was claimed but has no runnable proof attached",
+ "howToTest": "Inspect the artifact against: Untested surface. What was claimed but has no runnable proof attached",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-OAA-003",
+ "title": "Verdict folds into the core one-line: ship, fix first, or do not trust",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:oaa",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Verdict folds into the core one-line: ship, fix first, or do not trust",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Verdict folds into the core one-line: ship, fix first, or do not trust",
+ "howToTest": "Inspect the artifact against: Verdict folds into the core one-line: ship, fix first, or do not trust",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-FMT-001",
+ "title": "Tenancy sampled instead of swept. Spot-checking three routes and declaring isolation good",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:fmt",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Tenancy sampled instead of swept. Spot-checking three routes and declaring isolation good",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Tenancy sampled instead of swept. Spot-checking three routes and declaring isolation good",
+ "howToTest": "Inspect the artifact against: Tenancy sampled instead of swept. Spot-checking three routes and declaring isolation good",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-FMT-002",
+ "title": "\"Reachability\" as a pass: \"we never call that function\" with no evidence",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:fmt",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: \"Reachability\" as a pass: \"we never call that function\" with no evidence",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: \"Reachability\" as a pass: \"we never call that function\" with no evidence",
+ "howToTest": "Inspect the artifact against: \"Reachability\" as a pass: \"we never call that function\" with no evidence",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-FMT-003",
+ "title": "Trusting a green pipeline badge as proof of production behavior",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:fmt",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Trusting a green pipeline badge as proof of production behavior",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Trusting a green pipeline badge as proof of production behavior",
+ "howToTest": "Inspect the artifact against: Trusting a green pipeline badge as proof of production behavior",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-FMT-004",
+ "title": "A fix that patches one instance while the bug class survives in sibling paths",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:fmt",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: A fix that patches one instance while the bug class survives in sibling paths",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: A fix that patches one instance while the bug class survives in sibling paths",
+ "howToTest": "Inspect the artifact against: A fix that patches one instance while the bug class survives in sibling paths",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-MTD-001",
+ "title": "AlphaFlux: tenancy sweep is mandatory, route by route, no sampling. Go backend, Flutter clients, SurrealDB",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:mtd",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: AlphaFlux: tenancy sweep is mandatory, route by route, no sampling. Go backend, Flutter clients, Sur",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: AlphaFlux: tenancy sweep is mandatory, route by route, no sampling. Go backend, Flutter clients, Sur",
+ "howToTest": "Inspect the artifact against: AlphaFlux: tenancy sweep is mandatory, route by route, no sampling. Go backend, Flutter clients, SurrealDB",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-MTD-002",
+ "title": "AlphaVision: update-path integrity, untrusted input (remote, cast, deep links), local port exposure",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:mtd",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: AlphaVision: update-path integrity, untrusted input (remote, cast, deep links), local port exposure",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: AlphaVision: update-path integrity, untrusted input (remote, cast, deep links), local port exposure",
+ "howToTest": "Inspect the artifact against: AlphaVision: update-path integrity, untrusted input (remote, cast, deep links), local port exposure",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-MTD-003",
+ "title": "the harness: the full agent surface, prompt injection via repo content, tool abuse, sandbox egress, secret exposure",
+ "level": 2,
+ "severityIfFailed": "high",
+ "rubricRef": "rubric:code:mtd",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: the harness: the full agent surface, prompt injection via repo content, tool abuse, sandbox egress, secret",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: the harness: the full agent surface, prompt injection via repo content, tool abuse, sandbox egress, secret",
+ "howToTest": "Inspect the artifact against: the harness: the full agent surface, prompt injection via repo content, tool abuse, sandbox egress, secret exposure",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-MTD-004",
+ "title": "Any Go service: golang and golang-pro idioms; any Flutter surface: flutter widget and state tests",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:mtd",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: Any Go service: golang and golang-pro idioms; any Flutter surface: flutter widget and state tests",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: Any Go service: golang and golang-pro idioms; any Flutter surface: flutter widget and state tests",
+ "howToTest": "Inspect the artifact against: Any Go service: golang and golang-pro idioms; any Flutter surface: flutter widget and state tests",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ },
+ {
+ "id": "CODE-R-001",
+ "title": "`references/vuln-watch.md`: the vulnerability watchlist seed snapshot. Refresh it live per checklist A1 before every scan; the seed is never",
+ "level": 1,
+ "severityIfFailed": "medium",
+ "rubricRef": "rubric:code:r",
+ "applicability": {
+ "stacks": [],
+ "artifactTypes": [],
+ "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+ },
+ "evidenceTypes": [
+ "source-quote",
+ "command-output"
+ ],
+ "passCriteria": "Evidence shows the check holds: `references/vuln-watch.md`: the vulnerability watchlist seed snapshot. Refresh it live per checklist",
+ "failCriteria": "Evidence shows the check fails or no evidence is produced for: `references/vuln-watch.md`: the vulnerability watchlist seed snapshot. Refresh it live per checklist",
+ "howToTest": "Inspect the artifact against: `references/vuln-watch.md`: the vulnerability watchlist seed snapshot. Refresh it live per checklist A1 before every scan; the seed is never current o",
+ "taxonomy": {
+ "owasp": [],
+ "cwe": [],
+ "lens": "code"
+ },
+ "status": "active"
+ }
+ ]
+}

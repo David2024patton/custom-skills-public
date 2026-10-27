@@ -1,0 +1,287 @@
+{
+  "bank_version": 1,
+  "kept_separate_from_bank": true,
+  "note": "Ground truth lives in this file only. The bank file handed to an injector carries no expected findings. The oracle is maintained independently of the critics' own tooling; consensus among the five is never the oracle.",
+  "entries": [
+    {
+      "seed_id": "SB-001",
+      "location": "fixture-app/code/module-01.txt:1",
+      "defect_class": "missing-auth-check",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "code lens reports missing-auth-check at Critical"
+    },
+    {
+      "seed_id": "SB-002",
+      "location": "fixture-app/code/module-02.txt:1",
+      "defect_class": "tenancy-escape",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "code lens reports tenancy-escape at Critical"
+    },
+    {
+      "seed_id": "SB-003",
+      "location": "fixture-app/code/module-03.txt:1",
+      "defect_class": "sql-string-concat",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "code lens reports sql-string-concat at High"
+    },
+    {
+      "seed_id": "SB-004",
+      "location": "fixture-app/code/module-04.txt:1",
+      "defect_class": "unbounded-loop",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "code lens reports unbounded-loop at High"
+    },
+    {
+      "seed_id": "SB-005",
+      "location": "fixture-app/code/module-05.txt:1",
+      "defect_class": "secret-in-source",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "code lens reports secret-in-source at Medium"
+    },
+    {
+      "seed_id": "SB-006",
+      "location": "fixture-app/code/module-06.txt:1",
+      "defect_class": "missing-auth-check",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "code lens reports missing-auth-check at Medium"
+    },
+    {
+      "seed_id": "SB-007",
+      "location": "fixture-app/code/module-07.txt:1",
+      "defect_class": "tenancy-escape",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "code lens reports tenancy-escape at Low"
+    },
+    {
+      "seed_id": "SB-008",
+      "location": "fixture-app/code/module-08.txt:1",
+      "defect_class": "sql-string-concat",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "code lens reports sql-string-concat at Low"
+    },
+    {
+      "seed_id": "SB-009",
+      "location": "fixture-app/claims/module-09.txt:1",
+      "defect_class": "overstated-claim",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "claims lens reports overstated-claim at Critical"
+    },
+    {
+      "seed_id": "SB-010",
+      "location": "fixture-app/claims/module-10.txt:1",
+      "defect_class": "circular-source",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "claims lens reports circular-source at Critical"
+    },
+    {
+      "seed_id": "SB-011",
+      "location": "fixture-app/claims/module-11.txt:1",
+      "defect_class": "unbacked-number",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "claims lens reports unbacked-number at High"
+    },
+    {
+      "seed_id": "SB-012",
+      "location": "fixture-app/claims/module-12.txt:1",
+      "defect_class": "stale-figure",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "claims lens reports stale-figure at High"
+    },
+    {
+      "seed_id": "SB-013",
+      "location": "fixture-app/claims/module-13.txt:1",
+      "defect_class": "vendor-number-untagged",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "claims lens reports vendor-number-untagged at Medium"
+    },
+    {
+      "seed_id": "SB-014",
+      "location": "fixture-app/claims/module-14.txt:1",
+      "defect_class": "overstated-claim",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "claims lens reports overstated-claim at Medium"
+    },
+    {
+      "seed_id": "SB-015",
+      "location": "fixture-app/claims/module-15.txt:1",
+      "defect_class": "circular-source",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "claims lens reports circular-source at Low"
+    },
+    {
+      "seed_id": "SB-016",
+      "location": "fixture-app/claims/module-16.txt:1",
+      "defect_class": "unbacked-number",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "claims lens reports unbacked-number at Low"
+    },
+    {
+      "seed_id": "SB-017",
+      "location": "fixture-app/ux/module-17.txt:1",
+      "defect_class": "dead-button",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "ux lens reports dead-button at Critical"
+    },
+    {
+      "seed_id": "SB-018",
+      "location": "fixture-app/ux/module-18.txt:1",
+      "defect_class": "tiny-touch-target",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "ux lens reports tiny-touch-target at Critical"
+    },
+    {
+      "seed_id": "SB-019",
+      "location": "fixture-app/ux/module-19.txt:1",
+      "defect_class": "raw-error-shown",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "ux lens reports raw-error-shown at High"
+    },
+    {
+      "seed_id": "SB-020",
+      "location": "fixture-app/ux/module-20.txt:1",
+      "defect_class": "missing-empty-state",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "ux lens reports missing-empty-state at High"
+    },
+    {
+      "seed_id": "SB-021",
+      "location": "fixture-app/ux/module-21.txt:1",
+      "defect_class": "missing-error-state",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "ux lens reports missing-error-state at Medium"
+    },
+    {
+      "seed_id": "SB-022",
+      "location": "fixture-app/ux/module-22.txt:1",
+      "defect_class": "dead-button",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "ux lens reports dead-button at Medium"
+    },
+    {
+      "seed_id": "SB-023",
+      "location": "fixture-app/ux/module-23.txt:1",
+      "defect_class": "tiny-touch-target",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "ux lens reports tiny-touch-target at Low"
+    },
+    {
+      "seed_id": "SB-024",
+      "location": "fixture-app/ux/module-24.txt:1",
+      "defect_class": "raw-error-shown",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "ux lens reports raw-error-shown at Low"
+    },
+    {
+      "seed_id": "SB-025",
+      "location": "fixture-app/growth/module-25.txt:1",
+      "defect_class": "cta-mismatch",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "growth lens reports cta-mismatch at Critical"
+    },
+    {
+      "seed_id": "SB-026",
+      "location": "fixture-app/growth/module-26.txt:1",
+      "defect_class": "unsubstantiated-superlative",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "growth lens reports unsubstantiated-superlative at Critical"
+    },
+    {
+      "seed_id": "SB-027",
+      "location": "fixture-app/growth/module-27.txt:1",
+      "defect_class": "missing-mechanism",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "growth lens reports missing-mechanism at High"
+    },
+    {
+      "seed_id": "SB-028",
+      "location": "fixture-app/growth/module-28.txt:1",
+      "defect_class": "generic-swap-fail",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "growth lens reports generic-swap-fail at High"
+    },
+    {
+      "seed_id": "SB-029",
+      "location": "fixture-app/growth/module-29.txt:1",
+      "defect_class": "pricing-math-error",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "growth lens reports pricing-math-error at Medium"
+    },
+    {
+      "seed_id": "SB-030",
+      "location": "fixture-app/growth/module-30.txt:1",
+      "defect_class": "cta-mismatch",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "growth lens reports cta-mismatch at Medium"
+    },
+    {
+      "seed_id": "SB-031",
+      "location": "fixture-app/growth/module-31.txt:1",
+      "defect_class": "unsubstantiated-superlative",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "growth lens reports unsubstantiated-superlative at Low"
+    },
+    {
+      "seed_id": "SB-032",
+      "location": "fixture-app/growth/module-32.txt:1",
+      "defect_class": "missing-mechanism",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "growth lens reports missing-mechanism at Low"
+    },
+    {
+      "seed_id": "SB-033",
+      "location": "fixture-app/compliance/module-33.txt:1",
+      "defect_class": "retention-unstated",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "compliance lens reports retention-unstated at Critical"
+    },
+    {
+      "seed_id": "SB-034",
+      "location": "fixture-app/compliance/module-34.txt:1",
+      "defect_class": "unencrypted-store",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "compliance lens reports unencrypted-store at Critical"
+    },
+    {
+      "seed_id": "SB-035",
+      "location": "fixture-app/compliance/module-35.txt:1",
+      "defect_class": "access-log-absent",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "compliance lens reports access-log-absent at High"
+    },
+    {
+      "seed_id": "SB-036",
+      "location": "fixture-app/compliance/module-36.txt:1",
+      "defect_class": "pii-logged",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "compliance lens reports pii-logged at High"
+    },
+    {
+      "seed_id": "SB-037",
+      "location": "fixture-app/compliance/module-37.txt:1",
+      "defect_class": "missing-consent",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "compliance lens reports missing-consent at Medium"
+    },
+    {
+      "seed_id": "SB-038",
+      "location": "fixture-app/compliance/module-38.txt:1",
+      "defect_class": "retention-unstated",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "compliance lens reports retention-unstated at Medium"
+    },
+    {
+      "seed_id": "SB-039",
+      "location": "fixture-app/compliance/module-39.txt:1",
+      "defect_class": "unencrypted-store",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "compliance lens reports unencrypted-store at Low"
+    },
+    {
+      "seed_id": "SB-040",
+      "location": "fixture-app/compliance/module-40.txt:1",
+      "defect_class": "access-log-absent",
+      "reachability": "reachable in fixture review copy; marker line is the defect site",
+      "expected_finding": "compliance lens reports access-log-absent at Low"
+    }
+  ]
+}

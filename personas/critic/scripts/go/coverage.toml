@@ -1,0 +1,8 @@
+# Coverage ratchet template (report L1-06). Copy to the project at
+# .critic/coverage.toml. Floors are percentages. A project below the
+# target records its current total in .critic/coverage-baseline and
+# the gate holds it there: the floor may only move up.
+min_total = 80
+min_package = 60
+# Excluded from the per-package floor: cmd/ packages and generated
+# files (handled by the gate script).

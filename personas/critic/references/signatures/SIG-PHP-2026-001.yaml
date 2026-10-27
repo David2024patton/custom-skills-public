@@ -1,0 +1,38 @@
+# SIG-PHP-2026-001 - PHP2Shell runtime state signature (P-15).
+# Describe-only: the critic never sends exploit traffic. The signature
+# is runtime state, not a version string alone, because distro
+# backports can fix the flaw without a version bump.
+id: SIG-PHP-2026-001
+name: PHP2Shell pair, runtime state check
+verified_as_of: "2026-10-27"
+expires: "2027-01-25"
+cves:
+  - id: CVE-2026-109618
+    ghsa: GHSA-w8hw-w9fx-j79w
+    summary: "RCE via OOM corruption of partially initialised request memory through longjmp()."
+    severity: "CVSS v4.0 9.2 (PHP as CNA, primary). NVD v3.1 rescoring diverged at 9.8; report the CNA v4 score as primary and note the NVD v3 score, never silently pick one."
+    kev: "Listed in CISA KEV 2026-10-26, due 2026-10-29, forensic triage required."
+  - id: CVE-2026-109619
+    ghsa: GHSA-6wmf-4rv5-p3rp
+    summary: "RCE via stale request-owned global state surviving its backing memory."
+    severity: "CVSS v4.0 9.2 (PHP as CNA, primary). NVD v3.1 rescoring diverged at 8.1; same reporting rule as the pair mate."
+    kev: "Listed in CISA KEV 2026-10-26, due 2026-10-29, forensic triage required."
+affected: "Vulnerable code dates to PHP 5.4. All web-serving SAPIs affected: FPM, mod_php (highest risk, demonstrated pre-application-code unauthenticated exploit), php-cgi, FrankenPHP, LiteSpeed. No project release fixes 8.1 and older."
+fixed_in:
+  "8.5": "8.5.12"
+  "8.4": "8.4.27"
+  "8.3": "8.3.36"
+  "8.2": "8.2.35"
+  fixed_date: "2026-10-21"
+semantics:
+  exit_0_OK: "Serving runtime is at or past the fixed release for its branch, or a verified vendor backport (vendor plus advisory ID recorded) is present, and workers have restarted onto the fixed code."
+  exit_1_VULNERABLE: "Serving runtime is below the fixed release for its branch with no verified backport."
+  exit_3_UNKNOWN: "Serving runtime version or patch state cannot be established. An absent X-Powered-By or Server header is UNKNOWN, never a pass."
+checks:
+  primary: "Version of the runtime that serves requests. Not the CLI binary, not composer.json constraints."
+  header_probes: "X-Powered-By and Server headers are weak signals only."
+  config_greps_raise_priority_never_clear: ["finite app-controllable memory_limit with a multipart surface", "session.upload_progress.enabled unset or on", "on 8.5, fatal_error_backtraces on"]
+  worker_restart: "Part of the fix: old workers keep running old code. The server mode of the reference checker, which also checks worker restart, is the stronger form."
+reference_checker: "openai/php2shell-checker (Apache-2.0) implements exactly this three-state semantics with no exploit probes."
+not_this: "Not CVE-2024-4577 (2024 CGI argument injection, different flaw, different discoverer). The library carries that flaw as a separate, correctly attributed entry so the library models attribution discipline."
+follow_ons_separate_entries: ["CVE-2026-115560 (session upload progress, unusual preconditions, disclosed 2026-10-23)", "CVE-2026-111497 (Brotli out-of-bounds write in Windows builds)"]

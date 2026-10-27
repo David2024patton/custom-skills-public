@@ -1,0 +1,609 @@
+{
+ "schemaVersion": 1,
+ "lens": "claims",
+ "version": "1.0.0",
+ "sourceOfTruth": "This JSON is the source of truth. The prose lens in skills/software-development/critic-lens-claims/SKILL.md is a human readable view; checklist-lint rejects duplicate IDs and SARIF ruleIds that do not resolve here.",
+ "idMigration": {},
+ "items": [
+  {
+   "id": "CLAIMS-TFC-001",
+   "title": "Find the original source, not the aggregator. Trace the number up the citation chain until you hit whoever generated it. If three outlets ci",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:tfc",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Find the original source, not the aggregator. Trace the number up the citation chain until you hit w",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Find the original source, not the aggregator. Trace the number up the citation chain until you hit w",
+   "howToTest": "Inspect the artifact against: Find the original source, not the aggregator. Trace the number up the citation chain until you hit whoever generated it. If three outlets cite one stu",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-TFC-002",
+   "title": "Check the source actually says what the work claims. Misquotation is the most common subtle defect. Quote the source's own words back",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:tfc",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Check the source actually says what the work claims. Misquotation is the most common subtle defect. ",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Check the source actually says what the work claims. Misquotation is the most common subtle defect. ",
+   "howToTest": "Inspect the artifact against: Check the source actually says what the work claims. Misquotation is the most common subtle defect. Quote the source's own words back",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-TFC-003",
+   "title": "Assess the source. Primary (the body that generated the data) vs secondary (someone reporting it). Peer-reviewed vs blog vs vendor whitepape",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:tfc",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Assess the source. Primary (the body that generated the data) vs secondary (someone reporting it). P",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Assess the source. Primary (the body that generated the data) vs secondary (someone reporting it). P",
+   "howToTest": "Inspect the artifact against: Assess the source. Primary (the body that generated the data) vs secondary (someone reporting it). Peer-reviewed vs blog vs vendor whitepaper vs press",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-TFC-004",
+   "title": "Date it. Numbers move. Anything past its shelf life is OUTDATED, not TRUE",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:tfc",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Date it. Numbers move. Anything past its shelf life is OUTDATED, not TRUE",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Date it. Numbers move. Anything past its shelf life is OUTDATED, not TRUE",
+   "howToTest": "Inspect the artifact against: Date it. Numbers move. Anything past its shelf life is OUTDATED, not TRUE",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-SSW-001",
+   "title": "Sample size and power. A 3 percent lift on 40 users is noise. Ask for n and the confidence interval",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:ssw",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Sample size and power. A 3 percent lift on 40 users is noise. Ask for n and the confidence interval",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Sample size and power. A 3 percent lift on 40 users is noise. Ask for n and the confidence interval",
+   "howToTest": "Inspect the artifact against: Sample size and power. A 3 percent lift on 40 users is noise. Ask for n and the confidence interval",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-SSW-002",
+   "title": "p-hacking and multiple comparisons. If 20 metrics were tested and one is significant, that is the expected false positive, not a finding",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:ssw",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: p-hacking and multiple comparisons. If 20 metrics were tested and one is significant, that is the ex",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: p-hacking and multiple comparisons. If 20 metrics were tested and one is significant, that is the ex",
+   "howToTest": "Inspect the artifact against: p-hacking and multiple comparisons. If 20 metrics were tested and one is significant, that is the expected false positive, not a finding",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-SSW-003",
+   "title": "Selection and survivorship. Who is missing from the dataset. Did failures get dropped",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:ssw",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Selection and survivorship. Who is missing from the dataset. Did failures get dropped",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Selection and survivorship. Who is missing from the dataset. Did failures get dropped",
+   "howToTest": "Inspect the artifact against: Selection and survivorship. Who is missing from the dataset. Did failures get dropped",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-SSW-004",
+   "title": "Correlation dressed as causation. \"Users who X churn less\" is not \"doing X stops churn\". Demand the mechanism or the experiment",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:ssw",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Correlation dressed as causation. \"Users who X churn less\" is not \"doing X stops churn\". Demand the ",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Correlation dressed as causation. \"Users who X churn less\" is not \"doing X stops churn\". Demand the ",
+   "howToTest": "Inspect the artifact against: Correlation dressed as causation. \"Users who X churn less\" is not \"doing X stops churn\". Demand the mechanism or the experiment",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-SSW-005",
+   "title": "Base rate neglect. A conversion rate without the denominator is meaningless",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:ssw",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Base rate neglect. A conversion rate without the denominator is meaningless",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Base rate neglect. A conversion rate without the denominator is meaningless",
+   "howToTest": "Inspect the artifact against: Base rate neglect. A conversion rate without the denominator is meaningless",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-SSW-006",
+   "title": "Overfitting. A model or rule tuned and evaluated on the same data proves nothing. Demand a holdout",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:ssw",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Overfitting. A model or rule tuned and evaluated on the same data proves nothing. Demand a holdout",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Overfitting. A model or rule tuned and evaluated on the same data proves nothing. Demand a holdout",
+   "howToTest": "Inspect the artifact against: Overfitting. A model or rule tuned and evaluated on the same data proves nothing. Demand a holdout",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-SSW-007",
+   "title": "Recomputed math. Recalculate every total, percentage, and conversion from the stated inputs. Arithmetic errors hide in confident documents",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:ssw",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Recomputed math. Recalculate every total, percentage, and conversion from the stated inputs. Arithme",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Recomputed math. Recalculate every total, percentage, and conversion from the stated inputs. Arithme",
+   "howToTest": "Inspect the artifact against: Recomputed math. Recalculate every total, percentage, and conversion from the stated inputs. Arithmetic errors hide in confident documents",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-WTL-001",
+   "title": "Provenance on every number: source URL, observation date, method tag (live fetch, crawl, doc, secondary, estimate)",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:wtl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Provenance on every number: source URL, observation date, method tag (live fetch, crawl, doc, second",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Provenance on every number: source URL, observation date, method tag (live fetch, crawl, doc, second",
+   "howToTest": "Inspect the artifact against: Provenance on every number: source URL, observation date, method tag (live fetch, crawl, doc, secondary, estimate)",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-WTL-002",
+   "title": "The gap analysis. What did the work leave out: the failing competitor, the hidden cost, the untested assumption",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:wtl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: The gap analysis. What did the work leave out: the failing competitor, the hidden cost, the untested",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: The gap analysis. What did the work leave out: the failing competitor, the hidden cost, the untested",
+   "howToTest": "Inspect the artifact against: The gap analysis. What did the work leave out: the failing competitor, the hidden cost, the untested assumption",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-WTL-003",
+   "title": "The parity reality check. For competitor claims, does the cited source actually show what is claimed, verbatim",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:wtl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: The parity reality check. For competitor claims, does the cited source actually show what is claimed",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: The parity reality check. For competitor claims, does the cited source actually show what is claimed",
+   "howToTest": "Inspect the artifact against: The parity reality check. For competitor claims, does the cited source actually show what is claimed, verbatim",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-OAA-001",
+   "title": "Circular-source map. Where multiple citations collapse to one origin",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:oaa",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Circular-source map. Where multiple citations collapse to one origin",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Circular-source map. Where multiple citations collapse to one origin",
+   "howToTest": "Inspect the artifact against: Circular-source map. Where multiple citations collapse to one origin",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-OAA-002",
+   "title": "Recomputed figures. The work's math vs your recomputation, side by side",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:oaa",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Recomputed figures. The work's math vs your recomputation, side by side",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Recomputed figures. The work's math vs your recomputation, side by side",
+   "howToTest": "Inspect the artifact against: Recomputed figures. The work's math vs your recomputation, side by side",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-OAA-003",
+   "title": "Gap list. Missing competitors, costs, and failure modes",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:oaa",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Gap list. Missing competitors, costs, and failure modes",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Gap list. Missing competitors, costs, and failure modes",
+   "howToTest": "Inspect the artifact against: Gap list. Missing competitors, costs, and failure modes",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-FMT-001",
+   "title": "Aggregator cited as primary. Vendor benchmark dressed as independent measurement",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:fmt",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Aggregator cited as primary. Vendor benchmark dressed as independent measurement",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Aggregator cited as primary. Vendor benchmark dressed as independent measurement",
+   "howToTest": "Inspect the artifact against: Aggregator cited as primary. Vendor benchmark dressed as independent measurement",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-FMT-002",
+   "title": "Circular reporting mistaken for corroboration",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:fmt",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Circular reporting mistaken for corroboration",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Circular reporting mistaken for corroboration",
+   "howToTest": "Inspect the artifact against: Circular reporting mistaken for corroboration",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-FMT-003",
+   "title": "Stale figure presented as current. Rounded number presented as measured",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:fmt",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Stale figure presented as current. Rounded number presented as measured",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Stale figure presented as current. Rounded number presented as measured",
+   "howToTest": "Inspect the artifact against: Stale figure presented as current. Rounded number presented as measured",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-FMT-004",
+   "title": "Significance claimed from an underpowered or cherry-picked sample",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:fmt",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Significance claimed from an underpowered or cherry-picked sample",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Significance claimed from an underpowered or cherry-picked sample",
+   "howToTest": "Inspect the artifact against: Significance claimed from an underpowered or cherry-picked sample",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-R-001",
+   "title": "`references/fallacies.md`: the shared 18-fallacy catalogue (from yegor256/critic). Quote the trigger line, name the fallacy, give the one-li",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:r",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: `references/fallacies.md`: the shared 18-fallacy catalogue (from yegor256/critic). Quote the trigger",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: `references/fallacies.md`: the shared 18-fallacy catalogue (from yegor256/critic). Quote the trigger",
+   "howToTest": "Inspect the artifact against: `references/fallacies.md`: the shared 18-fallacy catalogue (from yegor256/critic). Quote the trigger line, name the fallacy, give the one-line remedy",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-LB2-001",
+   "title": "Bound fact: the operator's SearXNG metasearch instance is the search endpoint for the method; the endpoint value is operator configuration h",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:lb2",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Bound fact: the operator's SearXNG metasearch instance is the search endpoint for the method; the en",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Bound fact: the operator's SearXNG metasearch instance is the search endpoint for the method; the en",
+   "howToTest": "Inspect the artifact against: Bound fact: the operator's SearXNG metasearch instance is the search endpoint for the method; the endpoint value is operator configuration held in the",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-LB2-002",
+   "title": "Why it is bound: the operator runs this instance and wants it searched before any public search tool, per the deep-research method",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:lb2",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Why it is bound: the operator runs this instance and wants it searched before any public search tool",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Why it is bound: the operator runs this instance and wants it searched before any public search tool",
+   "howToTest": "Inspect the artifact against: Why it is bound: the operator runs this instance and wants it searched before any public search tool, per the deep-research method",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  },
+  {
+   "id": "CLAIMS-LB2-003",
+   "title": "Portable assumption: any metasearch or web search tool works for the verification step; the instance is a preference, not a requirement of t",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:claims:lb2",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Portable assumption: any metasearch or web search tool works for the verification step; the instance",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Portable assumption: any metasearch or web search tool works for the verification step; the instance",
+   "howToTest": "Inspect the artifact against: Portable assumption: any metasearch or web search tool works for the verification step; the instance is a preference, not a requirement of the lens",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "claims"
+   },
+   "status": "active"
+  }
+ ]
+}
