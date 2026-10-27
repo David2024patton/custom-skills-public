@@ -1,0 +1,41 @@
+# Commit Gates trigger layer: Lefthook configuration.
+#
+# WHAT THIS IS: the sanctioned alternative to .pre-commit-config.yaml
+# in this templates folder. It wires the same gates to the same stages
+# for repos that run Lefthook instead of the pre-commit framework. Use
+# one runner per repo, never both. Copy this file to the repo root as
+# lefthook.yml, copy commitlint.config.js from the same templates
+# folder to the repo root, and install the hooks once per clone:
+#   lefthook install
+#
+# STAGE MAPPING (same as the pre-commit config):
+#   pre-commit: format check, lint, debug check, and the secret scan
+#     via run-gates.sh --quick, plus the explicit secret scan so the
+#     hook-only secret gate runs even on its own.
+#   commit-msg: commit message form (commitlint). Hook-only gate:
+#     the message is fixed at commit time, so CI is too late to be
+#     the first check (CI re-checks the PR range as proof).
+#   pre-push: the full gate set, tests and vulnerability scan
+#     included, via run-gates.sh with no flags.
+#
+# SCRIPTS PATH: commands expect the commit-gates scripts library
+# vendored in the repo at tools/commit-gates/scripts/ (copy it there
+# or add it as a submodule). If the repo keeps the library elsewhere,
+# change the run paths below and nothing else.
+
+pre-commit:
+  commands:
+    commit-gates-quick:
+      run: tools/commit-gates/scripts/run-gates.sh --quick
+    secret-scan:
+      run: tools/commit-gates/scripts/common/secrets-scan.sh
+
+commit-msg:
+  commands:
+    commitlint:
+      run: npx --yes @commitlint/cli --config commitlint.config.js --edit {1}
+
+pre-push:
+  commands:
+    commit-gates-full:
+      run: tools/commit-gates/scripts/run-gates.sh

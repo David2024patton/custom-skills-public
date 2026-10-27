@@ -1,0 +1,26 @@
+# Standard .editorconfig for repos under the github-repo-standard.
+# Copy to the repo root as .editorconfig. Editors and formatters read
+# this file so whitespace agrees across machines before the gates run.
+
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+[*.go]
+indent_style = tab
+
+[Makefile]
+indent_style = tab
+
+[*.sh]
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false
