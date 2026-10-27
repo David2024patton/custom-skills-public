@@ -1,0 +1,7525 @@
+{
+ "registry_format_version": 1,
+ "generated_from_commit": "722508e8294153293902a5e2d1e8b17ec5b1953c",
+ "generator": "scripts/build-registry.py",
+ "risk_policy": {
+  "resolution_order": [
+   "frontmatter",
+   "known-map",
+   "derived",
+   "default"
+  ],
+  "derived_keyword_classes": [
+   {
+    "risk_class": "destructive",
+    "keywords": [
+     "delete",
+     "remove",
+     "destroy",
+     "terminate",
+     "wipe"
+    ]
+   },
+   {
+    "risk_class": "money",
+    "keywords": [
+     "book",
+     "buy",
+     "purchase",
+     "pay",
+     "order",
+     "checkout",
+     "reserve"
+    ]
+   },
+   {
+    "risk_class": "external-send",
+    "keywords": [
+     "send",
+     "publish",
+     "post",
+     "message",
+     "email"
+    ]
+   },
+   {
+    "risk_class": "write",
+    "keywords": [
+     "create",
+     "update",
+     "edit",
+     "manage",
+     "schedule",
+     "configure",
+     "install"
+    ]
+   }
+  ],
+  "derived_matching": "Case insensitive, inflection aware, word bounded matching over the skill's own description; the highest matching class in the order destructive, money, external-send, write wins.",
+  "default": {
+   "risk_class": "write",
+   "risk_source": "default"
+  },
+  "default_rule": "The default is never read. A record whose risk_source is default is unclassified and must be treated as confirmation required before any action beyond reading."
+ },
+ "counts": {
+  "skills": 228,
+  "personas": 23,
+  "pointers": 0,
+  "duplicates": 53,
+  "total_records": 304
+ },
+ "units": [
+  {
+   "id": "ad-tracking-pixels",
+   "name": "ad-tracking-pixels",
+   "kind": "skill",
+   "path": "skills/research/ad-tracking-pixels",
+   "category": "research",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "ad",
+     "pixels",
+     "tracking"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "f74ba68d447b3f2692bf9e63840a5289d6f8ad1151d3c905819dfdb4ae7d35f6",
+   "role": "canonical"
+  },
+  {
+   "id": "advertising-campaigns",
+   "name": "advertising-campaigns",
+   "kind": "skill",
+   "path": "advertising-campaigns",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "money",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "advertising",
+     "campaigns"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "f631d0c6b3737f5382662a7578a24751751cf7a70dfe29485cc706e985be4d9b",
+   "role": "canonical"
+  },
+  {
+   "id": "ai-seo-aeo",
+   "name": "ai-seo-aeo",
+   "kind": "skill",
+   "path": "skills/research/ai-seo-aeo",
+   "category": "research",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "aeo",
+     "ai",
+     "seo"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "772d9d77d10cbc89dc8556a4d6bc3fbd90e193f942f28803bb560b0013948c1e",
+   "role": "canonical"
+  },
+  {
+   "id": "airtable",
+   "name": "airtable",
+   "kind": "skill",
+   "path": "skills/productivity/airtable",
+   "category": "productivity",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "airtable"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "dc6df0af80363568018d5a60b3282093f527404c94633395a128b24c71255d82",
+   "role": "canonical"
+  },
+  {
+   "id": "alon",
+   "name": "alon",
+   "kind": "persona",
+   "path": "personas/alon",
+   "category": "persona",
+   "description": "Alon, Ecommerce Growth Lead",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "alon"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "801bc7f7d4af3242b9383479e98b38ad19ab2b48f78b6b6714f622b0a2241856",
+   "role": "canonical"
+  },
+  {
+   "id": "alphaflux-research",
+   "name": "alphaflux-research",
+   "kind": "skill",
+   "path": "alphaflux-research",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "alphaflux",
+     "research"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "0d9a3082e27566b587c6d2d810bb3139ebf1c99672803ef57b1abcde75166d36",
+   "role": "canonical"
+  },
+  {
+   "id": "analyst",
+   "name": "analyst",
+   "kind": "persona",
+   "path": "personas/analyst",
+   "category": "persona",
+   "description": "SOUL.md - The Analyst: Requirements and Analysis (Phase 2)",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "analyst"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "98af8739e7ee25b4b316c41926a8bfe11a2298fe213a31a4c596e3be826fe791",
+   "role": "canonical"
+  },
+  {
+   "id": "android-keyboard",
+   "name": "android-keyboard",
+   "kind": "skill",
+   "path": "android-keyboard",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "android",
+     "keyboard"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "7f36b664d8364f6dcea5a7560e00c9416d12a0004a01daa085c190fea89b3695",
+   "role": "canonical"
+  },
+  {
+   "id": "app-creation",
+   "name": "app-creation",
+   "kind": "skill",
+   "path": "app-creation",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "app",
+     "creation"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "c1c73bc9b786917b2fc01826c8b27c0cf285a9707695447a3d8b72a49af9537a",
+   "role": "canonical"
+  },
+  {
+   "id": "apple-notes",
+   "name": "apple-notes",
+   "kind": "skill",
+   "path": "skills/apple/apple-notes",
+   "category": "apple",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "apple",
+     "notes"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "7a3a40dafd8c836391206423249fa27159a3b2b45024153dba1ba5ddcc3b0a24",
+   "role": "canonical"
+  },
+  {
+   "id": "apple-reminders",
+   "name": "apple-reminders",
+   "kind": "skill",
+   "path": "skills/apple/apple-reminders",
+   "category": "apple",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "apple",
+     "reminders"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "8b5a66a6f65b5c393cafa9c1c742b3549bcc6b56a8da70d0e332abea24b6ff31",
+   "role": "canonical"
+  },
+  {
+   "id": "appllama-app-design-skill",
+   "name": "appllama-app-design-skill",
+   "kind": "skill",
+   "path": "appllama-app-design-skill",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "app",
+     "appllama",
+     "design",
+     "skill"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "9cbdca3454a17a84287221dde2391c43626c9584de71d47f166f1648ece56f18",
+   "role": "canonical"
+  },
+  {
+   "id": "appllama-usage",
+   "name": "appllama-usage",
+   "kind": "skill",
+   "path": "appllama-usage",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "appllama",
+     "usage"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "f2f7a0db01550e981cc8462211a65787d8cb45ad8199dfe79bed43cc9ee29826",
+   "role": "canonical"
+  },
+  {
+   "id": "architect",
+   "name": "architect",
+   "kind": "persona",
+   "path": "personas/architect",
+   "category": "persona",
+   "description": "SOUL.md - The Orchestra: Design Architect",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "architect"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "48bb10e8272309a5ed05043f1664e26b53caa818bbe797f89195bfdeddde62e0",
+   "role": "canonical"
+  },
+  {
+   "id": "architecture-diagram",
+   "name": "architecture-diagram",
+   "kind": "skill",
+   "path": "skills/creative/architecture-diagram",
+   "category": "creative",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "architecture",
+     "diagram"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "c9288873022794dfd32f6f02bc8cd2d1cf9baabcf888a34507c12b88e4a770a5",
+   "role": "canonical"
+  },
+  {
+   "id": "arxiv",
+   "name": "arxiv",
+   "kind": "skill",
+   "path": "skills/research/arxiv",
+   "category": "research",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "arxiv"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "59a848f5ff77b2953ae2333367246d955943377b664f761f153883105a4375f1",
+   "role": "canonical"
+  },
+  {
+   "id": "ascii-video",
+   "name": "ascii-video",
+   "kind": "skill",
+   "path": "skills/creative/ascii-video",
+   "category": "creative",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "ascii",
+     "video"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "97efb8cc8cd07b3614273a8a5cb1adafe895987aedd8137ca84af270aec7ab2e",
+   "role": "canonical"
+  },
+  {
+   "id": "audit_code",
+   "name": "audit_code",
+   "kind": "skill",
+   "path": "audit_code",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "audit_code"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "8269a36d7c2b318507c857d294903d2e54c38a7ad7751fab1c2acff0548d09d4",
+   "role": "canonical"
+  },
+  {
+   "id": "baoyu-infographic",
+   "name": "baoyu-infographic",
+   "kind": "skill",
+   "path": "skills/creative/baoyu-infographic",
+   "category": "creative",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "baoyu",
+     "infographic"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "7a987cfd16d21a213a8ea9e9ee4e9b05fd76388171962bbab65dd630afbc8c93",
+   "role": "canonical"
+  },
+  {
+   "id": "beatrice",
+   "name": "beatrice",
+   "kind": "persona",
+   "path": "personas/beatrice",
+   "category": "persona",
+   "description": "Beatrice, Sales Closer",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "beatrice"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "9327fe51c74ad72823b08058f95bcc63fe4713df9e244558cadc0bb68e511362",
+   "role": "canonical"
+  },
+  {
+   "id": "blocked-page-recovery",
+   "name": "blocked-page-recovery",
+   "kind": "skill",
+   "path": "skills/web/blocked-page-recovery",
+   "category": "web",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "blocked",
+     "page",
+     "recovery"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "757dc7f5c8597633a0fcad9d1ddc0919a1fe97ffa2c11bce32445062cba38a62",
+   "role": "canonical"
+  },
+  {
+   "id": "box",
+   "name": "box",
+   "kind": "skill",
+   "path": "skills/productivity/box",
+   "category": "productivity",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "box"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "d17939c7ad27588efc16ecc97d6ac0fd62a2e2238d71ee0c22513ad0f28b6076",
+   "role": "canonical"
+  },
+  {
+   "id": "builder",
+   "name": "builder",
+   "kind": "persona",
+   "path": "personas/builder",
+   "category": "persona",
+   "description": "SOUL.md - The Builder: Phase 4 Implementation Specialist",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "builder"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "fc3023db5c55b0ac7bc6bdce6caf4a131a0671ae52af1db92ed8bb4849ea83a0",
+   "role": "canonical"
+  },
+  {
+   "id": "business-finance",
+   "name": "business-finance",
+   "kind": "skill",
+   "path": "business-finance",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "external-send",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "business",
+     "finance"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "40b49c3d3f993c71db5c9fc113b2c230cbd6f118a0b388e269ae37afbcf99147",
+   "role": "canonical"
+  },
+  {
+   "id": "claude-code",
+   "name": "claude-code",
+   "kind": "skill",
+   "path": "skills/autonomous-ai-agents/claude-code",
+   "category": "autonomous-ai-agents",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "claude",
+     "code"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "932e9d88717fd06934925bd5107e22be970b4d734d5ff86c17730e1c3bbc32c8",
+   "role": "canonical"
+  },
+  {
+   "id": "claude-design",
+   "name": "claude-design",
+   "kind": "skill",
+   "path": "skills/creative/claude-design",
+   "category": "creative",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "claude",
+     "design"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "02c7bd47a15dd8c83842061a32e6171793cc883bb82b69e3fc513c61211dc975",
+   "role": "canonical"
+  },
+  {
+   "id": "codebase-inspection",
+   "name": "codebase-inspection",
+   "kind": "skill",
+   "path": "skills/software-development/codebase-inspection",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "codebase",
+     "inspection"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "8e56423b6f36a467a37a31beb165f20f868e6ee7e424262e1aec5a2b1eecc562",
+   "role": "canonical"
+  },
+  {
+   "id": "codex",
+   "name": "codex",
+   "kind": "skill",
+   "path": "skills/autonomous-ai-agents/codex",
+   "category": "autonomous-ai-agents",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "codex"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "3c25152d36a0267e2945aa2199975b83230233fa2685c72131c181fe14af1705",
+   "role": "canonical"
+  },
+  {
+   "id": "collection-router",
+   "name": "collection-router",
+   "kind": "skill",
+   "path": "collection-router",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "read",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "collection",
+     "router"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "04cab9482519ad195975b1d8593d30e175a4c12ebac5238fcd9c0e174491446e",
+   "role": "canonical"
+  },
+  {
+   "id": "commit-gates",
+   "name": "commit-gates",
+   "kind": "skill",
+   "path": "commit-gates",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "commit",
+     "gates"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "1e6727ff21b0df2ba2bd9585eba1a3886b09d24ccfefbadfffaf0a85d1fecfb8",
+   "role": "canonical"
+  },
+  {
+   "id": "commit-gates",
+   "name": "commit-gates",
+   "kind": "skill",
+   "path": "skills/commit-gates",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "commit",
+     "gates"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "c47a4b64a2dd7079c0a17e363ac7e2f11b324eaa4b427e72a85c20c4aa5a1ede",
+   "role": "duplicate",
+   "canonical_id": "commit-gates"
+  },
+  {
+   "id": "competitor-crawl-pipeline",
+   "name": "competitor-crawl-pipeline",
+   "kind": "skill",
+   "path": "skills/competitor-crawl-pipeline",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "competitor",
+     "crawl",
+     "pipeline"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "13886c6561145f9540b6e2a89f7f301f1cb75cd4c9f9d4dc111cb9ab8a556895",
+   "role": "canonical"
+  },
+  {
+   "id": "competitor-news-monitor",
+   "name": "competitor-news-monitor",
+   "kind": "skill",
+   "path": "skills/research/competitor-news-monitor",
+   "category": "research",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "competitor",
+     "monitor",
+     "news"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "cf09cded63cd987f4655cb97544c1ceb11c9bc574ab1c251d4ab080da222c5ea",
+   "role": "canonical"
+  },
+  {
+   "id": "computer-use",
+   "name": "computer-use",
+   "kind": "skill",
+   "path": "skills/autonomous-ai-agents/computer-use",
+   "category": "autonomous-ai-agents",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "computer",
+     "use"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "f8cb7fdfe65d7ef1b3f6147f2fd99b122861f9382322614c0acd44dc4cc3ba33",
+   "role": "canonical"
+  },
+  {
+   "id": "conversation-store-sweep",
+   "name": "conversation-store-sweep",
+   "kind": "skill",
+   "path": "skills/conversation-store-sweep",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "conversation",
+     "store",
+     "sweep"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "017224df82153c64dc83ea4e534b7af0f207ca01735699b5936f0ca7e9f55053",
+   "role": "canonical"
+  },
+  {
+   "id": "crawl4ai-competitor-intel",
+   "name": "crawl4ai-competitor-intel",
+   "kind": "skill",
+   "path": "skills/crawl4ai-competitor-intel",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "competitor",
+     "crawl4ai",
+     "intel"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "c51b082ebf972bf5ff83177a5f9f1f48c1a64ed3a988150942c1087d575ce592",
+   "role": "canonical"
+  },
+  {
+   "id": "critic",
+   "name": "critic",
+   "kind": "persona",
+   "path": "personas/critic",
+   "category": "persona",
+   "description": "SOUL.md - The Critic: Cross-Cutting Consensus Review",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "critic"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "72baf446062ebe2e007d7ff6e684fb826bcd8858540a51a700f486b7f974f064",
+   "role": "canonical"
+  },
+  {
+   "id": "critic-lens-claims",
+   "name": "critic-lens-claims",
+   "kind": "skill",
+   "path": "skills/software-development/critic-lens-claims",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "claims",
+     "critic",
+     "lens"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "a19d8f8f812273e58d438c4223996346e707dd30d688b4ec8cbbf14ec8c5fd24",
+   "role": "canonical"
+  },
+  {
+   "id": "critic-lens-code",
+   "name": "critic-lens-code",
+   "kind": "skill",
+   "path": "skills/software-development/critic-lens-code",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "code",
+     "critic",
+     "lens"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "ff9e1cf3d3715585ef72010d3bf0f0758ccfff244c3f536757dfed79674ba8d6",
+   "role": "canonical"
+  },
+  {
+   "id": "critic-lens-compliance",
+   "name": "critic-lens-compliance",
+   "kind": "skill",
+   "path": "skills/software-development/critic-lens-compliance",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "compliance",
+     "critic",
+     "lens"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "1f9cbb2779cd28c3f842b88d14c53f67aa255f196f43e33ad05a95ec2ea491fc",
+   "role": "canonical"
+  },
+  {
+   "id": "critic-lens-growth",
+   "name": "critic-lens-growth",
+   "kind": "skill",
+   "path": "skills/software-development/critic-lens-growth",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "critic",
+     "growth",
+     "lens"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "a330eb69fb318450a06c3c65129c2a8905e3bf8bf34eb616de3853b40da17a8d",
+   "role": "canonical"
+  },
+  {
+   "id": "critic-lens-ux",
+   "name": "critic-lens-ux",
+   "kind": "skill",
+   "path": "skills/software-development/critic-lens-ux",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "critic",
+     "lens",
+     "ux"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "730ca89b39c67e1ed78c4beccc303a6bf6ef3bd29f3e018971ba35c34f2c9977",
+   "role": "canonical"
+  },
+  {
+   "id": "custom-connector-setup",
+   "name": "custom-connector-setup",
+   "kind": "skill",
+   "path": "custom-connector-setup",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "connector",
+     "custom",
+     "setup"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "17eb1077e9354d8339bab99b4fdbd28e638e5dd44120d92ef8ffce7cc484a55c",
+   "role": "canonical"
+  },
+  {
+   "id": "customer-outreach",
+   "name": "customer-outreach",
+   "kind": "skill",
+   "path": "customer-outreach",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "external-send",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "customer",
+     "outreach"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "900dfdd7ecad5b56ab2f17485c00015751593386f7fd9ca750e66e507d375980",
+   "role": "canonical"
+  },
+  {
+   "id": "deep-research",
+   "name": "deep-research",
+   "kind": "skill",
+   "path": "deep-research",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "read",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "deep",
+     "research"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "9b7d790cfa1ea62dc7a88d5ec0d6a2c93be3b94f47dc9865bfcfb7a2edfb4268",
+   "role": "duplicate",
+   "canonical_id": "deep-research"
+  },
+  {
+   "id": "deep-research",
+   "name": "deep-research",
+   "kind": "skill",
+   "path": "skills/deep-research",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "read",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "deep",
+     "research"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "9f634d9481489a5fffcb330e826b22b6fede5635f66117a87b73c83402e8d8a8",
+   "role": "canonical"
+  },
+  {
+   "id": "design-md",
+   "name": "design-md",
+   "kind": "skill",
+   "path": "skills/creative/design-md",
+   "category": "creative",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "design",
+     "md"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "9af631fc817e193432fc842d895bcfab40aca8d0169d340831f26315474cb166",
+   "role": "canonical"
+  },
+  {
+   "id": "device-data",
+   "name": "device-data",
+   "kind": "skill",
+   "path": "device-data",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "data",
+     "device"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "15482b4b16c48eb76adcc58117377e2e4c1db2c051b6977e5de21368446a75d6",
+   "role": "canonical"
+  },
+  {
+   "id": "devops",
+   "name": "devops",
+   "kind": "persona",
+   "path": "personas/devops",
+   "category": "persona",
+   "description": "SOUL.md - The Release Guardian: DevOps Engineer (Phase 6: Deployment)",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "devops"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "cb6aff9b549a587e2ac1abe8181c6df36c82c775472fa584a0c5d605e900223c",
+   "role": "canonical"
+  },
+  {
+   "id": "docker-ops",
+   "name": "docker-ops",
+   "kind": "skill",
+   "path": "skills/docker-ops",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "docker",
+     "ops"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "59757bbe167ec62460ef2f96666dc2d37046df627ac38fcfd9cbba154e542d84",
+   "role": "canonical"
+  },
+  {
+   "id": "document-to-action-items",
+   "name": "document-to-action-items",
+   "kind": "skill",
+   "path": "skills/productivity/document-to-action-items",
+   "category": "productivity",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "action",
+     "document",
+     "items",
+     "to"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "44f5fd7b3cdb067ded9ce02eefd6b9e9b2f699927006b66db93dcc1ebfa07b52",
+   "role": "canonical"
+  },
+  {
+   "id": "documents",
+   "name": "documents",
+   "kind": "skill",
+   "path": "documents",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "documents"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "f3eeae78099dfdc36a53ddf5fcfe950221c19f3b5551e2a13f97bbbdeb576133",
+   "role": "canonical"
+  },
+  {
+   "id": "docx",
+   "name": "docx",
+   "kind": "skill",
+   "path": "skills/productivity/docx",
+   "category": "productivity",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "docx"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "436cc86b1b413ff8e879190c3f143b34b90e070a669584c220679344efe046b3",
+   "role": "canonical"
+  },
+  {
+   "id": "dogfood",
+   "name": "dogfood",
+   "kind": "skill",
+   "path": "skills/software-development/dogfood",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "dogfood"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "189a9ff4b565f1925a4e05696c9e1975ceadc408e9b55063734ab212a44bc43d",
+   "role": "canonical"
+  },
+  {
+   "id": "domain-fanout",
+   "name": "domain-fanout",
+   "kind": "skill",
+   "path": "skills/software-development/domain-fanout",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "domain",
+     "fanout"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "ac87188d516e8be44e69e64f2c67122f28a34e12e812506dad8ac3c0177fc340",
+   "role": "canonical"
+  },
+  {
+   "id": "email-inbox-triage",
+   "name": "email-inbox-triage",
+   "kind": "skill",
+   "path": "skills/email/email-inbox-triage",
+   "category": "email",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "email",
+     "inbox",
+     "triage"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "f593ceace3a4eaba5092e291c82b90d4377f36a8a965c57ff4a682faec5deade",
+   "role": "canonical"
+  },
+  {
+   "id": "email-management",
+   "name": "email-management",
+   "kind": "skill",
+   "path": "email-management",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "external-send",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "email",
+     "management"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "9074e4b0c503c69f71365d3d220aa2cf154ba0c25bc787b90c4effedc6f57436",
+   "role": "canonical"
+  },
+  {
+   "id": "event-tickets",
+   "name": "event-tickets",
+   "kind": "skill",
+   "path": "event-tickets",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "money",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "event",
+     "tickets"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "104904f71c5285e7418f74f4c8edb60d81f73cec963c26bab0114123404caa0f",
+   "role": "canonical"
+  },
+  {
+   "id": "exec-scripts",
+   "name": "exec-scripts",
+   "kind": "skill",
+   "path": "skills/software-development/exec-scripts",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "exec",
+     "scripts"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "5815392193dbb66fd8cfa77678897ab726f104b38e4da69b69da4c3096adfcc3",
+   "role": "canonical"
+  },
+  {
+   "id": "fastmcp",
+   "name": "fastmcp",
+   "kind": "skill",
+   "path": "skills/mcp/fastmcp",
+   "category": "mcp",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "fastmcp"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "f702e5ebd17a342aa04f15416ffbee423fb7446a00373149b168956532762141",
+   "role": "canonical"
+  },
+  {
+   "id": "felix",
+   "name": "felix",
+   "kind": "persona",
+   "path": "personas/felix",
+   "category": "persona",
+   "description": "Felix, Content Marketing Lead",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "felix"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "ee5f75fa7790a43a39e342ccc1d9bfa8683ed41aa48ffcca4e52945460e6457e",
+   "role": "canonical"
+  },
+  {
+   "id": "file-hosting",
+   "name": "file-hosting",
+   "kind": "skill",
+   "path": "file-hosting",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "file",
+     "hosting"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "cb40b3e95269e951a3b7221cc249aca2c2de4d047dbc04fb3511f9b121b92de2",
+   "role": "canonical"
+  },
+  {
+   "id": "final-auditor",
+   "name": "final-auditor",
+   "kind": "skill",
+   "path": "skills/software-development/final-auditor",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "auditor",
+     "final"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "0a656709b36382848f012c81ef3b259594dea4a3b18f2054f994c8ea66b4be6a",
+   "role": "canonical"
+  },
+  {
+   "id": "financial-planning",
+   "name": "financial-planning",
+   "kind": "skill",
+   "path": "financial-planning",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "financial",
+     "planning"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "8c29f3c0b755117dc7fc6096435777d98ec22f1f8548ca8cb98f5597e4e8e671",
+   "role": "canonical"
+  },
+  {
+   "id": "findmy",
+   "name": "findmy",
+   "kind": "skill",
+   "path": "skills/apple/findmy",
+   "category": "apple",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "findmy"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "d629c3613f32a35efdbc391379ddf43ce56e922f61f64b5fbc82242d520f96f6",
+   "role": "canonical"
+  },
+  {
+   "id": "fitness-tracking",
+   "name": "fitness-tracking",
+   "kind": "skill",
+   "path": "fitness-tracking",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "fitness",
+     "tracking"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "669707620e09ed0e96b4ded410aae9d73ceba08300021d3114f3c3dc9f34cc2b",
+   "role": "canonical"
+  },
+  {
+   "id": "flight-booking",
+   "name": "flight-booking",
+   "kind": "skill",
+   "path": "flight-booking",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "money",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "booking",
+     "flight"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "a7753ffe401defb1d29f172a0d5d665c26b2530f91d97a91557ec7349c0e90d6",
+   "role": "canonical"
+  },
+  {
+   "id": "flight-tracking",
+   "name": "flight-tracking",
+   "kind": "skill",
+   "path": "flight-tracking",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "read",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "flight",
+     "tracking"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "ec722e532a64c11884fd17852fedb70c189a405edd30e198ca1a6ab72cb341d0",
+   "role": "canonical"
+  },
+  {
+   "id": "flutter",
+   "name": "flutter",
+   "kind": "skill",
+   "path": "skills/flutter",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "flutter"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "e7030fd4d23594b1a7c2f79177b1dd87cf558ef36ce450eeb09baeff3135058d",
+   "role": "canonical"
+  },
+  {
+   "id": "forget",
+   "name": "forget",
+   "kind": "skill",
+   "path": "forget",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "forget"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "062acbcad8b3d1e64ab87c995e7533205e5ab1f6ab995e4cab78e1da50b6f337",
+   "role": "canonical"
+  },
+  {
+   "id": "form-design",
+   "name": "form-design",
+   "kind": "skill",
+   "path": "form-design",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "design",
+     "form"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "b423bde821a8dd514728c3e7cefe5e42018ae8e99422a36b7192e68d0f075ebc",
+   "role": "canonical"
+  },
+  {
+   "id": "game-creation",
+   "name": "game-creation",
+   "kind": "skill",
+   "path": "game-creation",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "creation",
+     "game"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "8209575e29e3882fa5a77a5452bafdfc511ae018bd1bb7cb753784ec80104583",
+   "role": "canonical"
+  },
+  {
+   "id": "generate_podcast",
+   "name": "generate_podcast",
+   "kind": "skill",
+   "path": "generate_podcast",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "external-send",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "generate_podcast"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "a7a4231f5a0ef0fbbc089f38a77aaaf28cbe7f841f4e969aff6bde7bbfe535ce",
+   "role": "canonical"
+  },
+  {
+   "id": "gif-search",
+   "name": "gif-search",
+   "kind": "skill",
+   "path": "skills/media/gif-search",
+   "category": "media",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "gif",
+     "search"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "60780ed24c53e2e01f14f6e728e1f6c220b3cf8e8dd0df6d1c5fb72091cf3c5a",
+   "role": "canonical"
+  },
+  {
+   "id": "github",
+   "name": "github",
+   "kind": "skill",
+   "path": "skills/software-development/github",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "github"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "9bda3989b3c31100a6dc7798feb44ad9a823e5fcc73b85be70104526d1e4b16e",
+   "role": "canonical"
+  },
+  {
+   "id": "github-repo-standard",
+   "name": "github-repo-standard",
+   "kind": "skill",
+   "path": "github-repo-standard",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "github",
+     "repo",
+     "standard"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "82ba0fdc28ad7a9df56ec125c3edd88802cb441444e1da03097c865a312676fc",
+   "role": "canonical"
+  },
+  {
+   "id": "github-repo-standard",
+   "name": "github-repo-standard",
+   "kind": "skill",
+   "path": "skills/github-repo-standard",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "github",
+     "repo",
+     "standard"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "70eca8915cfa621aa01c96d82a2bf064a61bc5e6b265aab0d965d4205f2dffcf",
+   "role": "duplicate",
+   "canonical_id": "github-repo-standard"
+  },
+  {
+   "id": "github-research",
+   "name": "github-research",
+   "kind": "skill",
+   "path": "skills/github-research",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "read",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "github",
+     "research"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "e83c88b69f91de27f2efba113c3cbbdb46be92317ff28b6cb5676d9ec8e68b30",
+   "role": "canonical"
+  },
+  {
+   "id": "goals",
+   "name": "goals",
+   "kind": "skill",
+   "path": "goals",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "goals"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "812b0f8dde7f1996a78bf26ec9134e397c6ef3f5a87bd547c17b41503294ee36",
+   "role": "canonical"
+  },
+  {
+   "id": "golang",
+   "name": "golang",
+   "kind": "skill",
+   "path": "skills/golang",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "1d9b424e4bf90ecd52a9927ad50a3f410b27ac8d7e4020ef339aa470358c882e",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-benchmark",
+   "name": "golang-benchmark",
+   "kind": "skill",
+   "path": "golang-benchmark",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "benchmark",
+     "golang"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "f7050bd1de9f88fc10113ef77b15be6c07d497122158c023b1b464d673a11881",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-cli",
+   "name": "golang-cli",
+   "kind": "skill",
+   "path": "golang-cli",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "cli",
+     "golang"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "cb74a06627b0a3225d7b6d48721f409e27f70f5ba4ad6280a9c5ca5f2d96be42",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-code-style",
+   "name": "golang-code-style",
+   "kind": "skill",
+   "path": "golang-code-style",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "code",
+     "golang",
+     "style"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "459b984628cfcfa28c961e1a588e2eb23aa368155d57f699a52f4ee95c75b7ad",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-concurrency",
+   "name": "golang-concurrency",
+   "kind": "skill",
+   "path": "golang-concurrency",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "concurrency",
+     "golang"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "0b75c0d3c5958575b9a6a736371c12d8f1d2691dc58949b72edaedfa62d6b7eb",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-context",
+   "name": "golang-context",
+   "kind": "skill",
+   "path": "golang-context",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "context",
+     "golang"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "2f9d09a4b5847cba9f491fd06709de8720954ad3a914884a4226d77706e46bb3",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-continuous-integration",
+   "name": "golang-continuous-integration",
+   "kind": "skill",
+   "path": "golang-continuous-integration",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "continuous",
+     "golang",
+     "integration"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "2d8d6fb5ef1ed78c6e97e984575bc3c273e4ab728018087688b3b022cf1c11b2",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-data-structures",
+   "name": "golang-data-structures",
+   "kind": "skill",
+   "path": "golang-data-structures",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "data",
+     "golang",
+     "structures"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "009cd6ceb2b4ed530a990bdf38982ff6707f48109be7f2b28b428300cc7fcdf9",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-database",
+   "name": "golang-database",
+   "kind": "skill",
+   "path": "golang-database",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "database",
+     "golang"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "5a91d3eef26d6fec2dfe10b36892c50e4b5309488b96e85c5098cde3e7675368",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-dependency-injection",
+   "name": "golang-dependency-injection",
+   "kind": "skill",
+   "path": "golang-dependency-injection",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "dependency",
+     "golang",
+     "injection"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "4f34df2a3a1c61cf65b1ba576fa468f34c7be3f92ee2118f7295ac75912b8f4d",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-dependency-management",
+   "name": "golang-dependency-management",
+   "kind": "skill",
+   "path": "golang-dependency-management",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "dependency",
+     "golang",
+     "management"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "79d154c279aeb31601d5f25d8e13672c5241d8e25a79bbd89158cd7b44149e68",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-design-patterns",
+   "name": "golang-design-patterns",
+   "kind": "skill",
+   "path": "golang-design-patterns",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "design",
+     "golang",
+     "patterns"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "e1c99d54d3d9a4263d398e222502985f5703c0e10ac74d2e6a8d335161a5ec20",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-documentation",
+   "name": "golang-documentation",
+   "kind": "skill",
+   "path": "golang-documentation",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "documentation",
+     "golang"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "494cf86c5ebdf62cbdf6408afe344175ae3c6947102d1636dea3034579629d84",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-error-handling",
+   "name": "golang-error-handling",
+   "kind": "skill",
+   "path": "golang-error-handling",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "error",
+     "golang",
+     "handling"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "51681cbc09e5e13670c864d7ff139ea1778e58cae8847d2558ef085d233f6f94",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-google-wire",
+   "name": "golang-google-wire",
+   "kind": "skill",
+   "path": "golang-google-wire",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "google",
+     "wire"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "78cc8c4b5337cdc909ae823dd6619a683d454469ff5f174172cd6c7b43e7919a",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-gopls",
+   "name": "golang-gopls",
+   "kind": "skill",
+   "path": "golang-gopls",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "gopls"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "fb6440034db9c5f5a656d25ecbf075e56227705e96e0f41409671159931cdd8c",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-graphql",
+   "name": "golang-graphql",
+   "kind": "skill",
+   "path": "golang-graphql",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "graphql"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "d980d9ce7b5a49b02024505f1cbd39d280ff252a0c1d5d3ce5aba491edc8245b",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-grpc",
+   "name": "golang-grpc",
+   "kind": "skill",
+   "path": "golang-grpc",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "grpc"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "7b7dfb65771c9e817cd2492f2747f2b1ceb84b6723e0df53553653ce9bc573e7",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-how-to",
+   "name": "golang-how-to",
+   "kind": "skill",
+   "path": "golang-how-to",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "how",
+     "to"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "cb5716624f0aff812e9750280ef70fb81e91888089c789864797f26d8e803d4a",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-lint",
+   "name": "golang-lint",
+   "kind": "skill",
+   "path": "golang-lint",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "lint"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "2518f903c7ca313c89e618bd69ba6a42a042e23bab39c1947bb6227eb12ea7ab",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-modernize",
+   "name": "golang-modernize",
+   "kind": "skill",
+   "path": "golang-modernize",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "modernize"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "7f9954aab14f225ed00cc24186e2ca0a7df50f1a1de14fe81eccc80e83d2c6e6",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-naming",
+   "name": "golang-naming",
+   "kind": "skill",
+   "path": "golang-naming",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "naming"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "f728325c537df6212c3ec0553b8f699cc1460404c383fa7ed9e2ea7bc3a47b56",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-observability",
+   "name": "golang-observability",
+   "kind": "skill",
+   "path": "golang-observability",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "observability"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "999b893ef3abd2471ead52de2b4977450c2f839e2970b140368768ae5396325d",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-performance",
+   "name": "golang-performance",
+   "kind": "skill",
+   "path": "golang-performance",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "performance"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "33563d713904fe846dbdb850f28fe783042fec72d5023396c0e8169e76d28bb3",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-pkg-go-dev",
+   "name": "golang-pkg-go-dev",
+   "kind": "skill",
+   "path": "golang-pkg-go-dev",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "dev",
+     "go",
+     "golang",
+     "pkg"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "8d3f9468fd8fbda277eebef7b15f47f26f2f9316bfb811693da1a4d0ad33bf76",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-popular-libraries",
+   "name": "golang-popular-libraries",
+   "kind": "skill",
+   "path": "golang-popular-libraries",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "libraries",
+     "popular"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "71dda73b01a670ad305f69ef046f09961a63a0aaaf3804f63fe4d3a4aef9ed17",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-pro",
+   "name": "golang-pro",
+   "kind": "skill",
+   "path": "skills/golang-pro",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "pro"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "c3de183e3be02afbfcf8f606916de8ff9c5f4d25b8675b7bc46fce2b5f545fa6",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-project-layout",
+   "name": "golang-project-layout",
+   "kind": "skill",
+   "path": "golang-project-layout",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "layout",
+     "project"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "08c7f06c9db131c463465b78c14207bbf53efcfb4704a14171916463efccca92",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-refactoring",
+   "name": "golang-refactoring",
+   "kind": "skill",
+   "path": "golang-refactoring",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "refactoring"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "1648381b5ad995c82e2b63632e156a79bbd319f59933477c94ef062fbbd71e15",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-safety",
+   "name": "golang-safety",
+   "kind": "skill",
+   "path": "golang-safety",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "safety"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "3861fdf20ea7d0cb34a5435897da41b5c23bf8a51dfc6ee02c7f6c19217bb49c",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-samber-do",
+   "name": "golang-samber-do",
+   "kind": "skill",
+   "path": "golang-samber-do",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "do",
+     "golang",
+     "samber"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "546f972e6fc0756cd2a4401db424c4d6ecb712a4f5a74139abfe5e2a2ec3b1ed",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-samber-hot",
+   "name": "golang-samber-hot",
+   "kind": "skill",
+   "path": "golang-samber-hot",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "hot",
+     "samber"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "7307735d5541e8fdb70e3ac6039b00136ef5ae88f70399517e872eaf567d728b",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-samber-lo",
+   "name": "golang-samber-lo",
+   "kind": "skill",
+   "path": "golang-samber-lo",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "lo",
+     "samber"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "80d81c3c1f6e18e49bea843ca05f2e4e164a2c111a12b3526cf31520c51c72d1",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-samber-mo",
+   "name": "golang-samber-mo",
+   "kind": "skill",
+   "path": "golang-samber-mo",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "mo",
+     "samber"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "676094f287adbcbcbab4d8bdd13f4772b696523c50a88c95845be731e47cb820",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-samber-oops",
+   "name": "golang-samber-oops",
+   "kind": "skill",
+   "path": "golang-samber-oops",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "oops",
+     "samber"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "f4fc49cba72197d802ad903a7bdfcee02ba1c849f0f1668db86be9455a7d8f7a",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-samber-ro",
+   "name": "golang-samber-ro",
+   "kind": "skill",
+   "path": "golang-samber-ro",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "ro",
+     "samber"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "a51c8b953e39be1030b2f2716e4d7dc65b211408722dedfc2d30028e99e039dd",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-samber-slog",
+   "name": "golang-samber-slog",
+   "kind": "skill",
+   "path": "golang-samber-slog",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "samber",
+     "slog"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "24e789f36ba661960e239cd057c850bf8915436129b16c92f5d18af4d7519aab",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-security",
+   "name": "golang-security",
+   "kind": "skill",
+   "path": "golang-security",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "security"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "1cba87ba0e21d4dab2e74465f851c1f72c96ab6ee79d7e7e1c5eac98e61e23ac",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-spf13-cobra",
+   "name": "golang-spf13-cobra",
+   "kind": "skill",
+   "path": "golang-spf13-cobra",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "cobra",
+     "golang",
+     "spf13"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "e71871552c92873dde9bcf267d872088db259a21f288d2bec904cdcd3a843b05",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-spf13-viper",
+   "name": "golang-spf13-viper",
+   "kind": "skill",
+   "path": "golang-spf13-viper",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "spf13",
+     "viper"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "d84e125475d88f6cb01becb7669760e22612035d324c0b320962fbb690aad079",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-stay-updated",
+   "name": "golang-stay-updated",
+   "kind": "skill",
+   "path": "golang-stay-updated",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "stay",
+     "updated"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "ab4b876eae0beebc0fdc7430fb2c4b1fdcdcce76aa8b65f4a7986b4a39d5d0f2",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-stretchr-testify",
+   "name": "golang-stretchr-testify",
+   "kind": "skill",
+   "path": "golang-stretchr-testify",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "stretchr",
+     "testify"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "5e5c2157665298bc45372a7f5a8b2ad0a5951c20ffde3303a9bf94542aa4ac46",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-structs-interfaces",
+   "name": "golang-structs-interfaces",
+   "kind": "skill",
+   "path": "golang-structs-interfaces",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "interfaces",
+     "structs"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "9cfedc8787152f268485aefe31790276599b5d8a244a56d56fd455efb2f416a0",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-swagger",
+   "name": "golang-swagger",
+   "kind": "skill",
+   "path": "golang-swagger",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "swagger"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "b2fed279c745ebf44d4028d36063c56e8bc97c5b617c5d39c8fdc5ecd12cdb91",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-testing",
+   "name": "golang-testing",
+   "kind": "skill",
+   "path": "golang-testing",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "testing"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "effed0abbfc48deaaa3d4f51af84fbc403f2b5b03e8c7c1a749a4222fb465817",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-troubleshooting",
+   "name": "golang-troubleshooting",
+   "kind": "skill",
+   "path": "golang-troubleshooting",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "troubleshooting"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "24a7a28864c2e6c6a30c16eceebb324c0640ea7bf2075e383d6c131ad7a27b30",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-uber-dig",
+   "name": "golang-uber-dig",
+   "kind": "skill",
+   "path": "golang-uber-dig",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "dig",
+     "golang",
+     "uber"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "a2dab4601643f4f26dd548d0888d66f92a865fb09e6d0b39c1e39bfa95f23256",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-uber-fx",
+   "name": "golang-uber-fx",
+   "kind": "skill",
+   "path": "golang-uber-fx",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "fx",
+     "golang",
+     "uber"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "f73c2a6d2e444fd84acea63b4a8ec2ac2c21bf7d6f48cdc15f6183f06603915b",
+   "role": "canonical"
+  },
+  {
+   "id": "golang-web",
+   "name": "golang-web",
+   "kind": "skill",
+   "path": "skills/golang-web",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "web"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "b4c8c671f6d69c8985f823fcd19e79c52a63b9c1a6b75e472f67c4a8ddbb4ea2",
+   "role": "canonical"
+  },
+  {
+   "id": "google-business-profiles",
+   "name": "google-business-profiles",
+   "kind": "skill",
+   "path": "google-business-profiles",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "business",
+     "google",
+     "profiles"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "d60c66f2178008a19b0d998eb041910cf49a72ec4d9cf16124d36a39a828ed94",
+   "role": "canonical"
+  },
+  {
+   "id": "google-workspace",
+   "name": "google-workspace",
+   "kind": "skill",
+   "path": "skills/productivity/google-workspace",
+   "category": "productivity",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "google",
+     "workspace"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "2d58b876a328195aa29291efee2eb2c0c536babd691fe1d91deefbc59c4e3fa9",
+   "role": "canonical"
+  },
+  {
+   "id": "groceries",
+   "name": "groceries",
+   "kind": "skill",
+   "path": "groceries",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "money",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "groceries"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "d3cc5fd8c6f813ca7e2e111136f3661f1b9bd31dca6e153f5bd87e72c9a78a3c",
+   "role": "canonical"
+  },
+  {
+   "id": "grounded-citations",
+   "name": "grounded-citations",
+   "kind": "skill",
+   "path": "skills/research/grounded-citations",
+   "category": "research",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "citations",
+     "grounded"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "839291c4d3ca1ca6f7b4f62ed730c4e90cd93868e7bc04ae024f6acbb5970d68",
+   "role": "canonical"
+  },
+  {
+   "id": "health-review",
+   "name": "health-review",
+   "kind": "skill",
+   "path": "health-review",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "health",
+     "review"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "9137a173a73e153789eee89b81bd30189c1b2806efbdb1789b6b944d9fae7047",
+   "role": "canonical"
+  },
+  {
+   "id": "hermes-agent",
+   "name": "hermes-agent",
+   "kind": "skill",
+   "path": "skills/autonomous-ai-agents/hermes-agent",
+   "category": "autonomous-ai-agents",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "agent",
+     "hermes"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "31f34e917afaeefe840504a5899c5f558cdf0bca41864a5789f8603af4be25ec",
+   "role": "canonical"
+  },
+  {
+   "id": "hermes-agent-skill-authoring",
+   "name": "hermes-agent-skill-authoring",
+   "kind": "skill",
+   "path": "skills/software-development/hermes-agent-skill-authoring",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "agent",
+     "authoring",
+     "hermes",
+     "skill"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "8ba0c335be1fe093c74c03934edcfc882a26a964a5cda2fd10636fd812876571",
+   "role": "canonical"
+  },
+  {
+   "id": "hermes-cache-discipline",
+   "name": "hermes-cache-discipline",
+   "kind": "skill",
+   "path": "skills/hermes-cache-discipline",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "cache",
+     "discipline",
+     "hermes"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "c472bce354f5ee8ee7ad184775cab2218df2c83282fd247a999849cd8423c87a",
+   "role": "canonical"
+  },
+  {
+   "id": "hermes-harness",
+   "name": "hermes-harness",
+   "kind": "skill",
+   "path": "skills/autonomous-ai-agents/hermes-harness",
+   "category": "autonomous-ai-agents",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "harness",
+     "hermes"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "038bcda934b03a6cecffa162c778bdce66f919c29ced3366d6856b1e3d772407",
+   "role": "canonical"
+  },
+  {
+   "id": "himalaya",
+   "name": "himalaya",
+   "kind": "skill",
+   "path": "skills/email/himalaya",
+   "category": "email",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "external-send",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "himalaya"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "11d0c0c79f94a4dbba31032333efd1d2288bb529c72e713d02ebc63db2bc1c2a",
+   "role": "canonical"
+  },
+  {
+   "id": "home-control",
+   "name": "home-control",
+   "kind": "skill",
+   "path": "home-control",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "control",
+     "home"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "e90c317f717650e4ae1667505c23b0fad3b866b640599e38ecd6a1572d4eb7c5",
+   "role": "canonical"
+  },
+  {
+   "id": "home-search",
+   "name": "home-search",
+   "kind": "skill",
+   "path": "home-search",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "home",
+     "search"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "ddeec17019faf63733bbea5a11aaa00350d4c73803b99748d1ee20bc52fdd63c",
+   "role": "canonical"
+  },
+  {
+   "id": "hotel-booking",
+   "name": "hotel-booking",
+   "kind": "skill",
+   "path": "hotel-booking",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "money",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "booking",
+     "hotel"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "871568987050b14d2ef67b8d74833a983b38962143b816af99531ab7b164cc4f",
+   "role": "canonical"
+  },
+  {
+   "id": "humanizer",
+   "name": "humanizer",
+   "kind": "skill",
+   "path": "skills/creative/humanizer",
+   "category": "creative",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "humanizer"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "027cbccba83fd80034287b04be389f27c8930408167f6022b2be4433c7de535d",
+   "role": "canonical"
+  },
+  {
+   "id": "ideation-research",
+   "name": "ideation-research",
+   "kind": "skill",
+   "path": "skills/research/ideation-research",
+   "category": "research",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "ideation",
+     "research"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "a594c68a5dbfc1fc435d0a642965f07a978c71ade9dd6891540dc5260875a8cc",
+   "role": "canonical"
+  },
+  {
+   "id": "ideator",
+   "name": "ideator",
+   "kind": "persona",
+   "path": "personas/ideator",
+   "category": "persona",
+   "description": "SOUL.md - The Ideator: Vet the Idea Before It Is Built",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "ideator"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "3cbac0ea3671e90dd02e0a8bae87cca7b46e16f51a0636f1ff9c0b77c5d20176",
+   "role": "canonical"
+  },
+  {
+   "id": "image-search",
+   "name": "image-search",
+   "kind": "skill",
+   "path": "image-search",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "image",
+     "search"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "19b1ca3cd09ac9c46c1c95e744bc597422bb25dd6b8fe581cc4e68b180f801a8",
+   "role": "canonical"
+  },
+  {
+   "id": "imessage",
+   "name": "imessage",
+   "kind": "skill",
+   "path": "skills/apple/imessage",
+   "category": "apple",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "external-send",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "imessage"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "501a6c3859a4726b1fbcb7c721ed06ff2e37aa8912195e34c4ad475af1eb0fe3",
+   "role": "canonical"
+  },
+  {
+   "id": "inspecting-hermes-desktop-dom",
+   "name": "inspecting-hermes-desktop-dom",
+   "kind": "skill",
+   "path": "skills/software-development/inspecting-hermes-desktop-dom",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "desktop",
+     "dom",
+     "hermes",
+     "inspecting"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "3d6a72ccb561e50141b984b82b8d9ffdc4d499cef3569555a6a0ebb75423364d",
+   "role": "canonical"
+  },
+  {
+   "id": "knowledge-organization",
+   "name": "knowledge-organization",
+   "kind": "skill",
+   "path": "knowledge-organization",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "knowledge",
+     "organization"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "799d81c4465f80893c0b497f1390dcfe171fdc62458fd0d8b0b8fe5887300090",
+   "role": "canonical"
+  },
+  {
+   "id": "language-knowledge",
+   "name": "language-knowledge",
+   "kind": "skill",
+   "path": "skills/software-development/language-knowledge",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "knowledge",
+     "language"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "5738058be9e3fa71f1db5e1dd2647ccda5fba3590b53b71eb18e5d1306358a49",
+   "role": "canonical"
+  },
+  {
+   "id": "leo",
+   "name": "leo",
+   "kind": "persona",
+   "path": "personas/leo",
+   "category": "persona",
+   "description": "Leo, Content Creator",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "leo"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "0e115da612da2313e229c923f7708d79662a60288fd141062a2d08567f8c662f",
+   "role": "canonical"
+  },
+  {
+   "id": "lewis",
+   "name": "lewis",
+   "kind": "persona",
+   "path": "personas/lewis",
+   "category": "persona",
+   "description": "Lewis, Finance Ops Manager",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "lewis"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "6aa9d19214552724812c7ad0f3e89a2ad8ae49dc66b626ee65bf35fab6f4787a",
+   "role": "canonical"
+  },
+  {
+   "id": "llm-wiki",
+   "name": "llm-wiki",
+   "kind": "skill",
+   "path": "skills/research/llm-wiki",
+   "category": "research",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "llm",
+     "wiki"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "c829ccab1348b0678ad43aaeb37fb4b3995e77b2ad75d933fb8be64f6067dc10",
+   "role": "canonical"
+  },
+  {
+   "id": "local-android-keyboard",
+   "name": "local-android-keyboard",
+   "kind": "skill",
+   "path": "local-android-keyboard",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "android",
+     "keyboard",
+     "local"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "930be668305bfcbdc49e792f48e8aac32e7e4ecb367ddd7e302311310f609ca4",
+   "role": "duplicate",
+   "canonical_id": "android-keyboard"
+  },
+  {
+   "id": "local-appllama-app-design-skill",
+   "name": "local-appllama-app-design-skill",
+   "kind": "skill",
+   "path": "local-appllama-app-design-skill",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "app",
+     "appllama",
+     "design",
+     "local",
+     "skill"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "2e6600cf9d9c31597d8b1da06e36a9586e112621f2b4a32e7e1c9087d7e84cdd",
+   "role": "duplicate",
+   "canonical_id": "appllama-app-design-skill"
+  },
+  {
+   "id": "local-appllama-usage",
+   "name": "local-appllama-usage",
+   "kind": "skill",
+   "path": "local-appllama-usage",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "appllama",
+     "local",
+     "usage"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "528d2c221e8fc50646edcebca5078624b46a0a1e33f817608bceb488996e83ef",
+   "role": "duplicate",
+   "canonical_id": "appllama-usage"
+  },
+  {
+   "id": "local-golang-benchmark",
+   "name": "local-golang-benchmark",
+   "kind": "skill",
+   "path": "local-golang-benchmark",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "benchmark",
+     "golang",
+     "local"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "d491772122c2ecd78487e37b683c7cd693a0d4e7fe2af0d9b93bd7ae11f0d057",
+   "role": "duplicate",
+   "canonical_id": "golang-benchmark"
+  },
+  {
+   "id": "local-golang-cli",
+   "name": "local-golang-cli",
+   "kind": "skill",
+   "path": "local-golang-cli",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "cli",
+     "golang",
+     "local"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "b816e29992ba8198b902729e054ab79cccc929a321e65f7157627961d1a9e898",
+   "role": "duplicate",
+   "canonical_id": "golang-cli"
+  },
+  {
+   "id": "local-golang-code-style",
+   "name": "local-golang-code-style",
+   "kind": "skill",
+   "path": "local-golang-code-style",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "code",
+     "golang",
+     "local",
+     "style"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "38f4dfcaa4bb5f2ef5490ad53aaad1977d7f2d83f0c84796e3977a847b58ec12",
+   "role": "duplicate",
+   "canonical_id": "golang-code-style"
+  },
+  {
+   "id": "local-golang-concurrency",
+   "name": "local-golang-concurrency",
+   "kind": "skill",
+   "path": "local-golang-concurrency",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "concurrency",
+     "golang",
+     "local"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "14eda472e7e47ac84671ecee637ead1b2f3b505c3713438ea2d5adcc98567ad8",
+   "role": "duplicate",
+   "canonical_id": "golang-concurrency"
+  },
+  {
+   "id": "local-golang-context",
+   "name": "local-golang-context",
+   "kind": "skill",
+   "path": "local-golang-context",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "context",
+     "golang",
+     "local"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "28a93d2a5fd66e68bd6604e207e32540383f72f53bf4f5e9cb234b2f89011974",
+   "role": "duplicate",
+   "canonical_id": "golang-context"
+  },
+  {
+   "id": "local-golang-continuous-integration",
+   "name": "local-golang-continuous-integration",
+   "kind": "skill",
+   "path": "local-golang-continuous-integration",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "continuous",
+     "golang",
+     "integration",
+     "local"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "7639d0b59e450aa813d316766d4357d8cc524e73834f680004997c835593e1ab",
+   "role": "duplicate",
+   "canonical_id": "golang-continuous-integration"
+  },
+  {
+   "id": "local-golang-data-structures",
+   "name": "local-golang-data-structures",
+   "kind": "skill",
+   "path": "local-golang-data-structures",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "data",
+     "golang",
+     "local",
+     "structures"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "a30ce15388d64e2b74e29978edeeb28bf97dae047f4b0b17430bb3dff3c38c96",
+   "role": "duplicate",
+   "canonical_id": "golang-data-structures"
+  },
+  {
+   "id": "local-golang-database",
+   "name": "local-golang-database",
+   "kind": "skill",
+   "path": "local-golang-database",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "database",
+     "golang",
+     "local"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "ba77fb3f5ef500770d1729ed02e65c77f522e81c07fc99996ce138634a51f923",
+   "role": "duplicate",
+   "canonical_id": "golang-database"
+  },
+  {
+   "id": "local-golang-dependency-injection",
+   "name": "local-golang-dependency-injection",
+   "kind": "skill",
+   "path": "local-golang-dependency-injection",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "dependency",
+     "golang",
+     "injection",
+     "local"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "8133e9829b78f298961922f5b5069938307f695146cba89e5500d4af774945e3",
+   "role": "duplicate",
+   "canonical_id": "golang-dependency-injection"
+  },
+  {
+   "id": "local-golang-dependency-management",
+   "name": "local-golang-dependency-management",
+   "kind": "skill",
+   "path": "local-golang-dependency-management",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "dependency",
+     "golang",
+     "local",
+     "management"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "6a649f25059e7bcc1c625d86d5362c5052ebf6d745b1f837ef74df2124235c70",
+   "role": "duplicate",
+   "canonical_id": "golang-dependency-management"
+  },
+  {
+   "id": "local-golang-design-patterns",
+   "name": "local-golang-design-patterns",
+   "kind": "skill",
+   "path": "local-golang-design-patterns",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "design",
+     "golang",
+     "local",
+     "patterns"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "8d3e1dda2a5abe69448dbba59dd10a55df4f492c7996c0c2b07a8b17a27bc5be",
+   "role": "duplicate",
+   "canonical_id": "golang-design-patterns"
+  },
+  {
+   "id": "local-golang-documentation",
+   "name": "local-golang-documentation",
+   "kind": "skill",
+   "path": "local-golang-documentation",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "documentation",
+     "golang",
+     "local"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "5632aa4aa69fa93e4f04aa26e7b8cfc0f2e3907494b6594901278aa6f39a201d",
+   "role": "duplicate",
+   "canonical_id": "golang-documentation"
+  },
+  {
+   "id": "local-golang-error-handling",
+   "name": "local-golang-error-handling",
+   "kind": "skill",
+   "path": "local-golang-error-handling",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "error",
+     "golang",
+     "handling",
+     "local"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "143bf75410009eaef4bf6c68c1361e5fef93adc333dd8186c35994cfc09bb452",
+   "role": "duplicate",
+   "canonical_id": "golang-error-handling"
+  },
+  {
+   "id": "local-golang-google-wire",
+   "name": "local-golang-google-wire",
+   "kind": "skill",
+   "path": "local-golang-google-wire",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "google",
+     "local",
+     "wire"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "21a95506676621cf256772d323fe78d9b2bbb56b39f2721c7edc470eee82ede5",
+   "role": "duplicate",
+   "canonical_id": "golang-google-wire"
+  },
+  {
+   "id": "local-golang-gopls",
+   "name": "local-golang-gopls",
+   "kind": "skill",
+   "path": "local-golang-gopls",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "gopls",
+     "local"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "818f0a1513a83bda93f3723485f7c55c32ed0269ddc3362c5e870a1b7e598a4f",
+   "role": "duplicate",
+   "canonical_id": "golang-gopls"
+  },
+  {
+   "id": "local-golang-graphql",
+   "name": "local-golang-graphql",
+   "kind": "skill",
+   "path": "local-golang-graphql",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "graphql",
+     "local"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "dbed7451813adcfe4dae195914c213625f39c329eedc5cc085cea7109984f353",
+   "role": "duplicate",
+   "canonical_id": "golang-graphql"
+  },
+  {
+   "id": "local-golang-grpc",
+   "name": "local-golang-grpc",
+   "kind": "skill",
+   "path": "local-golang-grpc",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "grpc",
+     "local"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "3e33e46aa62887f1e79714e5ce9ae98c180cc072993d8942af3700f1d205785e",
+   "role": "duplicate",
+   "canonical_id": "golang-grpc"
+  },
+  {
+   "id": "local-golang-how-to",
+   "name": "local-golang-how-to",
+   "kind": "skill",
+   "path": "local-golang-how-to",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "how",
+     "local",
+     "to"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "f76b3ba3292d667ae9a8c47d636beb1ceafd7ae3ce1056868608f8f27b85842e",
+   "role": "duplicate",
+   "canonical_id": "golang-how-to"
+  },
+  {
+   "id": "local-golang-lint",
+   "name": "local-golang-lint",
+   "kind": "skill",
+   "path": "local-golang-lint",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "lint",
+     "local"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "85c05d889757779d56b852377648b9de83d4212435ebd3cc26187c33178c7d59",
+   "role": "duplicate",
+   "canonical_id": "golang-lint"
+  },
+  {
+   "id": "local-golang-modernize",
+   "name": "local-golang-modernize",
+   "kind": "skill",
+   "path": "local-golang-modernize",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "local",
+     "modernize"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "2cd660a9bd8a24c86c377238e4603421f878a3ec94734e18853e79175b765b10",
+   "role": "duplicate",
+   "canonical_id": "golang-modernize"
+  },
+  {
+   "id": "local-golang-naming",
+   "name": "local-golang-naming",
+   "kind": "skill",
+   "path": "local-golang-naming",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "local",
+     "naming"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "242841881b5a28a4475a6740d9ab789c5e2e377eb0c8904488eb0a6d99efffc9",
+   "role": "duplicate",
+   "canonical_id": "golang-naming"
+  },
+  {
+   "id": "local-golang-observability",
+   "name": "local-golang-observability",
+   "kind": "skill",
+   "path": "local-golang-observability",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "local",
+     "observability"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "1dcc3bac00d95a8dd2f3983d4b91b751a9c090395643e5d2f2a95b98b36c6519",
+   "role": "duplicate",
+   "canonical_id": "golang-observability"
+  },
+  {
+   "id": "local-golang-performance",
+   "name": "local-golang-performance",
+   "kind": "skill",
+   "path": "local-golang-performance",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "local",
+     "performance"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "bd674166180b4705e3e9b7b6ac1ea6907b7f68e0e71c884f9fea6881e0fed737",
+   "role": "duplicate",
+   "canonical_id": "golang-performance"
+  },
+  {
+   "id": "local-golang-pkg-go-dev",
+   "name": "local-golang-pkg-go-dev",
+   "kind": "skill",
+   "path": "local-golang-pkg-go-dev",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "dev",
+     "go",
+     "golang",
+     "local",
+     "pkg"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "565b4977eb0bfc9f2a80cddc6470636f838f71a2ef32a88ed0dbd6997a8ce8d3",
+   "role": "duplicate",
+   "canonical_id": "golang-pkg-go-dev"
+  },
+  {
+   "id": "local-golang-popular-libraries",
+   "name": "local-golang-popular-libraries",
+   "kind": "skill",
+   "path": "local-golang-popular-libraries",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "libraries",
+     "local",
+     "popular"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "5560f96981f2747c9eb647cdd1fa9ede4e9e20c7afb212583b3fc4ffbd8b135b",
+   "role": "duplicate",
+   "canonical_id": "golang-popular-libraries"
+  },
+  {
+   "id": "local-golang-project-layout",
+   "name": "local-golang-project-layout",
+   "kind": "skill",
+   "path": "local-golang-project-layout",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "layout",
+     "local",
+     "project"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "5bab2ed5f49d0e94c02b0d966e32bc9ce7796402d56fb66d9fd23073fd68ed34",
+   "role": "duplicate",
+   "canonical_id": "golang-project-layout"
+  },
+  {
+   "id": "local-golang-refactoring",
+   "name": "local-golang-refactoring",
+   "kind": "skill",
+   "path": "local-golang-refactoring",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "local",
+     "refactoring"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "45e332a0f3cc8dc3ef3fa297da70312f4e78d4d13f37573db1212336445f5278",
+   "role": "duplicate",
+   "canonical_id": "golang-refactoring"
+  },
+  {
+   "id": "local-golang-safety",
+   "name": "local-golang-safety",
+   "kind": "skill",
+   "path": "local-golang-safety",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "local",
+     "safety"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "5ea87abf50d0bf0e3a73cf576b8624a027a70357dc0b9d980270f267f57784fa",
+   "role": "duplicate",
+   "canonical_id": "golang-safety"
+  },
+  {
+   "id": "local-golang-samber-do",
+   "name": "local-golang-samber-do",
+   "kind": "skill",
+   "path": "local-golang-samber-do",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "do",
+     "golang",
+     "local",
+     "samber"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "990f29ecd7bde7d1fddbb7dcabc19ace55bd33fa8190116ea1c12bdc92d845cb",
+   "role": "duplicate",
+   "canonical_id": "golang-samber-do"
+  },
+  {
+   "id": "local-golang-samber-hot",
+   "name": "local-golang-samber-hot",
+   "kind": "skill",
+   "path": "local-golang-samber-hot",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "hot",
+     "local",
+     "samber"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "bf370e299c4ebffba80ff3bca01e735d982f2ac7282d63a3e95db2ec5c7bed14",
+   "role": "duplicate",
+   "canonical_id": "golang-samber-hot"
+  },
+  {
+   "id": "local-golang-samber-lo",
+   "name": "local-golang-samber-lo",
+   "kind": "skill",
+   "path": "local-golang-samber-lo",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "lo",
+     "local",
+     "samber"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "f5111689d928871254df4a44982cdc5f3123657ffb52d1ad2370ea623bd952c3",
+   "role": "duplicate",
+   "canonical_id": "golang-samber-lo"
+  },
+  {
+   "id": "local-golang-samber-mo",
+   "name": "local-golang-samber-mo",
+   "kind": "skill",
+   "path": "local-golang-samber-mo",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "local",
+     "mo",
+     "samber"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "e85fa8d3f8deaf3c1a5f46df2f9c5957d1e13726550adfadc58e9ac04c05b524",
+   "role": "duplicate",
+   "canonical_id": "golang-samber-mo"
+  },
+  {
+   "id": "local-golang-samber-oops",
+   "name": "local-golang-samber-oops",
+   "kind": "skill",
+   "path": "local-golang-samber-oops",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "local",
+     "oops",
+     "samber"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "add2fc68abffc714c1423d749a5237ea131bd5b5edbb77abdad3d7b07f55cf7b",
+   "role": "duplicate",
+   "canonical_id": "golang-samber-oops"
+  },
+  {
+   "id": "local-golang-samber-ro",
+   "name": "local-golang-samber-ro",
+   "kind": "skill",
+   "path": "local-golang-samber-ro",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "local",
+     "ro",
+     "samber"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "dae92e61a6509b6c512f73c3262bbdcf05f25af50c28f83bddc322d1a0fcf3ff",
+   "role": "duplicate",
+   "canonical_id": "golang-samber-ro"
+  },
+  {
+   "id": "local-golang-samber-slog",
+   "name": "local-golang-samber-slog",
+   "kind": "skill",
+   "path": "local-golang-samber-slog",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "local",
+     "samber",
+     "slog"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "73ba38164ff57797445444631251024eb15c18dee5c87a8aa42e3589b7147354",
+   "role": "duplicate",
+   "canonical_id": "golang-samber-slog"
+  },
+  {
+   "id": "local-golang-security",
+   "name": "local-golang-security",
+   "kind": "skill",
+   "path": "local-golang-security",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "local",
+     "security"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "de08cd2aece3c3a6af8f2bcfeac99da62870fb97441c1b1e190abb19b7fe34a7",
+   "role": "duplicate",
+   "canonical_id": "golang-security"
+  },
+  {
+   "id": "local-golang-spf13-cobra",
+   "name": "local-golang-spf13-cobra",
+   "kind": "skill",
+   "path": "local-golang-spf13-cobra",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "cobra",
+     "golang",
+     "local",
+     "spf13"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "78e9c3d4a5f4474af669b84f997522486d3c0a88075ca2fc83bcc183e6740a3a",
+   "role": "duplicate",
+   "canonical_id": "golang-spf13-cobra"
+  },
+  {
+   "id": "local-golang-spf13-viper",
+   "name": "local-golang-spf13-viper",
+   "kind": "skill",
+   "path": "local-golang-spf13-viper",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "local",
+     "spf13",
+     "viper"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "d3a417a6b5a2f71ac9a52aea76ac219389fd3831051f672d9ca2d5374e4aac84",
+   "role": "duplicate",
+   "canonical_id": "golang-spf13-viper"
+  },
+  {
+   "id": "local-golang-stay-updated",
+   "name": "local-golang-stay-updated",
+   "kind": "skill",
+   "path": "local-golang-stay-updated",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "local",
+     "stay",
+     "updated"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "4e4c315bf28d61a23f7af85362972f157c5db763fb58a52511db4ce52f18eaf8",
+   "role": "duplicate",
+   "canonical_id": "golang-stay-updated"
+  },
+  {
+   "id": "local-golang-stretchr-testify",
+   "name": "local-golang-stretchr-testify",
+   "kind": "skill",
+   "path": "local-golang-stretchr-testify",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "local",
+     "stretchr",
+     "testify"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "5646b11153bab859213faf7c20b0c35ce507503592eec833730002978cb67700",
+   "role": "duplicate",
+   "canonical_id": "golang-stretchr-testify"
+  },
+  {
+   "id": "local-golang-structs-interfaces",
+   "name": "local-golang-structs-interfaces",
+   "kind": "skill",
+   "path": "local-golang-structs-interfaces",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "interfaces",
+     "local",
+     "structs"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "6f911dc78a7821990aa8961afb621e3ab8c9072f791d10796646290e9eec7d30",
+   "role": "duplicate",
+   "canonical_id": "golang-structs-interfaces"
+  },
+  {
+   "id": "local-golang-swagger",
+   "name": "local-golang-swagger",
+   "kind": "skill",
+   "path": "local-golang-swagger",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "local",
+     "swagger"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "1dd34c2bd61f90e357d7cd27f7396d9ba4e86b4d977d58cb9013b30f53782f4b",
+   "role": "duplicate",
+   "canonical_id": "golang-swagger"
+  },
+  {
+   "id": "local-golang-testing",
+   "name": "local-golang-testing",
+   "kind": "skill",
+   "path": "local-golang-testing",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "local",
+     "testing"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "1c0d69c12833523fbe15dcb051eef767eee1bba0b34fb791baa1ee742f80c0fe",
+   "role": "duplicate",
+   "canonical_id": "golang-testing"
+  },
+  {
+   "id": "local-golang-troubleshooting",
+   "name": "local-golang-troubleshooting",
+   "kind": "skill",
+   "path": "local-golang-troubleshooting",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "golang",
+     "local",
+     "troubleshooting"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "4001427b025ad13885a6d61401c9bed4cecf748096108ffda490558302fd4696",
+   "role": "duplicate",
+   "canonical_id": "golang-troubleshooting"
+  },
+  {
+   "id": "local-golang-uber-dig",
+   "name": "local-golang-uber-dig",
+   "kind": "skill",
+   "path": "local-golang-uber-dig",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "dig",
+     "golang",
+     "local",
+     "uber"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "01d1d9d13d2d3af4b2a448c11ee328be7ab2a8e4e2edbc0e3b30b4352f1a5b60",
+   "role": "duplicate",
+   "canonical_id": "golang-uber-dig"
+  },
+  {
+   "id": "local-golang-uber-fx",
+   "name": "local-golang-uber-fx",
+   "kind": "skill",
+   "path": "local-golang-uber-fx",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "fx",
+     "golang",
+     "local",
+     "uber"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "703de7de3340d09a6b578c62264a81fad7c22fe292c189be6edd711520c66995",
+   "role": "duplicate",
+   "canonical_id": "golang-uber-fx"
+  },
+  {
+   "id": "local-playwright",
+   "name": "local-playwright",
+   "kind": "skill",
+   "path": "local-playwright",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "local",
+     "playwright"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "8ac719e52c646eef820c4f39535e85ec6077c736ca953ac14d9ec3ea86f91cca",
+   "role": "duplicate",
+   "canonical_id": "playwright"
+  },
+  {
+   "id": "maintainer",
+   "name": "maintainer",
+   "kind": "persona",
+   "path": "personas/maintainer",
+   "category": "persona",
+   "description": "SOUL.md - The Steward: Maintenance Engineer",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "maintainer"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "66aa5741847515fe2c877193e1cc70b91844080c1f82834bf234e4918df0403c",
+   "role": "canonical"
+  },
+  {
+   "id": "manim-video",
+   "name": "manim-video",
+   "kind": "skill",
+   "path": "skills/creative/manim-video",
+   "category": "creative",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "manim",
+     "video"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "53e9a81861e26a8bbb8801216a08ec6109837c62ce9b925789bd6fb8cd14c19d",
+   "role": "canonical"
+  },
+  {
+   "id": "maps",
+   "name": "maps",
+   "kind": "skill",
+   "path": "skills/productivity/maps",
+   "category": "productivity",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "maps"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "bf2e192ea83af7646ad5fbb35037f00aa29ee5b1950b7a07edc3cbbab2d1d9e6",
+   "role": "canonical"
+  },
+  {
+   "id": "marketplaces",
+   "name": "marketplaces",
+   "kind": "skill",
+   "path": "marketplaces",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "money",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "marketplaces"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "79538b4b5d9d2069f91a17d8eab1de0c02d8ae493857acc34f7f37ad5962439b",
+   "role": "canonical"
+  },
+  {
+   "id": "media-library",
+   "name": "media-library",
+   "kind": "skill",
+   "path": "media-library",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "library",
+     "media"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "b5a3dd38b746851bbf94e97be7cd09c9a27b995cbc47db30c1fd32537b969bf0",
+   "role": "canonical"
+  },
+  {
+   "id": "meeting-action-items",
+   "name": "meeting-action-items",
+   "kind": "skill",
+   "path": "skills/productivity/meeting-action-items",
+   "category": "productivity",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "action",
+     "items",
+     "meeting"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "5333aaa04844766df81a5be5017f16262916f99cb20991006777324642241811",
+   "role": "canonical"
+  },
+  {
+   "id": "meeting-follow-up",
+   "name": "meeting-follow-up",
+   "kind": "skill",
+   "path": "meeting-follow-up",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "follow",
+     "meeting",
+     "up"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "85fd2e3a2d64f408ad977d0a3e14a5e4cab77c45277d53199763aaa712b08626",
+   "role": "canonical"
+  },
+  {
+   "id": "messaging",
+   "name": "messaging",
+   "kind": "skill",
+   "path": "messaging",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "external-send",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "messaging"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "24fb22bd313015e86d9d6089576d471d5ca291737a35b2513d3161f033a1daf4",
+   "role": "canonical"
+  },
+  {
+   "id": "meta-leads",
+   "name": "meta-leads",
+   "kind": "skill",
+   "path": "meta-leads",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "leads",
+     "meta"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "8ed91159617a897ccd052b0a7243fadea08f9b72fb14924c495d34c80f24d0f4",
+   "role": "canonical"
+  },
+  {
+   "id": "mike",
+   "name": "mike",
+   "kind": "persona",
+   "path": "personas/mike",
+   "category": "persona",
+   "description": "Mike, Startup Builder",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "mike"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "44297b6bcdf0ca0ffc92bc7906548b5673d7625ae6e0ed87b1d373767582d17e",
+   "role": "canonical"
+  },
+  {
+   "id": "milly",
+   "name": "milly",
+   "kind": "persona",
+   "path": "personas/milly",
+   "category": "persona",
+   "description": "Milly, AI CEO",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "milly"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "c681e9601a753648257ff096a6b5cb3909ee91389ea87b62e4b11d1020521fbd",
+   "role": "canonical"
+  },
+  {
+   "id": "mojo",
+   "name": "mojo",
+   "kind": "skill",
+   "path": "skills/mojo",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "mojo"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "1b6753fb6855faf5afe5d48e3f45fd4e0363be8897612c882d135e1e8e17c0b6",
+   "role": "canonical"
+  },
+  {
+   "id": "mortgage-comparison",
+   "name": "mortgage-comparison",
+   "kind": "skill",
+   "path": "mortgage-comparison",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "comparison",
+     "mortgage"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "bce5e86985d34ca57c5933b513082f6f9073e4960022deca7bca51c787b1f59e",
+   "role": "canonical"
+  },
+  {
+   "id": "muse-early-access",
+   "name": "muse-early-access",
+   "kind": "skill",
+   "path": "muse-early-access",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "access",
+     "early",
+     "muse"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "5aff9c7ad930354ba560db01005529c3f851ccd22ff7f28e20bd36768cbb5a90",
+   "role": "canonical"
+  },
+  {
+   "id": "muse-feedback",
+   "name": "muse-feedback",
+   "kind": "skill",
+   "path": "muse-feedback",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "feedback",
+     "muse"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "0b3168887ed96153bd2272d34893ee7508055b571c778ba043bbb5e473a2c1e8",
+   "role": "canonical"
+  },
+  {
+   "id": "muse_db",
+   "name": "muse_db",
+   "kind": "skill",
+   "path": "muse_db",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "muse_db"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "325c6ff936025f96ddc5055e73234d70fa255b1c334cdb32673a0da72823fafa",
+   "role": "canonical"
+  },
+  {
+   "id": "music-discovery",
+   "name": "music-discovery",
+   "kind": "skill",
+   "path": "music-discovery",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "discovery",
+     "music"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "1b210996113fca3a2c79dcd735031eb941ddfa379eda7111577a5b9470545716",
+   "role": "canonical"
+  },
+  {
+   "id": "node-inspect-debugger",
+   "name": "node-inspect-debugger",
+   "kind": "skill",
+   "path": "skills/software-development/node-inspect-debugger",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "debugger",
+     "inspect",
+     "node"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "382afd61afd1b12b15a2be1054895c000080b7e981da138ab95a2487f41b899f",
+   "role": "canonical"
+  },
+  {
+   "id": "notion",
+   "name": "notion",
+   "kind": "skill",
+   "path": "skills/productivity/notion",
+   "category": "productivity",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "notion"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "4174af7cfd8f7adca2e657a61a18331c8a2d32e885ca786524577d6c0f2d523b",
+   "role": "canonical"
+  },
+  {
+   "id": "obsidian",
+   "name": "obsidian",
+   "kind": "skill",
+   "path": "skills/note-taking/obsidian",
+   "category": "note-taking",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "obsidian"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "a2c06108638814fd5c884472118c64229abfa55a88560b4902ee628e979489b9",
+   "role": "canonical"
+  },
+  {
+   "id": "opencode",
+   "name": "opencode",
+   "kind": "skill",
+   "path": "skills/autonomous-ai-agents/opencode",
+   "category": "autonomous-ai-agents",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "opencode"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "8a75806b7f1fd045e129076c3e97a46f825742e9882292ba6301040d3b0da1d6",
+   "role": "canonical"
+  },
+  {
+   "id": "orchestrator",
+   "name": "orchestrator",
+   "kind": "persona",
+   "path": "personas/orchestrator",
+   "category": "persona",
+   "description": "SOUL.md - The Orchestra: Engineering Orchestrator",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "orchestrator"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "8927799dc9b9fd1d52f53e6af7d483318762e6e73dadbf8c58f5d314714b1a1a",
+   "role": "canonical"
+  },
+  {
+   "id": "p5js",
+   "name": "p5js",
+   "kind": "skill",
+   "path": "skills/creative/p5js",
+   "category": "creative",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "p5js"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "d07db12d9d0d5a289db16ab52fa703cca614c242e431960093fec68a5e1b0a50",
+   "role": "canonical"
+  },
+  {
+   "id": "pdf",
+   "name": "pdf",
+   "kind": "skill",
+   "path": "skills/productivity/pdf",
+   "category": "productivity",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "pdf"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "06a61d9b462a78e2e4876372cf83e309467487a74bcf690ba4522efafd6bba3a",
+   "role": "canonical"
+  },
+  {
+   "id": "persona-ceo",
+   "name": "persona-ceo",
+   "kind": "skill",
+   "path": "skills/persona-ceo",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "ceo",
+     "persona"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "04b2d577e6f799521ee197c8de3669e2c3801cd689a79face3ddb8eef7159b8d",
+   "role": "canonical"
+  },
+  {
+   "id": "persona-content-creator",
+   "name": "persona-content-creator",
+   "kind": "skill",
+   "path": "skills/persona-content-creator",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "content",
+     "creator",
+     "persona"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "3c2a911f64dfc9716a98c45fbcf3357cc9a2eab515cfee1e304efeeeff39b0a1",
+   "role": "canonical"
+  },
+  {
+   "id": "persona-content-marketing",
+   "name": "persona-content-marketing",
+   "kind": "skill",
+   "path": "skills/persona-content-marketing",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "content",
+     "marketing",
+     "persona"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "bd67c2ef88e0fd3d500c4b8f17873eab160f4648278130145cf4a45cca6f141d",
+   "role": "canonical"
+  },
+  {
+   "id": "persona-ecommerce-growth",
+   "name": "persona-ecommerce-growth",
+   "kind": "skill",
+   "path": "skills/persona-ecommerce-growth",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "ecommerce",
+     "growth",
+     "persona"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "9cd4eab8f8561fb8ef59f763e2d0b5931fb0c6664e250c25e2c78f66696e868f",
+   "role": "canonical"
+  },
+  {
+   "id": "persona-finance-ops",
+   "name": "persona-finance-ops",
+   "kind": "skill",
+   "path": "skills/persona-finance-ops",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "finance",
+     "ops",
+     "persona"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "d0b1965bcbda4205cbe835de18c289d6549777a57785c5cd6e70c31d6c06e57d",
+   "role": "canonical"
+  },
+  {
+   "id": "persona-release-captain",
+   "name": "persona-release-captain",
+   "kind": "skill",
+   "path": "skills/persona-release-captain",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "captain",
+     "persona",
+     "release"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "d814a7b3fd55745dcb449840c7e02a84ede1fad1d6402540aaf655c79708463b",
+   "role": "canonical"
+  },
+  {
+   "id": "persona-research-specialist",
+   "name": "persona-research-specialist",
+   "kind": "skill",
+   "path": "skills/persona-research-specialist",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "persona",
+     "research",
+     "specialist"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "c3b706ffa477198b62ef61a7d089005b6faa407ea843d9503ceccffb101de311",
+   "role": "canonical"
+  },
+  {
+   "id": "persona-sales-closer",
+   "name": "persona-sales-closer",
+   "kind": "skill",
+   "path": "skills/persona-sales-closer",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "closer",
+     "persona",
+     "sales"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "bd2b11bedc55b78f3e0269f3e636daf9ce8b00eea2177e5e1e6e85dd230f4ad4",
+   "role": "canonical"
+  },
+  {
+   "id": "persona-sdlc-analyst",
+   "name": "persona-sdlc-analyst",
+   "kind": "skill",
+   "path": "skills/persona-sdlc-analyst",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "analyst",
+     "persona",
+     "sdlc"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "d7131935447bddaa8786d4880749cad14718b191d6e1c0ec94e3a9184696e77d",
+   "role": "canonical"
+  },
+  {
+   "id": "persona-sdlc-architect",
+   "name": "persona-sdlc-architect",
+   "kind": "skill",
+   "path": "skills/persona-sdlc-architect",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "architect",
+     "persona",
+     "sdlc"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "e4eb4edeebc33c0a2cec1cc20f5cb52d0e14e596f08369bb2fe7e829157f9228",
+   "role": "canonical"
+  },
+  {
+   "id": "persona-sdlc-builder",
+   "name": "persona-sdlc-builder",
+   "kind": "skill",
+   "path": "skills/persona-sdlc-builder",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "builder",
+     "persona",
+     "sdlc"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "662c5b6772ff7d53f3dd84f7b29cce451a782b05162547ee68536b30d97b6fb3",
+   "role": "canonical"
+  },
+  {
+   "id": "persona-sdlc-devops",
+   "name": "persona-sdlc-devops",
+   "kind": "skill",
+   "path": "skills/persona-sdlc-devops",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "devops",
+     "persona",
+     "sdlc"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "fa661cd4eb3db9114a7331d1cf87ecc49220eb30625fa023eec697a895eb7bda",
+   "role": "canonical"
+  },
+  {
+   "id": "persona-sdlc-maintainer",
+   "name": "persona-sdlc-maintainer",
+   "kind": "skill",
+   "path": "skills/persona-sdlc-maintainer",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "maintainer",
+     "persona",
+     "sdlc"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "669c63b4721c845c6d240d74c657210ac6e5b1194f7c28f09962934dd89da265",
+   "role": "canonical"
+  },
+  {
+   "id": "persona-sdlc-planner",
+   "name": "persona-sdlc-planner",
+   "kind": "skill",
+   "path": "skills/persona-sdlc-planner",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "persona",
+     "planner",
+     "sdlc"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "bc98d9800187f3a4a86e5b3d9dd68bc31a47922ca2a8dfc3844bf4a9e3e20606",
+   "role": "canonical"
+  },
+  {
+   "id": "persona-sdlc-tester",
+   "name": "persona-sdlc-tester",
+   "kind": "skill",
+   "path": "skills/persona-sdlc-tester",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "persona",
+     "sdlc",
+     "tester"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "9419f26f135002da5c352a91d55d220a4c8fea6c3f2d12763c5c42fdc349520b",
+   "role": "canonical"
+  },
+  {
+   "id": "persona-security-auditor",
+   "name": "persona-security-auditor",
+   "kind": "skill",
+   "path": "skills/persona-security-auditor",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "auditor",
+     "persona",
+     "security"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "261dac31953b173fd5ee4bc81c86145360d7a4268f89762244ea4c094a06406b",
+   "role": "canonical"
+  },
+  {
+   "id": "persona-skeptic",
+   "name": "persona-skeptic",
+   "kind": "skill",
+   "path": "skills/software-development/persona-skeptic",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "persona",
+     "skeptic"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "eee8c86a4a06fdef6a311fed719bce151af68386da8c777cb060f619843f88b5",
+   "role": "canonical"
+  },
+  {
+   "id": "persona-startup-builder",
+   "name": "persona-startup-builder",
+   "kind": "skill",
+   "path": "skills/persona-startup-builder",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "builder",
+     "persona",
+     "startup"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "619cf8ee030cb07ac552a7836d32ea6c5e813baa2f6febad8c0c66fc00737fd5",
+   "role": "canonical"
+  },
+  {
+   "id": "persona-support-lead",
+   "name": "persona-support-lead",
+   "kind": "skill",
+   "path": "skills/persona-support-lead",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "lead",
+     "persona",
+     "support"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "8107a0a8e1d1b29cf66d52b09ee7fdbffd6f9cdb3f169f626a1ceeabad7463d4",
+   "role": "canonical"
+  },
+  {
+   "id": "place-discovery",
+   "name": "place-discovery",
+   "kind": "skill",
+   "path": "place-discovery",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "discovery",
+     "place"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "6d462dd8dd5c6400fbb93fdb73c16d93cc4b877b3f529be9fc284abbb40adfd7",
+   "role": "canonical"
+  },
+  {
+   "id": "planner",
+   "name": "planner",
+   "kind": "persona",
+   "path": "personas/planner",
+   "category": "persona",
+   "description": "SOUL.md - The Planner (Phase 1: Planning)",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "planner"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "ff0edf845ad94a95d87a58be6f1ebfcb5b17eacb2b1f100f0bcbab0526f21379",
+   "role": "canonical"
+  },
+  {
+   "id": "playwright",
+   "name": "playwright",
+   "kind": "skill",
+   "path": "playwright",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "playwright"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "e590a81ba294893197af33ca9ec487c3ee8f96620f03868c629943e9c9ab701c",
+   "role": "canonical"
+  },
+  {
+   "id": "popular-web-designs",
+   "name": "popular-web-designs",
+   "kind": "skill",
+   "path": "skills/creative/popular-web-designs",
+   "category": "creative",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "designs",
+     "popular",
+     "web"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "2e2bbaed30934f54f5a043cd542d40a213623a18a8af08aa5eef2fa2323913e8",
+   "role": "canonical"
+  },
+  {
+   "id": "powerpoint",
+   "name": "powerpoint",
+   "kind": "skill",
+   "path": "skills/productivity/powerpoint",
+   "category": "productivity",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "powerpoint"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "4833aeb9b7839418f9adf804c6c95f4ebea370fdd7b5e0c21d781df605e5e645",
+   "role": "canonical"
+  },
+  {
+   "id": "product-price-monitor",
+   "name": "product-price-monitor",
+   "kind": "skill",
+   "path": "skills/productivity/product-price-monitor",
+   "category": "productivity",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "read",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "monitor",
+     "price",
+     "product"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "0c8d4bfdd7a99d6539f050a905f2ce462cae20edd965616d1669508ed15d99f0",
+   "role": "canonical"
+  },
+  {
+   "id": "python-debugpy",
+   "name": "python-debugpy",
+   "kind": "skill",
+   "path": "skills/software-development/python-debugpy",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "debugpy",
+     "python"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "cbbfa56d3d6a90375d42cc72b7ef269f3f09d835c6dbf14b9b4d479c4d21e1ee",
+   "role": "canonical"
+  },
+  {
+   "id": "requesting-code-review",
+   "name": "requesting-code-review",
+   "kind": "skill",
+   "path": "skills/software-development/requesting-code-review",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "code",
+     "requesting",
+     "review"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "12847f20fc1acf997ddf8128c0ce84b97db49fd68fd9bb59a36ee32b16fd658a",
+   "role": "canonical"
+  },
+  {
+   "id": "research-lens-horizon",
+   "name": "research-lens-horizon",
+   "kind": "skill",
+   "path": "skills/research/research-lens-horizon",
+   "category": "research",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "horizon",
+     "lens",
+     "research"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "cc9832723bb5051ee0e067b8469021e7ac6ba99fe484ae2cb8fb78a9d85ea52e",
+   "role": "canonical"
+  },
+  {
+   "id": "research-lens-market",
+   "name": "research-lens-market",
+   "kind": "skill",
+   "path": "skills/research/research-lens-market",
+   "category": "research",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "lens",
+     "market",
+     "research"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "fbd50251951ca095d87119b3b746ad5eabe57bdf9dba17331bbc6937ec2af3e3",
+   "role": "canonical"
+  },
+  {
+   "id": "research-lens-stack",
+   "name": "research-lens-stack",
+   "kind": "skill",
+   "path": "skills/research/research-lens-stack",
+   "category": "research",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "lens",
+     "research",
+     "stack"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "962c143dd2b9f3419212792467dcace942197a3c9bdecbb4bb78073dabd0e7dc",
+   "role": "canonical"
+  },
+  {
+   "id": "researcher",
+   "name": "researcher",
+   "kind": "persona",
+   "path": "personas/researcher",
+   "category": "persona",
+   "description": "SOUL.md - The Orchestra: Research Specialist",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "researcher"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "a2f3f2db2aedd38f63547f469e1405d59b3aecad8bda72dde06f0006fdddc702",
+   "role": "canonical"
+  },
+  {
+   "id": "restaurant-reservations",
+   "name": "restaurant-reservations",
+   "kind": "skill",
+   "path": "restaurant-reservations",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "money",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "reservations",
+     "restaurant"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "cc34995339797d1d715d3a189a956e8042284b7216afe7cd71e126c37a7e106d",
+   "role": "canonical"
+  },
+  {
+   "id": "rtsp-diagnostics",
+   "name": "rtsp-diagnostics",
+   "kind": "skill",
+   "path": "skills/devops/rtsp-diagnostics",
+   "category": "devops",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "diagnostics",
+     "rtsp"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "e1309000107b170be653a4529f3c74eb5a8274384ffb1073ea225df2984faa57",
+   "role": "canonical"
+  },
+  {
+   "id": "rust",
+   "name": "rust",
+   "kind": "skill",
+   "path": "skills/rust",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "rust"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "d47fb3875080b92fd1fcb7e6881e8080a7dad38cdc6009ab656529cbcd9910d9",
+   "role": "canonical"
+  },
+  {
+   "id": "scheduling",
+   "name": "scheduling",
+   "kind": "skill",
+   "path": "scheduling",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "money",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "scheduling"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "a32b8dd251ff00161a33cd1b4673a77e95e30b12193bb8bb613d29b4c658721a",
+   "role": "canonical"
+  },
+  {
+   "id": "sdlc-review",
+   "name": "sdlc-review",
+   "kind": "skill",
+   "path": "skills/devops/sdlc-review",
+   "category": "devops",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "review",
+     "sdlc"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "40218ae380e7f84849d42d702cc6b7ef176f17c4c5638a32604c771b553c054d",
+   "role": "canonical"
+  },
+  {
+   "id": "security",
+   "name": "security",
+   "kind": "persona",
+   "path": "personas/security",
+   "category": "persona",
+   "description": "SOUL.md - The Security Profile: Hostile Auditor and Threat Researcher",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "security"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "7121bdca55fa42379bf09033be86bbdc0f7bd15b385e0e84bca5453eba43892f",
+   "role": "canonical"
+  },
+  {
+   "id": "security-auditor",
+   "name": "security-auditor",
+   "kind": "skill",
+   "path": "skills/security-auditor",
+   "category": "pipeline",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "auditor",
+     "security"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "64f865ed7d1f8c177b677781a9172e551e7d36a22955ca71729b787154e356f7",
+   "role": "canonical"
+  },
+  {
+   "id": "self-awareness",
+   "name": "self-awareness",
+   "kind": "skill",
+   "path": "self-awareness",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "awareness",
+     "self"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "55bf4b30c21a6ee4438b979e77189159ae9650eec2b6be5b99196abe4f67a2b7",
+   "role": "canonical"
+  },
+  {
+   "id": "seo-reference",
+   "name": "seo-reference",
+   "kind": "skill",
+   "path": "skills/research/seo-reference",
+   "category": "research",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "reference",
+     "seo"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "9bf44f43c9c0462444e97cd2dbaf5fd0f75bc57c2110e4d1809006f1b1f5352c",
+   "role": "canonical"
+  },
+  {
+   "id": "share-ideas",
+   "name": "share-ideas",
+   "kind": "skill",
+   "path": "share-ideas",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "external-send",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "ideas",
+     "share"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "3b12434854411ab1636218ea0ac38d588abe026aceb61e88ffc195c28e018598",
+   "role": "canonical"
+  },
+  {
+   "id": "shopping",
+   "name": "shopping",
+   "kind": "skill",
+   "path": "shopping",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "money",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "shopping"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "c64366f545d50e6cc956f440782007d5a2bc1c29aa1e385a4c548c1b7f64e96c",
+   "role": "canonical"
+  },
+  {
+   "id": "simplify-code",
+   "name": "simplify-code",
+   "kind": "skill",
+   "path": "skills/software-development/simplify-code",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "code",
+     "simplify"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "d6ed0a8ad1bdf23164308e116f2f209a1ef3595d1f9568b28c36fa903fd83548",
+   "role": "canonical"
+  },
+  {
+   "id": "skeptic",
+   "name": "skeptic",
+   "kind": "persona",
+   "path": "personas/skeptic",
+   "category": "persona",
+   "description": "SOUL.md - The Skeptic: Adversarial Reviewer and Claims Auditor",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "skeptic"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "c32b08696cf0cb6f2540a548d57473b6f8ed0ec6ccee98dc9aa0717e822e474c",
+   "role": "canonical"
+  },
+  {
+   "id": "skill",
+   "name": "skill",
+   "kind": "skill",
+   "path": "custom-connector-setup/templates/skill",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "skill"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "c9d5c8f82ccae558a65d98f2bb820fec0db458a8ce009cdc006e3b586c6f7634",
+   "role": "canonical"
+  },
+  {
+   "id": "smb-product-shots",
+   "name": "smb-product-shots",
+   "kind": "skill",
+   "path": "smb-product-shots",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "product",
+     "shots",
+     "smb"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "a3574a304723f672b81d0f433bd23148e12abbb52cd9ea1c344adf5c92fd39c2",
+   "role": "canonical"
+  },
+  {
+   "id": "social-content-performance",
+   "name": "social-content-performance",
+   "kind": "skill",
+   "path": "social-content-performance",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "content",
+     "performance",
+     "social"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "a021c2e15dc9295a4082617aa86ee822f3c82d3bb65707f4b793e7bbc8579cf1",
+   "role": "canonical"
+  },
+  {
+   "id": "social-presence-audit",
+   "name": "social-presence-audit",
+   "kind": "skill",
+   "path": "skills/research/social-presence-audit",
+   "category": "research",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "audit",
+     "presence",
+     "social"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "49a95e667596e48c2ca41b83590c87fd0dffdf354e26910e66c216c749d6b60b",
+   "role": "canonical"
+  },
+  {
+   "id": "social-publishing",
+   "name": "social-publishing",
+   "kind": "skill",
+   "path": "social-publishing",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "external-send",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "publishing",
+     "social"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "2ea761834092bab470fe9687aec0f1f3d908cc299933ed640f93acb7af09f3e1",
+   "role": "canonical"
+  },
+  {
+   "id": "social_publishing_rejected_media",
+   "name": "social_publishing_rejected_media",
+   "kind": "skill",
+   "path": "social_publishing_rejected_media",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "social_publishing_rejected_media"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "a560628a822394cb47031723131b2f95bc7f30bcdf75445be4873030bf5719f0",
+   "role": "canonical"
+  },
+  {
+   "id": "songsee",
+   "name": "songsee",
+   "kind": "skill",
+   "path": "skills/media/songsee",
+   "category": "media",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "songsee"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "d399b3f6a85ba7f14bf59e7954013142c3f3737119e5e4a5c3470d1a13db36b1",
+   "role": "canonical"
+  },
+  {
+   "id": "songwriting-and-ai-music",
+   "name": "songwriting-and-ai-music",
+   "kind": "skill",
+   "path": "skills/creative/songwriting-and-ai-music",
+   "category": "creative",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "ai",
+     "and",
+     "music",
+     "songwriting"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "9bae78eecb20478b8eb58548a0fe736514096622d75a1ee4c4df61507db64020",
+   "role": "canonical"
+  },
+  {
+   "id": "spike",
+   "name": "spike",
+   "kind": "skill",
+   "path": "skills/software-development/spike",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "spike"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "18d6dca26c8084161f65cccf3ea9f96670d9be332fef70215a8eb01c90bacb34",
+   "role": "canonical"
+  },
+  {
+   "id": "spoken-audio",
+   "name": "spoken-audio",
+   "kind": "skill",
+   "path": "spoken-audio",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "external-send",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "audio",
+     "spoken"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "513b2d9622183f6268ab63c321fb385ed26a209e7ff6fa102c5660767f8af034",
+   "role": "canonical"
+  },
+  {
+   "id": "store-operations",
+   "name": "store-operations",
+   "kind": "skill",
+   "path": "store-operations",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "money",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "operations",
+     "store"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "3048aabfd8f7202b3b0587d00d4b9a07cfd1a11e0240abfeb6afe56a217b5e0b",
+   "role": "canonical"
+  },
+  {
+   "id": "style-tryon",
+   "name": "style-tryon",
+   "kind": "skill",
+   "path": "style-tryon",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "style",
+     "tryon"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "128cca1cf34dd47da84699efd97ea69d58aba2af763d25235c2b3c6bef08952d",
+   "role": "canonical"
+  },
+  {
+   "id": "subagent-driven-development",
+   "name": "subagent-driven-development",
+   "kind": "skill",
+   "path": "skills/software-development/subagent-driven-development",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "development",
+     "driven",
+     "subagent"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "fc591c68c4bc6bcbf92817cea13144767f1bc6e90b60ef5c5ba8547f6271fc2c",
+   "role": "canonical"
+  },
+  {
+   "id": "subscription-status",
+   "name": "subscription-status",
+   "kind": "skill",
+   "path": "subscription-status",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "status",
+     "subscription"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "70a40328336c54b208c0aa132bce449304ec9bc277a28f6508abaa5754de7c86",
+   "role": "canonical"
+  },
+  {
+   "id": "systematic-debugging",
+   "name": "systematic-debugging",
+   "kind": "skill",
+   "path": "skills/software-development/systematic-debugging",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "debugging",
+     "systematic"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "0b09c86ba42e278955b18b5b879052215c8a00fb3c0b1d35b6323df167de9920",
+   "role": "canonical"
+  },
+  {
+   "id": "task-management",
+   "name": "task-management",
+   "kind": "skill",
+   "path": "task-management",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "management",
+     "task"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "2f2b02ad1b85083eb70e296a90b00ed034f84e781abeaa7dd88154ac061cedf3",
+   "role": "canonical"
+  },
+  {
+   "id": "teams-meeting-pipeline",
+   "name": "teams-meeting-pipeline",
+   "kind": "skill",
+   "path": "skills/productivity/teams-meeting-pipeline",
+   "category": "productivity",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "meeting",
+     "pipeline",
+     "teams"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "55394a953411cc91a1e3c1e100cd2281516b74d99d7cf3b57c25597539e65532",
+   "role": "canonical"
+  },
+  {
+   "id": "ted",
+   "name": "ted",
+   "kind": "persona",
+   "path": "personas/ted",
+   "category": "persona",
+   "description": "Ted, Release Captain",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "ted"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "acd3c8884823b4a03b97a212f276decd4a578f9b2470e4318721d7892d78f44a",
+   "role": "canonical"
+  },
+  {
+   "id": "test-driven-development",
+   "name": "test-driven-development",
+   "kind": "skill",
+   "path": "skills/software-development/test-driven-development",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "development",
+     "driven",
+     "test"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "319e0f9df5468416ac9ba2b95be361477e0e1c95fe6c3116f127d5262d48679b",
+   "role": "canonical"
+  },
+  {
+   "id": "tester",
+   "name": "tester",
+   "kind": "persona",
+   "path": "personas/tester",
+   "category": "persona",
+   "description": "SOUL.md - The Testing Corps: Phase 5 Adversarial QA (Tester)",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "tester"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "1dd2333b178c50bbad586c7e678f22f3127a6f2dc7745faaf848188cd7c8fcdc",
+   "role": "canonical"
+  },
+  {
+   "id": "translation",
+   "name": "translation",
+   "kind": "skill",
+   "path": "translation",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "translation"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "9c036696668c0bc4cfe1ad62e3afcdb15667a19879b8ff42ce582919180be15d",
+   "role": "canonical"
+  },
+  {
+   "id": "trip-planning",
+   "name": "trip-planning",
+   "kind": "skill",
+   "path": "trip-planning",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "planning",
+     "trip"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "c85a0615031b249acda7415f387deaef19fcdcd65081721f478db69d06a3f456",
+   "role": "canonical"
+  },
+  {
+   "id": "trip-transport",
+   "name": "trip-transport",
+   "kind": "skill",
+   "path": "trip-transport",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "money",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "transport",
+     "trip"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "eeac12590bcfe1a666a5ce4131f8efaa46ba3e55be7ed8591aa7c16d72b75850",
+   "role": "canonical"
+  },
+  {
+   "id": "ui-visual-check",
+   "name": "ui-visual-check",
+   "kind": "skill",
+   "path": "skills/software-development/ui-visual-check",
+   "category": "software-development",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "check",
+     "ui",
+     "visual"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "6de5a9db7164c3a1e24cf59bd011c53ccdee2743ffb1b36cac5fb3947d0f8a3e",
+   "role": "canonical"
+  },
+  {
+   "id": "uispecialist",
+   "name": "uispecialist",
+   "kind": "persona",
+   "path": "personas/uispecialist",
+   "category": "persona",
+   "description": "SOUL.md - The UI Specialist: Design Craft and Visual Verification",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "uispecialist"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "deefbe5a5c237662e9166c6b1fe5ab99bc712d2efd0392806bc3f3524f1bc9ed",
+   "role": "canonical"
+  },
+  {
+   "id": "wearables-comms",
+   "name": "wearables-comms",
+   "kind": "skill",
+   "path": "wearables-comms",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "external-send",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "comms",
+     "wearables"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "a4d33084bffa4b117a12f073e29aa9b23ec6bcd1002b0f3d3a5e1ed86b506749",
+   "role": "canonical"
+  },
+  {
+   "id": "weekly-review-planning",
+   "name": "weekly-review-planning",
+   "kind": "skill",
+   "path": "skills/productivity/weekly-review-planning",
+   "category": "productivity",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "planning",
+     "review",
+     "weekly"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "313ce4d4e93124f3d86f06ff22d7b52304824f6e3303d92bd7848590228d1d66",
+   "role": "canonical"
+  },
+  {
+   "id": "wide-research",
+   "name": "wide-research",
+   "kind": "skill",
+   "path": "wide-research",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "research",
+     "wide"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "4e163da3888c7533cc33ccab48bcf60c58b51d4ae5c894bc4c74de8b3f4bfcdd",
+   "role": "canonical"
+  },
+  {
+   "id": "workout-planning",
+   "name": "workout-planning",
+   "kind": "skill",
+   "path": "workout-planning",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "planning",
+     "workout"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "4439dc9fcfaa7b51439bbaef361b243fd3bc51ed55f7fd29b27cf932ce321b9f",
+   "role": "canonical"
+  },
+  {
+   "id": "xlsx",
+   "name": "xlsx",
+   "kind": "skill",
+   "path": "skills/productivity/xlsx",
+   "category": "productivity",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "xlsx"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "9104af4f283b364f9dc21793a8fd87a6e854deedf8fa81f537c97994d2d24138",
+   "role": "canonical"
+  },
+  {
+   "id": "xurl",
+   "name": "xurl",
+   "kind": "skill",
+   "path": "skills/social-media/xurl",
+   "category": "social-media",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "external-send",
+   "risk_source": "known-map",
+   "triggers": {
+    "keywords": [
+     "xurl"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "7105a69d8483b2cee6ddfb396ee52396935f18d950e9a4099290eb136fdfead5",
+   "role": "canonical"
+  },
+  {
+   "id": "youtube",
+   "name": "youtube",
+   "kind": "skill",
+   "path": "youtube",
+   "category": "root",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "youtube"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "a67ee7f2956fb2d28285a6e8078c9b4c5ff15755204addc342eb67177df4105b",
+   "role": "canonical"
+  },
+  {
+   "id": "youtube-content",
+   "name": "youtube-content",
+   "kind": "skill",
+   "path": "skills/media/youtube-content",
+   "category": "media",
+   "description": "",
+   "version": null,
+   "license": null,
+   "license_status": "mit-cleared",
+   "license_source": "folder LICENSE",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "content",
+     "youtube"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "a0c08e6701c097a5f691fa9ee7604b7c6563bcaa464e0c4a758c01aceb9e82b7",
+   "role": "canonical"
+  },
+  {
+   "id": "zoe",
+   "name": "zoe",
+   "kind": "persona",
+   "path": "personas/zoe",
+   "category": "persona",
+   "description": "Zoe, Customer Support Lead",
+   "version": null,
+   "license": null,
+   "license_status": "not-cleared",
+   "license_source": "none",
+   "risk_class": "write",
+   "risk_source": "default",
+   "triggers": {
+    "keywords": [
+     "zoe"
+    ],
+    "file_patterns": [],
+    "tool_needs": []
+   },
+   "checksum_sha256": "2fd2d681c370576de16138301de56465ef34acf0827edd44b89b76d2d1694f72",
+   "role": "canonical"
+  }
+ ]
+}

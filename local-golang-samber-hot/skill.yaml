@@ -1,0 +1,14 @@
+name: local_golang_samber_hot
+title: Local golang samber hot
+description: In-memory caching in Golang using samber/hot, eviction algorithms (LRU, LFU, TinyLFU, W-TinyLFU, S3FIFO, ARC, TwoQueue, SIEVE, FIFO), TTL, cache loaders, sharding, stale-while-revalidate, missing key caching, and Prometheus metrics. Apply when using or adopting samber/hot, when the codebase imports github.com/samber/hot, or when the project repeatedly loads the same medium-to-low cardinality resources at high frequency and needs to reduce latency or backend pressure.
+include_in_prompt: true
+availability:
+  confidential_vm: true
+  needs_speech: false
+skill_improvement:
+  managed: true
+  needs_review: true
+license: MIT
+author: samber
+upstream_version: "1.1.2"
+derived_from: samber/cc-skills-golang (golang-samber-hot)
