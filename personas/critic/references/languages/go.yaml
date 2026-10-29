@@ -1,0 +1,62 @@
+# go.yaml - Critic language file: Go.
+# Loaded into every critic brief when stack detection reports the go stack
+# (critic.manifest.json stacks[].languageFile; SOUL section 2 brief assembly).
+# Source of truth for per-language review knowledge: toolchain, gates,
+# sanitizer, dangerous patterns, honest gaps. Carries verified_as_of and
+# expires 90 days later under the staleness law (SOUL 8.15).
+version: 1
+stack: go
+display_name: "Go"
+verified_as_of: "2026-10-29"
+expires: "2027-01-27"
+detection:
+  markers: ["go.mod"]
+  notes: "A go.mod anywhere within depth 4 declares the stack. Vendored trees under vendor/ are dependencies, not the target's own code; review them as supply chain, not as source."
+toolchain:
+  build: "go build ./..."
+  test: "go test ./..."
+  lint: "golangci-lint with the family config (scripts/go/golangci.yml), plus gofumpt formatting"
+  format: "gofumpt (strict gofmt); a file gofumpt would rewrite is a finding"
+  debug: "structured logging and a diagnostic seam per the family's debug rules; debug-check.sh greps for the seam"
+gates:
+  manifest_gates: ["go-lint", "go-debug-check", "go-test"]
+  script_dir: "scripts/go"
+  extra_scripts: ["format.sh", "bench.sh", "coverage.sh", "fuzz.sh", "debug-add.sh"]
+sanitizer:
+  status: canonical
+  canonical: "bluemonday"
+  package: "github.com/microcosm-cc/bluemonday"
+  license: "BSD-3-Clause"
+  latest_known: {version: "v1.0.18 or later (slow-moving upstream)", as_of: "2026-10-28"}
+  currency_rule: "Verify the pinned version against pkg.go.dev at intel-refresh; upstream releases are infrequent, so any pin is probably current, but a fork (for example a v2 fork) is not the canonical module and is a finding until justified."
+  config_checks:
+    - "Sanitization runs AFTER markdown rendering (blackfriday, goldmark) and any other processing, never before; bluemonday's own docs state this order."
+    - "The policy is an allowlist (UGCPolicy or stricter). A hand-built policy that allows style, form, or iframe elements needs explicit justification."
+    - "One policy per configuration, built once; policy construction is not goroutine-safe, policy use is."
+  dangerous_sinks:
+    - "template.HTML, template.JS, template.URL, template.CSS casts in html/template: each cast disables autoescaping for that value"
+    - "Writing user-controlled strings to an http.ResponseWriter with a text/html content type without escaping"
+    - "Markdown renderers configured to pass raw HTML through unsanitized (goldmark WithUnsafe, blackfriday without sanitization after)"
+  verdict_rules:
+    - "User HTML rendered with no bluemonday (or equivalent allowlist) pass: finding, high."
+    - "bluemonday present but applied before rendering, or bypassed by a template cast on the same value: finding, high."
+security_tooling:
+  - "govulncheck (manifest tool probe; the family's vuln-scan path for Go modules)"
+  - "osv-scanner over go.mod and go.sum"
+  - "golangci-lint security linters via the family config"
+dangerous_patterns:
+  - "exec.Command with shell string composition from user input"
+  - "sql string concatenation into database/sql queries instead of parameters"
+  - "unsafe package use outside a justified, reviewed hotspot"
+  - "TLS certificate verification disabled (InsecureSkipVerify) outside tests"
+review_can:
+  - "Run the full gate triple and the fuzz and coverage scripts"
+  - "Verify sanitizer presence, order, and policy shape from source and go.mod"
+  - "Match module versions against govulncheck and OSV data"
+review_cannot:
+  - "Prove runtime behavior of sanitization on rendered pages without executing the app; source-level verdicts only"
+untested:
+  - "Gremlins mutation ran for real on 2026-10-29 (lane 6) through bench.sh mutation mode: efficacy 87.50 percent on the go-tiny fixture, 7 killed, 1 lived (effectively equivalent boundary mutant)."
+sources:
+  - "bluemonday repository and pkg.go.dev documentation, read 2026-10-28"
+  - "Critic inventory 2026-10-28 (gate and UNTESTED records)"

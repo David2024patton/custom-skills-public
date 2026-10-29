@@ -1,0 +1,10 @@
+# Signature library example for runtime-version.sh (report L1-29).
+# The canonical library ships with the critic bundle; gate scripts
+# receive its path as an argument and never embed entries.
+# Format: SIG-ID | runtime | fixed-versions | mode | notes
+# mode "branch": compare within the artefact's own branch.
+# mode "floor": any version below the listed release is vulnerable.
+SIG-PHP-2026-001 | php | 8.5.12,8.4.27,8.3.36,8.2.35 | branch | CVE-2026-109618 and CVE-2026-109619 (PHP2Shell), fixed 2026-10-21; distro backports may fix without a version bump, claimed only with a vendor attestation
+SIG-NODE-EXAMPLE | node | 22.11.0 | floor | example entry shape only; replace with the current advisory floor from the canonical library
+SIG-PY-EXAMPLE | python | 3.12.7 | floor | example entry shape only; replace with the current advisory floor from the canonical library
+SIG-GO-EXAMPLE | go | 1.23.2 | floor | example entry shape only; the real check pairs the toolchain version from go version -m with govulncheck reachability

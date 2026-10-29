@@ -1,0 +1,9 @@
+{
+  "name": "critic-sanitize-gate-refenv",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Reference sanitizer install for the critic sanitize gate: pinned isomorphic-dompurify used to execute the XSS corpus.",
+  "dependencies": {
+    "isomorphic-dompurify": "^2.36.0"
+  }
+}

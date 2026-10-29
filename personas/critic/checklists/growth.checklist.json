@@ -1,0 +1,756 @@
+{
+ "schemaVersion": 1,
+ "lens": "growth",
+ "version": "1.1.0",
+ "sourceOfTruth": "This JSON is the source of truth. The prose lens in skills/software-development/critic-lens-growth/SKILL.md is a human readable view; checklist-lint rejects duplicate IDs and SARIF ruleIds that do not resolve here. Panel machinery items (annex application, capture-recapture, inter-rater reliability, decorrelation, seed calibration, unknowns ledger, Not tested list, write gate, environment levels) are carried in the code checklist as CODE-PM-001 through CODE-PM-009 and are part of every brief, whatever lens leads.",
+ "idMigration": {
+  "UX-MMS-001": "GROWTH-MMS-001",
+  "UX-MMS-002": "GROWTH-MMS-002"
+ },
+ "items": [
+  {
+   "id": "GROWTH-TFQ-001",
+   "title": "Does the key message and tone match the brief's objective and audience.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:tfq",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Does the key message and tone match the brief's objective and audience.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Does the key message and tone match the brief's objective and audience.",
+   "howToTest": "Inspect the artifact against: Does the key message and tone match the brief's objective and audience.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-TFQ-002",
+   "title": "Is the takeaway singular. One ad, one idea. If a reader cannot repeat the offer back in one sentence, it failed (clarity beats cleverness every time).",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:tfq",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Is the takeaway singular. One ad, one idea. If a reader cannot repeat the offer back in one sentence, it failed (clarity beats cleverness every time).",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Is the takeaway singular. One ad, one idea. If a reader cannot repeat the offer back in one sentence, it failed (clarity beats cleverness every time).",
+   "howToTest": "Inspect the artifact against: Is the takeaway singular. One ad, one idea. If a reader cannot repeat the offer back in one sentence, it failed (clarity beats cleverness every time).",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-SAL-001",
+   "title": "Every claim on a paid or public surface must be substantiable.",
+   "level": 2,
+   "severityIfFailed": "high",
+   "rubricRef": "rubric:growth:sal",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Every claim on the surface traces to substantiation on file, and legally defined words (proven, guaranteed, best, most, free) are used only where the evidence meets their legal bar.",
+   "failCriteria": "Any public or paid claim lacks substantiation, or a legally defined word is used without its evidentiary bar being met.",
+   "howToTest": "Inspect the artifact against: Every claim on a paid or public surface must be substantiable. \"Proven\", \"guaranteed\", \"best\", \"most\", \"free\" have legal definitions and evidentiary bars.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-SAL-002",
+   "title": "Unsubstantiated comparative and superiority claims are FTC risk (US) and a refund and chargeback risk.",
+   "level": 2,
+   "severityIfFailed": "high",
+   "rubricRef": "rubric:growth:sal",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Every comparative or superiority claim is either substantiated on file or flagged OVERSTATED or UNBACKED in the report with the substantiation that would clear it named.",
+   "failCriteria": "A comparative or superiority claim ships unflagged and unsubstantiated.",
+   "howToTest": "Inspect the artifact against: Unsubstantiated comparative and superiority claims are FTC risk (US) and a refund and chargeback risk. Flag each as OVERSTATED or UNBACKED with the substantiation that would clear it.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-SAL-003",
+   "title": "Testimonials and results carry disclosure requirements. \"Results not typical\" is not a fix for an atypical claim.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:sal",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Testimonials and results carry disclosure requirements. \"Results not typical\" is not a fix for an atypical claim.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Testimonials and results carry disclosure requirements. \"Results not typical\" is not a fix for an atypical claim.",
+   "howToTest": "Inspect the artifact against: Testimonials and results carry disclosure requirements. \"Results not typical\" is not a fix for an atypical claim.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-PAU-001",
+   "title": "Clarity over cleverness. If the value proposition needs a second read, cut it.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:pau",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Clarity over cleverness. If the value proposition needs a second read, cut it.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Clarity over cleverness. If the value proposition needs a second read, cut it.",
+   "howToTest": "Inspect the artifact against: Clarity over cleverness. If the value proposition needs a second read, cut it.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-PAU-002",
+   "title": "The one-sentence test. Can a reader explain the offer to a friend after one read.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:pau",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: The one-sentence test. Can a reader explain the offer to a friend after one read.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: The one-sentence test. Can a reader explain the offer to a friend after one read.",
+   "howToTest": "Inspect the artifact against: The one-sentence test. Can a reader explain the offer to a friend after one read.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-PAU-003",
+   "title": "Differentiation. What does this say that the competitor cannot say truthfully.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:pau",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Differentiation. What does this say that the competitor cannot say truthfully. If the copy would work with the competitor's logo swapped, it is generic.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Differentiation. What does this say that the competitor cannot say truthfully. If the copy would work with the competitor's logo swapped, it is generic.",
+   "howToTest": "Inspect the artifact against: Differentiation. What does this say that the competitor cannot say truthfully. If the copy would work with the competitor's logo swapped, it is generic.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-PAU-004",
+   "title": "Audience specificity. \"Everyone\" is no one. Name the ICP and the job to be done.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:pau",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Audience specificity. \"Everyone\" is no one. Name the ICP and the job to be done.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Audience specificity. \"Everyone\" is no one. Name the ICP and the job to be done.",
+   "howToTest": "Inspect the artifact against: Audience specificity. \"Everyone\" is no one. Name the ICP and the job to be done.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-PCR-001",
+   "title": "Hook in the first 3 seconds or first line, or the attention is gone.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:pcr",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Hook in the first 3 seconds or first line, or the attention is gone.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Hook in the first 3 seconds or first line, or the attention is gone.",
+   "howToTest": "Inspect the artifact against: Hook in the first 3 seconds or first line, or the attention is gone.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-PCR-002",
+   "title": "One CTA, one intent. Multiple competing CTAs convert none.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:pcr",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: One CTA, one intent. Multiple competing CTAs convert none.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: One CTA, one intent. Multiple competing CTAs convert none.",
+   "howToTest": "Inspect the artifact against: One CTA, one intent. Multiple competing CTAs convert none.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-PCR-003",
+   "title": "Does the creative promise match the destination. Bait headline plus mismatched landing page is a conversion killer and a trust breach.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:pcr",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Does the creative promise match the destination. Bait headline plus mismatched landing page is a conversion killer and a trust breach.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Does the creative promise match the destination. Bait headline plus mismatched landing page is a conversion killer and a trust breach.",
+   "howToTest": "Inspect the artifact against: Does the creative promise match the destination. Bait headline plus mismatched landing page is a conversion killer and a trust breach.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-PCR-004",
+   "title": "Format fit: does the creative match the placement (feed vs story vs search intent vs email subject).",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:pcr",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Format fit: does the creative match the placement (feed vs story vs search intent vs email subject).",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Format fit: does the creative match the placement (feed vs story vs search intent vs email subject).",
+   "howToTest": "Inspect the artifact against: Format fit: does the creative match the placement (feed vs story vs search intent vs email subject).",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-WTG-001",
+   "title": "The mechanism. Why will this convert. \"It looks good\" is not a mechanism. Name the psychological or economic driver.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:wtg",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: The mechanism. Why will this convert. \"It looks good\" is not a mechanism. Name the psychological or economic driver.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: The mechanism. Why will this convert. \"It looks good\" is not a mechanism. Name the psychological or economic driver.",
+   "howToTest": "Inspect the artifact against: The mechanism. Why will this convert. \"It looks good\" is not a mechanism. Name the psychological or economic driver.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-WTG-002",
+   "title": "The number's source. Projected revenue, CAC, or lift must trace to a model or a real cohort, not optimism.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:wtg",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: The number's source. Projected revenue, CAC, or lift must trace to a model or a real cohort, not optimism. When numbers get heavy, work the claims checklist in full as well; every critic carries it, so this is a deeper pass over the same brief, not a handoff.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: The number's source. Projected revenue, CAC, or lift must trace to a model or a real cohort, not optimism. When numbers get heavy, work the claims checklist in full as well; every critic carries it, so this is a deeper pass over the same brief, not a handoff.",
+   "howToTest": "Inspect the artifact against: The number's source. Projected revenue, CAC, or lift must trace to a model or a real cohort, not optimism. When numbers get heavy, work the claims checklist in full as well; every critic carries it, so this is a deeper pass over the same brief, not a handoff.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-WTG-003",
+   "title": "The honest comparison. Against the top competitor the customer would actually weigh, not a strawman.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:wtg",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: The honest comparison. Against the top competitor the customer would actually weigh, not a strawman.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: The honest comparison. Against the top competitor the customer would actually weigh, not a strawman.",
+   "howToTest": "Inspect the artifact against: The honest comparison. Against the top competitor the customer would actually weigh, not a strawman.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-OAA-001",
+   "title": "Substantiation ledger. Every claim, its verdict label, the evidence bar it must clear.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:oaa",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Substantiation ledger. Every claim, its verdict label, the evidence bar it must clear.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Substantiation ledger. Every claim, its verdict label, the evidence bar it must clear.",
+   "howToTest": "Inspect the artifact against: Substantiation ledger. Every claim, its verdict label, the evidence bar it must clear.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-OAA-002",
+   "title": "Brief-fit score. Does it hit the objective, the audience, the single takeaway.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:oaa",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Brief-fit score. Does it hit the objective, the audience, the single takeaway.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Brief-fit score. Does it hit the objective, the audience, the single takeaway.",
+   "howToTest": "Inspect the artifact against: Brief-fit score. Does it hit the objective, the audience, the single takeaway.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-OAA-003",
+   "title": "The swap test. Would this work under a competitor's logo. Yes means generic.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:oaa",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: The swap test. Would this work under a competitor's logo. Yes means generic.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: The swap test. Would this work under a competitor's logo. Yes means generic.",
+   "howToTest": "Inspect the artifact against: The swap test. Would this work under a competitor's logo. Yes means generic.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-FMT-001",
+   "title": "Maker-taste review, not audience review. \"I like it\" is not a finding.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:fmt",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Maker-taste review, not audience review. \"I like it\" is not a finding.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Maker-taste review, not audience review. \"I like it\" is not a finding.",
+   "howToTest": "Inspect the artifact against: Maker-taste review, not audience review. \"I like it\" is not a finding.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-FMT-002",
+   "title": "Clever headline that fails the one-sentence test.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:fmt",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Clever headline that fails the one-sentence test.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Clever headline that fails the one-sentence test.",
+   "howToTest": "Inspect the artifact against: Clever headline that fails the one-sentence test.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-FMT-003",
+   "title": "Unsubstantiated superiority claim waiting to be a legal problem.",
+   "level": 2,
+   "severityIfFailed": "high",
+   "rubricRef": "rubric:growth:fmt",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "No superiority claim appears on the surface without substantiation; any that did appear is filed as a legal-risk finding, not a style note.",
+   "failCriteria": "An unsubstantiated superiority claim is present and is not filed as a legal problem.",
+   "howToTest": "Inspect the artifact against: Unsubstantiated superiority claim waiting to be a legal problem.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-FMT-004",
+   "title": "Creative-to-landing mismatch. Promise the thing the page delivers.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:fmt",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Creative-to-landing mismatch. Promise the thing the page delivers.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Creative-to-landing mismatch. Promise the thing the page delivers.",
+   "howToTest": "Inspect the artifact against: Creative-to-landing mismatch. Promise the thing the page delivers.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-FMT-005",
+   "title": "Growth number with no cohort or model behind it.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:fmt",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Growth number with no cohort or model behind it.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Growth number with no cohort or model behind it.",
+   "howToTest": "Inspect the artifact against: Growth number with no cohort or model behind it.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-MTD-001",
+   "title": "AlphaFlux whitelabel tiers: pricing-page substantiation and tier-clarity attack.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:mtd",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: AlphaFlux whitelabel tiers: pricing-page substantiation and tier-clarity attack.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: AlphaFlux whitelabel tiers: pricing-page substantiation and tier-clarity attack.",
+   "howToTest": "Inspect the artifact against: AlphaFlux whitelabel tiers: pricing-page substantiation and tier-clarity attack.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-MTD-002",
+   "title": "iTaK Learn and iTaK Gaming: acquisition creative, hook and one-CTA discipline.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:mtd",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: iTaK Learn and iTaK Gaming: acquisition creative, hook and one-CTA discipline.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: iTaK Learn and iTaK Gaming: acquisition creative, hook and one-CTA discipline.",
+   "howToTest": "Inspect the artifact against: iTaK Learn and iTaK Gaming: acquisition creative, hook and one-CTA discipline.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-MTD-003",
+   "title": "Patriot Pest Control: local-service claims, \"guaranteed\" and \"best\" legal bar, testimonial disclosure.",
+   "level": 2,
+   "severityIfFailed": "high",
+   "rubricRef": "rubric:growth:mtd",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Patriot Pest Control claims meet the local-service legal bar: every 'guaranteed' or 'best' claim is substantiated or removed, and every testimonial carries its disclosure.",
+   "failCriteria": "A guaranteed or best claim stands without substantiation, or a testimonial runs without its disclosure.",
+   "howToTest": "Inspect the artifact against: Patriot Pest Control: local-service claims, \"guaranteed\" and \"best\" legal bar, testimonial disclosure.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-MTD-004",
+   "title": "Launch plans: premortem the go-to-market before the spend.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:mtd",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Launch plans: premortem the go-to-market before the spend.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Launch plans: premortem the go-to-market before the spend.",
+   "howToTest": "Inspect the artifact against: Launch plans: premortem the go-to-market before the spend.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-MMS-001",
+   "title": "Ad pixels / conversion tracking (Meta, TikTok, LinkedIn, Google, server-side CAPI, dedup, GTM, consent)",
+   "level": 2,
+   "severityIfFailed": "high",
+   "rubricRef": "rubric:growth:mms",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Every declared pixel and tag (Meta, TikTok, LinkedIn, Google, GTM) is inventoried on the page, each conversion event is shown firing its pixel, server-side CAPI events deduplicate against browser events on the shared event id, and no pixel fires before consent where consent is required.",
+   "failCriteria": "A declared channel has no working pixel, tracking is browser-only where CAPI is declared, events double-count for lack of deduplication, or a pixel fires before consent.",
+   "howToTest": "Inspect the artifact against: Ad pixels / conversion tracking (Meta, TikTok, LinkedIn, Google, server-side CAPI, dedup, GTM, consent), audited with the inlined pixel procedure in the growth lens skill (the MMS checks): inventory every pixel and tag on the page, verify each fires on its conversion event, verify server-side CAPI events deduplicate against browser events on the shared event id, and verify no pixel fires before consent where consent is required. Missing or browser-only tracking is a real conversion gap.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-MMS-002",
+   "title": "Local business listing / social presence (if the site belongs to a local business): Google Business Profile completeness + currency",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:mms",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Local business listing / social presence (if the site belongs to a local business): Google Business Profile completeness + currency, Facebook/Instagram/LinkedIn presence, NAP consistency.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Local business listing / social presence (if the site belongs to a local business): Google Business Profile completeness + currency, Facebook/Instagram/LinkedIn presence, NAP consistency.",
+   "howToTest": "Inspect the artifact against: if the site belongs to a local business, verify the listing and presence surface directly, in this order: (1) open the Google Business Profile and compare name, address, phone, hours, and categories against the site field by field; (2) confirm the profile's newest photo is under 90 days old and its hours match the site's stated hours; (3) read the three most recent reviews and confirm each carries an owner response or a recorded reason it does not; (4) follow every linked social profile (Facebook, Instagram, LinkedIn) and confirm it resolves, carries the same name, address, and phone (NAP consistency), and shows a post inside the last 30 days; (5) record every disagreement between the site and the profiles as the finding, quoting both values. If the business is not a local business, record not-applicable with that reason. Never return the website verdict with this surface skipped and unrecorded.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  },
+  {
+   "id": "GROWTH-BRF-001",
+   "title": "Brief-fit score. The creative is scored against the brief on three components, 0 to 3 each: objective fit, audience fit, and single-takeaway fit.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:growth:brf",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "manual-attestation"
+   ],
+   "passCriteria": "Evidence shows the check holds: Brief-fit score. The creative is scored against the brief on three components, 0 to 3 each: objective fit, audience fit, and single-takeaway fit. Passing is a total of 6 of 9 or better with no component at 0. The three component scores are printed, not just the total.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Brief-fit score. The creative is scored against the brief on three components, 0 to 3 each: objective fit, audience fit, and single-takeaway fit. Passing is a total of 6 of 9 or better with no component at 0. The three component scores are printed, not just the total.",
+   "howToTest": "Inspect the artifact against: Brief-fit score. The creative is scored against the brief on three components, 0 to 3 each: objective fit, audience fit, and single-takeaway fit. Passing is a total of 6 of 9 or better with no component at 0. The three component scores are printed, not just the total.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "growth"
+   },
+   "status": "active"
+  }
+ ]
+}

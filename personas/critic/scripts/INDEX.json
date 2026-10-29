@@ -1,0 +1,622 @@
+{
+ "schemaVersion": 1,
+ "generatedBy": "scripts/index-gen.py",
+ "scripts": [
+  {
+   "question": "Can a run directory be sealed into a verifiable evidence bundle?",
+   "stackDetection": "none.",
+   "inputs": "--run-dir DIR (findings.sarif, verdict.json, capabilities.json, coverage.json, logs/, evidence/), --manifest critic.manifest.json, --out bundle dir",
+   "effects": "mutating (creates the --out bundle directory only)",
+   "exits": "0 bundle built and hashes verified; 1 a required run file is missing; 4 input invalid",
+   "output": "summary line first; bundle manifest at <out>/manifest.json",
+   "file": "bundle-evidence.py",
+   "legacyHeader": false,
+   "path": "bundle-evidence.py"
+  },
+  {
+   "question": "Which required tools and gates can actually run here, and what verdict ceiling does that impose?",
+   "stackDetection": "probes come from critic.manifest.json tool entries (command, version regex, minimum).",
+   "inputs": "--manifest PATH, --mode quick|full, --out capabilities.json, --root DIR",
+   "effects": "read-only, except a pinned install attempt in full mode where the manifest declares one (attempt is logged).",
+   "exits": "0 all required tools present; 1 findings-fail (reserved); 2 a required tool is missing; 3 tool error; 4 manifest invalid; 124 timeout",
+   "output": "summary line first; full record written to the --out path (default capabilities.json)",
+   "file": "capabilities.py",
+   "legacyHeader": false,
+   "path": "capabilities.py"
+  },
+  {
+   "file": "capture-recapture.py",
+   "legacyHeader": true,
+   "question": null,
+   "path": "capture-recapture.py"
+  },
+  {
+   "file": "check-critique.py",
+   "legacyHeader": true,
+   "question": null,
+   "path": "check-critique.py"
+  },
+  {
+   "question": "Are the checklist JSON files well formed, uniquely identified, and consistent with prose and SARIF?",
+   "stackDetection": "none.",
+   "inputs": "--checklists DIR, --prose DIR (lens SKILL.md folders, optional), --sarif FILE (optional), --skills-root DIR (optional), --control-map FILE (optional)",
+   "effects": "read-only",
+   "exits": "0 clean; 1 violations; 2 inputs missing; 4 a checklist is invalid JSON or wrong schemaVersion",
+   "output": "summary line first, then one violation per line; also writes nothing",
+   "file": "checklist-lint.py",
+   "legacyHeader": false,
+   "path": "checklist-lint.py"
+  },
+  {
+   "file": "runtime-version.sh",
+   "legacyHeader": true,
+   "question": "Runtime-version gate family (report L1-29, generalising",
+   "path": "common/runtime-version.sh"
+  },
+  {
+   "file": "secrets-scan.sh",
+   "legacyHeader": true,
+   "question": "Secrets scanning in two layers (report L1-30).",
+   "path": "common/secrets-scan.sh"
+  },
+  {
+   "file": "vuln-scan.sh",
+   "legacyHeader": true,
+   "question": "Check dependencies against known vulnerabilities (osv.dev",
+   "path": "common/vuln-scan.sh"
+  },
+  {
+   "file": "consensus-stats.py",
+   "legacyHeader": true,
+   "question": null,
+   "path": "consensus-stats.py"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard Flutter diagnostic pattern (and scaffold",
+   "path": "dart-flutter/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check the app HAS its debugging built in: a logging or",
+   "path": "dart-flutter/debug-check.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "Dart/Flutter analyze gate (report L1-15, L1-16).",
+   "path": "dart-flutter/lint.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "Dart/Flutter test gate with coverage ratchet (report",
+   "path": "dart-flutter/test.sh"
+  },
+  {
+   "file": "vuln.sh",
+   "legacyHeader": true,
+   "question": "Dart/Flutter vulnerability gate (report L1-16). There",
+   "path": "dart-flutter/vuln.sh"
+  },
+  {
+   "file": "decorrelate.py",
+   "legacyHeader": true,
+   "question": null,
+   "path": "decorrelate.py"
+  },
+  {
+   "file": "evidence-gate.py",
+   "legacyHeader": true,
+   "question": null,
+   "path": "evidence-gate.py"
+  },
+  {
+   "file": "exit-check.py",
+   "legacyHeader": true,
+   "question": null,
+   "path": "exit-check.py"
+  },
+  {
+   "file": "finding-ledger.py",
+   "legacyHeader": true,
+   "question": null,
+   "path": "finding-ledger.py"
+  },
+  {
+   "file": "bench.sh",
+   "legacyHeader": true,
+   "question": "Go benchmark and mutation lanes, nightly shape (report",
+   "path": "go/bench.sh"
+  },
+  {
+   "file": "coverage.sh",
+   "legacyHeader": true,
+   "question": "Go coverage gate with a ratchet (report L1-06). There is",
+   "path": "go/coverage.sh"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Scaffold the standard Go diagnostic seam into a module that",
+   "path": "go/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check that this Go module HAS its debugging built in, as",
+   "path": "go/debug-check.sh"
+  },
+  {
+   "file": "format.sh",
+   "legacyHeader": true,
+   "question": "Go standalone format gate (report L1-03). Format is its",
+   "path": "go/format.sh"
+  },
+  {
+   "file": "fuzz.sh",
+   "legacyHeader": true,
+   "question": "Go fuzz lanes (report L1-05).",
+   "path": "go/fuzz.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "Go lint gate (report L1-03): go vet as a fast lane, plus",
+   "path": "go/lint.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "Go test gate, unified invocation (report L1-02). Both gate",
+   "path": "go/test.sh"
+  },
+  {
+   "question": "What scripts does the critic bundle ship, in manifest-header shape?",
+   "stackDetection": "none.",
+   "inputs": "--scripts DIR, --out INDEX.json, --check (compare instead of writing)",
+   "effects": "mutating (writes the generated --out index only; never hand-kept). With --check: read-only.",
+   "exits": "0 ok (or, with --check, index and tree agree); 1 --check found drift; 2 scripts dir missing",
+   "output": "summary line first; generated index at --out",
+   "file": "index-gen.py",
+   "legacyHeader": false,
+   "path": "index-gen.py"
+  },
+  {
+   "file": "injection-probe.py",
+   "legacyHeader": true,
+   "question": null,
+   "path": "injection-probe.py"
+  },
+  {
+   "file": "intel-refresh.py",
+   "legacyHeader": true,
+   "question": null,
+   "path": "intel-refresh.py"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard plain-JavaScript (ESM) diagnostic",
+   "path": "javascript/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check a plain JavaScript (ESM) project HAS a diagnostic",
+   "path": "javascript/debug-check.sh"
+  },
+  {
+   "file": "format.sh",
+   "legacyHeader": true,
+   "question": "Web format gate (report L1-22). Format is its own",
+   "path": "javascript/format.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "JavaScript (plain ESM Node, \"type\": \"module\") lint gate.",
+   "path": "javascript/lint.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "JavaScript (plain ESM Node) test gate.",
+   "path": "javascript/test.sh"
+  },
+  {
+   "file": "dead-code.sh",
+   "legacyHeader": true,
+   "question": "Dead code and dependency gate (report L1-27): Knip.",
+   "path": "js-ts/dead-code.sh"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard JS/TS diagnostic pattern: one logger",
+   "path": "js-ts/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check the project HAS a logging/diagnostic path (a logger",
+   "path": "js-ts/debug-check.sh"
+  },
+  {
+   "file": "format.sh",
+   "legacyHeader": true,
+   "question": "Web format gate (report L1-22). Format is its own",
+   "path": "js-ts/format.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "JS/TS lint gate, driven by what the TARGET repo declares",
+   "path": "js-ts/lint.sh"
+  },
+  {
+   "file": "security.sh",
+   "legacyHeader": true,
+   "question": "Web SAST layer (report L1-27).",
+   "path": "js-ts/security.sh"
+  },
+  {
+   "file": "test-quality.sh",
+   "legacyHeader": true,
+   "question": "Web test quality gate (report L1-27). The gate checks",
+   "path": "js-ts/test-quality.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "JS/TS test gate: run the project's test script. The",
+   "path": "js-ts/test.sh"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard Mojo diagnostic pattern, and (when",
+   "path": "mojo/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check that this Mojo tree HAS its debugging built in: a",
+   "path": "mojo/debug-check.sh"
+  },
+  {
+   "file": "deps.sh",
+   "legacyHeader": true,
+   "question": "Mojo dependency lane and property harness (report",
+   "path": "mojo/deps.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "Mojo lint gate (report L1-13): compiler-as-lint plus the",
+   "path": "mojo/lint.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "Mojo test gate, rebuilt on the TestSuite pattern.",
+   "path": "mojo/test.sh"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard Next.js diagnostic pattern.",
+   "path": "nextjs/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check a Next.js project HAS a diagnostic path, and ships",
+   "path": "nextjs/debug-check.sh"
+  },
+  {
+   "file": "format.sh",
+   "legacyHeader": true,
+   "question": "Web format gate (report L1-22). Format is its own",
+   "path": "nextjs/format.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "Next.js lint + typecheck gate. Lint is ESLint DIRECTLY,",
+   "path": "nextjs/lint.sh"
+  },
+  {
+   "file": "security.sh",
+   "legacyHeader": true,
+   "question": "Next.js security checklist gate (report L1-25, the",
+   "path": "nextjs/security.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "Next.js heavy gate: production build, then project tests.",
+   "path": "nextjs/test.sh"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard PHP diagnostic pattern, and (when",
+   "path": "php/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check the project HAS its debugging built in: a",
+   "path": "php/debug-check.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "PHP lint and static analysis gate. Two halves, and the",
+   "path": "php/lint.sh"
+  },
+  {
+   "file": "security.sh",
+   "legacyHeader": true,
+   "question": "PHP security layer. Three halves, all stated:",
+   "path": "php/security.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "PHP test gate: PHPUnit with a zero-test guard. A suite",
+   "path": "php/test.sh"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard Prisma diagnostic pattern.",
+   "path": "prisma/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Prisma debug check, at the level a schema honestly has",
+   "path": "prisma/debug-check.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "Prisma lint gate: the schema is the code, so the checks",
+   "path": "prisma/lint.sh"
+  },
+  {
+   "file": "migrate-check.sh",
+   "legacyHeader": true,
+   "question": "Prisma migration safety gate (report L1-26). Pure",
+   "path": "prisma/migrate-check.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "Prisma build-proof gate: client generation, then tests.",
+   "path": "prisma/test.sh"
+  },
+  {
+   "file": "probe-runner.py",
+   "legacyHeader": true,
+   "question": null,
+   "path": "probe-runner.py"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard Python diagnostic pattern: logging",
+   "path": "python/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check the project HAS its debugging built in: the logging",
+   "path": "python/debug-check.sh"
+  },
+  {
+   "file": "fuzz.sh",
+   "legacyHeader": true,
+   "question": "Python fuzz lane, Tier 2 (report L1-21): Atheris,",
+   "path": "python/fuzz.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "Python lint and type gate (report L1-19).",
+   "path": "python/lint.sh"
+  },
+  {
+   "file": "mutation.sh",
+   "legacyHeader": true,
+   "question": "Python mutation gate (report L1-21). Nightly and",
+   "path": "python/mutation.sh"
+  },
+  {
+   "file": "security.sh",
+   "legacyHeader": true,
+   "question": "Python security layer (report L1-18). This is the",
+   "path": "python/security.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "Python test gate (report L1-20): pytest with BRANCH",
+   "path": "python/test.sh"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard React diagnostic pattern.",
+   "path": "react/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check a React project HAS a diagnostic path components",
+   "path": "react/debug-check.sh"
+  },
+  {
+   "file": "format.sh",
+   "legacyHeader": true,
+   "question": "Web format gate (report L1-22). Format is its own",
+   "path": "react/format.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "React component-stack lint gate, detection-driven.",
+   "path": "react/lint.sh"
+  },
+  {
+   "file": "test-quality.sh",
+   "legacyHeader": true,
+   "question": "React component test quality gate (report L1-24).",
+   "path": "react/test-quality.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "React test gate.",
+   "path": "react/test.sh"
+  },
+  {
+   "file": "run-gates.sh",
+   "legacyHeader": true,
+   "question": "Run every applicable commit gate for the repo in the current",
+   "path": "run-gates.sh"
+  },
+  {
+   "file": "advanced.sh",
+   "legacyHeader": true,
+   "question": "Rust mutation, fuzz, unsafe, and semver lanes (report",
+   "path": "rust/advanced.sh"
+  },
+  {
+   "file": "coverage.sh",
+   "legacyHeader": true,
+   "question": "Rust coverage gate (report L1-10): cargo-llvm-cov with",
+   "path": "rust/coverage.sh"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard Rust diagnostic pattern for this project",
+   "path": "rust/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check that this Rust tree HAS its debugging built in: a",
+   "path": "rust/debug-check.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "Rust lint gate (report L1-07): format check against the",
+   "path": "rust/lint.sh"
+  },
+  {
+   "file": "policy.sh",
+   "legacyHeader": true,
+   "question": "Rust dependency and policy gate (report L1-08).",
+   "path": "rust/policy.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "Rust test gate (report L1-09): cargo-nextest for the",
+   "path": "rust/test.sh"
+  },
+  {
+   "question": "Does this web target sanitize user HTML with a current canonical sanitizer, on every sink, and does its sanitizer configuration actually stop the family XSS corpus?",
+   "stackDetection": "manifest stacks javascript, typescript, react, nextjs; the wrapper takes the stack as its first argument for evidence labeling and passes it to sanitize-gate.mjs.",
+   "inputs": "sanitize-gate.sh STACK TARGET_DIR [--mode quick|full] [--corpus PATH] [--refenv DIR] [--out PATH]",
+   "effects": "read-only on the target; the target-module leg of the Node gate imports target code in a child process inside the review sandbox.",
+   "exits": "0 clean; 1 findings; 2 node missing or the corpus execution leg could not run (DID-NOT-RUN, stated); 3 gate error; 124 timeout (imposed by the caller).",
+   "output": "JSON lines on stdout from sanitize-gate.mjs; human summary on stderr.",
+   "file": "sanitize-gate.sh",
+   "legacyHeader": false,
+   "path": "sanitize/sanitize-gate.sh"
+  },
+  {
+   "question": "How are findings emitted as SARIF 2.1.0 under the frozen critic profile?",
+   "stackDetection": "none; ruleIds resolve against checklists/*.checklist.json when present.",
+   "inputs": "findings JSON file (array of finding objects), --out findings.sarif, --baseline present|absent",
+   "effects": "mutating (writes the --out file only)",
+   "exits": "0 ok; 1 a finding lacks evidence (invalid under the profile); 4 input invalid",
+   "output": "summary line first; SARIF written to --out",
+   "file": "sarif-emit.py",
+   "legacyHeader": false,
+   "path": "sarif-emit.py"
+  },
+  {
+   "question": "Does a SARIF file satisfy SARIF 2.1.0 structure and the frozen critic profile?",
+   "stackDetection": "none.",
+   "inputs": "findings.sarif, --schema PATH (official SARIF 2.1.0 JSON Schema), --checklists DIR",
+   "effects": "read-only",
+   "exits": "0 valid; 1 profile or schema violation; 2 validator dependency missing (jsonschema or schema file); 4 input invalid",
+   "output": "summary line first, then one violation per line",
+   "file": "sarif-validate.py",
+   "legacyHeader": false,
+   "path": "sarif-validate.py"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "Shell lint gate: shellcheck over every .sh file, plus a",
+   "path": "shell/lint.sh"
+  },
+  {
+   "question": "Which stacks, tools, and gates does this target declare, and which stacks are present in a target tree?",
+   "stackDetection": "reads personas/critic/critic.manifest.json; no detection logic lives in code.",
+   "inputs": "--root DIR, --manifest PATH, --format json|legacy-audit|shell-vars, --lint-manifest",
+   "effects": "read-only",
+   "exits": "0 ok; 2 tool or manifest missing; 4 manifest invalid",
+   "output": "summary line first, then one record per line (json mode prints one JSON document after the summary on stderr separation: summary to stderr)",
+   "file": "stack-detect.py",
+   "legacyHeader": false,
+   "path": "stack-detect.py"
+  },
+  {
+   "file": "debug-add.sh",
+   "legacyHeader": true,
+   "question": "Print the standard TypeScript diagnostic pattern. The",
+   "path": "typescript/debug-add.sh"
+  },
+  {
+   "file": "debug-check.sh",
+   "legacyHeader": true,
+   "question": "Check a TypeScript project HAS a diagnostic seam and",
+   "path": "typescript/debug-check.sh"
+  },
+  {
+   "file": "format.sh",
+   "legacyHeader": true,
+   "question": "Web format gate (report L1-22). Format is its own",
+   "path": "typescript/format.sh"
+  },
+  {
+   "file": "lint.sh",
+   "legacyHeader": true,
+   "question": "TypeScript lint/typecheck gate. Core step: `tsc --noEmit`.",
+   "path": "typescript/lint.sh"
+  },
+  {
+   "file": "strictness.sh",
+   "legacyHeader": true,
+   "question": "TypeScript strictness ladder check (report L1-23).",
+   "path": "typescript/strictness.sh"
+  },
+  {
+   "file": "test.sh",
+   "legacyHeader": true,
+   "question": "TypeScript test gate.",
+   "path": "typescript/test.sh"
+  }
+ ]
+}

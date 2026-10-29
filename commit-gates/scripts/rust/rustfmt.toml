@@ -1,0 +1,7 @@
+# rustfmt configuration template (report L1-07).
+# Copy to the project root as rustfmt.toml and commit it.
+# Stable options only: a nightly-only option here breaks the
+# format gate on stable toolchains.
+edition = "2024"
+style_edition = "2024"
+max_width = 100

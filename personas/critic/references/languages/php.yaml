@@ -1,0 +1,79 @@
+# php.yaml - Critic language file: PHP.
+# Loaded into every critic brief when stack detection reports the php stack
+# (critic.manifest.json stacks[].languageFile; SOUL section 2 brief assembly).
+# Source of truth for per-language review knowledge: toolchain, gates,
+# sanitizer, dangerous patterns, honest gaps. Carries verified_as_of and
+# expires 90 days later under the staleness law (SOUL 8.15).
+version: 1
+stack: php
+display_name: "PHP"
+verified_as_of: "2026-10-29"
+expires: "2027-01-27"
+detection:
+  markers: ["composer.json", "*.php"]
+  notes: "composer.json within depth 4 or any *.php source within depth 5 declares the stack. A lone .php file with no composer.json still counts; review it as script-grade code with the same sink rules, because the classic PHP failure modes do not need a framework."
+toolchain:
+  build: "no compile step; composer install builds the vendor tree and autoloader, and php -l over every source stands in as the build check (scripts/php/lint.sh)"
+  test: "PHPUnit via scripts/php/test.sh (vendor/bin/phpunit preferred, PATH phpunit otherwise), with a zero-test guard over the runner output"
+  lint: "php -l plus PHPStan when the project provides it, Psalm otherwise, via scripts/php/lint.sh; the static analysis half is unconditional, a syntax-only pass does not wear the gate's name"
+  format: "the project's own formatter where declared (php-cs-fixer, or PHP_CodeSniffer with a PSR-12 ruleset); no unconditional family formatter exists for PHP, recorded under review_cannot"
+  debug: "error_log and PSR-3 logger seam; scripts/php/debug-check.sh greps for the seam and for display_errors switched on in production config or code"
+gates:
+  manifest_gates: ["php-lint", "php-debug-check", "php-test"]
+  script_dir: "scripts/php"
+  extra_scripts: ["security.sh", "debug-add.sh"]
+sanitizer:
+  status: canonical
+  canonical: "HTMLPurifier"
+  package: "ezyang/htmlpurifier (Composer)"
+  license: "LGPL-2.1-or-later"
+  latest_known: {version: "4.18.0", as_of: "2026-10-28"}
+  currency_rule: "Upstream is slow-moving; 4.18.0 was the current release as of 2026-10-28. Verify the composer.lock pin against Packagist at intel-refresh; any current 4.x pin is probably fine, and a vendored or forked purifier is a finding until justified."
+  platform_canonicals:
+    - "Inside WordPress targets the canonical is wp_kses (wp_kses_post for post content): HTMLPurifier fights WordPress internals, and a WordPress codebase reaching for a second sanitizer is reviewed for why the platform one was not enough."
+    - "Where a PHP application renders client side, the browser layer is DOMPurify per the javascript language file; the PHP canonical covers server-rendered HTML only, and neither substitutes for the other."
+  config_checks:
+    - "Sanitization runs on the final HTML, after any markdown, BBCode, or template rendering, never on the source markup; purifying early and rendering after reintroduces whatever the renderer adds."
+    - "HTML.Allowed (or the equivalent allowlist) is set explicitly for the content class being purified; running with the default allowlist is a decision the code should show it made."
+    - "The DefinitionCache serializer path (cache.SerializerPath) is configured and writable in production; a purifier silently falling back or failing open on a cache error is a finding."
+    - "Widenings are reviewed one by one: HTML.Trusted, permissive CSS.AllowedProperties, URI.AllowedSchemes beyond http, https, mailto, and Attr.EnableID each need a stated reason."
+  dangerous_sinks:
+    - "Blade raw echo {!! !!} around user data (Laravel templates)"
+    - "Plain echo or print of unsanitized variables into HTML, including $_SERVER['PHP_SELF'] in form actions"
+    - "printf or sprintf style string building of markup from user values"
+    - "Twig |raw filter, or autoescaping disabled, on user data"
+    - "Short echo <?= of request superglobals"
+  verdict_rules:
+    - "User HTML rendered with no HTMLPurifier (or wp_kses inside WordPress, or an equivalent allowlist) pass: finding, high."
+    - "A regex-based strip_tags or preg_replace routine standing in for a parser-based sanitizer: finding, high, with the canonical replacement named."
+    - "HTMLPurifier present but applied before rendering, bypassed by a raw echo of the same value, or configured with unjustified widenings: finding, high to medium by exposure."
+security_tooling:
+  - "composer audit over composer.lock (scripts/php/security.sh)"
+  - "SIG-PHP-2026-001 runtime state check: the family's signature library carries the PHP2Shell fixed-release floors; security.sh compares an observed CLI version as a weak signal only, the serving SAPI runtime is the primary check"
+  - "PHPStan and Psalm security-relevant rules via the lint gate"
+  - "osv-scanner over composer.lock"
+dangerous_patterns:
+  - "unserialize() on data that crossed a trust boundary (PHP object injection); every call site must prove its bytes are fully trusted"
+  - "include, require, or their _once forms with variable or request-derived paths (local and remote file inclusion)"
+  - "SQL built by string concatenation or interpolation into PDO, mysqli, or legacy mysql calls instead of prepared statements with bound parameters"
+  - "File upload handling that trusts $_FILES name or type for the stored extension or path, or stores uploads inside the web root executable"
+  - "eval() and create_function() on any composed string"
+  - "extract() applied to request arrays, and register_globals style variable materialisation"
+  - "display_errors switched on in production config or code (information disclosure; the debug-check gate catches the config shape)"
+review_can:
+  - "Run the gate triple plus the security script"
+  - "Verify sanitizer presence, order, and allowlist shape from source and composer files"
+  - "Match dependency versions against composer audit and OSV data"
+  - "Flag the classic sink classes mechanically with file and line (security.sh grep half runs with no PHP tooling at all)"
+  - "Apply the SIG-PHP-2026-001 floor table to any observed runtime version, labelled with the signature's own weak-signal discipline"
+review_cannot:
+  - "A serving-runtime verdict from the CLI binary: SIG-PHP-2026-001 is explicit that the runtime that serves requests is the primary check, so CLI evidence never clears a target on its own"
+  - "Real php -l, PHPStan, Psalm, PHPUnit, or composer audit verdicts until a PHP toolchain exists on the review host (see untested)"
+  - "Formatting verdicts: no unconditional family formatter gate exists for PHP yet"
+  - "WordPress internals beyond call-site shape: wp_kses verdicts cover how the target calls the platform sanitizer, not core's own correctness"
+untested:
+  - "Entire PHP set UNTESTED against a real PHP toolchain: php and composer are not installed on the review VM (verified 2026-10-29), so every dispatch path is stub-proven only (stub php, stub composer, stub vendor/bin/phpstan and vendor/bin/phpunit, proofs in the lane evidence). Real php -l, PHPStan, Psalm, PHPUnit, and composer audit runs remain UNTESTED, the same standing the Mojo set carried at its landing."
+sources:
+  - "HTMLPurifier project and Packagist records (ezyang/htmlpurifier 4.18.0), read 2026-10-28"
+  - "references/signatures/SIG-PHP-2026-001.yaml (PHP2Shell runtime floors and three-state semantics)"
+  - "Critic inventory and language file conventions, 2026-10-28 and 2026-10-29"

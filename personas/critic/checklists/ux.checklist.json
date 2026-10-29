@@ -1,0 +1,805 @@
+{
+ "schemaVersion": 1,
+ "lens": "ux",
+ "version": "1.1.0",
+ "sourceOfTruth": "This JSON is the source of truth. The prose lens in skills/software-development/critic-lens-ux/SKILL.md is a human readable view; checklist-lint rejects duplicate IDs and SARIF ruleIds that do not resolve here. Panel machinery items (annex application, capture-recapture, inter-rater reliability, decorrelation, seed calibration, unknowns ledger, Not tested list, write gate, environment levels) are carried in the code checklist as CODE-PM-001 through CODE-PM-009 and are part of every brief, whatever lens leads.",
+ "idMigration": {
+  "UX-MMS-001": "GROWTH-MMS-001",
+  "UX-MMS-002": "GROWTH-MMS-002"
+ },
+ "items": [
+  {
+   "id": "UX-NS1-001",
+   "title": "Visibility of system status. Does the user know what is happening after every action. Loading, saving, errors, empty states.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:ns1",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Visibility of system status. Does the user know what is happening after every action. Loading, saving, errors, empty states.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Visibility of system status. Does the user know what is happening after every action. Loading, saving, errors, empty states.",
+   "howToTest": "Inspect the artifact against: Visibility of system status. Does the user know what is happening after every action. Loading, saving, errors, empty states.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-NS1-002",
+   "title": "Match between system and real world. Language the user uses, not internal jargon. Familiar sequences.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:ns1",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Match between system and real world. Language the user uses, not internal jargon. Familiar sequences.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Match between system and real world. Language the user uses, not internal jargon. Familiar sequences.",
+   "howToTest": "Inspect the artifact against: Match between system and real world. Language the user uses, not internal jargon. Familiar sequences.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-NS1-003",
+   "title": "User control and freedom. Undo, cancel, back, escape from any state. No trapped user.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:ns1",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: User control and freedom. Undo, cancel, back, escape from any state. No trapped user.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: User control and freedom. Undo, cancel, back, escape from any state. No trapped user.",
+   "howToTest": "Inspect the artifact against: User control and freedom. Undo, cancel, back, escape from any state. No trapped user.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-NS1-004",
+   "title": "Consistency and standards. Same action same place everywhere. Platform conventions honored. Brand casing exact.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:ns1",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Consistency and standards. Same action same place everywhere. Platform conventions honored. Brand casing exact.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Consistency and standards. Same action same place everywhere. Platform conventions honored. Brand casing exact.",
+   "howToTest": "Inspect the artifact against: Consistency and standards. Same action same place everywhere. Platform conventions honored. Brand casing exact.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-NS1-005",
+   "title": "Error prevention. Constraints before validation. Confirmation on destructive acts.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:ns1",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Error prevention. Constraints before validation. Confirmation on destructive acts.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Error prevention. Constraints before validation. Confirmation on destructive acts.",
+   "howToTest": "Inspect the artifact against: Error prevention. Constraints before validation. Confirmation on destructive acts.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-NS1-006",
+   "title": "Recognition rather than recall. Options visible, not memorized. Context and defaults present.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:ns1",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Recognition rather than recall. Options visible, not memorized. Context and defaults present.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Recognition rather than recall. Options visible, not memorized. Context and defaults present.",
+   "howToTest": "Inspect the artifact against: Recognition rather than recall. Options visible, not memorized. Context and defaults present.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-NS1-007",
+   "title": "Flexibility and efficiency of use. Shortcuts for experts, guidance for novices.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:ns1",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Flexibility and efficiency of use. Shortcuts for experts, guidance for novices.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Flexibility and efficiency of use. Shortcuts for experts, guidance for novices.",
+   "howToTest": "Inspect the artifact against: Flexibility and efficiency of use. Shortcuts for experts, guidance for novices.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-NS1-008",
+   "title": "Aesthetic and minimalist design. Nothing competing for attention. No decorative clutter.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:ns1",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Aesthetic and minimalist design. Nothing competing for attention. No decorative clutter.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Aesthetic and minimalist design. Nothing competing for attention. No decorative clutter.",
+   "howToTest": "Inspect the artifact against: Aesthetic and minimalist design. Nothing competing for attention. No decorative clutter.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-NS1-009",
+   "title": "Help users recognize, diagnose, recover from errors. Plain language, no raw backend errors or JSON on screen, a way forward.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:ns1",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Help users recognize, diagnose, recover from errors. Plain language, no raw backend errors or JSON on screen, a way forward.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Help users recognize, diagnose, recover from errors. Plain language, no raw backend errors or JSON on screen, a way forward.",
+   "howToTest": "Inspect the artifact against: Help users recognize, diagnose, recover from errors. Plain language, no raw backend errors or JSON on screen, a way forward.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-NS1-010",
+   "title": "Help and documentation. Searchable, task-focused, minimal.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:ns1",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Help and documentation. Searchable, task-focused, minimal.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Help and documentation. Searchable, task-focused, minimal.",
+   "howToTest": "Inspect the artifact against: Help and documentation. Searchable, task-focused, minimal.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-AW2-001",
+   "title": "Semantic structure, correct heading order, labeled controls.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:aw2",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Semantic structure, correct heading order, labeled controls.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Semantic structure, correct heading order, labeled controls.",
+   "howToTest": "Inspect the artifact against: Semantic structure, correct heading order, labeled controls.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-AW2-002",
+   "title": "Keyboard operable end to end. Visible focus. No keyboard traps.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:aw2",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Keyboard operable end to end. Visible focus. No keyboard traps.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Keyboard operable end to end. Visible focus. No keyboard traps.",
+   "howToTest": "Inspect the artifact against: Keyboard operable end to end. Visible focus. No keyboard traps.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-AW2-003",
+   "title": "Contrast ratios at threshold. Text that scales without clipping.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:aw2",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Contrast ratios at threshold. Text that scales without clipping.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Contrast ratios at threshold. Text that scales without clipping.",
+   "howToTest": "Inspect the artifact against: Contrast ratios at threshold. Text that scales without clipping.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-AW2-004",
+   "title": "Images with alt. Videos with captions. Forms with associated labels and error association.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:aw2",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Images with alt. Videos with captions. Forms with associated labels and error association.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Images with alt. Videos with captions. Forms with associated labels and error association.",
+   "howToTest": "Inspect the artifact against: Images with alt. Videos with captions. Forms with associated labels and error association.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-AW2-005",
+   "title": "Every state visible to a sighted user has a screen-reader path.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:aw2",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Every state visible to a sighted user has a screen-reader path.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Every state visible to a sighted user has a screen-reader path.",
+   "howToTest": "Inspect the artifact against: Every state visible to a sighted user has a screen-reader path.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-RUP-001",
+   "title": "Walk desktop, tablet, and phone widths. Clipped text, overlap, overflow, horizontal scroll, invisible fonts.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:rup",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Walk desktop, tablet, and phone widths. Clipped text, overlap, overflow, horizontal scroll, invisible fonts.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Walk desktop, tablet, and phone widths. Clipped text, overlap, overflow, horizontal scroll, invisible fonts.",
+   "howToTest": "Inspect the artifact against: Walk desktop, tablet, and phone widths. Clipped text, overlap, overflow, horizontal scroll, invisible fonts.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-RUP-002",
+   "title": "Every loading, empty, error, success, disabled, and long-content state.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:rup",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Every loading, empty, error, success, disabled, and long-content state.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Every loading, empty, error, success, disabled, and long-content state.",
+   "howToTest": "Inspect the artifact against: Every loading, empty, error, success, disabled, and long-content state.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-RUP-003",
+   "title": "Click every link, button, form, and route. No dead ends, no console errors, no 404s.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:rup",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Click every link, button, form, and route. No dead ends, no console errors, no 404s.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Click every link, button, form, and route. No dead ends, no console errors, no 404s.",
+   "howToTest": "Inspect the artifact against: Click every link, button, form, and route. No dead ends, no console errors, no 404s.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-RUP-004",
+   "title": "Role separation where it applies: admin, agency, and customer shells must look like different products; no role sees another's data.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:rup",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Role separation where it applies: admin, agency, and customer shells must look like different products; no role sees another's data.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Role separation where it applies: admin, agency, and customer shells must look like different products; no role sees another's data.",
+   "howToTest": "Inspect the artifact against: Role separation where it applies: admin, agency, and customer shells must look like different products; no role sees another's data.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-WPC-001",
+   "title": "LCP, INP, CLS. Slow first paint, janky interaction, layout shift.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:wpc",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: LCP, INP, CLS. Slow first paint, janky interaction, layout shift.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: LCP, INP, CLS. Slow first paint, janky interaction, layout shift.",
+   "howToTest": "Inspect the artifact against: LCP, INP, CLS. Slow first paint, janky interaction, layout shift.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-WPC-002",
+   "title": "Unbundled assets, render-blocking resources, runtime CDN fetches for text or fonts (a build that depends on one is not done).",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:wpc",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Unbundled assets, render-blocking resources, runtime CDN fetches for text or fonts (a build that depends on one is not done).",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Unbundled assets, render-blocking resources, runtime CDN fetches for text or fonts (a build that depends on one is not done).",
+   "howToTest": "Inspect the artifact against: Unbundled assets, render-blocking resources, runtime CDN fetches for text or fonts (a build that depends on one is not done).",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-WTU-001",
+   "title": "Evidence from the real thing. A screenshot or a live walkthrough, not a description of the design. \"It should work\" is not a review.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:wtu",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Evidence from the real thing. A screenshot or a live walkthrough, not a description of the design. \"It should work\" is not a review.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Evidence from the real thing. A screenshot or a live walkthrough, not a description of the design. \"It should work\" is not a review.",
+   "howToTest": "Inspect the artifact against: Evidence from the real thing. A screenshot or a live walkthrough, not a description of the design. \"It should work\" is not a review.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-WTU-002",
+   "title": "The empty and error states. Designers show the happy path. The user lives in the edge cases.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:wtu",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: The empty and error states. Designers show the happy path. The user lives in the edge cases.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: The empty and error states. Designers show the happy path. The user lives in the edge cases.",
+   "howToTest": "Inspect the artifact against: The empty and error states. Designers show the happy path. The user lives in the edge cases.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-WTU-003",
+   "title": "The 90-year-old test. David's bar is extreme simplicity. If a capable novice cannot use it cold, it fails.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:wtu",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: The 90-year-old test. David's bar is extreme simplicity. If a capable novice cannot use it cold, it fails.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: The 90-year-old test. David's bar is extreme simplicity. If a capable novice cannot use it cold, it fails.",
+   "howToTest": "Inspect the artifact against: The 90-year-old test. David's bar is extreme simplicity. If a capable novice cannot use it cold, it fails.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-OAA-001",
+   "title": "Heuristic violation ledger. Numbered by severity, each: heuristic number, what the user hits, the fix.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:oaa",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Heuristic violation ledger. Numbered by severity, each: heuristic number, what the user hits, the fix.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Heuristic violation ledger. Numbered by severity, each: heuristic number, what the user hits, the fix.",
+   "howToTest": "Inspect the artifact against: Heuristic violation ledger. Numbered by severity, each: heuristic number, what the user hits, the fix.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-OAA-002",
+   "title": "Accessibility findings. WCAG criterion, the barrier, the assistive tech affected.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:oaa",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Accessibility findings. WCAG criterion, the barrier, the assistive tech affected.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Accessibility findings. WCAG criterion, the barrier, the assistive tech affected.",
+   "howToTest": "Inspect the artifact against: Accessibility findings. WCAG criterion, the barrier, the assistive tech affected.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-OAA-003",
+   "title": "Path failures. Broken route, dead button, clipped layout, missing state.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:oaa",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Path failures. Broken route, dead button, clipped layout, missing state.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Path failures. Broken route, dead button, clipped layout, missing state.",
+   "howToTest": "Inspect the artifact against: Path failures. Broken route, dead button, clipped layout, missing state.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-FMT-001",
+   "title": "Happy-path-only review. Desktop-only review.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:fmt",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Happy-path-only review. Desktop-only review.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Happy-path-only review. Desktop-only review.",
+   "howToTest": "Inspect the artifact against: Happy-path-only review. Desktop-only review.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-FMT-002",
+   "title": "Raw backend errors or JSON leaking to the screen.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:fmt",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Raw backend errors or JSON leaking to the screen.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Raw backend errors or JSON leaking to the screen.",
+   "howToTest": "Inspect the artifact against: Raw backend errors or JSON leaking to the screen.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-FMT-003",
+   "title": "A design that reads well in a mock and collapses on a real phone or with real long content.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:fmt",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: A design that reads well in a mock and collapses on a real phone or with real long content.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: A design that reads well in a mock and collapses on a real phone or with real long content.",
+   "howToTest": "Inspect the artifact against: A design that reads well in a mock and collapses on a real phone or with real long content.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-FMT-004",
+   "title": "Accessibility bolted on at the end instead of designed in.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:fmt",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Accessibility bolted on at the end instead of designed in.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Accessibility bolted on at the end instead of designed in.",
+   "howToTest": "Inspect the artifact against: Accessibility bolted on at the end instead of designed in.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-HW-001",
+   "title": "Hidden writes (user surface).",
+   "level": 1,
+   "severityIfFailed": "high",
+   "rubricRef": "rubric:ux:hw",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Every write the artifact performs (storage, network sends, sync, posts, beacons) is inventoried with its trigger and destination, and each one is a write the user asked for or was told about.",
+   "failCriteria": "The artifact performs any write the user did not ask for and cannot see, or a write exists that the inventory does not name.",
+   "howToTest": "Inspect the artifact against: Hidden writes (user surface). The product performs no writes the user did not ask for and cannot see: nothing is posted, sent, synced, shared, or deleted on the user's behalf without an action they took and a surface they can inspect. Every such write is inventoried with its trigger and destination.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  },
+  {
+   "id": "UX-A11Y-001",
+   "title": "Automated accessibility disclosure.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:ux:a11y",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote"
+   ],
+   "passCriteria": "Evidence shows the check holds: Automated accessibility disclosure. Any report in this run that cites automated accessibility results (axe or an equivalent automated checker) carries the manifest's ceiling disclosure verbatim: 'Automated checks detect only a subset of WCAG issues. This result means no automatically-detectable violations were found; it does not mean WCAG compliant.' A bare automated pass claim without the disclosure fails this item.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Automated accessibility disclosure. Any report in this run that cites automated accessibility results (axe or an equivalent automated checker) carries the manifest's ceiling disclosure verbatim: 'Automated checks detect only a subset of WCAG issues. This result means no automatically-detectable violations were found; it does not mean WCAG compliant.' A bare automated pass claim without the disclosure fails this item.",
+   "howToTest": "Inspect the artifact against: Automated accessibility disclosure. Any report in this run that cites automated accessibility results (axe or an equivalent automated checker) carries the manifest's ceiling disclosure verbatim: 'Automated checks detect only a subset of WCAG issues. This result means no automatically-detectable violations were found; it does not mean WCAG compliant.' A bare automated pass claim without the disclosure fails this item.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "ux"
+   },
+   "status": "active"
+  }
+ ]
+}

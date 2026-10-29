@@ -1,0 +1,1774 @@
+{
+ "schemaVersion": 1,
+ "name": "critic",
+ "bundleRoot": "personas/critic",
+ "registryHash": "0339da3fb5a870e86d22dee7e69324f8f9f434c4332a19bacd1f17583782c452",
+ "registryRef": "../../registry.json",
+ "exitTable": {
+  "0": "pass",
+  "1": "findings-fail",
+  "2": "tool-missing",
+  "3": "tool-error",
+  "4": "manifest-invalid",
+  "124": "timeout"
+ },
+ "a11yCeilingDisclosure": "Automated checks detect only a subset of WCAG issues. This result means no automatically-detectable violations were found; it does not mean WCAG compliant.",
+ "mutationPromotionRule": "mutation-diff promotes from optional to required only after 4 consecutive green nightly runs.",
+ "stacks": [
+  {
+   "stack": "go",
+   "languageFile": "references/languages/go.yaml",
+   "detect": {
+    "markers": [
+     {
+      "glob": "go.mod",
+      "maxDepth": 4
+     }
+    ],
+    "negativeMarkers": []
+   }
+  },
+  {
+   "stack": "rust",
+   "languageFile": "references/languages/rust.yaml",
+   "detect": {
+    "markers": [
+     {
+      "glob": "Cargo.toml",
+      "maxDepth": 4
+     }
+    ],
+    "negativeMarkers": []
+   }
+  },
+  {
+   "stack": "mojo",
+   "languageFile": "references/languages/mojo.yaml",
+   "detect": {
+    "markers": [
+     {
+      "glob": "*.mojo",
+      "maxDepth": 5
+     },
+     {
+      "glob": "mojoproject.toml",
+      "maxDepth": 5
+     },
+     {
+      "glob": "pixi.toml",
+      "maxDepth": 5
+     }
+    ],
+    "negativeMarkers": []
+   }
+  },
+  {
+   "stack": "dart",
+   "languageFile": "references/languages/dart.yaml",
+   "detect": {
+    "markers": [
+     {
+      "glob": "pubspec.yaml",
+      "maxDepth": 4
+     }
+    ],
+    "negativeMarkers": [
+     {
+      "glob": "pubspec.yaml",
+      "contains": "flutter:"
+     }
+    ]
+   }
+  },
+  {
+   "stack": "flutter",
+   "languageFile": "references/languages/flutter.yaml",
+   "detect": {
+    "markers": [
+     {
+      "glob": "pubspec.yaml",
+      "maxDepth": 4
+     }
+    ],
+    "negativeMarkers": []
+   }
+  },
+  {
+   "stack": "python",
+   "languageFile": "references/languages/python.yaml",
+   "detect": {
+    "markers": [
+     {
+      "glob": "pyproject.toml",
+      "maxDepth": 4
+     },
+     {
+      "glob": "requirements.txt",
+      "maxDepth": 4
+     },
+     {
+      "glob": "setup.py",
+      "maxDepth": 4
+     }
+    ],
+    "negativeMarkers": []
+   }
+  },
+  {
+   "stack": "javascript",
+   "languageFile": "references/languages/javascript.yaml",
+   "detect": {
+    "markers": [
+     {
+      "glob": "package.json",
+      "maxDepth": 2
+     }
+    ],
+    "negativeMarkers": []
+   }
+  },
+  {
+   "stack": "typescript",
+   "languageFile": "references/languages/typescript.yaml",
+   "detect": {
+    "markers": [
+     {
+      "glob": "tsconfig.json",
+      "maxDepth": 4
+     },
+     {
+      "glob": "package.json",
+      "maxDepth": 2,
+      "contains": "typescript"
+     }
+    ],
+    "negativeMarkers": []
+   }
+  },
+  {
+   "stack": "react",
+   "languageFile": "references/languages/react.yaml",
+   "detect": {
+    "markers": [
+     {
+      "glob": "package.json",
+      "maxDepth": 2,
+      "contains": "react"
+     }
+    ],
+    "negativeMarkers": []
+   }
+  },
+  {
+   "stack": "nextjs",
+   "languageFile": "references/languages/nextjs.yaml",
+   "detect": {
+    "markers": [
+     {
+      "glob": "next.config.*",
+      "maxDepth": 2
+     },
+     {
+      "glob": "package.json",
+      "maxDepth": 2,
+      "contains": "\"next\""
+     }
+    ],
+    "negativeMarkers": []
+   }
+  },
+  {
+   "stack": "prisma",
+   "languageFile": "references/languages/prisma.yaml",
+   "detect": {
+    "markers": [
+     {
+      "glob": "prisma/schema.prisma",
+      "maxDepth": 4
+     },
+     {
+      "glob": "schema.prisma",
+      "maxDepth": 4
+     },
+     {
+      "glob": "prisma/*.prisma",
+      "maxDepth": 4
+     }
+    ],
+    "negativeMarkers": []
+   }
+  },
+  {
+   "stack": "shell",
+   "languageFile": "references/languages/shell.yaml",
+   "detect": {
+    "markers": [
+     {
+      "glob": "*.sh",
+      "maxDepth": 6
+     }
+    ],
+    "negativeMarkers": []
+   }
+  },
+  {
+   "stack": "php",
+   "languageFile": "references/languages/php.yaml",
+   "detect": {
+    "markers": [
+     {
+      "glob": "composer.json",
+      "maxDepth": 4
+     },
+     {
+      "glob": "*.php",
+      "maxDepth": 5
+     }
+    ],
+    "negativeMarkers": []
+   }
+  }
+ ],
+ "tools": [
+  {
+   "name": "go",
+   "probe": {
+    "command": "go version",
+    "versionRegex": "go version go([0-9.]+)",
+    "minimum": "1.22"
+   },
+   "install": null
+  },
+  {
+   "name": "cargo",
+   "probe": {
+    "command": "cargo --version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "rustc",
+   "probe": {
+    "command": "rustc --version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "mojo",
+   "probe": {
+    "command": "mojo --version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "dart",
+   "probe": {
+    "command": "dart --version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "flutter",
+   "probe": {
+    "command": "flutter --version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "python3",
+   "probe": {
+    "command": "python3 --version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "node",
+   "probe": {
+    "command": "node --version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "gofumpt",
+   "probe": {
+    "command": "gofumpt -version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "golangci-lint",
+   "probe": {
+    "command": "golangci-lint version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "govulncheck",
+   "probe": {
+    "command": "govulncheck -version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "betterleaks",
+   "probe": {
+    "command": "betterleaks version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "gitleaks",
+   "probe": {
+    "command": "gitleaks version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "trufflehog",
+   "probe": {
+    "command": "trufflehog --version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "syft",
+   "probe": {
+    "command": "syft version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": {
+    "pinned": "syft 1.x",
+    "command": "syft --version",
+    "note": "pinned install attempt in full mode only, logged in capabilities.json"
+   }
+  },
+  {
+   "name": "scancode",
+   "probe": {
+    "command": "scancode --version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "benchstat",
+   "probe": {
+    "command": "benchstat -help",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "lhci",
+   "probe": {
+    "command": "lhci --version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "playwright",
+   "probe": {
+    "command": "npx playwright --version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "axe",
+   "probe": {
+    "command": "npx axe --version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "osv-scanner",
+   "probe": {
+    "command": "osv-scanner --version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "scorecard",
+   "probe": {
+    "command": "scorecard --version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "shellcheck",
+   "probe": {
+    "command": "shellcheck --version",
+    "versionRegex": "([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  },
+  {
+   "name": "php",
+   "probe": {
+    "command": "php --version",
+    "versionRegex": "PHP ([0-9]+\\.[0-9]+\\.[0-9]+)",
+    "minimum": null
+   },
+   "install": null
+  }
+ ],
+ "gates": [
+  {
+   "id": "go-lint",
+   "stack": "go",
+   "argv": [
+    "bash",
+    "scripts/go/lint.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/go-lint.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "go-debug-check",
+   "stack": "go",
+   "argv": [
+    "bash",
+    "scripts/go/debug-check.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/go-debug-check.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "go-test",
+   "stack": "go",
+   "argv": [
+    "bash",
+    "scripts/go/test.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/go-test.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "rust-lint",
+   "stack": "rust",
+   "argv": [
+    "bash",
+    "scripts/rust/lint.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/rust-lint.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "rust-debug-check",
+   "stack": "rust",
+   "argv": [
+    "bash",
+    "scripts/rust/debug-check.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/rust-debug-check.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "rust-test",
+   "stack": "rust",
+   "argv": [
+    "bash",
+    "scripts/rust/test.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/rust-test.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "mojo-lint",
+   "stack": "mojo",
+   "argv": [
+    "bash",
+    "scripts/mojo/lint.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/mojo-lint.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "mojo-debug-check",
+   "stack": "mojo",
+   "argv": [
+    "bash",
+    "scripts/mojo/debug-check.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/mojo-debug-check.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "mojo-test",
+   "stack": "mojo",
+   "argv": [
+    "bash",
+    "scripts/mojo/test.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/mojo-test.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "dart-flutter-lint",
+   "stack": "dart-flutter",
+   "argv": [
+    "bash",
+    "scripts/dart-flutter/lint.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/dart-flutter-lint.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "dart-flutter-debug-check",
+   "stack": "dart-flutter",
+   "argv": [
+    "bash",
+    "scripts/dart-flutter/debug-check.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/dart-flutter-debug-check.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "dart-flutter-test",
+   "stack": "dart-flutter",
+   "argv": [
+    "bash",
+    "scripts/dart-flutter/test.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/dart-flutter-test.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "python-lint",
+   "stack": "python",
+   "argv": [
+    "bash",
+    "scripts/python/lint.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/python-lint.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "python-debug-check",
+   "stack": "python",
+   "argv": [
+    "bash",
+    "scripts/python/debug-check.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/python-debug-check.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "python-test",
+   "stack": "python",
+   "argv": [
+    "bash",
+    "scripts/python/test.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/python-test.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "javascript-lint",
+   "stack": "javascript",
+   "argv": [
+    "bash",
+    "scripts/javascript/lint.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/javascript-lint.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "javascript-debug-check",
+   "stack": "javascript",
+   "argv": [
+    "bash",
+    "scripts/javascript/debug-check.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/javascript-debug-check.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "javascript-test",
+   "stack": "javascript",
+   "argv": [
+    "bash",
+    "scripts/javascript/test.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/javascript-test.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "typescript-lint",
+   "stack": "typescript",
+   "argv": [
+    "bash",
+    "scripts/typescript/lint.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/typescript-lint.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "typescript-debug-check",
+   "stack": "typescript",
+   "argv": [
+    "bash",
+    "scripts/typescript/debug-check.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/typescript-debug-check.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "typescript-test",
+   "stack": "typescript",
+   "argv": [
+    "bash",
+    "scripts/typescript/test.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/typescript-test.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "react-lint",
+   "stack": "react",
+   "argv": [
+    "bash",
+    "scripts/react/lint.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/react-lint.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "react-debug-check",
+   "stack": "react",
+   "argv": [
+    "bash",
+    "scripts/react/debug-check.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/react-debug-check.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "react-test",
+   "stack": "react",
+   "argv": [
+    "bash",
+    "scripts/react/test.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/react-test.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "nextjs-lint",
+   "stack": "nextjs",
+   "argv": [
+    "bash",
+    "scripts/nextjs/lint.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/nextjs-lint.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "nextjs-debug-check",
+   "stack": "nextjs",
+   "argv": [
+    "bash",
+    "scripts/nextjs/debug-check.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/nextjs-debug-check.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "nextjs-test",
+   "stack": "nextjs",
+   "argv": [
+    "bash",
+    "scripts/nextjs/test.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/nextjs-test.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "prisma-lint",
+   "stack": "prisma",
+   "argv": [
+    "bash",
+    "scripts/prisma/lint.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/prisma-lint.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "prisma-debug-check",
+   "stack": "prisma",
+   "argv": [
+    "bash",
+    "scripts/prisma/debug-check.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/prisma-debug-check.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "prisma-test",
+   "stack": "prisma",
+   "argv": [
+    "bash",
+    "scripts/prisma/test.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/prisma-test.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "shell-lint",
+   "stack": "shell",
+   "argv": [
+    "bash",
+    "scripts/shell/lint.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/shell-lint.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "secrets-diff",
+   "stack": "common",
+   "argv": [
+    "bash",
+    "scripts/common/secrets-scan.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/secrets-diff.log",
+    "findings/secrets-diff.sarif"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "secrets-history",
+   "stack": "common",
+   "argv": [
+    "bash",
+    "scripts/common/secrets-scan.sh",
+    ".",
+    "deep"
+   ],
+   "shell": false,
+   "required": false,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/secrets-history.log",
+    "findings/secrets-history.sarif"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "vuln-scan",
+   "stack": "common",
+   "argv": [
+    "bash",
+    "scripts/common/vuln-scan.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/vuln-scan.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "dep-review",
+   "stack": "common",
+   "argv": [
+    "python3",
+    "scripts/capabilities.py",
+    "--gate",
+    "dep-review"
+   ],
+   "shell": false,
+   "required": false,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/dep-review.log",
+    "reports/dep-review.json"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "scorecard-warn",
+   "stack": "common",
+   "argv": [
+    "scorecard",
+    "--format",
+    "json"
+   ],
+   "shell": false,
+   "required": false,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "reports/scorecard.json"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "sbom-generate",
+   "stack": "common",
+   "argv": [
+    "syft",
+    "packages",
+    ".",
+    "-o",
+    "cyclonedx-json@1.6=sbom.cdx.json"
+   ],
+   "shell": false,
+   "required": false,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "sbom.cdx.json"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "license-policy",
+   "stack": "common",
+   "argv": [
+    "scancode",
+    "--license",
+    "--json-pp",
+    "license-scan.json",
+    "."
+   ],
+   "shell": false,
+   "required": false,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "license-scan.json"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "fuzz-diff",
+   "stack": "common",
+   "argv": [
+    "python3",
+    "scripts/capabilities.py",
+    "--gate",
+    "fuzz-diff"
+   ],
+   "shell": false,
+   "required": false,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/fuzz-diff.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "a11y-axe",
+   "stack": "web",
+   "argv": [
+    "npx",
+    "axe"
+   ],
+   "shell": false,
+   "required": false,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "reports/a11y-axe.json"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "perf-benchstat",
+   "stack": "common",
+   "argv": [
+    "benchstat",
+    "old.txt",
+    "new.txt"
+   ],
+   "shell": false,
+   "required": false,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "reports/benchstat.txt"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "perf-lhci",
+   "stack": "web",
+   "argv": [
+    "lhci",
+    "autorun"
+   ],
+   "shell": false,
+   "required": false,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "reports/lhci/"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "visual-diff",
+   "stack": "web",
+   "argv": [
+    "npx",
+    "playwright",
+    "test",
+    "--grep",
+    "visual"
+   ],
+   "shell": false,
+   "required": false,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "reports/visual-diff/"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "mutation-diff",
+   "stack": "common",
+   "argv": [
+    "python3",
+    "scripts/capabilities.py",
+    "--gate",
+    "mutation-diff"
+   ],
+   "shell": false,
+   "required": false,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "reports/mutation.json"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "php-lint",
+   "stack": "php",
+   "argv": [
+    "bash",
+    "scripts/php/lint.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/php-lint.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "php-debug-check",
+   "stack": "php",
+   "argv": [
+    "bash",
+    "scripts/php/debug-check.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/php-debug-check.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "php-test",
+   "stack": "php",
+   "argv": [
+    "bash",
+    "scripts/php/test.sh"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2
+   },
+   "evidenceArtifacts": [
+    "logs/php-test.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "javascript-sanitize",
+   "stack": "javascript",
+   "argv": [
+    "bash",
+    "scripts/sanitize/sanitize-gate.sh",
+    "javascript",
+    ".",
+    "--mode",
+    "quick"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3
+   },
+   "evidenceArtifacts": [
+    "logs/javascript-sanitize.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "javascript-sanitize-corpus",
+   "stack": "javascript",
+   "argv": [
+    "bash",
+    "scripts/sanitize/sanitize-gate.sh",
+    "javascript",
+    ".",
+    "--mode",
+    "full"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3
+   },
+   "evidenceArtifacts": [
+    "logs/javascript-sanitize-corpus.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "typescript-sanitize",
+   "stack": "typescript",
+   "argv": [
+    "bash",
+    "scripts/sanitize/sanitize-gate.sh",
+    "typescript",
+    ".",
+    "--mode",
+    "quick"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3
+   },
+   "evidenceArtifacts": [
+    "logs/typescript-sanitize.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "typescript-sanitize-corpus",
+   "stack": "typescript",
+   "argv": [
+    "bash",
+    "scripts/sanitize/sanitize-gate.sh",
+    "typescript",
+    ".",
+    "--mode",
+    "full"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3
+   },
+   "evidenceArtifacts": [
+    "logs/typescript-sanitize-corpus.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "react-sanitize",
+   "stack": "react",
+   "argv": [
+    "bash",
+    "scripts/sanitize/sanitize-gate.sh",
+    "react",
+    ".",
+    "--mode",
+    "quick"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3
+   },
+   "evidenceArtifacts": [
+    "logs/react-sanitize.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "react-sanitize-corpus",
+   "stack": "react",
+   "argv": [
+    "bash",
+    "scripts/sanitize/sanitize-gate.sh",
+    "react",
+    ".",
+    "--mode",
+    "full"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3
+   },
+   "evidenceArtifacts": [
+    "logs/react-sanitize-corpus.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "nextjs-sanitize",
+   "stack": "nextjs",
+   "argv": [
+    "bash",
+    "scripts/sanitize/sanitize-gate.sh",
+    "nextjs",
+    ".",
+    "--mode",
+    "quick"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "quick",
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3
+   },
+   "evidenceArtifacts": [
+    "logs/nextjs-sanitize.log"
+   ],
+   "timeoutSec": 600
+  },
+  {
+   "id": "nextjs-sanitize-corpus",
+   "stack": "nextjs",
+   "argv": [
+    "bash",
+    "scripts/sanitize/sanitize-gate.sh",
+    "nextjs",
+    ".",
+    "--mode",
+    "full"
+   ],
+   "shell": false,
+   "required": true,
+   "modes": [
+    "full"
+   ],
+   "exitMap": {
+    "0": 0,
+    "1": 1,
+    "2": 2,
+    "3": 3
+   },
+   "evidenceArtifacts": [
+    "logs/nextjs-sanitize-corpus.log"
+   ],
+   "timeoutSec": 600
+  }
+ ],
+ "personaHashes": {
+  "critic": {
+   "path": "SOUL.md",
+   "sha256": "b997ad2bdb348f8aa6ce96a23756322494a9e81d2fecdb40c31f30de795504b6"
+  },
+  "skeptic": {
+   "path": "../skeptic/SOUL.md",
+   "sha256": "00ff8140286b80b539bb544f4186cb69e2eed68057e77a1cadf10c7216969a8a"
+  }
+ },
+ "externalDependencies": [
+  {
+   "name": "documents skill (pdf mode)",
+   "used_for": "rendering the consensus report PDF (SOUL section 5 output contract)",
+   "when_absent": "ship the Markdown as the deliverable and declare \"Markdown only\" in the report header"
+  }
+ ]
+}

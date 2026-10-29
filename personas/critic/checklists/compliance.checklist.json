@@ -1,0 +1,709 @@
+{
+ "schemaVersion": 1,
+ "lens": "compliance",
+ "version": "1.1.0",
+ "sourceOfTruth": "This JSON is the source of truth. The prose lens in skills/software-development/critic-lens-compliance/SKILL.md is a human readable view; checklist-lint rejects duplicate IDs and SARIF ruleIds that do not resolve here. Panel machinery items (annex application, capture-recapture, inter-rater reliability, decorrelation, seed calibration, unknowns ledger, Not tested list, write gate, environment levels) are carried in the code checklist as CODE-PM-001 through CODE-PM-009 and are part of every brief, whatever lens leads.",
+ "idMigration": {},
+ "items": [
+  {
+   "id": "COMPLIANCE-TME-001",
+   "title": "Scope first.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:tme",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Scope first. Name the frameworks in play for THIS artifact or system from the product table below, and the personal or regulated data types in scope (emails, customer records, payments, student data, health, none). Never audit \"all frameworks\" by default.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Scope first. Name the frameworks in play for THIS artifact or system from the product table below, and the personal or regulated data types in scope (emails, customer records, payments, student data, health, none). Never audit \"all frameworks\" by default.",
+   "howToTest": "Inspect the artifact against: Scope first. Name the frameworks in play for THIS artifact or system from the product table below, and the personal or regulated data types in scope (emails, customer records, payments, student data, health, none). Never audit \"all frameworks\" by default.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-TME-002",
+   "title": "Evidence per control.",
+   "level": 1,
+   "severityIfFailed": "critical",
+   "rubricRef": "rubric:compliance:tme",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Evidence per control. For every control in the library: cite the enforcing code with file:line, the config with its file, the live check with its output, or mark it ABSENT. A policy document with no enforcing code is a finding, not evidence. Never grade a control PASS on intent.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Evidence per control. For every control in the library: cite the enforcing code with file:line, the config with its file, the live check with its output, or mark it ABSENT. A policy document with no enforcing code is a finding, not evidence. Never grade a control PASS on intent.",
+   "howToTest": "Inspect the artifact against: Evidence per control. For every control in the library: cite the enforcing code with file:line, the config with its file, the live check with its output, or mark it ABSENT. A policy document with no enforcing code is a finding, not evidence. Never grade a control PASS on intent.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-TME-003",
+   "title": "One matrix, many frameworks.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:tme",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: One matrix, many frameworks. Use the shared library so each verified control fills every framework column it maps to (the EasyAudit lesson, their own docs: implement a control once, it satisfies every framework that asks). Verdicts per framework column: PASS, GAP, INHERITED (cloud provider, named), NOT-APPLICABLE (with the reason).",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: One matrix, many frameworks. Use the shared library so each verified control fills every framework column it maps to (the EasyAudit lesson, their own docs: implement a control once, it satisfies every framework that asks). Verdicts per framework column: PASS, GAP, INHERITED (cloud provider, named), NOT-APPLICABLE (with the reason).",
+   "howToTest": "Inspect the artifact against: One matrix, many frameworks. Use the shared library so each verified control fills every framework column it maps to (the EasyAudit lesson, their own docs: implement a control once, it satisfies every framework that asks). Verdicts per framework column: PASS, GAP, INHERITED (cloud provider, named), NOT-APPLICABLE (with the reason).",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-TME-004",
+   "title": "Severity, deterministic.",
+   "level": 2,
+   "severityIfFailed": "high",
+   "rubricRef": "rubric:compliance:tme",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Every finding's severity follows the deterministic scale in the item text (absent governing control is Critical, unenforced or unmonitored is High, no evidence trail is Medium, documentation drift is Low), and the scale is quoted in the report.",
+   "failCriteria": "A severity is assigned off-scale, or regulated or personal data is processed with an absent governing control and the finding is graded below Critical.",
+   "howToTest": "Inspect the artifact against: Severity, deterministic. Critical: regulated or personal data processed with the governing control ABSENT (no consent, no deletion path, no access control). High: control exists but is unenforced or unmonitored. Medium: enforced but leaves no evidence trail. Low: documentation drift.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-TME-005",
+   "title": "Smallest fix per gap, tied to a module seam, plus the owner. Every GAP line says which framework columns it closes when fixed.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:tme",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Smallest fix per gap, tied to a module seam, plus the owner. Every GAP line says which framework columns it closes when fixed.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Smallest fix per gap, tied to a module seam, plus the owner. Every GAP line says which framework columns it closes when fixed.",
+   "howToTest": "Inspect the artifact against: Smallest fix per gap, tied to a module seam, plus the owner. Every GAP line says which framework columns it closes when fixed.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-TME-006",
+   "title": "Honest labeling, every report: \"readiness audit, not certification",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:tme",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Honest labeling, every report: \"readiness audit, not certification; an independent auditor issues the certificate.\" Never imply a passed audit here equals compliance.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Honest labeling, every report: \"readiness audit, not certification; an independent auditor issues the certificate.\" Never imply a passed audit here equals compliance.",
+   "howToTest": "Inspect the artifact against: Honest labeling, every report: \"readiness audit, not certification; an independent auditor issues the certificate.\" Never imply a passed audit here equals compliance.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-PSD-001",
+   "title": "AlphaFlux (multi-tenant SaaS, payments, customer data): SOC 2, GDPR, CCPA now; PCI-DSS scope via the hosted processor (SAQ-A) documented",
+   "level": 2,
+   "severityIfFailed": "high",
+   "rubricRef": "rubric:compliance:psd",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "The AlphaFlux framework set is applied as scoped: SOC 2, GDPR, and CCPA controls assessed, the PCI-DSS SAQ-A scope via the hosted processor documented, and ISO 27001 and NIST CSF 2.0 used as the maturity frame, each with a verdict.",
+   "failCriteria": "A framework in the AlphaFlux scope is skipped without a not-applicable reason, or PCI-DSS scope is claimed beyond the documented SAQ-A boundary.",
+   "howToTest": "Inspect the artifact against: AlphaFlux (multi-tenant SaaS, payments, customer data): SOC 2, GDPR, CCPA now; PCI-DSS scope via the hosted processor (SAQ-A) documented; ISO 27001 and NIST CSF 2.0 as the maturity frame.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-PSD-002",
+   "title": "iTaK Learn (student data): FERPA, COPPA for minors; add the student-data controls to the same library, never a separate system.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:psd",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: iTaK Learn (student data): FERPA, COPPA for minors; add the student-data controls to the same library, never a separate system.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: iTaK Learn (student data): FERPA, COPPA for minors; add the student-data controls to the same library, never a separate system.",
+   "howToTest": "Inspect the artifact against: iTaK Learn (student data): FERPA, COPPA for minors; add the student-data controls to the same library, never a separate system.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-PSD-003",
+   "title": "Patriot Pest Control (customer contacts, SMS): CCPA basics; A2P 10DLC registration state as an operational control.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:psd",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Patriot Pest Control (customer contacts, SMS): CCPA basics; A2P 10DLC registration state as an operational control. - HIPAA and CMMC: named slots, activated only if health data or defense contracting enters scope; never claimed without it.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Patriot Pest Control (customer contacts, SMS): CCPA basics; A2P 10DLC registration state as an operational control. - HIPAA and CMMC: named slots, activated only if health data or defense contracting enters scope; never claimed without it.",
+   "howToTest": "Inspect the artifact against: Patriot Pest Control (customer contacts, SMS): CCPA basics; A2P 10DLC registration state as an operational control. - HIPAA and CMMC: named slots, activated only if health data or defense contracting enters scope; never claimed without it.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-PSD-004",
+   "title": "HIPAA and CMMC: named slots, activated only if health data or defense contracting enters scope; never claimed without it.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:psd",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: HIPAA and CMMC: named slots, activated only if health data or defense contracting enters scope; never claimed without it.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: HIPAA and CMMC: named slots, activated only if health data or defense contracting enters scope; never claimed without it.",
+   "howToTest": "Inspect the artifact against: HIPAA and CMMC: named slots, activated only if health data or defense contracting enters scope; never claimed without it.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-CTL-001",
+   "title": "Control C1: Role-based access, least privilege.",
+   "level": 1,
+   "severityIfFailed": "critical",
+   "rubricRef": "rubric:compliance:ctl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Control C1: Role-based access, least privilege. Evidence to cite (per references/control-map.md): auth/RBAC code file:line, role table. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Control C1: Role-based access, least privilege. Evidence to cite (per references/control-map.md): auth/RBAC code file:line, role table. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "howToTest": "Inspect the artifact against: Control C1: Role-based access, least privilege. Evidence to cite (per references/control-map.md): auth/RBAC code file:line, role table. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-CTL-002",
+   "title": "Control C2: Authentication strength (MFA, sessions).",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:ctl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Control C2: Authentication strength (MFA, sessions). Evidence to cite (per references/control-map.md): login handler, session TTL config. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Control C2: Authentication strength (MFA, sessions). Evidence to cite (per references/control-map.md): login handler, session TTL config. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "howToTest": "Inspect the artifact against: Control C2: Authentication strength (MFA, sessions). Evidence to cite (per references/control-map.md): login handler, session TTL config. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-CTL-003",
+   "title": "Control C3: Encryption in transit. Evidence to cite (per references/control-map.md): TLS config, HSTS, redirect enforcement.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:ctl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Control C3: Encryption in transit. Evidence to cite (per references/control-map.md): TLS config, HSTS, redirect enforcement. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Control C3: Encryption in transit. Evidence to cite (per references/control-map.md): TLS config, HSTS, redirect enforcement. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "howToTest": "Inspect the artifact against: Control C3: Encryption in transit. Evidence to cite (per references/control-map.md): TLS config, HSTS, redirect enforcement. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-CTL-004",
+   "title": "Control C4: Encryption at rest, key custody.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:ctl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Control C4: Encryption at rest, key custody. Evidence to cite (per references/control-map.md): DB/volume encryption, vault entries. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Control C4: Encryption at rest, key custody. Evidence to cite (per references/control-map.md): DB/volume encryption, vault entries. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "howToTest": "Inspect the artifact against: Control C4: Encryption at rest, key custody. Evidence to cite (per references/control-map.md): DB/volume encryption, vault entries. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-CTL-005",
+   "title": "Control C5: Audit logging (who/what/when, retention).",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:ctl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Control C5: Audit logging (who/what/when, retention). Evidence to cite (per references/control-map.md): audit log writer file:line, retention job. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Control C5: Audit logging (who/what/when, retention). Evidence to cite (per references/control-map.md): audit log writer file:line, retention job. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "howToTest": "Inspect the artifact against: Control C5: Audit logging (who/what/when, retention). Evidence to cite (per references/control-map.md): audit log writer file:line, retention job. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-CTL-006",
+   "title": "Control C6: Change management (review, gates, trace).",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:ctl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Control C6: Change management (review, gates, trace). Evidence to cite (per references/control-map.md): PR gates, commit-gates law, CI config. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Control C6: Change management (review, gates, trace). Evidence to cite (per references/control-map.md): PR gates, commit-gates law, CI config. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "howToTest": "Inspect the artifact against: Control C6: Change management (review, gates, trace). Evidence to cite (per references/control-map.md): PR gates, commit-gates law, CI config. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-CTL-007",
+   "title": "Control C7: Vulnerability management (scan, patch SLA).",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:ctl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Control C7: Vulnerability management (scan, patch SLA). Evidence to cite (per references/control-map.md): scripts/common/vuln-scan.sh output, scripts/intel-refresh.py stamps (KEV, EPSS, OSV ages), patch log. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Control C7: Vulnerability management (scan, patch SLA). Evidence to cite (per references/control-map.md): scripts/common/vuln-scan.sh output, scripts/intel-refresh.py stamps (KEV, EPSS, OSV ages), patch log. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "howToTest": "Inspect the artifact against: Control C7: Vulnerability management (scan, patch SLA). Evidence to cite (per references/control-map.md): scripts/common/vuln-scan.sh output, scripts/intel-refresh.py stamps (KEV, EPSS, OSV ages), patch log. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-CTL-008",
+   "title": "Control C8: Incident response (plan, breach clock).",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:ctl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Control C8: Incident response (plan, breach clock). Evidence to cite (per references/control-map.md): IR plan file, on-call, clock owner. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Control C8: Incident response (plan, breach clock). Evidence to cite (per references/control-map.md): IR plan file, on-call, clock owner. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "howToTest": "Inspect the artifact against: Control C8: Incident response (plan, breach clock). Evidence to cite (per references/control-map.md): IR plan file, on-call, clock owner. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-CTL-009",
+   "title": "Control C9: Backup and tested restore. Evidence to cite (per references/control-map.md): backup job, last restore test record.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:ctl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Control C9: Backup and tested restore. Evidence to cite (per references/control-map.md): backup job, last restore test record. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Control C9: Backup and tested restore. Evidence to cite (per references/control-map.md): backup job, last restore test record. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "howToTest": "Inspect the artifact against: Control C9: Backup and tested restore. Evidence to cite (per references/control-map.md): backup job, last restore test record. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-CTL-010",
+   "title": "Control C10: Personal-data inventory (what/where/why).",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:ctl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Control C10: Personal-data inventory (what/where/why). Evidence to cite (per references/control-map.md): data map doc, DB schema annotation. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Control C10: Personal-data inventory (what/where/why). Evidence to cite (per references/control-map.md): data map doc, DB schema annotation. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "howToTest": "Inspect the artifact against: Control C10: Personal-data inventory (what/where/why). Evidence to cite (per references/control-map.md): data map doc, DB schema annotation. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-CTL-011",
+   "title": "Control C11: Lawful basis and consent.",
+   "level": 1,
+   "severityIfFailed": "critical",
+   "rubricRef": "rubric:compliance:ctl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Control C11: Lawful basis and consent. Evidence to cite (per references/control-map.md): consent capture records; the in-bundle MMS checks (checklist item GROWTH-MMS-001) for the tracking surface the consent governs. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Control C11: Lawful basis and consent. Evidence to cite (per references/control-map.md): consent capture records; the in-bundle MMS checks (checklist item GROWTH-MMS-001) for the tracking surface the consent governs. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "howToTest": "Inspect the artifact against: Control C11: Lawful basis and consent. Evidence to cite (per references/control-map.md): consent capture records; the in-bundle MMS checks (checklist item GROWTH-MMS-001) for the tracking surface the consent governs. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-CTL-012",
+   "title": "Control C12: Data subject rights (access, erase, port).",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:ctl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Control C12: Data subject rights (access, erase, port). Evidence to cite (per references/control-map.md): DSAR route, erasure job file:line. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Control C12: Data subject rights (access, erase, port). Evidence to cite (per references/control-map.md): DSAR route, erasure job file:line. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "howToTest": "Inspect the artifact against: Control C12: Data subject rights (access, erase, port). Evidence to cite (per references/control-map.md): DSAR route, erasure job file:line. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-CTL-013",
+   "title": "Control C13: Retention limits and deletion jobs.",
+   "level": 1,
+   "severityIfFailed": "critical",
+   "rubricRef": "rubric:compliance:ctl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Control C13: Retention limits and deletion jobs. Evidence to cite (per references/control-map.md): retention config, tombstone path. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Control C13: Retention limits and deletion jobs. Evidence to cite (per references/control-map.md): retention config, tombstone path. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "howToTest": "Inspect the artifact against: Control C13: Retention limits and deletion jobs. Evidence to cite (per references/control-map.md): retention config, tombstone path. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-CTL-014",
+   "title": "Control C14: Tenant isolation (logical separation).",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:ctl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Control C14: Tenant isolation (logical separation). Evidence to cite (per references/control-map.md): tenancy tests, scoping middleware. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Control C14: Tenant isolation (logical separation). Evidence to cite (per references/control-map.md): tenancy tests, scoping middleware. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "howToTest": "Inspect the artifact against: Control C14: Tenant isolation (logical separation). Evidence to cite (per references/control-map.md): tenancy tests, scoping middleware. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-CTL-015",
+   "title": "Control C15: Vendor and subprocessor management.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:ctl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Control C15: Vendor and subprocessor management. Evidence to cite (per references/control-map.md): vendor list, DPAs, subprocessor page. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Control C15: Vendor and subprocessor management. Evidence to cite (per references/control-map.md): vendor list, DPAs, subprocessor page. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "howToTest": "Inspect the artifact against: Control C15: Vendor and subprocessor management. Evidence to cite (per references/control-map.md): vendor list, DPAs, subprocessor page. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-CTL-016",
+   "title": "Control C16: Personnel offboarding, access revocation.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:ctl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Control C16: Personnel offboarding, access revocation. Evidence to cite (per references/control-map.md): account lifecycle, key rotation record. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Control C16: Personnel offboarding, access revocation. Evidence to cite (per references/control-map.md): account lifecycle, key rotation record. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "howToTest": "Inspect the artifact against: Control C16: Personnel offboarding, access revocation. Evidence to cite (per references/control-map.md): account lifecycle, key rotation record. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-CTL-017",
+   "title": "Control C17: Documented, versioned policy set.",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:ctl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Control C17: Documented, versioned policy set. Evidence to cite (per references/control-map.md): policy files, dated versions. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Control C17: Documented, versioned policy set. Evidence to cite (per references/control-map.md): policy files, dated versions. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "howToTest": "Inspect the artifact against: Control C17: Documented, versioned policy set. Evidence to cite (per references/control-map.md): policy files, dated versions. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  },
+  {
+   "id": "COMPLIANCE-CTL-018",
+   "title": "Control C18: Physical and media (inherited hosting).",
+   "level": 1,
+   "severityIfFailed": "medium",
+   "rubricRef": "rubric:compliance:ctl",
+   "applicability": {
+    "stacks": [],
+    "artifactTypes": [],
+    "predicate": "always unless the surface is absent, in which case record not-applicable with the absence as the reason"
+   },
+   "evidenceTypes": [
+    "source-quote",
+    "command-output"
+   ],
+   "passCriteria": "Evidence shows the check holds: Control C18: Physical and media (inherited hosting). Evidence to cite (per references/control-map.md): provider SOC report named, scope noted. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "failCriteria": "Evidence shows the check fails or no evidence is produced for: Control C18: Physical and media (inherited hosting). Evidence to cite (per references/control-map.md): provider SOC report named, scope noted. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "howToTest": "Inspect the artifact against: Control C18: Physical and media (inherited hosting). Evidence to cite (per references/control-map.md): provider SOC report named, scope noted. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "taxonomy": {
+    "owasp": [],
+    "cwe": [],
+    "lens": "compliance"
+   },
+   "status": "active"
+  }
+ ]
+}

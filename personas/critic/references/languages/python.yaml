@@ -1,0 +1,65 @@
+# python.yaml - Critic language file: Python.
+# Loaded into every critic brief when stack detection reports the python stack
+# (critic.manifest.json stacks[].languageFile; SOUL section 2 brief assembly).
+# Source of truth for per-language review knowledge: toolchain, gates,
+# sanitizer, dangerous patterns, honest gaps. Carries verified_as_of and
+# expires 90 days later under the staleness law (SOUL 8.15).
+version: 1
+stack: python
+display_name: "Python"
+verified_as_of: "2026-10-29"
+expires: "2027-01-27"
+detection:
+  markers: ["pyproject.toml", "requirements.txt", "setup.py"]
+  notes: "Any of the three markers within depth 4 declares the stack. A lone requirements.txt with no project metadata still counts; review it as a script-grade project, not a package."
+toolchain:
+  build: "no build step; import and compile checks stand in (python -m compileall)"
+  test: "pytest via the family test script"
+  lint: "ruff plus the family security layer (Bandit, pip-audit, Semgrep dispatch) in scripts/python/security.sh"
+  format: "ruff format conventions per the family lint script"
+  debug: "logging based diagnostic seam; debug-check.sh greps for the seam"
+gates:
+  manifest_gates: ["python-lint", "python-debug-check", "python-test"]
+  script_dir: "scripts/python"
+  extra_scripts: ["security.sh", "fuzz.sh", "mutation.sh", "debug-add.sh"]
+sanitizer:
+  status: canonical
+  canonical: "nh3"
+  package: "nh3 (PyPI)"
+  license: "MIT"
+  latest_known: {version: "0.3.x line", as_of: "2026-10-28"}
+  currency_rule: "nh3 is the Python binding of the Rust ammonia crate; verify the pin against PyPI at intel-refresh and apply the ammonia floor logic from the rust language file to the underlying crate version where it is exposed."
+  deprecated_predecessor: "bleach is deprecated and unmaintained (no releases, not even for security issues, per its own documentation as of 2026). A bleach dependency is a currency finding with a named migration: nh3 is a near drop-in replacement."
+  config_checks:
+    - "Sanitization runs on the rendered HTML (after markdown conversion), never on the markdown source; Python-Markdown passes raw HTML through by default."
+    - "tags and attributes arguments form the allowlist; a call with no allowlist arguments accepts nh3 defaults, which is a decision the code should show it made."
+    - "url_schemes restricted to http, https, mailto unless the artifact documents why more are safe; link_rel set to noopener noreferrer for user content."
+  dangerous_sinks:
+    - "markupsafe.Markup() wrapped around user data, and Django mark_safe or the |safe template filter on user data"
+    - "Jinja2 autoescape disabled, or Markup objects built by string formatting"
+    - "Flask render_template_string with user input in the template string itself"
+    - "Django template engines rendering user HTML with autoescape off"
+  verdict_rules:
+    - "User HTML rendered with no nh3 (or equivalent allowlist) pass: finding, high."
+    - "bleach still in the dependency set of a project that renders user HTML: finding, medium, with the nh3 migration named."
+security_tooling:
+  - "pip-audit over the locked environment (ran for real in the family gates)"
+  - "Bandit static checks (ran for real)"
+  - "Semgrep dispatch (see untested)"
+  - "osv-scanner over requirements or lock files"
+dangerous_patterns:
+  - "Unsafe deserialization: pickle.load or loads, yaml.load without SafeLoader, torch.load without weights_only (watchlist class WATCH-PY-UNSAFE-LOADERS)"
+  - "eval or exec on data that crossed a trust boundary"
+  - "subprocess with shell=True built from user input"
+  - "SQL string formatting into execute calls"
+review_can:
+  - "Run the gate triple plus the security, fuzz, and mutation scripts"
+  - "Verify sanitizer presence, order, and allowlist shape from source and dependency files"
+  - "Match dependency versions against pip-audit and OSV data"
+review_cannot:
+  - "Semgrep verdicts until the real run works in the review environment (see untested)"
+untested:
+  - "Semgrep, pip-audit, and Bandit all ran for real on 2026-10-29 (lane 6): security.sh exit 1 on a planted-pattern fixture, 7 Semgrep blocking findings. osv-scanner remains uninstalled; the cross-ecosystem half of security.sh still skips, stated in its output."
+sources:
+  - "nh3 and bleach project documentation, read 2026-10-28 (deprecation status, API shape)"
+  - "Critic inventory 2026-10-28 (gate and UNTESTED records)"

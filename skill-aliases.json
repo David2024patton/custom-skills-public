@@ -1,0 +1,367 @@
+{
+ "aliases_format_version": 1,
+ "generated_from_commit": "8a34aaddd5014c4301dc68ce1162a0f60c8674f1",
+ "generator": "scripts/build-registry.py",
+ "risk_policy": {
+  "resolution_order": [
+   "frontmatter",
+   "known-map",
+   "derived",
+   "default"
+  ],
+  "derived_keyword_classes": [
+   {
+    "risk_class": "destructive",
+    "keywords": [
+     "delete",
+     "remove",
+     "destroy",
+     "terminate",
+     "wipe"
+    ]
+   },
+   {
+    "risk_class": "money",
+    "keywords": [
+     "book",
+     "buy",
+     "purchase",
+     "pay",
+     "order",
+     "checkout",
+     "reserve"
+    ]
+   },
+   {
+    "risk_class": "external-send",
+    "keywords": [
+     "send",
+     "publish",
+     "post",
+     "message",
+     "email"
+    ]
+   },
+   {
+    "risk_class": "write",
+    "keywords": [
+     "create",
+     "update",
+     "edit",
+     "manage",
+     "schedule",
+     "configure",
+     "install"
+    ]
+   }
+  ],
+  "derived_matching": "Case insensitive, inflection aware, word bounded matching over the skill's own description; the highest matching class in the order destructive, money, external-send, write wins.",
+  "default": {
+   "risk_class": "write",
+   "risk_source": "default"
+  },
+  "default_rule": "The default is never read. A record whose risk_source is default is unclassified and must be treated as confirmation required before any action beyond reading."
+ },
+ "aliases": [
+  {
+   "alias": "local-android-keyboard",
+   "canonical_id": "android-keyboard",
+   "kind": "recovered-copy",
+   "path": "local-android-keyboard"
+  },
+  {
+   "alias": "local-appllama-app-design-skill",
+   "canonical_id": "appllama-app-design-skill",
+   "kind": "recovered-copy",
+   "path": "local-appllama-app-design-skill"
+  },
+  {
+   "alias": "local-appllama-usage",
+   "canonical_id": "appllama-usage",
+   "kind": "recovered-copy",
+   "path": "local-appllama-usage"
+  },
+  {
+   "alias": "local-golang-benchmark",
+   "canonical_id": "golang-benchmark",
+   "kind": "recovered-copy",
+   "path": "local-golang-benchmark"
+  },
+  {
+   "alias": "local-golang-cli",
+   "canonical_id": "golang-cli",
+   "kind": "recovered-copy",
+   "path": "local-golang-cli"
+  },
+  {
+   "alias": "local-golang-code-style",
+   "canonical_id": "golang-code-style",
+   "kind": "recovered-copy",
+   "path": "local-golang-code-style"
+  },
+  {
+   "alias": "local-golang-concurrency",
+   "canonical_id": "golang-concurrency",
+   "kind": "recovered-copy",
+   "path": "local-golang-concurrency"
+  },
+  {
+   "alias": "local-golang-context",
+   "canonical_id": "golang-context",
+   "kind": "recovered-copy",
+   "path": "local-golang-context"
+  },
+  {
+   "alias": "local-golang-continuous-integration",
+   "canonical_id": "golang-continuous-integration",
+   "kind": "recovered-copy",
+   "path": "local-golang-continuous-integration"
+  },
+  {
+   "alias": "local-golang-data-structures",
+   "canonical_id": "golang-data-structures",
+   "kind": "recovered-copy",
+   "path": "local-golang-data-structures"
+  },
+  {
+   "alias": "local-golang-database",
+   "canonical_id": "golang-database",
+   "kind": "recovered-copy",
+   "path": "local-golang-database"
+  },
+  {
+   "alias": "local-golang-dependency-injection",
+   "canonical_id": "golang-dependency-injection",
+   "kind": "recovered-copy",
+   "path": "local-golang-dependency-injection"
+  },
+  {
+   "alias": "local-golang-dependency-management",
+   "canonical_id": "golang-dependency-management",
+   "kind": "recovered-copy",
+   "path": "local-golang-dependency-management"
+  },
+  {
+   "alias": "local-golang-design-patterns",
+   "canonical_id": "golang-design-patterns",
+   "kind": "recovered-copy",
+   "path": "local-golang-design-patterns"
+  },
+  {
+   "alias": "local-golang-documentation",
+   "canonical_id": "golang-documentation",
+   "kind": "recovered-copy",
+   "path": "local-golang-documentation"
+  },
+  {
+   "alias": "local-golang-error-handling",
+   "canonical_id": "golang-error-handling",
+   "kind": "recovered-copy",
+   "path": "local-golang-error-handling"
+  },
+  {
+   "alias": "local-golang-google-wire",
+   "canonical_id": "golang-google-wire",
+   "kind": "recovered-copy",
+   "path": "local-golang-google-wire"
+  },
+  {
+   "alias": "local-golang-gopls",
+   "canonical_id": "golang-gopls",
+   "kind": "recovered-copy",
+   "path": "local-golang-gopls"
+  },
+  {
+   "alias": "local-golang-graphql",
+   "canonical_id": "golang-graphql",
+   "kind": "recovered-copy",
+   "path": "local-golang-graphql"
+  },
+  {
+   "alias": "local-golang-grpc",
+   "canonical_id": "golang-grpc",
+   "kind": "recovered-copy",
+   "path": "local-golang-grpc"
+  },
+  {
+   "alias": "local-golang-how-to",
+   "canonical_id": "golang-how-to",
+   "kind": "recovered-copy",
+   "path": "local-golang-how-to"
+  },
+  {
+   "alias": "local-golang-lint",
+   "canonical_id": "golang-lint",
+   "kind": "recovered-copy",
+   "path": "local-golang-lint"
+  },
+  {
+   "alias": "local-golang-modernize",
+   "canonical_id": "golang-modernize",
+   "kind": "recovered-copy",
+   "path": "local-golang-modernize"
+  },
+  {
+   "alias": "local-golang-naming",
+   "canonical_id": "golang-naming",
+   "kind": "recovered-copy",
+   "path": "local-golang-naming"
+  },
+  {
+   "alias": "local-golang-observability",
+   "canonical_id": "golang-observability",
+   "kind": "recovered-copy",
+   "path": "local-golang-observability"
+  },
+  {
+   "alias": "local-golang-performance",
+   "canonical_id": "golang-performance",
+   "kind": "recovered-copy",
+   "path": "local-golang-performance"
+  },
+  {
+   "alias": "local-golang-pkg-go-dev",
+   "canonical_id": "golang-pkg-go-dev",
+   "kind": "recovered-copy",
+   "path": "local-golang-pkg-go-dev"
+  },
+  {
+   "alias": "local-golang-popular-libraries",
+   "canonical_id": "golang-popular-libraries",
+   "kind": "recovered-copy",
+   "path": "local-golang-popular-libraries"
+  },
+  {
+   "alias": "local-golang-project-layout",
+   "canonical_id": "golang-project-layout",
+   "kind": "recovered-copy",
+   "path": "local-golang-project-layout"
+  },
+  {
+   "alias": "local-golang-refactoring",
+   "canonical_id": "golang-refactoring",
+   "kind": "recovered-copy",
+   "path": "local-golang-refactoring"
+  },
+  {
+   "alias": "local-golang-safety",
+   "canonical_id": "golang-safety",
+   "kind": "recovered-copy",
+   "path": "local-golang-safety"
+  },
+  {
+   "alias": "local-golang-samber-do",
+   "canonical_id": "golang-samber-do",
+   "kind": "recovered-copy",
+   "path": "local-golang-samber-do"
+  },
+  {
+   "alias": "local-golang-samber-hot",
+   "canonical_id": "golang-samber-hot",
+   "kind": "recovered-copy",
+   "path": "local-golang-samber-hot"
+  },
+  {
+   "alias": "local-golang-samber-lo",
+   "canonical_id": "golang-samber-lo",
+   "kind": "recovered-copy",
+   "path": "local-golang-samber-lo"
+  },
+  {
+   "alias": "local-golang-samber-mo",
+   "canonical_id": "golang-samber-mo",
+   "kind": "recovered-copy",
+   "path": "local-golang-samber-mo"
+  },
+  {
+   "alias": "local-golang-samber-oops",
+   "canonical_id": "golang-samber-oops",
+   "kind": "recovered-copy",
+   "path": "local-golang-samber-oops"
+  },
+  {
+   "alias": "local-golang-samber-ro",
+   "canonical_id": "golang-samber-ro",
+   "kind": "recovered-copy",
+   "path": "local-golang-samber-ro"
+  },
+  {
+   "alias": "local-golang-samber-slog",
+   "canonical_id": "golang-samber-slog",
+   "kind": "recovered-copy",
+   "path": "local-golang-samber-slog"
+  },
+  {
+   "alias": "local-golang-security",
+   "canonical_id": "golang-security",
+   "kind": "recovered-copy",
+   "path": "local-golang-security"
+  },
+  {
+   "alias": "local-golang-spf13-cobra",
+   "canonical_id": "golang-spf13-cobra",
+   "kind": "recovered-copy",
+   "path": "local-golang-spf13-cobra"
+  },
+  {
+   "alias": "local-golang-spf13-viper",
+   "canonical_id": "golang-spf13-viper",
+   "kind": "recovered-copy",
+   "path": "local-golang-spf13-viper"
+  },
+  {
+   "alias": "local-golang-stay-updated",
+   "canonical_id": "golang-stay-updated",
+   "kind": "recovered-copy",
+   "path": "local-golang-stay-updated"
+  },
+  {
+   "alias": "local-golang-stretchr-testify",
+   "canonical_id": "golang-stretchr-testify",
+   "kind": "recovered-copy",
+   "path": "local-golang-stretchr-testify"
+  },
+  {
+   "alias": "local-golang-structs-interfaces",
+   "canonical_id": "golang-structs-interfaces",
+   "kind": "recovered-copy",
+   "path": "local-golang-structs-interfaces"
+  },
+  {
+   "alias": "local-golang-swagger",
+   "canonical_id": "golang-swagger",
+   "kind": "recovered-copy",
+   "path": "local-golang-swagger"
+  },
+  {
+   "alias": "local-golang-testing",
+   "canonical_id": "golang-testing",
+   "kind": "recovered-copy",
+   "path": "local-golang-testing"
+  },
+  {
+   "alias": "local-golang-troubleshooting",
+   "canonical_id": "golang-troubleshooting",
+   "kind": "recovered-copy",
+   "path": "local-golang-troubleshooting"
+  },
+  {
+   "alias": "local-golang-uber-dig",
+   "canonical_id": "golang-uber-dig",
+   "kind": "recovered-copy",
+   "path": "local-golang-uber-dig"
+  },
+  {
+   "alias": "local-golang-uber-fx",
+   "canonical_id": "golang-uber-fx",
+   "kind": "recovered-copy",
+   "path": "local-golang-uber-fx"
+  },
+  {
+   "alias": "local-playwright",
+   "canonical_id": "playwright",
+   "kind": "recovered-copy",
+   "path": "local-playwright"
+  }
+ ]
+}

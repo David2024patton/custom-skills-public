@@ -1,0 +1,63 @@
+# rust.yaml - Critic language file: Rust.
+# Loaded into every critic brief when stack detection reports the rust stack
+# (critic.manifest.json stacks[].languageFile; SOUL section 2 brief assembly).
+# Source of truth for per-language review knowledge: toolchain, gates,
+# sanitizer, dangerous patterns, honest gaps. Carries verified_as_of and
+# expires 90 days later under the staleness law (SOUL 8.15).
+version: 1
+stack: rust
+display_name: "Rust"
+verified_as_of: "2026-10-29"
+expires: "2027-01-27"
+detection:
+  markers: ["Cargo.toml"]
+  notes: "Workspace roots and member crates both carry Cargo.toml; treat the workspace root as the review unit and members as modules of it."
+toolchain:
+  build: "cargo build (workspace where present)"
+  test: "cargo test; cargo-nextest where installed (see untested)"
+  lint: "clippy with warnings denied, rustfmt check; family policy in scripts/rust/deny.toml and rustfmt.toml"
+  format: "rustfmt; a file rustfmt would rewrite is a finding"
+  debug: "tracing or log based diagnostic seam; debug-check.sh greps for the seam"
+gates:
+  manifest_gates: ["rust-lint", "rust-debug-check", "rust-test"]
+  script_dir: "scripts/rust"
+  extra_scripts: ["coverage.sh", "advanced.sh", "policy.sh", "debug-add.sh"]
+sanitizer:
+  status: canonical
+  canonical: "ammonia"
+  package: "ammonia (crates.io)"
+  license: "MIT or Apache-2.0 (crate dual license)"
+  latest_known: {version: "4.2.4", as_of: "2026-10-25"}
+  minimum_safe: "Namespace mutation-XSS fix floors by release line: at least 3.3.1 on the 3.x line, 4.0.1 on 4.0, 4.1.2 on 4.1; prefer the latest 4.2.x. A pin below its line's floor is a security finding, not a currency nit."
+  currency_rule: "Verify the pinned version against crates.io and the RustSec database at intel-refresh; RUSTSEC-2026-0373 touches this crate family, so pull live RustSec data rather than trusting this file's snapshot."
+  config_checks:
+    - "Allowing SVG or MathML content raises the namespace confusion stakes; a config that allows them needs the fixed version above and a stated reason."
+    - "Allowing rawtext elements (title, textarea, xmp, style, script class elements) alongside SVG or MathML is the exact shape of the recorded mutation-XSS issue; flag it."
+    - "Default ammonia configuration is the baseline; every relaxation (tags, attributes, url schemes) is reviewed as a deliberate widening."
+  dangerous_sinks:
+    - "Building HTML by string formatting (format!, write!) and returning it as a web framework Html response without a sanitizer pass"
+    - "Template autoescaping disabled: Tera or Askama safe filters, or equivalent, applied to user data"
+    - "Markup types that bypass escaping by construction are safe (maud); hand-rolled escaping functions are a finding until proven equivalent to ammonia"
+  verdict_rules:
+    - "User HTML rendered with no ammonia (or equivalent allowlist) pass: finding, high."
+    - "ammonia pinned below its release line's mutation-XSS floor: finding, high."
+security_tooling:
+  - "cargo audit against the RustSec database (family policy.sh and deny.toml path)"
+  - "cargo deny for licenses, bans, and sources"
+  - "osv-scanner over Cargo.lock"
+dangerous_patterns:
+  - "unsafe blocks outside a justified, reviewed hotspot; each one names its invariant or it is a finding"
+  - "Archive extraction from untrusted input (the tokio-tar class, RUSTSEC-2025-0111; also on the watchlist)"
+  - "Unmaintained or abandoned crates anywhere in the dependency tree (watchlist class)"
+  - "Command execution built by string concatenation"
+review_can:
+  - "Run the gate triple plus coverage and policy scripts"
+  - "Verify sanitizer presence, version floor, and config widenings from source and Cargo.toml or Cargo.lock"
+  - "Match crate versions against RustSec and OSV data"
+review_cannot:
+  - "Miri, cargo-fuzz, and mutation verdicts in the current sandbox (see untested); absence of these runs caps the verdict per the capability contract"
+untested:
+  - "cargo-nextest ran for real on 2026-10-29 (lane 6): family rust/test.sh took its nextest branch, 2 of 2 passed, doctest lane passed. cargo-mutants ran for real the same day: 10 mutants, 10 caught on the rs-tiny fixture. cargo-fuzz and cargo-semver-checks real runs UNTESTED; no nightly toolchain for Miri or fuzz. Carried in part from laneA L1-09 and L1-11."
+sources:
+  - "ammonia crate records and vulnerability reporting, read 2026-10-28 (latest version and mutation-XSS fix floors)"
+  - "Critic inventory 2026-10-28 (gate and UNTESTED records)"

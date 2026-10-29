@@ -1,0 +1,287 @@
+{
+ "bank_version": 2,
+ "kept_separate_from_bank": true,
+ "note": "Locations assume the shipped fixture from make-fixture.py (exactly 12 clean lines per module file); the runner verifies the injected line against this file and refuses to score on drift. Custody: the operator holds the authoritative copy outside the ingested tree; see calibration/README.md.",
+ "entries": [
+  {
+   "seed_id": "SB-001",
+   "location": "fixture-app/code/module-01.txt:13",
+   "defect_class": "missing-auth-check",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "code lens reports missing-auth-check at Critical"
+  },
+  {
+   "seed_id": "SB-002",
+   "location": "fixture-app/code/module-02.txt:13",
+   "defect_class": "sql-string-concat",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "code lens reports sql-string-concat at Critical"
+  },
+  {
+   "seed_id": "SB-003",
+   "location": "fixture-app/code/module-03.txt:13",
+   "defect_class": "shell-injection",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "code lens reports shell-injection at High"
+  },
+  {
+   "seed_id": "SB-004",
+   "location": "fixture-app/code/module-04.txt:13",
+   "defect_class": "hardcoded-secret",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "code lens reports hardcoded-secret at High"
+  },
+  {
+   "seed_id": "SB-005",
+   "location": "fixture-app/code/module-05.txt:13",
+   "defect_class": "unsafe-deserialize",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "code lens reports unsafe-deserialize at Medium"
+  },
+  {
+   "seed_id": "SB-006",
+   "location": "fixture-app/code/module-06.txt:13",
+   "defect_class": "path-traversal",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "code lens reports path-traversal at Medium"
+  },
+  {
+   "seed_id": "SB-007",
+   "location": "fixture-app/code/module-07.txt:13",
+   "defect_class": "weak-crypto",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "code lens reports weak-crypto at Low"
+  },
+  {
+   "seed_id": "SB-008",
+   "location": "fixture-app/code/module-08.txt:13",
+   "defect_class": "missing-rate-limit",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "code lens reports missing-rate-limit at Low"
+  },
+  {
+   "seed_id": "SB-009",
+   "location": "fixture-app/claims/module-01.txt:13",
+   "defect_class": "fabricated-statistic",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "claims lens reports fabricated-statistic at Critical"
+  },
+  {
+   "seed_id": "SB-010",
+   "location": "fixture-app/claims/module-02.txt:13",
+   "defect_class": "misquoted-source",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "claims lens reports misquoted-source at Critical"
+  },
+  {
+   "seed_id": "SB-011",
+   "location": "fixture-app/claims/module-03.txt:13",
+   "defect_class": "invented-citation",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "claims lens reports invented-citation at High"
+  },
+  {
+   "seed_id": "SB-012",
+   "location": "fixture-app/claims/module-04.txt:13",
+   "defect_class": "correlation-as-causation",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "claims lens reports correlation-as-causation at High"
+  },
+  {
+   "seed_id": "SB-013",
+   "location": "fixture-app/claims/module-05.txt:13",
+   "defect_class": "missing-provenance",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "claims lens reports missing-provenance at Medium"
+  },
+  {
+   "seed_id": "SB-014",
+   "location": "fixture-app/claims/module-06.txt:13",
+   "defect_class": "cherry-picked-window",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "claims lens reports cherry-picked-window at Medium"
+  },
+  {
+   "seed_id": "SB-015",
+   "location": "fixture-app/claims/module-07.txt:13",
+   "defect_class": "unbacked-superlative",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "claims lens reports unbacked-superlative at Low"
+  },
+  {
+   "seed_id": "SB-016",
+   "location": "fixture-app/claims/module-08.txt:13",
+   "defect_class": "stale-figure-as-current",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "claims lens reports stale-figure-as-current at Low"
+  },
+  {
+   "seed_id": "SB-017",
+   "location": "fixture-app/ux/module-01.txt:13",
+   "defect_class": "missing-error-state",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "ux lens reports missing-error-state at Critical"
+  },
+  {
+   "seed_id": "SB-018",
+   "location": "fixture-app/ux/module-02.txt:13",
+   "defect_class": "keyboard-trap",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "ux lens reports keyboard-trap at Critical"
+  },
+  {
+   "seed_id": "SB-019",
+   "location": "fixture-app/ux/module-03.txt:13",
+   "defect_class": "tiny-touch-target",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "ux lens reports tiny-touch-target at High"
+  },
+  {
+   "seed_id": "SB-020",
+   "location": "fixture-app/ux/module-04.txt:13",
+   "defect_class": "missing-alt-text",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "ux lens reports missing-alt-text at High"
+  },
+  {
+   "seed_id": "SB-021",
+   "location": "fixture-app/ux/module-05.txt:13",
+   "defect_class": "color-only-status",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "ux lens reports color-only-status at Medium"
+  },
+  {
+   "seed_id": "SB-022",
+   "location": "fixture-app/ux/module-06.txt:13",
+   "defect_class": "low-contrast",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "ux lens reports low-contrast at Medium"
+  },
+  {
+   "seed_id": "SB-023",
+   "location": "fixture-app/ux/module-07.txt:13",
+   "defect_class": "jargon-error-message",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "ux lens reports jargon-error-message at Low"
+  },
+  {
+   "seed_id": "SB-024",
+   "location": "fixture-app/ux/module-08.txt:13",
+   "defect_class": "missing-empty-state",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "ux lens reports missing-empty-state at Low"
+  },
+  {
+   "seed_id": "SB-025",
+   "location": "fixture-app/growth/module-01.txt:13",
+   "defect_class": "missing-ad-disclosure",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "growth lens reports missing-ad-disclosure at Critical"
+  },
+  {
+   "seed_id": "SB-026",
+   "location": "fixture-app/growth/module-02.txt:13",
+   "defect_class": "fake-scarcity",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "growth lens reports fake-scarcity at Critical"
+  },
+  {
+   "seed_id": "SB-027",
+   "location": "fixture-app/growth/module-03.txt:13",
+   "defect_class": "unsubstantiated-superlative",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "growth lens reports unsubstantiated-superlative at High"
+  },
+  {
+   "seed_id": "SB-028",
+   "location": "fixture-app/growth/module-04.txt:13",
+   "defect_class": "dark-pattern-preselect",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "growth lens reports dark-pattern-preselect at High"
+  },
+  {
+   "seed_id": "SB-029",
+   "location": "fixture-app/growth/module-05.txt:13",
+   "defect_class": "unbacked-comparison",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "growth lens reports unbacked-comparison at Medium"
+  },
+  {
+   "seed_id": "SB-030",
+   "location": "fixture-app/growth/module-06.txt:13",
+   "defect_class": "testimonial-without-source",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "growth lens reports testimonial-without-source at Medium"
+  },
+  {
+   "seed_id": "SB-031",
+   "location": "fixture-app/growth/module-07.txt:13",
+   "defect_class": "price-without-terms",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "growth lens reports price-without-terms at Low"
+  },
+  {
+   "seed_id": "SB-032",
+   "location": "fixture-app/growth/module-08.txt:13",
+   "defect_class": "missing-brief-fit",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "growth lens reports missing-brief-fit at Low"
+  },
+  {
+   "seed_id": "SB-033",
+   "location": "fixture-app/compliance/module-01.txt:13",
+   "defect_class": "prechecked-consent",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "compliance lens reports prechecked-consent at Critical"
+  },
+  {
+   "seed_id": "SB-034",
+   "location": "fixture-app/compliance/module-02.txt:13",
+   "defect_class": "children-no-age-gate",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "compliance lens reports children-no-age-gate at Critical"
+  },
+  {
+   "seed_id": "SB-035",
+   "location": "fixture-app/compliance/module-03.txt:13",
+   "defect_class": "retention-forever",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "compliance lens reports retention-forever at High"
+  },
+  {
+   "seed_id": "SB-036",
+   "location": "fixture-app/compliance/module-04.txt:13",
+   "defect_class": "bundled-consent",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "compliance lens reports bundled-consent at High"
+  },
+  {
+   "seed_id": "SB-037",
+   "location": "fixture-app/compliance/module-05.txt:13",
+   "defect_class": "transfer-without-notice",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "compliance lens reports transfer-without-notice at Medium"
+  },
+  {
+   "seed_id": "SB-038",
+   "location": "fixture-app/compliance/module-06.txt:13",
+   "defect_class": "breach-timeline-wrong",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "compliance lens reports breach-timeline-wrong at Medium"
+  },
+  {
+   "seed_id": "SB-039",
+   "location": "fixture-app/compliance/module-07.txt:13",
+   "defect_class": "missing-dpo-contact",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "compliance lens reports missing-dpo-contact at Low"
+  },
+  {
+   "seed_id": "SB-040",
+   "location": "fixture-app/compliance/module-08.txt:13",
+   "defect_class": "missing-purpose",
+   "reachability": "reachable in fixture review copy; the defect sits on the first inserted line (line 13, after the fixture's 12 clean lines)",
+   "expected_finding": "compliance lens reports missing-purpose at Low"
+  }
+ ]
+}

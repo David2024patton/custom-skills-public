@@ -1,0 +1,51 @@
+# prisma.yaml - Critic language file: Prisma.
+# Loaded into every critic brief when stack detection reports the prisma stack
+# (critic.manifest.json stacks[].languageFile; SOUL section 2 brief assembly).
+# Prisma is a data layer, not a language and not an HTML surface; this file
+# carries its review knowledge honestly in that shape. Carries verified_as_of
+# and expires 90 days later under the staleness law (SOUL 8.15).
+version: 1
+stack: prisma
+display_name: "Prisma"
+verified_as_of: "2026-10-29"
+expires: "2027-01-27"
+detection:
+  markers: ["prisma/schema.prisma", "schema.prisma", "prisma/*.prisma"]
+  notes: "Fires on a Prisma schema within depth 4. The application stacks around it (typescript, react, nextjs) fire separately and carry the HTML surface; this file never substitutes for them."
+toolchain:
+  build: "prisma generate (client generation); a schema that does not generate is a build failure"
+  test: "the family test script (DB-free gates; see untested for the CLI-dependent remainder)"
+  lint: "prisma format and validate via the family lint script"
+  format: "prisma format; a schema it would rewrite is a finding"
+  debug: "query logging posture reviewed in the client construction (log levels never include raw query parameters in production)"
+gates:
+  manifest_gates: ["prisma-lint", "prisma-debug-check", "prisma-test"]
+  script_dir: "scripts/prisma"
+  extra_scripts: ["migrate-check.sh", "debug-add.sh"]
+sanitizer:
+  status: not-applicable
+  canonical: null
+  notes: "Prisma renders no HTML and has no sanitizer. The XSS surface of a Prisma-backed app lives in its application stacks; the sanitizer blocks of typescript.yaml, react.yaml, and nextjs.yaml carry it. What Prisma owns instead is the injection surface below."
+  dangerous_sinks:
+    - "$queryRaw and $executeRaw with template-string interpolation of user data instead of parameter binding (Prisma's tagged template form parameterizes; a concatenated plain string does not)"
+    - "Raw query results serialized straight into HTML responses by the app layer (cross-reference the app stack's language file)"
+  verdict_rules:
+    - "An interpolated raw query carrying user data: finding, high (SQL injection class), regardless of the HTML story."
+security_tooling:
+  - "scripts/prisma/migrate-check.sh (migration review: destructive changes, missing rollback shape)"
+  - "osv-scanner over the app's lockfile for the prisma and @prisma/client pins"
+dangerous_patterns:
+  - "Migrations edited after being applied anywhere (the applied migration history is immutable; a changed checksum is a finding)"
+  - "Cascade deletes on tenant-owned models without an explicit tenancy review (cross-reference CODE checklist tenancy items)"
+  - "A datasource URL with credentials committed in the schema or .env examples"
+  - "Client constructed per-request in serverless code (connection exhaustion class)"
+review_can:
+  - "Run the DB-free gate set and the migration check"
+  - "Grep the raw-query surface mechanically and classify each call site as parameterized or interpolated"
+review_cannot:
+  - "Any verdict that needs the Prisma CLI or engines in the current sandbox (see untested); DB-free evidence only"
+untested:
+  - "Prisma CLI installed and run for real on 2026-10-29 (lane 6), version 8.0.0-rc.28. The family prisma scripts target the classic CLI surface (format, validate, generate); the current CLI registers none of those commands (exact errors in lane 6 evidence), so CLI-dependent gates fail on command lookup, not on schema findings. The classic CLI (prisma@6) remains uninstallable in this sandbox: its @prisma/engines postinstall download is reset by the egress proxy (ECONNRESET, two routes). A family decision is needed: pin the classic CLI where network permits, or port the prisma set to the contract and migration command surface."
+  - "In the proof run on the critic family itself, the prisma industrial gates were DID-NOT-RUN in that environment. Carried from laneD lane-report via the critic inventory 2026-10-28."
+sources:
+  - "Critic inventory 2026-10-28 (gate and UNTESTED records)"

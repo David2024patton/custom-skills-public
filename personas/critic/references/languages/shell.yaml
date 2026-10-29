@@ -1,0 +1,53 @@
+# shell.yaml - Critic language file: Shell (bash and POSIX sh).
+# Loaded into every critic brief when stack detection reports the shell stack
+# (critic.manifest.json stacks[].languageFile; SOUL section 2 brief assembly).
+# Shell has no HTML surface; this file carries its injection and execution
+# review knowledge. Carries verified_as_of and expires 90 days later under
+# the staleness law (SOUL 8.15).
+version: 1
+stack: shell
+display_name: "Shell"
+verified_as_of: "2026-10-28"
+expires: "2027-01-26"
+detection:
+  markers: ["*.sh"]
+  notes: "Any .sh file within depth 6 declares the stack, including inside projects whose primary stack is something else. Extensionless scripts with a shell shebang are the same surface; the manifest does not detect them, so the critic greps for shebangs during ingestion and reviews what it finds under this file."
+toolchain:
+  build: "no build step; bash -n syntax check stands in"
+  test: "the project harness where one exists; the family has no shell test gate beyond lint (recorded honestly in review_cannot)"
+  lint: "shellcheck via scripts/shell/lint.sh (the shell-lint gate)"
+  format: "shfmt where the project carries it; not a family gate"
+  debug: "set -x is a debugging aid, never a shipped default; a script that traces by default leaks its inputs to logs"
+gates:
+  manifest_gates: ["shell-lint"]
+  script_dir: "scripts/shell"
+  extra_scripts: []
+sanitizer:
+  status: not-applicable
+  canonical: null
+  notes: "Shell renders no HTML and has no sanitizer. Its equivalent surface is command and argument injection, carried below."
+  dangerous_sinks:
+    - "eval on any composed string"
+    - "sh -c or bash -c with interpolated variables"
+    - "curl or wget output piped into a shell"
+    - "Unquoted variable expansions in command position (word splitting and globbing on data)"
+  verdict_rules:
+    - "eval or a piped-to-shell download carrying data that crossed a trust boundary: finding, high."
+security_tooling:
+  - "shellcheck (the one shell tool in the manifest probes)"
+  - "the family's common secrets gates (scripts in shell are a classic credential leak site)"
+dangerous_patterns:
+  - "Credentials or tokens literal in script text or in command lines visible to ps"
+  - "rm -rf with a variable path and no empty-value guard"
+  - "Temporary files in shared directories without mktemp"
+  - "Scripts that must run as root doing network fetches first"
+  - "Exit-code swallowing: pipelines without pipefail, commands whose failure the script cannot see"
+review_can:
+  - "Run shellcheck over every detected script and classify each finding"
+  - "Grep the injection sinks mechanically across the tree"
+review_cannot:
+  - "Behavioral verdicts on scripts with environment-dependent branches from a static review; the family has no shell execution harness, and inventing one mid-review is out of protocol"
+untested:
+  - "None recorded. Carried from the critic inventory 2026-10-28."
+sources:
+  - "Critic inventory 2026-10-28 (gate and UNTESTED records)"

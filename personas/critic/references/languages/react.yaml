@@ -1,0 +1,58 @@
+# react.yaml - Critic language file: React.
+# Loaded into every critic brief when stack detection reports the react stack
+# (critic.manifest.json stacks[].languageFile; SOUL section 2 brief assembly).
+# Loads alongside javascript.yaml or typescript.yaml; this file carries the
+# React-specific surface only. Carries verified_as_of and expires 90 days
+# later under the staleness law (SOUL 8.15).
+version: 1
+stack: react
+display_name: "React"
+verified_as_of: "2026-10-28"
+expires: "2027-01-26"
+detection:
+  markers: ["package.json containing react"]
+  notes: "Fires on a react dependency within depth 2. Next.js projects fire both this stack and nextjs; load both files."
+toolchain:
+  build: "the project's build script"
+  test: "the family test script plus scripts/react/test-quality.sh, which audits test quality signals"
+  lint: "eslint with the React rule set via the family lint script"
+  format: "the family format script"
+  debug: "diagnostic seam per the family debug rules; debug-check.sh greps for the seam"
+gates:
+  manifest_gates: ["react-lint", "react-debug-check", "react-test"]
+  script_dir: "scripts/react"
+  extra_scripts: ["format.sh", "test-quality.sh", "debug-add.sh"]
+sanitizer:
+  status: canonical
+  canonical: "DOMPurify, applied to the exact string fed to dangerouslySetInnerHTML"
+  package: "dompurify (client); isomorphic-dompurify (SSR or shared code)"
+  license: "Apache-2.0 or MPL-2.0 for DOMPurify (choose Apache-2.0); MIT for isomorphic-dompurify"
+  latest_known: {version: "3.4.17 (DOMPurify)", as_of: "2026-10-28"}
+  currency_rule: "Same as javascript.yaml."
+  config_checks:
+    - "React escapes everything by default; the only raw-HTML door is dangerouslySetInnerHTML. Every use is inventoried, and each one shows its DOMPurify pass on the same value, in the same render path."
+    - "Markdown pipelines: react-markdown is safe by default; adding rehype-raw reopens raw HTML and requires a rehype-sanitize or DOMPurify step after it, in that order."
+    - "Server-rendered and client-rendered paths sanitize identically; an isomorphic import keeps one configuration for both."
+  dangerous_sinks:
+    - "dangerouslySetInnerHTML with any value that did not pass through DOMPurify in the same code path"
+    - "href or src bound to user data without scheme validation (javascript: URLs survive React's escaping)"
+    - "rehype-raw or equivalent raw-HTML plugins without a following sanitize step"
+    - "Children or render props that hand user strings to a third-party component documented to inject HTML"
+  verdict_rules:
+    - "A dangerouslySetInnerHTML use without a visible DOMPurify pass: finding, high. No exceptions for trusted-looking sources; the data's origin is reviewed, not assumed."
+security_tooling:
+  - "osv-scanner and npm audit over package-lock.json"
+  - "the family's web gates (a11y-axe, perf-lhci, visual-diff) where the project serves pages"
+dangerous_patterns:
+  - "Keys, refs, or DOM ids built from user data reaching DOM APIs outside React's escaping (refs plus innerHTML in an effect)"
+  - "Client-side data fetching that injects API HTML into the page through a wrapper component"
+review_can:
+  - "Run the gate triple, the format script, and the test-quality script"
+  - "Inventory every dangerouslySetInnerHTML in the tree mechanically and check each one's sanitize pass"
+review_cannot:
+  - "The react industrial gates were DID-NOT-RUN in the family's own proof-run environment (see untested); verdicts needing them cap per the capability contract"
+untested:
+  - "In the proof run on the critic family itself, the react industrial gates were DID-NOT-RUN in that environment. Carried from laneD lane-report via the critic inventory 2026-10-28."
+sources:
+  - "Critic inventory 2026-10-28 (gate and UNTESTED records)"
+  - "DOMPurify repository README, read 2026-10-28"

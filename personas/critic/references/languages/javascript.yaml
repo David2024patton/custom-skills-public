@@ -1,0 +1,64 @@
+# javascript.yaml - Critic language file: JavaScript.
+# Loaded into every critic brief when stack detection reports the javascript
+# stack (critic.manifest.json stacks[].languageFile; SOUL section 2 brief
+# assembly). Source of truth for per-language review knowledge: toolchain,
+# gates, sanitizer, dangerous patterns, honest gaps. Carries verified_as_of
+# and expires 90 days later under the staleness law (SOUL 8.15).
+version: 1
+stack: javascript
+display_name: "JavaScript"
+verified_as_of: "2026-10-28"
+expires: "2027-01-26"
+detection:
+  markers: ["package.json"]
+  notes: "A package.json within depth 2 declares the stack. When tsconfig.json or a typescript dependency is present, the typescript stack also fires and its language file loads alongside this one; when neither javascript nor typescript dispatch applies, run-gates.sh falls back to the generic scripts/js-ts set, which this file and typescript.yaml jointly cover (recorded exception: js-ts has no manifest stack and no language file of its own, by design)."
+toolchain:
+  build: "the project's own build script (npm run build) where one exists"
+  test: "the project's test runner via the family test script (vitest or jest in practice)"
+  lint: "eslint via the family lint script"
+  format: "the family format script (prettier where the project carries it)"
+  debug: "console-free diagnostic seam per the family debug rules; debug-check.sh greps for the seam"
+gates:
+  manifest_gates: ["javascript-lint", "javascript-debug-check", "javascript-test"]
+  script_dir: "scripts/javascript"
+  extra_scripts: ["format.sh", "debug-add.sh"]
+sanitizer:
+  status: canonical
+  canonical: "DOMPurify"
+  package: "dompurify (browser); isomorphic-dompurify (Node and universal code)"
+  license: "Apache-2.0 or MPL-2.0 for DOMPurify (choose Apache-2.0); MIT for isomorphic-dompurify"
+  latest_known: {version: "3.4.17", as_of: "2026-10-28"}
+  currency_rule: "Verify the pin against npm at intel-refresh. DOMPurify does not follow semantic versioning strictly; treat every release as potentially security-bearing and flag pins more than one minor behind the current release."
+  config_checks:
+    - "Server-side use goes through isomorphic-dompurify or an explicit jsdom window; the jsdom version must be current, because DOMPurify's own documentation warns that old jsdom versions contain XSS holes even when DOMPurify is perfect. happy-dom is named unsafe by the DOMPurify project and is never an acceptable substitute."
+    - "USE_PROFILES restricted to html unless the artifact needs SVG or MathML and says why."
+    - "ADD_TAGS, ADD_ATTR, and addHook calls are widenings; each one is reviewed. A hook that sets innerHTML or re-inserts removed content voids the sanitization."
+    - "Nothing modifies the sanitized string afterwards before insertion; post-sanitize processing voids the protection (the library's own footgun warning)."
+  dangerous_sinks:
+    - "element.innerHTML or outerHTML assigned user-controlled data"
+    - "insertAdjacentHTML with user-controlled data"
+    - "document.write or document.writeln on any dynamic data"
+    - "jQuery .html() with user-controlled data"
+    - "Assigning user data to href or src without scheme validation (javascript: URLs)"
+  verdict_rules:
+    - "User HTML reaching a sink with no DOMPurify pass: finding, high."
+    - "DOMPurify present but pinned stale, run over a known-bad DOM (old jsdom, happy-dom), or widened without justification: finding, high to medium by exposure."
+security_tooling:
+  - "osv-scanner and npm audit over package-lock.json"
+  - "the family's common vuln-scan and secrets gates"
+dangerous_patterns:
+  - "eval, new Function, or setTimeout and setInterval with string arguments on dynamic data"
+  - "Prototype pollution sinks: unchecked merge or assign of user objects into defaults"
+  - "Install scripts added or changed in a dependency bump (watchlist class WATCH-NPM-SHAI-HULUD)"
+review_can:
+  - "Run the gate triple and the format script"
+  - "Verify sanitizer presence, version, DOM host, and config shape from source and package files"
+  - "Run the shared payload corpus (references/xss-payloads.yaml) through the target's sanitizer configuration where a Node runtime is available"
+review_cannot:
+  - "Browser-exact mutation-XSS behavior from a Node-only review; jsdom parsing differs from real browsers at the edges, so a clean Node run is strong evidence, not proof"
+untested:
+  - "No per-language UNTESTED line recorded for the javascript set; the program-level remainder stands: the full web npm install was not run in the sandbox. Carried from the critic inventory 2026-10-28."
+sources:
+  - "DOMPurify repository README (cure53/DOMPurify), read in full 2026-10-28: version, server-side jsdom warnings, footgun list"
+  - "isomorphic-dompurify repository README (kkomelin), read 2026-10-28"
+  - "Critic inventory 2026-10-28 (gate and UNTESTED records)"

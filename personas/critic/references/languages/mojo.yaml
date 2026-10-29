@@ -1,0 +1,86 @@
+# mojo.yaml - Critic language file: Mojo.
+# Loaded into every critic brief when stack detection reports the mojo stack
+# (critic.manifest.json stacks[].languageFile; SOUL section 2 brief assembly).
+# Built from the deep research run of 2026-10-28
+# (~/workspace/research_notes/mojo-critic-2026-10-28/REPORT.md, 30 evidence
+# records, 20 claims). Mojo ships monthly minors; version facts in this file
+# go stale faster than the 90-day law assumes, so the refresh trigger below
+# is per-release, not per-quarter. Carries verified_as_of and expires under
+# the staleness law (SOUL 8.15).
+version: 1
+stack: mojo
+display_name: "Mojo"
+verified_as_of: "2026-10-29"
+expires: "2027-01-27"
+refresh_trigger: "Re-verify on every Mojo minor release (roughly monthly) and on any MAX license change, whichever comes first."
+identity:
+  maintainer: "Modular Inc (founders Chris Lattner and Tim Davis); a Qualcomm company since the acquisition announced 2026-06-24 and closed late July 2026 (exact closing day unverified)"
+  current_version: "1.2.0, released 2026-10-22; the 1.x line ships roughly monthly minors (1.0.0 2026-08-11, 1.1.0 2026-09-17, 1.2.0 2026-10-22); older versions are no longer installable"
+  version_source_rule: "Cite only the official releases index (mojolang.org/releases) for versions. Wikipedia still showed 1.1.0 a week after 1.2.0 shipped; secondary sources are stale by construction for this language."
+  open_source: "The whole language is open source: stdlib open since March 2024, compiler open since August 2026, both Apache License v2.0 with LLVM Exceptions, in github.com/modular/modular."
+  license_warning: "MAX, the platform Mojo ships with, is source-available under the separate MAX License since 26.7 and is NOT open source. Never write Mojo and MAX as one licensing claim."
+  python_relationship: "Python-family syntax with a CPython bridge (std.python) in both directions. NOT a Python superset; Modular walked the superset goal back in August 2025. Python review rules do not transfer to Mojo files."
+detection:
+  markers: ["*.mojo", "mojoproject.toml", "pixi.toml"]
+  notes: "Manifest markers above. Additional signals the critic uses: the fire emoji extension .🔥 is a real Mojo source extension; a directory containing __init__.mojo is a package; pixi.toml channels naming conda-forge plus the Modular channels are a fingerprint. There is no shebang convention."
+  era_markers:
+    current: "def (the only function keyword), comptime, struct, trait, var, mut argument convention, raises, square-bracket parameters, ownership transfer postfix ^, decorators @fieldwise_init @register_passable @always_inline @export, std. prefixed imports (from std.testing import), match and case"
+    legacy: "fn, alias, let, inout, borrowed and owned argument spellings, @parameter if and for, stdlib imports without the std. prefix, .mojopkg artifacts, mojoproject.toml manifests"
+    rule: "Legacy-era syntax in new code cannot compile on Mojo 1.1 or later; its presence is a finding, and it dates the codebase on sight."
+toolchain:
+  cli_surface: "Exactly eight subcommands exist: run, build, repl, debug, precompile, format, doc, demangle. There is NO mojo test, NO mojo lint, NO mojo package; a script or claim invoking them is wrong."
+  build: "mojo build; the lint substitute is the compiler itself: mojo build --Werror --warn-on-unstable-apis --diagnose-missing-doc-strings --diagnostic-format json (all flags verified against the current build reference). Also real: --sanitize address|thread, -D defines, -g."
+  test: "In-language std.testing TestSuite. Tests are test_*.mojo files whose def main() raises runs TestSuite.discover_tests[__functions_in_module()]().run(), executed per file with mojo run. A test file without that entry point runs zero tests and still exits 0; the entry point check is mandatory before trusting any green run. Community multi-file runner: mtest."
+  lint: "DOES NOT EXIST. No linter, no Semgrep or CodeQL support. Compiler-as-lint (above) is the ceiling. The mojo format documentation calls the formatter a lint tool; it is a formatter with two options."
+  format: "mojo format, in place, options --line-length (default 80) and --quiet only. No --check and no --diff; CI format verification requires the copy, format, diff workaround the family lint.sh already implements."
+  debug: "mojo debug (LLDB based, --vscode mode); build with -g. Not supported from VS Code when the SDK was installed as a Python wheel. mojo-lsp-server diagnostics are advisory only (open crash and leak reports into October 2026), never a CI gate."
+  packages: "mojo precompile emits .mojoc; distribution is conda packages built with rattler-build into the modular-community channel on prefix.dev. A native Mojo package manager is planned only. Project environments are pixi (pixi.toml plus pixi.lock, lock under version control, lock diffs reviewed). Magic is deprecated; mojoproject.toml migrates to pixi.toml."
+  deployment_gotcha: "mojo build does not bundle the Python packages a project uses; they load from the runtime environment."
+gates:
+  manifest_gates: ["mojo-lint", "mojo-debug-check", "mojo-test"]
+  script_dir: "scripts/mojo"
+  extra_scripts: ["deps.sh", "debug-add.sh"]
+  script_assessment:
+    - "lint.sh: KEEP. Every compiler flag verified against the current mojo build reference; the format workaround is forced by the tool; degrades to exit 2 DID-NOT-RUN without a toolchain. Real-toolchain run 2026-10-29 (lane 6) exposed a defect in its --disable-warnings tripwire (line 38): a misplaced -- disables the --include filters and the grep matches the compiler binary inside .pixi, a guaranteed false positive on pixi-installed projects. Fix specified in lane 6 MOJO-SPEC and applied at the fix-all merge. The same run showed --warn-on-unstable-apis under --Werror flags stdlib print and __init__ as unstable API errors on Mojo 1.2.0, so the compiler-as-lint tier is very loud on ordinary code; that is real toolchain behavior, recorded here so no one mistakes it for a gate bug."
+    - "test.sh: KEEP. The TestSuite entry point verification matches the documented model and kills the silent zero-test pass. Its header dates the mojo test removal to 1.2.0; the absence is verified, the exact removal version is UNVERIFIED."
+    - "deps.sh: KEEP. Its Syft plus Grype composition over .pixi/envs/default ran for real on 2026-10-29 (lane 6): 51 CVE rows against a known-vulnerable fixture env, real CVEs against a live Mojo toolchain env. pixi audit stays advisory-only by the decision of 2026-10-29: pixi 0.83.0 stable does not contain the subcommand at all ('error: unrecognized subcommand audit'); promotion trigger is a stable release shipping it plus a fixture run matching or beating the composition. Prop mode was FIXED 2026-10-29: it passed --sanitize address to mojo run, which accepts the flag but fails in the JIT (ASan runtime symbols unresolvable); it now builds with mojo build --sanitize address and executes the artifact, proven green on the real toolchain. Open parent question: grype runs without a fail-on threshold, so deps mode exits 0 with findings printed; severity gating is undecided."
+    - "debug-check.sh: KEEP. Pure grep; the only Mojo gate that produces signal on a bare review host."
+    - "debug-add.sh: FIXED 2026-10-28 in the same pass that landed this file. Its scaffold used the fn keyword, removed in Mojo 1.1.0, so --apply output could not compile on any current toolchain; rewritten with def. The fix is verified against the 1.1.0 release notes and, since 2026-10-29 (lane 6), against the live Mojo 1.2.0 toolchain: the scaffolded diag.mojo compiled and ran ('refusals: 1', exit 0)."
+sanitizer:
+  status: none-exists
+  canonical: null
+  notes: "No HTML sanitizer exists for Mojo: none in the stdlib, none in the curated package list (about 75 packages), none in awesome-mojo. No template engine exists either. Searches for one return Perl Mojolicious material, a name collision. Never suggest a Mojo sanitizer in a finding or a fix."
+  web_surface: "No official web framework and no HTML rendering in stdlib or MAX. Community only: Lightbug (pure Mojo HTTP 1.1; its README says not production ready; serves HTML as static bytes with a manual content type; the curated listing pins it to a pre-1.0 compiler). Supporting pieces: mojo-net, mojo-tls, mojo-http2, mojo-websockets, Req, grpc-mojo. MAX Serve is a Python-side serving layer, not a Mojo web framework."
+  dangerous_sinks:
+    - "Any HTML a Mojo program emits (string-built markup, Lightbug handlers) is unsanitized by construction"
+  verdict_rules:
+    - "Raw HTML output carrying user data from Mojo code: finding, high, with the fix stated as sanitize at another layer, never in-language."
+security_tooling:
+  - "Dependency scanning is a composition, not a tool: Syft SBOM of .pixi/envs/default (conda-meta cataloger on) into Grype, per prefix.dev's own guidance; pixi has no built in scanner, by its own documentation"
+  - "pixi audit exists as a beta since 2026-09-24 (Basilisk conda-forge database, JSON and SARIF output, no statically linked binaries), but it is NOT in stable pixi: 0.83.0 answers 'error: unrecognized subcommand audit' (verified 2026-10-29). Do not write a gate or a brief that invokes it until a stable release ships it."
+  - "osv-scanner cannot read pixi.lock; it covers only exported PyPI locks. The PyPI side of a Mojo project (the modular and max pip packages) is fully covered by GHSA and OSV data"
+  - "Feed hygiene: never match advisories on the bare word Mojo (it collides with Chromium Mojo IPC and Perl Mojolicious). Scope to vendor Modular and packages modular, max, mojo-compiler"
+  - "Known CVE on record: CVE-2025-60455, unsafe deserialization (CWE-502, Critical) in MAX Serve, pip package modular below 25.6.0, patched in 25.6.0. It is a Python serving-layer flaw, not a language flaw. No CVE for the Mojo compiler or toolchain was found as of 2026-10-28 (a search result, not a proof of absence)"
+dangerous_patterns:
+  - "external_call in std.sys.ffi: calls an arbitrary C function by name"
+  - "DLHandle: loads arbitrary shared libraries and fetches function pointers"
+  - "UnsafePointer and the unsafe_ prefixed API family (unsafe_init_with, unsafe_assume_init, unsafe_deinit_elements): raw memory with manual lifetimes. Pointer naming is contested in secondary sources; grep both Pointer and UnsafePointer"
+  - "std.python surface: Python.evaluate evaluates arbitrary Python source; Python.import_module and PythonObject dispatch bypass the type system; Python.add_to_path mutates the interpreter path; PythonModuleBuilder puts Mojo code inside other Python processes"
+  - "GPU bounds posture: collections are bounds-checked on CPU by default; GPU bounds checking is OFF by default unless built with -D ASSERT=all. GPU code without an ASSERT posture is a finding"
+  - "--disable-warnings anywhere in the tree: a finding, not a setting"
+  - "Build is a code execution surface: comptime runs at compile time, rattler-build recipes run arbitrary scripts, pixi [activation] scripts run by default on pixi shell and pixi run. Review pixi.toml activation sections, pixi.lock diffs, and recipe.yaml alongside the sources"
+review_can:
+  - "Without a toolchain: detect language and era, grep the FFI, unsafe, and Python-bridge hotspots, read pixi.toml, pixi.lock diffs, activation sections and recipes, check PyPI-side modular and max pins against GHSA, verify TestSuite entry points, verify no --disable-warnings, verify GPU ASSERT posture"
+  - "With a toolchain installed: compiler-as-lint with JSON diagnostics, format check via copy-format-diff, real TestSuite execution per file, sanitizer-instrumented property runs, SBOM dependency scanning over the installed environment"
+review_cannot:
+  - "Run a real linter rule set, SAST, coverage, or coverage-guided fuzzing: none of these exist for Mojo as of October 2026"
+  - "Mature direct advisory matching on pixi.lock; pixi audit is a beta that no stable pixi release contains yet (0.83.0 checked 2026-10-29)"
+  - "Sanitize HTML in the language; trust .mojoc artifacts across compiler versions (they are compiler-version specific)"
+  - "Treat LSP diagnostics as a CI gate"
+untested:
+  - "Real-toolchain Mojo runs are no longer UNTESTED: Mojo 1.2.0 and pixi 0.83.0 were installed in the sandbox on 2026-10-29 (lane 6) and the family gates ran for real: test.sh green (2 of 2 TestSuite tests), lint.sh produced real compiler JSON diagnostics, deps.sh Syft plus Grype composition matched real CVEs, and the debug-add.sh scaffold compiled and ran. Evidence: fix-all/lane6/RUN-EVIDENCE/."
+  - "pixi audit: not present in stable pixi. pixi 0.83.0 answers 'error: unrecognized subcommand audit' (checked 2026-10-29). The 2026-09-24 beta exists per prefix.dev but ships in no stable release. deps.sh keeps it advisory-only per the 2026-10-29 decision, with a two-part promotion trigger (stable release ships it, and a fixture run matches or beats the Syft plus Grype composition)."
+  - "UNVERIFIED items carried from the research, not to be stated as fact: the exact Qualcomm closing day; any CLA for compiler contributions; the exact version that removed mojo test; Linguist's Mojo entry. (The former item 'mojo run accepting --sanitize' is resolved and removed: mojo run accepts --sanitize address, then fails in the JIT because the ASan runtime symbols are not resolvable there; mojo build --sanitize address works. deps.sh prop mode was fixed accordingly in lane 6.)"
+sources:
+  - "Deep research report: ~/workspace/research_notes/mojo-critic-2026-10-28/REPORT.md (evidence E0001 to E0030, claims C0001 to C0020)"
+  - "Primary: mojolang.org releases index, CLI and build and format references, testing and packaging docs; github.com/modular/modular; GHSA-7xcv-9j6c-2fmc; prefix.dev pixi security guidance and audit beta announcement"

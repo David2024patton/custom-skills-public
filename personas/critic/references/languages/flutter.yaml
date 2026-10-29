@@ -1,0 +1,58 @@
+# flutter.yaml - Critic language file: Flutter.
+# Loaded into every critic brief when stack detection reports the flutter
+# stack (critic.manifest.json stacks[].languageFile; SOUL section 2 brief
+# assembly). Detection separates flutter from dart; the gate set is shared
+# (scripts/dart-flutter) and dart.yaml is the sibling file. Carries
+# verified_as_of and expires 90 days later under the staleness law (SOUL 8.15).
+version: 1
+stack: flutter
+display_name: "Flutter"
+verified_as_of: "2026-10-28"
+expires: "2027-01-26"
+detection:
+  markers: ["pubspec.yaml containing a flutter section"]
+  notes: "A pubspec.yaml within depth 4 whose flutter: section is present declares this stack and removes the dart stack. Review the app as widgets first; HTML is the exception surface, not the rendering model."
+toolchain:
+  build: "flutter build for the project's targets; flutter analyze is the standing gate"
+  test: "flutter test via the family test script (unit and widget tests)"
+  lint: "flutter analyze with the project's analysis_options (flutter_lints baseline)"
+  format: "dart format; a file it would rewrite is a finding"
+  debug: "diagnostic seam per the family debug rules (the AlphaFlux house rule applies: every screen ships with diagnostics); debug-check.sh greps for the seam"
+gates:
+  manifest_gates: ["dart-flutter-lint", "dart-flutter-debug-check", "dart-flutter-test"]
+  script_dir: "scripts/dart-flutter"
+  extra_scripts: ["vuln.sh", "debug-add.sh"]
+  shared_with: "dart (one gate set serves both stacks)"
+sanitizer:
+  status: weak
+  canonical: "none in-framework; sanitize_html (pub.dev) is the client-side fallback, server-side sanitization is the plan"
+  package: "sanitize_html (fallback only)"
+  preferred_pattern: "Flutter renders widgets, not HTML, so user text shown through Text widgets is not an XSS surface. Where HTML genuinely renders (WebView, flutter_html), the HTML must arrive already sanitized from a backend stack with a canonical sanitizer (Go and bluemonday, in the go language file). Client-side sanitize_html is defense in depth, never the primary control; its maintenance is rated poor (see dart.yaml)."
+  config_checks:
+    - "Every WebView in the tree is inventoried with its JavaScript mode and channel surface; the inventory is part of the review evidence."
+    - "flutter_html (or similar) receives only content the backend sanitized; a raw API string fed straight to an HTML widget is a finding."
+  dangerous_sinks:
+    - "WebView with JavaScript unrestricted plus addJavaScriptChannel handlers that act on page-supplied data (the page is then code, and unsanitized HTML in it is script execution)"
+    - "flutter_html or equivalent rendering unsanitized API or user HTML"
+    - "URL launcher calls on user-supplied URLs without scheme checks"
+    - "Deep link and intent parameters flowing into WebView loads or privileged actions unvalidated"
+  verdict_rules:
+    - "Unsanitized user HTML reaching a WebView or HTML widget: finding, high."
+    - "A JavaScript channel exposed on a WebView that can load remote or user content: finding, high, unless the loaded origin set is pinned and proven."
+security_tooling:
+  - "scripts/dart-flutter/vuln.sh (see untested in dart.yaml; the record is shared)"
+  - "osv-scanner over pubspec.lock"
+dangerous_patterns:
+  - "Secrets or tokens in the app bundle, in dart-define defaults, or in committed keystore-adjacent files"
+  - "Platform channels invoking privileged native actions on parameters that crossed the wire unvalidated"
+  - "Insecure storage of session material (plain SharedPreferences for tokens)"
+review_can:
+  - "Run the shared gate triple; verify the WebView and HTML-widget inventory mechanically from source"
+  - "Verify the sanitized-at-backend claim by tracing one user HTML value from API response to widget"
+review_cannot:
+  - "Device-runtime behavior of WebView content from a static review; source and configuration verdicts only"
+untested:
+  - "Shared with dart.yaml: the real dart pub outdated and vuln scan path is UNTESTED (sandbox blocker); exit-2 paths verified. Carried from laneA via the critic inventory 2026-10-28."
+sources:
+  - "Critic inventory 2026-10-28 (gate and UNTESTED records)"
+  - "sanitize_html package documentation and ecosystem listings, read 2026-10-28 (see dart.yaml)"

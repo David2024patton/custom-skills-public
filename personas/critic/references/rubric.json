@@ -1,0 +1,561 @@
+{
+ "schemaVersion": 1,
+ "note": "One entry per distinct rubricRef in the five checklists. Generated from the checklists; regenerate when they change. Severity grading anchors (behavioral tests and severity-by-lens exemplars) live in references/rubric-anchors.yaml; this file holds rubric-fit anchors only, one per rubricRef.",
+ "critical_cap": null,
+ "critical_cap_note": "Maximum Critical findings a pass may report before the excess is itself a calibration finding. UNCONFIGURED: the value is the operator\u2019s to set (SOUL 8.16). While null, no cap is enforced and no report may claim one.",
+ "rubrics": {
+  "rubric:claims:fmt": {
+   "ref": "rubric:claims:fmt",
+   "lens": "claims",
+   "anchor_id": "A-CLAIMS-FMT",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CLAIMS-FMT-001: Aggregator cited as primary. Vendor benchmark dressed as independent measurement.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CLAIMS-FMT-001",
+    "CLAIMS-FMT-002",
+    "CLAIMS-FMT-003",
+    "CLAIMS-FMT-004"
+   ]
+  },
+  "rubric:claims:lb2": {
+   "ref": "rubric:claims:lb2",
+   "lens": "claims",
+   "anchor_id": "A-CLAIMS-LB2",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CLAIMS-LB2-001: Bound fact: claim verification uses the search tool the run configuration supplies (the operator's metasearch instance when the run declares one, otherwise the run's default web search). No endpoint is assumed by the method.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CLAIMS-LB2-001",
+    "CLAIMS-LB2-002",
+    "CLAIMS-LB2-003"
+   ]
+  },
+  "rubric:claims:oaa": {
+   "ref": "rubric:claims:oaa",
+   "lens": "claims",
+   "anchor_id": "A-CLAIMS-OAA",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CLAIMS-OAA-001: Circular-source map. Where multiple citations collapse to one origin.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CLAIMS-OAA-001",
+    "CLAIMS-OAA-002",
+    "CLAIMS-OAA-003"
+   ]
+  },
+  "rubric:claims:r": {
+   "ref": "rubric:claims:r",
+   "lens": "claims",
+   "anchor_id": "A-CLAIMS-R",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CLAIMS-R-001: `references/fallacies.md`: the shared 18-fallacy catalogue (from yegor256/critic). Quote the trigger line, name the fallacy, give the one-line remedy.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CLAIMS-R-001"
+   ]
+  },
+  "rubric:claims:ssw": {
+   "ref": "rubric:claims:ssw",
+   "lens": "claims",
+   "anchor_id": "A-CLAIMS-SSW",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CLAIMS-SSW-001: Sample size and power. A 3 percent lift on 40 users is noise. Ask for n and the confidence interval.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CLAIMS-SSW-001",
+    "CLAIMS-SSW-002",
+    "CLAIMS-SSW-003",
+    "CLAIMS-SSW-004",
+    "CLAIMS-SSW-005",
+    "CLAIMS-SSW-006",
+    "CLAIMS-SSW-007"
+   ]
+  },
+  "rubric:claims:tfc": {
+   "ref": "rubric:claims:tfc",
+   "lens": "claims",
+   "anchor_id": "A-CLAIMS-TFC",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CLAIMS-TFC-001: Find the original source, not the aggregator. Trace the number up the citation chain until you hit whoever generated it. If three outlets cite one study, that is one source, not three (circular reporting).",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CLAIMS-TFC-001",
+    "CLAIMS-TFC-002",
+    "CLAIMS-TFC-003",
+    "CLAIMS-TFC-004"
+   ]
+  },
+  "rubric:claims:wtl": {
+   "ref": "rubric:claims:wtl",
+   "lens": "claims",
+   "anchor_id": "A-CLAIMS-WTL",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CLAIMS-WTL-001: Provenance on every number: source URL, observation date, method tag (live fetch, crawl, doc, secondary, estimate).",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CLAIMS-WTL-001",
+    "CLAIMS-WTL-002",
+    "CLAIMS-WTL-003"
+   ]
+  },
+  "rubric:code:1ta": {
+   "ref": "rubric:code:1ta",
+   "lens": "code",
+   "anchor_id": "A-CODE-1TA",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CODE-1TA-001: For every query, cache, file path, queue message, search index, and log: does tenant A reach tenant B? One missed filter is a breach, not a nit.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CODE-1TA-001",
+    "CODE-1TA-002",
+    "CODE-1TA-003",
+    "CODE-1TA-004",
+    "CODE-1TA-005"
+   ]
+  },
+  "rubric:code:2pi": {
+   "ref": "rubric:code:2pi",
+   "lens": "code",
+   "anchor_id": "A-CODE-2PI",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CODE-2PI-001: Prompt injection is a named, hunted class, not a footnote. For any artifact with an AI surface or a user-content surface, trace every path where untrusted input (user text, repo content, web pages, files, tool output, retrieved documents) reaches a prompt, a system instruction, a tool call, a template, or a retrieval index.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CODE-2PI-001",
+    "CODE-2PI-002",
+    "CODE-2PI-003"
+   ]
+  },
+  "rubric:code:2so": {
+   "ref": "rubric:code:2so",
+   "lens": "code",
+   "anchor_id": "A-CODE-2SO",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CODE-2SO-001: A01 Broken Access Control (SSRF folded in), A02 Misconfiguration, A03 Supply Chain, A04 Crypto, A05 Injection, A06 Insecure Design, A07 Auth, A08 Integrity, A09 Logging, A10 Exceptional Conditions (fail-open, panic paths).",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CODE-2SO-001",
+    "CODE-2SO-002",
+    "CODE-2SO-003"
+   ]
+  },
+  "rubric:code:3ca": {
+   "ref": "rubric:code:3ca",
+   "lens": "code",
+   "anchor_id": "A-CODE-3CA",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CODE-3CA-001: Happy path, negative path, and boundary tested. Empty, zero, one-past-max, unicode, huge payload, DST and month-end, double-submit.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CODE-3CA-001",
+    "CODE-3CA-002",
+    "CODE-3CA-003"
+   ]
+  },
+  "rubric:code:4pa": {
+   "ref": "rubric:code:4pa",
+   "lens": "code",
+   "anchor_id": "A-CODE-4PA",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CODE-4PA-001: N+1 query patterns, unbounded queries, missing pagination, missing indexes on the hot path.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CODE-4PA-001",
+    "CODE-4PA-002",
+    "CODE-4PA-003"
+   ]
+  },
+  "rubric:code:5m": {
+   "ref": "rubric:code:5m",
+   "lens": "code",
+   "anchor_id": "A-CODE-5M",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CODE-5M-001: Module isolation, one responsibility, tight scope. No monolith or spaghetti.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CODE-5M-001",
+    "CODE-5M-002",
+    "CODE-5M-003"
+   ]
+  },
+  "rubric:code:fmt": {
+   "ref": "rubric:code:fmt",
+   "lens": "code",
+   "anchor_id": "A-CODE-FMT",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CODE-FMT-001: Tenancy sampled instead of swept. Spot-checking three routes and declaring isolation good.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CODE-FMT-001",
+    "CODE-FMT-002",
+    "CODE-FMT-003",
+    "CODE-FMT-004"
+   ]
+  },
+  "rubric:code:hw": {
+   "ref": "rubric:code:hw",
+   "lens": "code",
+   "anchor_id": "A-CODE-HW",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CODE-HW-001: Hidden writes (code surface). The code performs no writes the user did not ask for and cannot see: no silent uploads, telemetry beacons, background posts, or state changes beyond the declared function. Every write is inventoried with its trigger and destination.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CODE-HW-001"
+   ]
+  },
+  "rubric:code:mtd": {
+   "ref": "rubric:code:mtd",
+   "lens": "code",
+   "anchor_id": "A-CODE-MTD",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CODE-MTD-001: AlphaFlux: tenancy sweep is mandatory, route by route, no sampling. Go backend, Flutter clients, SurrealDB.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CODE-MTD-001",
+    "CODE-MTD-002",
+    "CODE-MTD-003",
+    "CODE-MTD-004"
+   ]
+  },
+  "rubric:code:oaa": {
+   "ref": "rubric:code:oaa",
+   "lens": "code",
+   "anchor_id": "A-CODE-OAA",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CODE-OAA-001: Defect ledger. Numbered by severity (Critical, High, Medium, Low). Each: file:line, the defect, the exploit or failure path, the smallest fix.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CODE-OAA-001",
+    "CODE-OAA-002",
+    "CODE-OAA-003"
+   ]
+  },
+  "rubric:code:pm": {
+   "ref": "rubric:code:pm",
+   "lens": "code",
+   "anchor_id": "A-CODE-PM",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CODE-PM-001: Held-out annex application. The candidate set for this pass was scored against the held-out annex by its custodian, and the annex version and custodian are named in the run record. Annex contents are never visible to the critics or the fixers.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CODE-PM-001",
+    "CODE-PM-002",
+    "CODE-PM-003",
+    "CODE-PM-004",
+    "CODE-PM-005",
+    "CODE-PM-006",
+    "CODE-PM-007",
+    "CODE-PM-008",
+    "CODE-PM-009"
+   ]
+  },
+  "rubric:code:r": {
+   "ref": "rubric:code:r",
+   "lens": "code",
+   "anchor_id": "A-CODE-R",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CODE-R-001: `references/vuln-watch.md`: the vulnerability watchlist seed snapshot. Refresh it live per checklist A1 before every scan; the seed is never current on its own.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CODE-R-001"
+   ]
+  },
+  "rubric:code:wtc": {
+   "ref": "rubric:code:wtc",
+   "lens": "code",
+   "anchor_id": "A-CODE-WTC",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CODE-WTC-001: Evidence over claims. \"It compiles\" is not \"it works\". \"Tests pass\" requires the command and the raw output, run this session, not a paraphrase.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CODE-WTC-001",
+    "CODE-WTC-002",
+    "CODE-WTC-003"
+   ]
+  },
+  "rubric:code:xss": {
+   "ref": "rubric:code:xss",
+   "lens": "code",
+   "anchor_id": "A-CODE-XSS",
+   "anchor": "Canonical failure for this rubric, taken from its lead item CODE-XSS-001: Every path that renders user-controlled HTML: does the value reach the browser without passing through a parser-based allowlist sanitizer? Raw sinks (innerHTML, dangerouslySetInnerHTML, template escape casts, WebView loads, string-built markup) are inventoried per the stack language file; one unsanitized path is a breach, not a nit",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "CODE-XSS-001",
+    "CODE-XSS-002",
+    "CODE-XSS-003",
+    "CODE-XSS-004"
+   ]
+  },
+  "rubric:compliance:ctl": {
+   "ref": "rubric:compliance:ctl",
+   "lens": "compliance",
+   "anchor_id": "A-COMPLIANCE-CTL",
+   "anchor": "Canonical failure for this rubric, taken from its lead item COMPLIANCE-CTL-001: Control C1: Role-based access, least privilege. Evidence to cite (per references/control-map.md): auth/RBAC code file:line, role table. Cite the enforcing code with file:line, the config with its file, the live check with its output, or mark the control ABSENT.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "COMPLIANCE-CTL-001",
+    "COMPLIANCE-CTL-002",
+    "COMPLIANCE-CTL-003",
+    "COMPLIANCE-CTL-004",
+    "COMPLIANCE-CTL-005",
+    "COMPLIANCE-CTL-006",
+    "COMPLIANCE-CTL-007",
+    "COMPLIANCE-CTL-008",
+    "COMPLIANCE-CTL-009",
+    "COMPLIANCE-CTL-010",
+    "COMPLIANCE-CTL-011",
+    "COMPLIANCE-CTL-012",
+    "COMPLIANCE-CTL-013",
+    "COMPLIANCE-CTL-014",
+    "COMPLIANCE-CTL-015",
+    "COMPLIANCE-CTL-016",
+    "COMPLIANCE-CTL-017",
+    "COMPLIANCE-CTL-018"
+   ]
+  },
+  "rubric:compliance:psd": {
+   "ref": "rubric:compliance:psd",
+   "lens": "compliance",
+   "anchor_id": "A-COMPLIANCE-PSD",
+   "anchor": "Canonical failure for this rubric, taken from its lead item COMPLIANCE-PSD-001: AlphaFlux (multi-tenant SaaS, payments, customer data): SOC 2, GDPR, CCPA now; PCI-DSS scope via the hosted processor (SAQ-A) documented; ISO 27001 and NIST CSF 2.0 as the maturity frame.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "COMPLIANCE-PSD-001",
+    "COMPLIANCE-PSD-002",
+    "COMPLIANCE-PSD-003",
+    "COMPLIANCE-PSD-004"
+   ]
+  },
+  "rubric:compliance:tme": {
+   "ref": "rubric:compliance:tme",
+   "lens": "compliance",
+   "anchor_id": "A-COMPLIANCE-TME",
+   "anchor": "Canonical failure for this rubric, taken from its lead item COMPLIANCE-TME-001: Scope first. Name the frameworks in play for THIS artifact or system from the product table below, and the personal or regulated data types in scope (emails, customer records, payments, student data, health, none). Never audit \"all frameworks\" by default.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "COMPLIANCE-TME-001",
+    "COMPLIANCE-TME-002",
+    "COMPLIANCE-TME-003",
+    "COMPLIANCE-TME-004",
+    "COMPLIANCE-TME-005",
+    "COMPLIANCE-TME-006"
+   ]
+  },
+  "rubric:growth:brf": {
+   "ref": "rubric:growth:brf",
+   "lens": "growth",
+   "anchor_id": "A-GROWTH-BRF",
+   "anchor": "Canonical failure for this rubric, taken from its lead item GROWTH-BRF-001: Brief-fit score. The creative is scored against the brief on three components, 0 to 3 each: objective fit, audience fit, and single-takeaway fit. Passing is a total of 6 of 9 or better with no component at 0. The three component scores are printed, not just the total.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "GROWTH-BRF-001"
+   ]
+  },
+  "rubric:growth:fmt": {
+   "ref": "rubric:growth:fmt",
+   "lens": "growth",
+   "anchor_id": "A-GROWTH-FMT",
+   "anchor": "Canonical failure for this rubric, taken from its lead item GROWTH-FMT-001: Maker-taste review, not audience review. \"I like it\" is not a finding.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "GROWTH-FMT-001",
+    "GROWTH-FMT-002",
+    "GROWTH-FMT-003",
+    "GROWTH-FMT-004",
+    "GROWTH-FMT-005"
+   ]
+  },
+  "rubric:growth:mms": {
+   "ref": "rubric:growth:mms",
+   "lens": "growth",
+   "anchor_id": "A-GROWTH-MMS",
+   "anchor": "Canonical failure for this rubric, taken from its lead item GROWTH-MMS-001: Ad pixels / conversion tracking (Meta, TikTok, LinkedIn, Google, server-side CAPI, dedup, GTM, consent), audited with the inlined pixel procedure in the growth lens skill (the MMS checks): inventory every pixel and tag on the page, verify each fires on its conversion event, verify server-side CAPI events deduplicate against browser events on the shared event id, and verify no pixel fires before consent where consent is required. Missing or browser-only tracking is a real conversion gap.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "GROWTH-MMS-001",
+    "GROWTH-MMS-002"
+   ]
+  },
+  "rubric:growth:mtd": {
+   "ref": "rubric:growth:mtd",
+   "lens": "growth",
+   "anchor_id": "A-GROWTH-MTD",
+   "anchor": "Canonical failure for this rubric, taken from its lead item GROWTH-MTD-001: AlphaFlux whitelabel tiers: pricing-page substantiation and tier-clarity attack.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "GROWTH-MTD-001",
+    "GROWTH-MTD-002",
+    "GROWTH-MTD-003",
+    "GROWTH-MTD-004"
+   ]
+  },
+  "rubric:growth:oaa": {
+   "ref": "rubric:growth:oaa",
+   "lens": "growth",
+   "anchor_id": "A-GROWTH-OAA",
+   "anchor": "Canonical failure for this rubric, taken from its lead item GROWTH-OAA-001: Substantiation ledger. Every claim, its verdict label, the evidence bar it must clear.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "GROWTH-OAA-001",
+    "GROWTH-OAA-002",
+    "GROWTH-OAA-003"
+   ]
+  },
+  "rubric:growth:pau": {
+   "ref": "rubric:growth:pau",
+   "lens": "growth",
+   "anchor_id": "A-GROWTH-PAU",
+   "anchor": "Canonical failure for this rubric, taken from its lead item GROWTH-PAU-001: Clarity over cleverness. If the value proposition needs a second read, cut it.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "GROWTH-PAU-001",
+    "GROWTH-PAU-002",
+    "GROWTH-PAU-003",
+    "GROWTH-PAU-004"
+   ]
+  },
+  "rubric:growth:pcr": {
+   "ref": "rubric:growth:pcr",
+   "lens": "growth",
+   "anchor_id": "A-GROWTH-PCR",
+   "anchor": "Canonical failure for this rubric, taken from its lead item GROWTH-PCR-001: Hook in the first 3 seconds or first line, or the attention is gone.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "GROWTH-PCR-001",
+    "GROWTH-PCR-002",
+    "GROWTH-PCR-003",
+    "GROWTH-PCR-004"
+   ]
+  },
+  "rubric:growth:sal": {
+   "ref": "rubric:growth:sal",
+   "lens": "growth",
+   "anchor_id": "A-GROWTH-SAL",
+   "anchor": "Canonical failure for this rubric, taken from its lead item GROWTH-SAL-001: Every claim on a paid or public surface must be substantiable. \"Proven\", \"guaranteed\", \"best\", \"most\", \"free\" have legal definitions and evidentiary bars.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "GROWTH-SAL-001",
+    "GROWTH-SAL-002",
+    "GROWTH-SAL-003"
+   ]
+  },
+  "rubric:growth:tfq": {
+   "ref": "rubric:growth:tfq",
+   "lens": "growth",
+   "anchor_id": "A-GROWTH-TFQ",
+   "anchor": "Canonical failure for this rubric, taken from its lead item GROWTH-TFQ-001: Does the key message and tone match the brief's objective and audience.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "GROWTH-TFQ-001",
+    "GROWTH-TFQ-002"
+   ]
+  },
+  "rubric:growth:wtg": {
+   "ref": "rubric:growth:wtg",
+   "lens": "growth",
+   "anchor_id": "A-GROWTH-WTG",
+   "anchor": "Canonical failure for this rubric, taken from its lead item GROWTH-WTG-001: The mechanism. Why will this convert. \"It looks good\" is not a mechanism. Name the psychological or economic driver.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "GROWTH-WTG-001",
+    "GROWTH-WTG-002",
+    "GROWTH-WTG-003"
+   ]
+  },
+  "rubric:ux:a11y": {
+   "ref": "rubric:ux:a11y",
+   "lens": "ux",
+   "anchor_id": "A-UX-A11Y",
+   "anchor": "Canonical failure for this rubric, taken from its lead item UX-A11Y-001: Automated accessibility disclosure. Any report in this run that cites automated accessibility results (axe or an equivalent automated checker) carries the manifest's ceiling disclosure verbatim: 'Automated checks detect only a subset of WCAG issues. This result means no automatically-detectable violations were found; it does not mean WCAG compliant.' A bare automated pass claim without the disclosure fails this item.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "UX-A11Y-001"
+   ]
+  },
+  "rubric:ux:aw2": {
+   "ref": "rubric:ux:aw2",
+   "lens": "ux",
+   "anchor_id": "A-UX-AW2",
+   "anchor": "Canonical failure for this rubric, taken from its lead item UX-AW2-001: Semantic structure, correct heading order, labeled controls.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "UX-AW2-001",
+    "UX-AW2-002",
+    "UX-AW2-003",
+    "UX-AW2-004",
+    "UX-AW2-005"
+   ]
+  },
+  "rubric:ux:fmt": {
+   "ref": "rubric:ux:fmt",
+   "lens": "ux",
+   "anchor_id": "A-UX-FMT",
+   "anchor": "Canonical failure for this rubric, taken from its lead item UX-FMT-001: Happy-path-only review. Desktop-only review.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "UX-FMT-001",
+    "UX-FMT-002",
+    "UX-FMT-003",
+    "UX-FMT-004"
+   ]
+  },
+  "rubric:ux:hw": {
+   "ref": "rubric:ux:hw",
+   "lens": "ux",
+   "anchor_id": "A-UX-HW",
+   "anchor": "Canonical failure for this rubric, taken from its lead item UX-HW-001: Hidden writes (user surface). The product performs no writes the user did not ask for and cannot see: nothing is posted, sent, synced, shared, or deleted on the user's behalf without an action they took and a surface they can inspect. Every such write is inventoried with its trigger and destination.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "UX-HW-001"
+   ]
+  },
+  "rubric:ux:ns1": {
+   "ref": "rubric:ux:ns1",
+   "lens": "ux",
+   "anchor_id": "A-UX-NS1",
+   "anchor": "Canonical failure for this rubric, taken from its lead item UX-NS1-001: Visibility of system status. Does the user know what is happening after every action. Loading, saving, errors, empty states.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "UX-NS1-001",
+    "UX-NS1-002",
+    "UX-NS1-003",
+    "UX-NS1-004",
+    "UX-NS1-005",
+    "UX-NS1-006",
+    "UX-NS1-007",
+    "UX-NS1-008",
+    "UX-NS1-009",
+    "UX-NS1-010"
+   ]
+  },
+  "rubric:ux:oaa": {
+   "ref": "rubric:ux:oaa",
+   "lens": "ux",
+   "anchor_id": "A-UX-OAA",
+   "anchor": "Canonical failure for this rubric, taken from its lead item UX-OAA-001: Heuristic violation ledger. Numbered by severity, each: heuristic number, what the user hits, the fix.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "UX-OAA-001",
+    "UX-OAA-002",
+    "UX-OAA-003"
+   ]
+  },
+  "rubric:ux:rup": {
+   "ref": "rubric:ux:rup",
+   "lens": "ux",
+   "anchor_id": "A-UX-RUP",
+   "anchor": "Canonical failure for this rubric, taken from its lead item UX-RUP-001: Walk desktop, tablet, and phone widths. Clipped text, overlap, overflow, horizontal scroll, invisible fonts.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "UX-RUP-001",
+    "UX-RUP-002",
+    "UX-RUP-003",
+    "UX-RUP-004"
+   ]
+  },
+  "rubric:ux:wpc": {
+   "ref": "rubric:ux:wpc",
+   "lens": "ux",
+   "anchor_id": "A-UX-WPC",
+   "anchor": "Canonical failure for this rubric, taken from its lead item UX-WPC-001: LCP, INP, CLS. Slow first paint, janky interaction, layout shift.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "UX-WPC-001",
+    "UX-WPC-002"
+   ]
+  },
+  "rubric:ux:wtu": {
+   "ref": "rubric:ux:wtu",
+   "lens": "ux",
+   "anchor_id": "A-UX-WTU",
+   "anchor": "Canonical failure for this rubric, taken from its lead item UX-WTU-001: Evidence from the real thing. A screenshot or a live walkthrough, not a description of the design. \"It should work\" is not a review.",
+   "forced_comparison": "Before scoring a finding under this rubric, compare it side by side with the anchor: is the observed defect the same class, on the same kind of surface, with at least the anchor's consequence? If it is weaker, score it one band lower and say which anchor element it lacks; if it matches or exceeds the anchor, name the anchor element it matches.",
+   "criteria": [
+    "UX-WTU-001",
+    "UX-WTU-002",
+    "UX-WTU-003"
+   ]
+  }
+ }
+}

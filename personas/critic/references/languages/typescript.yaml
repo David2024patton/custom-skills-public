@@ -1,0 +1,57 @@
+# typescript.yaml - Critic language file: TypeScript.
+# Loaded into every critic brief when stack detection reports the typescript
+# stack (critic.manifest.json stacks[].languageFile; SOUL section 2 brief
+# assembly). Loads alongside javascript.yaml; this file carries only what
+# TypeScript adds. Source of truth for per-language review knowledge.
+# Carries verified_as_of and expires 90 days later under the staleness law
+# (SOUL 8.15).
+version: 1
+stack: typescript
+display_name: "TypeScript"
+verified_as_of: "2026-10-28"
+expires: "2027-01-26"
+detection:
+  markers: ["tsconfig.json", "package.json containing typescript"]
+  notes: "Detection fires on tsconfig.json within depth 4, or a package.json naming typescript. The generic scripts/js-ts fallback set is covered by this file together with javascript.yaml (recorded exception, same as in javascript.yaml)."
+toolchain:
+  build: "tsc via the project's build script; a type error is a build failure, never a warning to waive"
+  test: "the project's test runner via the family test script"
+  lint: "eslint with type-aware rules via the family lint script, plus scripts/typescript/strictness.sh, which audits the strictness posture and runs inside the lint path"
+  format: "the family format script"
+  debug: "diagnostic seam per the family debug rules; debug-check.sh greps for the seam"
+gates:
+  manifest_gates: ["typescript-lint", "typescript-debug-check", "typescript-test"]
+  script_dir: "scripts/typescript"
+  extra_scripts: ["format.sh", "strictness.sh", "debug-add.sh"]
+sanitizer:
+  status: canonical
+  canonical: "DOMPurify (typed via isomorphic-dompurify, which re-exports the Config and hook types)"
+  package: "isomorphic-dompurify (universal); dompurify (browser-only code)"
+  license: "Apache-2.0 or MPL-2.0 for DOMPurify (choose Apache-2.0); MIT for isomorphic-dompurify"
+  latest_known: {version: "3.4.17 (DOMPurify)", as_of: "2026-10-28"}
+  currency_rule: "Same as javascript.yaml: verify against npm at intel-refresh; flag pins more than one minor behind."
+  config_checks:
+    - "Sanitizer configuration is typed (Config from the library), not an untyped object literal cast into place; an as-cast around the config hides widenings from the type checker and from review."
+    - "All javascript.yaml config checks apply unchanged (jsdom currency, USE_PROFILES, ADD_TAGS and ADD_ATTR widenings, no post-sanitize mutation)."
+  dangerous_sinks:
+    - "Every sink in javascript.yaml, plus the TypeScript-specific bypasses below"
+    - "as unknown as string (or any double assertion) used to push unsanitized data past a typed sanitizer boundary"
+    - "Non-null assertions on values that gate sanitization (config!, window!)"
+  verdict_rules:
+    - "Same verdict rules as javascript.yaml; a type-system bypass around the sanitizer is itself a finding even when the current data flow looks safe."
+security_tooling:
+  - "osv-scanner and npm audit over package-lock.json"
+  - "tsc strictness posture as a security signal: strict off, or strictNullChecks off, in a project handling user HTML is a finding"
+dangerous_patterns:
+  - "any used to silence the checker around data ingress (request bodies, JSON.parse results flowing unvalidated into rendering)"
+  - "ts-ignore or ts-expect-error clusters around security-relevant calls"
+review_can:
+  - "Run the gate triple, the format script, and the strictness audit"
+  - "Verify sanitizer typing, config, and version from source and package files"
+review_cannot:
+  - "Runtime behavior beyond what the javascript file records; types prove shape, not safety"
+untested:
+  - "None recorded per-language. Carried from the critic inventory 2026-10-28."
+sources:
+  - "isomorphic-dompurify repository README (type re-exports), read 2026-10-28"
+  - "Critic inventory 2026-10-28 (gate and UNTESTED records)"

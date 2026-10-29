@@ -1,0 +1,168 @@
+# rubric-anchors.yaml - Severity rubric anchors for the Critic family.
+# Created by Lane 5 of the fix-all program, 2026-10-29, repairing the
+# defect that SOUL.md section 8.16 invoked "behavioural rubric anchors"
+# that existed nowhere in writing (diagnosis: DIAGNOSIS.md part 2.4).
+# Method: behaviorally anchored rating scales (Smith and Kendall,
+# 1963). Every severity carries a behavioral test, not an adjective,
+# and every severity x lens cell carries exemplar findings. Exemplars
+# drawn from the family's own adjudicated defects (proof run,
+# 2026-10-27; cited by defect ID) are the primary anchors. Cells the
+# adjudicated record does not cover carry constructed exemplars in
+# the same shape, labelled constructed, usually the adjudicated
+# pattern one cell over escalated by one behavioral step.
+# Rules of use:
+#   - Rate by recognition: which exemplar does this finding behave
+#     like, and does it pass that severity's behavioral test?
+#   - Critical and High require the forced anchor comparison of
+#     SOUL 8.16 against THIS file's anchor for the cell: "at least as
+#     reachable and at least as harmful as the anchor, yes or no, and
+#     why", kept verbatim in the finding record.
+#   - Retranslation rule: an exemplar that two critics place at
+#     different severities in a live pass is retired or rewritten at
+#     the next rubric revision; ambiguous anchors are defects of the
+#     rubric, not of the critics.
+#   - Adjacent-level contrast: each cell's exemplars were chosen so
+#     the level above and below are hard to confuse with it. If a
+#     finding sits between two cells, the deciding question is the
+#     higher cell's behavioral test, answered with evidence.
+# Carries verified_as_of and expires 90 days later under the
+# staleness law (SOUL 8.15). Research basis: lane5 RESEARCH.md
+# (E0006, E0007, E0008, E0009).
+version: 1
+verified_as_of: "2026-10-29"
+expires: "2027-01-27"
+severities:
+  Critical:
+    test: "Reachable by default, the defect defeats a load-bearing guarantee for every user, tenant, or verdict that reaches it, and no compensating control inside the artifact stops it: data crosses a trust boundary, a privileged action runs unauthenticated, secret material is exposed, or the artifact's own verdict machinery certifies something false. Ask: could this ship and cause a breach, a false ship verdict, or irreversible harm before a human would plausibly catch it in normal operation? Yes means Critical."
+    lenses:
+      code:
+        anchor: "A security or verdict control that cannot fail, or always passes, on the default path."
+        exemplars:
+          - source: "constructed (lane5)"
+            title: "A release gate script exits 0 when its own checks fail, so every artifact ships regardless of findings"
+      claims:
+        anchor: "A load-bearing claim the artifact's own evidence directly refutes, presented as measured fact."
+        exemplars:
+          - source: "constructed (lane5)"
+            title: "Documentation states the panel was validated at a 95 percent catch rate when the only calibration run behind the number was the built-in marker grep"
+      ux:
+        anchor: "The primary operator surface gives a success signal for a failed or dangerous operation, with no distinguishing signal anywhere on that surface."
+        exemplars:
+          - source: "constructed (lane5)"
+            title: "The one-line verdict prints SHIP for both a clean pass and a run whose gates never executed"
+      growth:
+        anchor: "A public claim whose falsity creates legal or refund exposure at scale, not mere embarrassment."
+        exemplars:
+          - source: "constructed (lane5)"
+            title: "The sales page promises a compliance certification the company does not hold, as the lead claim"
+      compliance:
+        anchor: "A legal or regulatory deadline or duty is silently missed because the machinery drops the field that carries it."
+        exemplars:
+          - source: "constructed (lane5), escalated from adjudicated D-42"
+            title: "KEV due dates are discarded before reporting, so a KEV-listed component ships past its federal remediation deadline under a green report"
+  High:
+    test: "A real guarantee fails, but the blast radius is bounded or a compensating control exists: one tenant, one surface, one check bypassable with effort, one required protocol element missing so verdicts rest on less than the protocol promises. Reachable in normal use. Ask: does an operator or user who trusts this artifact get a materially wrong outcome in an ordinary case, even if not the worst case? Yes means at least High; the Critical test decides between the two."
+    lenses:
+      code:
+        anchor: "A check, gate, or scorer that can be bypassed or that measures something other than what it claims to measure."
+        exemplars:
+          - source: "adjudicated D-21"
+            title: "Seed catch is scored by seed ID substring, and seeds announce themselves with a planted marker"
+          - source: "adjudicated D-14"
+            title: "Evidence gate path-escape check can be bypassed by a sibling prefix path"
+      claims:
+        anchor: "Two load-bearing statements in the artifact contradict each other, or a headline claim's only support is the artifact asserting it."
+        exemplars:
+          - source: "adjudicated D-01"
+            title: "Section 2 claims independence is enough, section 8 says it is not"
+          - source: "adjudicated D-29"
+            title: "Planted seeds announce their own defect class in the review copy"
+      ux:
+        anchor: "Operators cannot tell materially different run states apart on a surface they use every run, and must open source or logs to reconcile them."
+        exemplars:
+          - source: "constructed (lane5), escalated from adjudicated D-03"
+            title: "Two of the three exit vocabularies disagree on the code for tool-missing, and the report header prints the wrong one"
+      growth:
+        anchor: "A decision-shaping claim (price, parity, efficacy) with no evidence inside the artifact, placed where buyers or owners act on it."
+        exemplars:
+          - source: "constructed (lane5), escalated from adjudicated D-24"
+            title: "A competitor parity price with no source is the lead line of the public pricing page"
+      compliance:
+        anchor: "A required record, field, or control exists on paper but the machinery never produces or checks it, so compliance rests on an assumption."
+        exemplars:
+          - source: "constructed (lane5), escalated from adjudicated D-05"
+            title: "The manifest's registry reference points at a file outside the bundle, and the publish gate that should catch it accepts the reference string alone"
+  Medium:
+    test: "Behavior diverges from the artifact's own stated contract in a way that misleads operators or weakens a check without defeating it. The guarantee still mostly holds; the record about it does not. Ask: would a careful operator, trusting this artifact, form a wrong belief or skip a step they would otherwise have taken? Yes means Medium."
+    lenses:
+      code:
+        anchor: "A check that runs, passes, and verifies less than its name or contract says."
+        exemplars:
+          - source: "adjudicated D-12"
+            title: "Checklist lint prose orphan check walks the tree and does nothing"
+          - source: "adjudicated D-17"
+            title: "Injection probe returns 0 when the only results are sink hits"
+      claims:
+        anchor: "A claim that is templated, circular, or sourced below the standard the artifact demands of others."
+        exemplars:
+          - source: "adjudicated D-31"
+            title: "Every checklist pass and fail criterion is a templated restatement of its title"
+          - source: "adjudicated D-58"
+            title: "Watchlist vulnerability entries rest on press coverage instead of the primary sources the claims method demands"
+      ux:
+        anchor: "The operator must reconcile inconsistent surface behavior by hand, but the true state is recoverable from what is printed."
+        exemplars:
+          - source: "adjudicated D-03"
+            title: "Three different exit code vocabularies govern the same operator surface"
+          - source: "adjudicated D-11"
+            title: "One combined line satisfies the per-lens Not tested check for all five lenses"
+      growth:
+        anchor: "A growth claim or routing decision that would misdirect effort or credit, with no buyer-facing falsity."
+        exemplars:
+          - source: "adjudicated D-62"
+            title: "The family's headline efficacy claim carries no substantiation inside the artifact"
+          - source: "adjudicated D-65"
+            title: "Marketing conversion tracking checks are filed under the UX lens, splitting growth coverage"
+      compliance:
+        anchor: "Two governing values conflict, or a required print or record is produced in a form the law or protocol cannot use as written."
+        exemplars:
+          - source: "adjudicated D-06"
+            title: "Manifest feed staleness limit of 24 hours conflicts with the P-15 law of 48 and 120 hours"
+          - source: "adjudicated D-42"
+            title: "KEV matching discards the due date the staleness law requires printing"
+  Low:
+    test: "Cosmetic or local friction with no path to a wrong verdict, a harmed user, or a misled operator: truncated text, a dead expression, a missing metadata field, wording drift between sibling files. Ask: if nobody ever fixed this, would any decision come out different? No means Low."
+    lenses:
+      code:
+        anchor: "Dead or self-referential code whose output is still correct."
+        exemplars:
+          - source: "adjudicated D-53"
+            title: "Bootstrap interval line carries a dead conditional expression"
+          - source: "adjudicated D-41"
+            title: "Bundle hash verification compares each copy against its own hash"
+      claims:
+        anchor: "A claim about the artifact that is incomplete rather than wrong."
+        exemplars:
+          - source: "adjudicated D-50"
+            title: "Checklist pass and fail criteria restate the item title instead of stating an observable criterion"
+          - source: "adjudicated D-68"
+            title: "The PDF deliverable the output contract requires has no tooling or named skill inside the critic family"
+      ux:
+        anchor: "Reading friction on a secondary surface; the operator can still complete every task."
+        exemplars:
+          - source: "adjudicated D-61"
+            title: "Checklist titles in the source of truth JSON are cut mid sentence, so the operator cannot read the full check from the checklist"
+          - source: "adjudicated D-38"
+            title: "The mandated PDF deliverable carries no accessibility requirement of its own"
+      growth:
+        anchor: "A metric or term used without a definition, where no decision currently rides on it."
+        exemplars:
+          - source: "adjudicated D-33"
+            title: "Brief-fit score is demanded with no scale, range or passing value"
+      compliance:
+        anchor: "A record or frontmatter gap that breaks no duty but weakens auditability."
+        exemplars:
+          - source: "adjudicated D-28"
+            title: "Control C7 names evidence targets that do not exist in the bundle"
+          - source: "adjudicated D-67"
+            title: "Compliance lens frontmatter omits the version and platforms fields all four sibling lens skills carry"

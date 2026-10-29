@@ -1,0 +1,30 @@
+# SIG-PHP-2024-001 - PHP CGI argument injection signature.
+# Describe-only: the critic never sends exploit traffic. The signature
+# is runtime state, not a version string alone, because distro
+# backports can fix the flaw without a version bump.
+id: SIG-PHP-2024-001
+name: PHP CGI argument injection, runtime state check
+verified_as_of: "2026-10-29"
+expires: "2027-01-27"
+cves:
+  - id: CVE-2024-4577
+    ghsa: GHSA-3qgc-jrrr-25jv
+    summary: "Argument injection in PHP-CGI on Windows, discovered by Orange Tsai (DEVCORE) and disclosed 2024-06-06. The Windows Best Fit encoding conversion turns a soft hyphen (0xAD) in a request into a dash (0x2D) in the php-cgi command line, so an unauthenticated attacker can pass PHP options to the binary and reach source disclosure or arbitrary code execution. It bypasses the protections built for CVE-2012-1823."
+    severity: "CVSS v3.1 9.8 (NVD). Report the NVD score; this 2024 advisory predates the PHP CNA v4 scoring used by the 2026 pair."
+    kev: "Listed in CISA KEV, due 2024-07-03."
+affected: "PHP on Windows serving in CGI mode, or with the php-cgi binary exposed, under affected code pages (Traditional Chinese, Simplified Chinese, and Japanese locales are named; XAMPP on Windows is vulnerable by default in those locales). Vulnerable branches: 8.1 before 8.1.29, 8.2 before 8.2.20, 8.3 before 8.3.8. Non-Windows hosts and non-CGI SAPIs (FPM, mod_php) are not affected by this flaw."
+fixed_in:
+  "8.3": "8.3.8"
+  "8.2": "8.2.20"
+  "8.1": "8.1.29"
+  fixed_date: "2024-06-06"
+semantics:
+  exit_0_OK: "Serving runtime is at or past the fixed release for its branch, or the artifact does not run PHP in CGI mode on Windows at all (recorded as the reason), or a verified vendor backport (vendor plus advisory ID recorded) is present."
+  exit_1_VULNERABLE: "PHP in CGI mode on Windows below the fixed release for its branch with no verified backport."
+  exit_3_UNKNOWN: "Serving runtime version, SAPI, or patch state cannot be established. An absent X-Powered-By or Server header is UNKNOWN, never a pass."
+checks:
+  primary: "Version of the runtime that serves requests AND the SAPI in use. CGI on Windows is the affected configuration; the same version under FPM is a different risk picture. Not the CLI binary, not composer.json constraints."
+  header_probes: "X-Powered-By and Server headers are weak signals only."
+  config_greps_raise_priority_never_clear: ["php-cgi exposed as a web endpoint", "XAMPP on Windows in an affected locale", "Apache handler mapping scripts to php-cgi"]
+reference_checker: "No external reference checker is named for this entry; the bundle's runtime-version gate (scripts/common/runtime-version.sh) carries the branch comparison and the backport attestation rule."
+not_this: "Not CVE-2026-109618 or CVE-2026-109619 (the PHP2Shell pair, carried as SIG-PHP-2026-001): different flaw (interpreter memory state, all web SAPIs), different mechanism, different discoverer. The library carries the two separately so attribution stays exact."

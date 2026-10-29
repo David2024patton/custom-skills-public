@@ -1,0 +1,3652 @@
+# xss-payloads.yaml - shared XSS probe corpus for the Critic family, v2.
+# Run, do not eyeball: where a review can execute the target's sanitizer
+# configuration (a Node runtime for the JS stacks, a test harness for the
+# server stacks), every payload goes through it, and the outcome is the
+# evidence. The fixed rule for every payload in an attack class: the
+# payload's executable content must be gone or inert in the output.
+# Benign-control entries carry the opposite rule: their structure must
+# SURVIVE, and over-stripping is a defect of the opposite sign.
+# v2 is the full DOMPurify test-suite extraction, merged with the v1
+# curated entries (ids XSS-README-* and XSS-CLASS-*, kept verbatim).
+# Extraction: extract-corpus.mjs over a clone of cure53/DOMPurify at
+# commit b7e0edc1293359d6ab54dc0ccc9cf9bbdd72aff7 (DOMPurify 3.4.17), extracted 2026-10-29:
+# 562 payload occurrences scanned in test/fixtures/expect.mjs and inline
+# sanitize() calls in test/*.js, 402 unique payloads,
+# 3 payload(s) already present in v1 (provenance merged into
+# the v1 entry), 413 entries total in this file.
+# Entries carry per-entry provenance in source_file (v1 entries predate
+# per-file provenance; their source is the DOMPurify README and attack
+# class catalog, read 2026-10-28). Class names are the v1 taxonomy plus
+# one declared extension, script-element, for the bare script primitive
+# upstream tests heavily. 5 iframe and object embed payloads remain
+# class unclassified; their invariant is the generic one.
+# Entries are reproduced from the DOMPurify test suite under Apache-2.0
+# (DOMPurify is dual licensed Apache-2.0 or MPL-2.0; the family takes
+# Apache-2.0, consistent with THIRD-PARTY.md handling).
+# Quick mode gates run entries with core: true (all v1 entries plus the
+# strongest representatives per class); full mode runs every entry.
+# Carries verified_as_of and expires 90 days later under the staleness
+# law (SOUL 8.15); the extraction should be re-run on each DOMPurify
+# minor release and this file re-issued.
+version: 2
+verified_as_of: '2026-10-29'
+expires: '2027-01-27'
+source: cure53/DOMPurify test suite at commit b7e0edc1293359d6ab54dc0ccc9cf9bbdd72aff7 (DOMPurify 3.4.17), extracted 2026-10-29 with extract-corpus.mjs, merged with the v1 curated corpus (DOMPurify README samples and attack-class catalog, read 2026-10-28)
+entry_count: 413
+class_counts:
+  benign-control: 148
+  details-event: 1
+  dom-clobbering: 20
+  event-handler-basic: 41
+  form-action-scheme: 3
+  mathml-injection-point: 9
+  mutation-xss-namespace: 18
+  nesting-structure: 38
+  rawtext-breakout: 29
+  script-element: 39
+  srcdoc: 1
+  svg-event-handler: 13
+  template-content: 10
+  unclassified: 5
+  unclosed-tag-injection: 1
+  uri-scheme: 37
+entries:
+- id: XSS-README-001
+  class: nesting-structure
+  payload: <div id="x">a=1</div>
+  expect: Purified output keeps the div empty or text-only; the assignment text a=1 must not survive as markup or script-capable content.
+  core: true
+- id: XSS-README-002
+  class: svg-event-handler
+  payload: <svg><animate onbegin=alert(1) attributeName=x dur=1s>
+  expect: The onbegin handler is removed; no event attribute survives.
+  core: true
+- id: XSS-README-003
+  class: dom-clobbering
+  payload: <form><math><mtext></form><form><mglyph><style></math><img src onerror=alert(1)>
+  expect: No onerror survives; the clobbering form and math structure does not re-form an executable img handler after a browser parse.
+  core: true
+- id: XSS-README-004
+  class: unclosed-tag-injection
+  payload: <hello<
+  expect: Output is inert text or removed; no new element is created.
+  core: true
+- id: XSS-README-005
+  class: mathml-injection-point
+  payload: <math><mi//xlink:href="data:x,<script>alert(4)</script>">
+  expect: The script inside the data URI is gone; no script element or executable href survives.
+  core: true
+- id: XSS-README-006
+  class: rawtext-breakout
+  payload: <TABLE><tr><td>HELLO</tr></TABL>
+  expect: Malformed nesting is normalized to inert content; nothing executable is produced by parser repair.
+  core: true
+- id: XSS-CLASS-007
+  class: mutation-xss-namespace
+  payload: <svg><p><style><a id=</style><img src=x onerror=alert(1)>
+  expect: 'The mutation XSS canonical case: namespace shuffling between SVG, style rawtext, and HTML must not resurrect the onerror after a serialize and reparse round trip.'
+  core: true
+- id: XSS-CLASS-008
+  class: event-handler-basic
+  payload: <img src=x onerror=alert(1)>
+  expect: The img is removed or its onerror is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: true
+  also_in_upstream: test/bootstrap-test-suite.js
+- id: XSS-CLASS-009
+  class: uri-scheme
+  payload: <a href="javascript:alert(1)">click</a>
+  expect: 'The javascript: scheme does not survive in the href.'
+  core: true
+  also_in_upstream: test/test-suite.js
+- id: XSS-CLASS-010
+  class: form-action-scheme
+  payload: <form><button formaction="javascript:alert(1)">go</button></form>
+  expect: 'The formaction javascript: URL is removed or the element is stripped.'
+  core: true
+- id: XSS-CLASS-011
+  class: details-event
+  payload: <details open ontoggle=alert(1)>x</details>
+  expect: The ontoggle handler is removed.
+  core: true
+- id: XSS-CLASS-012
+  class: srcdoc
+  payload: <iframe srcdoc="<script>alert(1)</script>"></iframe>
+  expect: The iframe is removed or srcdoc is stripped; iframes allowed without srcdoc control are a config finding in their own right.
+  core: true
+- id: XSS-CLASS-013
+  class: template-content
+  payload: <template><img src=x onerror=alert(1)></template>
+  expect: Template content is sanitized too, not skipped as inert; a sanitizer that ignores template contents fails this entry.
+  core: true
+  also_in_upstream: test/test-suite.js
+- id: XSS-CLASS-014
+  class: benign-control
+  payload: <p>Hello <b>world</b>, see <a href="https://example.com">the docs</a>.</p>
+  expect: 'The control entry: benign structure and a safe link SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, which is a defect of the opposite sign and is reported as such.'
+  core: true
+- id: XSS-DP-0001
+  class: benign-control
+  payload: ' '
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: true
+  source_file: test/fixtures/expect.mjs
+  title: Tests against proper handling of leading whitespaces
+  expected_upstream: ' '
+- id: XSS-DP-0002
+  class: benign-control
+  payload: ' <b>AAAAA</b>'
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0003
+  class: benign-control
+  payload: ' AAAAA'
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0004
+  class: benign-control
+  payload: '{{999-333}}'
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0005
+  class: benign-control
+  payload: '{<x>{333+333}<x>}'
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0006
+  class: benign-control
+  payload: <!-- more soon -->
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Tests against additional problems regarding HTML inside MathML 2/2
+  expected_upstream: ''
+- id: XSS-DP-0007
+  class: benign-control
+  payload: <!DOCTYPE html><html><body>123</body></html>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0008
+  class: benign-control
+  payload: </iframe></option>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Closing Iframe and option
+  expected_upstream: ''
+- id: XSS-DP-0009
+  class: benign-control
+  payload: <a aria-abc="foo" href="#">abc</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0010
+  class: benign-control
+  payload: <a class="{{999-333}}"></a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0011
+  class: benign-control
+  payload: '<a data-bind="style: alert(1)"></a>'
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0012
+  class: benign-control
+  payload: <a data-harmless=""></a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0013
+  class: benign-control
+  payload: <a data-x="1">y</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0014
+  class: benign-control
+  payload: <a href="{{x">y</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0015
+  class: benign-control
+  payload: <a href="#" aria-abc="foo">abc</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0016
+  class: benign-control
+  payload: <a href="#" aria-aöü="foo">abc</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0017
+  class: benign-control
+  payload: <a href="#" aria-äöü="foo">abc</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0018
+  class: benign-control
+  payload: <a href="#" class="foo <br/>">abc</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0019
+  class: benign-control
+  payload: <a href="#" data-·._="foo">abc</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0020
+  class: benign-control
+  payload: <a href="#" data-""="foo">abc</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0021
+  class: benign-control
+  payload: <a href="#" data-abc-1-2-3="foo">abc</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0022
+  class: benign-control
+  payload: <a href="#" data-abc"="foo">abc</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0023
+  class: benign-control
+  payload: <a href="#" data-abc="foo">abc</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0024
+  class: benign-control
+  payload: <a href="#" data-äöü="foo">abc</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0025
+  class: benign-control
+  payload: <a href="#" data-evil="foo">abc</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0026
+  class: benign-control
+  payload: <a href="#" data-µ="foo">abc</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0027
+  class: benign-control
+  payload: <a href="#">abc</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0028
+  class: benign-control
+  payload: <a href="#">abc</a><CustomTag customattr="bar" CustomAttr="foo"/>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0029
+  class: benign-control
+  payload: <a href="#">abc<b style="color:red">123</b><q class="cite">123</b></a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0030
+  class: benign-control
+  payload: <a href="#">x</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0031
+  class: benign-control
+  payload: <a href="#some-code-here" id="location">invisible
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'DOM clobbering: location'
+  expected_upstream: <a href="#some-code-here">invisible</a>
+- id: XSS-DP-0032
+  class: benign-control
+  payload: <a href="data:image/gif;base64,123">icon.gif</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0033
+  class: benign-control
+  payload: <a href="https://example.com">x</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0034
+  class: benign-control
+  payload: <a href="https://x">y</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0035
+  class: benign-control
+  payload: <a href="x" id="location">click</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0036
+  class: benign-control
+  payload: <a href=data:,evilnastystuff>clickme</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Link with data URI href
+  expected_upstream: <a>clickme</a>
+- id: XSS-DP-0037
+  class: benign-control
+  payload: <a id="x"></a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0038
+  class: benign-control
+  payload: <a id="x"></a><a id="x"></a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0039
+  class: benign-control
+  payload: <a name="user-content-x">hi</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0040
+  class: benign-control
+  payload: <a x="1">123<b>456</b></a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0041
+  class: benign-control
+  payload: <a y="1">123<b y="1" y="2">456</b></a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0042
+  class: benign-control
+  payload: <a>123{{456}}</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0043
+  class: benign-control
+  payload: <a>123{{456}}<b>456{{789}}</b></a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0044
+  class: benign-control
+  payload: <a>123</a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0045
+  class: benign-control
+  payload: <a>123<b>456</b></a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0046
+  class: benign-control
+  payload: <allowed>yes</allowed><forbidden>no</forbidden>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0047
+  class: benign-control
+  payload: <apple>content</apple><banana>content</banana><cherry>content</cherry>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0048
+  class: benign-control
+  payload: <b is="foo">bar</b>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Tests against proper handling of is attributes (which cannot be removed)
+  expected_upstream: <b is="">bar</b>
+- id: XSS-DP-0049
+  class: benign-control
+  payload: <b typeof="bla:h">123</b>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0050
+  class: benign-control
+  payload: <b>again</b>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/bootstrap-test-suite.js
+- id: XSS-DP-0051
+  class: benign-control
+  payload: <b>hello goodbye</b>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0052
+  class: benign-control
+  payload: <b>hello</b>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0053
+  class: benign-control
+  payload: <b>x</b>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0054
+  class: benign-control
+  payload: <b>x</b><i>y</i>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0055
+  class: benign-control
+  payload: <br>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0056
+  class: benign-control
+  payload: <button command="show-modal" commandfor="dialog">Show Modal</button>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Testing support for command and commandfor
+  expected_upstream: <button command="show-modal" commandfor="dialog">Show Modal</button>
+- id: XSS-DP-0057
+  class: benign-control
+  payload: <button popovertargetaction="show" popovertarget="popover">Show Popover</button>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Testing support for popovertarget and popovertargetaction
+  expected_upstream: <button popovertargetaction="show" popovertarget="popover">Show Popover</button>
+- id: XSS-DP-0058
+  class: benign-control
+  payload: <custom-a></custom-a><custom-b></custom-b>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0059
+  class: benign-control
+  payload: <div aria-labelledby="msg--title" role="dialog" class="msg"><button class="modal-close" aria-label="close" type="button"><i class="icon-close"></i>some button</button></div>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'Don''t remove ARIA attributes if not prohibited (see #203)'
+  expected_upstream: <div aria-labelledby="msg--title" role="dialog" class="msg"><button class="modal-close" aria-label="close" type="button"><i class="icon-close"></i>some button</button></div>
+- id: XSS-DP-0060
+  class: benign-control
+  payload: <div custom-attr="test">content</div>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0061
+  class: benign-control
+  payload: <div data-bio="x"></div><x-bio data-bio="x"></x-bio>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0062
+  class: benign-control
+  payload: <div for="account-panel">x</div>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0063
+  class: benign-control
+  payload: <div for="target">x</div>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0064
+  class: benign-control
+  payload: <div id="43"><?xml version="1.0" standalone="no"?>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="43"></div>
+- id: XSS-DP-0065
+  class: benign-control
+  payload: <div id="user-content-x">hi</div>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0066
+  class: benign-control
+  payload: <div inert></div>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Testing support for inert
+  expected_upstream: <div inert=""></div>
+- id: XSS-DP-0067
+  class: benign-control
+  payload: <div patchsrc="//e">x</div>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0068
+  class: benign-control
+  payload: <div patchsrc="//evil.example/p">x</div>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0069
+  class: benign-control
+  payload: '<div poster="x:y" style="color: red">Test</div>'
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0070
+  class: benign-control
+  payload: <div>{<foo></foo>{constructor.constructor("alert(1)")()}<foo></foo>}</div>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0071
+  class: benign-control
+  payload: <div><?marker name="x1"></div>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0072
+  class: benign-control
+  payload: <div></div>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0073
+  class: benign-control
+  payload: <div><article><b>x</b></article><i>y</i></div>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0074
+  class: benign-control
+  payload: <div><b>preserve me</b></div><p><b>no not preserve me</b></p>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0075
+  class: benign-control
+  payload: <div><b>preserve me</b></div><p><b>no not preserve me</b></p><a><i>also no preserve me</i></a>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0076
+  class: benign-control
+  payload: <div><span>hi</span></div>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0077
+  class: benign-control
+  payload: <div><span>x</span></div>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0078
+  class: benign-control
+  payload: <div>x</div>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0079
+  class: benign-control
+  payload: <element-one attribute-one="1" attribute-two="2"></element-one>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0080
+  class: benign-control
+  payload: <foo-bar baz="foobar" forbidden="true"></foo-bar><div is="foo-baz"></div>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0081
+  class: benign-control
+  payload: <foo-bar>abc</foo-bar>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0082
+  class: benign-control
+  payload: <h1>HELLO</h1>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0083
+  class: benign-control
+  payload: <html><head></head><body><p>x</p></body></html>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0084
+  class: benign-control
+  payload: <i>&amp;amp; &lt;</i>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0085
+  class: benign-control
+  payload: <img />
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/bootstrap-test-suite.js
+- id: XSS-DP-0086
+  class: benign-control
+  payload: <img alt="<b/>">
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0087
+  class: benign-control
+  payload: "<img src=\"\r\ndata:image/jpeg,ab798ewqxbaudbuoibeqbla\">"
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Image with data URI src with whitespace
+  expected_upstream: <img src="data:image/jpeg,ab798ewqxbaudbuoibeqbla">
+- id: XSS-DP-0088
+  class: benign-control
+  payload: <img src="data:,123"><audio src="data:,456"></audio><video src="data:,789"></video><source src="data:,012"><div src="data:,345">
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'src Attributes for IMG, AUDIO, VIDEO and SOURCE (see #131)'
+  expected_upstream: <img src="data:,123"><audio src="data:,456"></audio><video src="data:,789"></video><source src="data:,012"><div></div>
+- id: XSS-DP-0089
+  class: benign-control
+  payload: <img src="https://test.com">
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0090
+  class: benign-control
+  payload: <img src="small.jpg" srcset="medium.jpg 1000w, large.jpg 2000w">
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Testing support for sizes and srcset
+  expected_upstream:
+  - <img src="small.jpg" srcset="medium.jpg 1000w, large.jpg 2000w">
+  - <img srcset="medium.jpg 1000w, large.jpg 2000w" src="small.jpg">
+- id: XSS-DP-0091
+  class: benign-control
+  payload: <img src="x" name="createNodeIterator">
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0092
+  class: benign-control
+  payload: <img src="x" name="getElementById">
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0093
+  class: benign-control
+  payload: <img src="x" name="implementation">
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0094
+  class: benign-control
+  payload: <img src=1 width="{{123}}">
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0095
+  class: benign-control
+  payload: <img src=data:image/jpeg,ab798ewqxbaudbuoibeqbla>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Image with data URI src
+  expected_upstream: <img src="data:image/jpeg,ab798ewqxbaudbuoibeqbla">
+- id: XSS-DP-0096
+  class: benign-control
+  payload: <img src=x name=cookie>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: DOM Clobbering against an empty cookie
+  expected_upstream: <img src="x">
+- id: XSS-DP-0097
+  class: benign-control
+  payload: <img src=x name=createElement><img src=y id=createElement>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'DOM Clobbering against document.createElement() (see #47)'
+  expected_upstream: <img src="x"><img src="y">
+- id: XSS-DP-0098
+  class: benign-control
+  payload: <img src=x name=getElementById>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'DOM clobbering: getElementById'
+  expected_upstream: <img src="x">
+- id: XSS-DP-0099
+  class: benign-control
+  payload: <img src=x>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0100
+  class: benign-control
+  payload: <img>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/bootstrap-test-suite.js
+- id: XSS-DP-0101
+  class: benign-control
+  payload: <input name=acceptCharset>123
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'DOM clobbering: acceptCharset'
+  expected_upstream: <input>123
+- id: XSS-DP-0102
+  class: benign-control
+  payload: <input name=submit>123
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'DOM clobbering: submit'
+  expected_upstream: <input>123
+- id: XSS-DP-0103
+  class: benign-control
+  payload: <item1>one</item1><item2>two</item2><other>three</other>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0104
+  class: benign-control
+  payload: <label for="email">Email</label>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0105
+  class: benign-control
+  payload: <my-component my-attr="foo">abc</my-component>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0106
+  class: benign-control
+  payload: <my-component>abc</my-component>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0107
+  class: benign-control
+  payload: <my-paragraph><span slot="my-text">test</span></my-paragraph>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0108
+  class: benign-control
+  payload: <noscript><noembed>x</noembed></noscript>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0109
+  class: benign-control
+  payload: <one attribute-one="1" attribute-two="2"></one><two attribute-one="1" attribute-two="2"></two>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0110
+  class: benign-control
+  payload: <one attribute-one="1" forbidden="bad"></one>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0111
+  class: benign-control
+  payload: <output for="a b">42</output>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0112
+  class: benign-control
+  payload: <p>HE<is-custom super-custom="test">LLO</is-custom></p>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0113
+  class: benign-control
+  payload: <p>hello</p>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: HTML paragraph with text
+  expected_upstream: <p>hello</p>
+- id: XSS-DP-0114
+  class: benign-control
+  payload: <p>Hello<b> World</b></p>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0115
+  class: benign-control
+  payload: <polyline points="0 0"></polyline>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0116
+  class: benign-control
+  payload: <section for="cart#total">$0.00</section>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0117
+  class: benign-control
+  payload: <section><?start name="g">hi<?end></section>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0118
+  class: benign-control
+  payload: <select><option>Pick me</option><selectedcontent>Pick me</selectedcontent></select>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0119
+  class: benign-control
+  payload: <selectedcontent></selectedcontent>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Testing support for selectedcontent
+  expected_upstream: <selectedcontent></selectedcontent>
+- id: XSS-DP-0120
+  class: benign-control
+  payload: <selectedcontent><span>x</span></selectedcontent>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0121
+  class: benign-control
+  payload: <span data-trusted="1"><img src="x"></span>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0122
+  class: benign-control
+  payload: <span>SEE ME</span>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0123
+  class: benign-control
+  payload: <svg keep="me"></svg>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0124
+  class: benign-control
+  payload: <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><mask id="a" mask-type="alpha"><rect width="100%" height="100%" fill="rgb(10% 10% 10% / 0.4)"></rect><circle cx="50" cy="50" r="35" fill="rgb(90% 90% 90% / 0.6)"></circle></mask><rect width="45" height="45" fill="red" mask="url(#a)"></rect></svg>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Does not remove the SVG 'mask-type' attribute
+  expected_upstream: <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><mask id="a" mask-type="alpha"><rect width="100%" height="100%" fill="rgb(10% 10% 10% / 0.4)"></rect><circle cx="50" cy="50" r="35" fill="rgb(90% 90% 90% / 0.6)"></circle></mask><rect width="45" height="45" fill="red" mask="url(#a)"></rect></svg>
+- id: XSS-DP-0125
+  class: benign-control
+  payload: <svg xmlns="http://www.w3.org/2000/svg"><rect width="10" height="10">
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0126
+  class: benign-control
+  payload: <svg><a xlink:href="https://x"></a></svg>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0127
+  class: benign-control
+  payload: <svg><circle vector-effect="non-scaling-stroke" cx="0" cy="0" r="30"/></svg>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'Keep the SVG vector-effect presentation attribute (see #447)'
+  expected_upstream: <svg><circle vector-effect="non-scaling-stroke" cx="0" cy="0" r="30"></circle></svg>
+- id: XSS-DP-0128
+  class: benign-control
+  payload: <svg><defs><filter id="f1"><feGaussianBlur in="SourceGraphic" stdDeviation="15" /></filter></defs><rect width="90" height="90" stroke="green" stroke-width="3" fill="yellow" filter="url(#f1)" /></svg>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'Avoid over-zealous stripping of SVG filter elements (see #144)'
+  expected_upstream: <svg><defs><filter id="f1"><feGaussianBlur in="SourceGraphic" stdDeviation="15"></feGaussianBlur></filter></defs><rect width="90" height="90" stroke="green" stroke-width="3" fill="yellow" filter="url(#f1)"></rect></svg>
+- id: XSS-DP-0129
+  class: benign-control
+  payload: <svg><feBlend in="SourceGraphic" mode="multiply" /></svg>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0130
+  class: benign-control
+  payload: '<svg><image id="v-146" width="500" height="500" xmlns:xlink="http://www.w3.org/1999/xlink" href="data:image/svg+xml;utf8,%3Csvg%20viewBox%3D%220%200%20100%20100%22%20height%3D%22100%22%20width%3D%22100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20data-name%3D%22Layer%201%22%20id%3D%22Layer_1%22%3E%0A%20%20%3Ctitle%3ECompute%3C%2Ftitle%3E%0A%20%20%3Cg%3E%0A%20%20%20%20%3Crect%20fill%3D%22%239d5025%22%20ry%3D%229.12%22%20rx%3D%229.12%22%20height%3D%2253%22%20width%3D%2253%22%20y%3D%2224.74%22%20x%3D%2223.5%22%3E%3C%2Frect%3E%0A%20%20%20%20%3Crect%20fill%3D%22%23f58536%22%20ry%3D%229.12%22%20rx%3D%229.12%22%20height%3D%2253%22%20width%3D%2253%22%20y%3D%2222.26%22%20x%3D%2223.5%22%3E%3C%2Frect%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E" preserveratio="true" style="border-color: rgb(51, 51, 51); box-sizing: border-box; color: rgb(51, 51, 51); cursor: move; font-family: sans-serif; font-size: 14px; line-height: 20px; outline-color: rgb(51, 51, 51); text-size-adjust: 100%; column-rule-color: rgb(51, 51, 51); -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-text-emphasis-color: rgb(51, 51, 51); -webkit-text-fill-color: rgb(51, 51, 51); -webkit-text-stroke-color: rgb(51, 51, 51); user-select: none; vector-effect: non-scaling-stroke;"></image></svg>'
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Don't remove data URIs from SVG images, with href attribute
+  expected_upstream: '<svg><image id="v-146" width="500" height="500" xmlns:xlink="http://www.w3.org/1999/xlink" href="data:image/svg+xml;utf8,%3Csvg%20viewBox%3D%220%200%20100%20100%22%20height%3D%22100%22%20width%3D%22100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20data-name%3D%22Layer%201%22%20id%3D%22Layer_1%22%3E%0A%20%20%3Ctitle%3ECompute%3C%2Ftitle%3E%0A%20%20%3Cg%3E%0A%20%20%20%20%3Crect%20fill%3D%22%239d5025%22%20ry%3D%229.12%22%20rx%3D%229.12%22%20height%3D%2253%22%20width%3D%2253%22%20y%3D%2224.74%22%20x%3D%2223.5%22%3E%3C%2Frect%3E%0A%20%20%20%20%3Crect%20fill%3D%22%23f58536%22%20ry%3D%229.12%22%20rx%3D%229.12%22%20height%3D%2253%22%20width%3D%2253%22%20y%3D%2222.26%22%20x%3D%2223.5%22%3E%3C%2Frect%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E" style="border-color: rgb(51, 51, 51); box-sizing: border-box; color: rgb(51, 51, 51); cursor: move; font-family: sans-serif; font-size: 14px; line-height: 20px; outline-color: rgb(51, 51, 51); text-size-adjust: 100%; column-rule-color: rgb(51, 51, 51); -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-text-emphasis-color: rgb(51, 51, 51); -webkit-text-fill-color: rgb(51, 51, 51); -webkit-text-stroke-color: rgb(51, 51, 51); user-select: none; vector-effect: non-scaling-stroke;"></image></svg>'
+- id: XSS-DP-0131
+  class: benign-control
+  payload: <svg><rect height="50"></rect></svg>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0132
+  class: benign-control
+  payload: <svg><rect pointer-events="none" width="10" height="10"/></svg>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Keep the SVG pointer-events presentation attribute
+  expected_upstream: <svg><rect pointer-events="none" width="10" height="10"></rect></svg>
+- id: XSS-DP-0133
+  class: benign-control
+  payload: <svg><switch><foreignObject><div>content</div></foreignObject></switch></svg>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0134
+  class: benign-control
+  payload: <svg><text dominant-baseline="middle">x</text></svg>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'Keep the SVG dominant-baseline presentation attribute (see #1525)'
+  expected_upstream: <svg><text dominant-baseline="middle">x</text></svg>
+- id: XSS-DP-0135
+  class: benign-control
+  payload: <svg><text text-orientation="upright">y</text></svg>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'Keep the SVG text-orientation presentation attribute (see #1525)'
+  expected_upstream: <svg><text text-orientation="upright">y</text></svg>
+- id: XSS-DP-0136
+  class: benign-control
+  payload: <svg><text>SEE ME</text></svg>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0137
+  class: benign-control
+  payload: <ul><li>a</li><?marker name="m"><li>b</li></ul>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0138
+  class: benign-control
+  payload: <x-evil>a</x-evil><x-ok>b</x-ok>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0139
+  class: benign-control
+  payload: <x-keep>a</x-keep><div>b</div>
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0140
+  class: benign-control
+  payload: '1'
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0141
+  class: benign-control
+  payload: '123'
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0142
+  class: benign-control
+  payload: 123<img id="body">
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0143
+  class: benign-control
+  payload: '123456'
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Simple numbers
+  expected_upstream: '123456'
+- id: XSS-DP-0144
+  class: benign-control
+  payload: abc
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0145
+  class: benign-control
+  payload: foo<img id="createDocumentFragment">
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0146
+  class: benign-control
+  payload: HELLO
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0147
+  class: benign-control
+  payload: x
+  expect: 'The control entry: benign structure and safe references SURVIVE substantially intact. A sanitizer setup that destroys this is over-stripping, a defect of the opposite sign, reported as such.'
+  core: true
+  source_file: test/bootstrap-test-suite.js, test/test-suite.js
+- id: XSS-DP-0148
+  class: dom-clobbering
+  payload: '<div id="132"><!doctype html>
+
+    <form>
+
+    <label>type a,b,c,d - watch the network tab/traffic (JS is off, latest NoScript)</label>
+
+    <br>
+
+    <input name="secret" type="password">
+
+    </form>
+
+    <!-- injection --><svg height="50px">
+
+    <image xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <set attributeName="xlink:href" begin="accessKey(a)" to="//example.com/?a" />
+
+    <set attributeName="xlink:href" begin="accessKey(b)" to="//example.com/?b" />
+
+    <set attributeName="xlink:href" begin="accessKey(c)" to="//example.com/?c" />
+
+    <set attributeName="xlink:href" begin="accessKey(d)" to="//example.com/?d" />
+
+    </image>
+
+    </svg>//["''`-->]]>]</div>'
+  expect: No event handler survives, and the clobbering structure does not re-form executable content after a browser parse.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - '<div id="132">
+
+    <form>
+
+    <label>type a,b,c,d - watch the network tab/traffic (JS is off, latest NoScript)</label>
+
+    <br>
+
+    <input type="password" name="secret">
+
+    </form>
+
+    <svg height="50px">
+
+    <image xmlns:xlink="http://www.w3.org/1999/xlink">
+
+
+
+
+
+    </image>
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="132">
+
+    <form>
+
+    <label>type a,b,c,d - watch the network tab/traffic (JS is off, latest NoScript)</label>
+
+    <br>
+
+    <input name="secret" type="password">
+
+    </form>
+
+    <svg height="50px">
+
+    <image xmlns:xlink="http://www.w3.org/1999/xlink">
+
+
+
+
+
+    </image>
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0149
+  class: dom-clobbering
+  payload: '<div id="136"><form action="x" method="post">
+
+    <input name="username" value="admin" />
+
+    <input name="password" type="password" value="secret" />
+
+    <input name="injected" value="injected" dirname="password" />
+
+    <input type="submit">
+
+    </form>//["''`-->]]>]</div>'
+  expect: No event handler survives, and the clobbering structure does not re-form executable content after a browser parse.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - '<div id="136"><form action="x" method="post">
+
+    <input name="username" value="admin">
+
+    <input name="password" type="password" value="secret">
+
+    <input name="injected" value="injected">
+
+    <input type="submit">
+
+    </form>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="136"><form action="x" method="post">
+
+    <input name="username" value="admin">
+
+    <input name="password" type="password" value="secret">
+
+    <input name="injected" value="injected">
+
+    <input type="submit">
+
+    </form>//["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0150
+  class: dom-clobbering
+  payload: <div onclick=alert(0)><form onsubmit=alert(1)><input onfocus=alert(2) name=parentNode>123</form></div>
+  expect: No event handler survives, and the clobbering structure does not re-form executable content after a browser parse.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'onclick, onsubmit, onfocus; DOM clobbering: parentNode'
+  expected_upstream: <div><form><input>123</form></div>
+- id: XSS-DP-0151
+  class: dom-clobbering
+  payload: <form id="x"><input id="y"></form>
+  expect: No event handler survives, and the clobbering structure does not re-form executable content after a browser parse.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0152
+  class: dom-clobbering
+  payload: <form onmouseover='alert(1)'><input name="attributes"><input name="attributes">
+  expect: No event handler survives, and the clobbering structure does not re-form executable content after a browser parse.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: DOM clobbering XSS by @irsdl using attributes
+  expected_upstream:
+  - ''
+  - <form><input><input></form>
+- id: XSS-DP-0153
+  class: dom-clobbering
+  payload: <form onsubmit=alert(1)><input onfocus=alert(2) name=attributes>123</form>
+  expect: No event handler survives, and the clobbering structure does not re-form executable content after a browser parse.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'onsubmit, onfocus; DOM clobbering: attributes'
+  expected_upstream: <form><input>123</form>
+- id: XSS-DP-0154
+  class: dom-clobbering
+  payload: <form onsubmit=alert(1)><input onfocus=alert(2) name=children>123</form>
+  expect: No event handler survives, and the clobbering structure does not re-form executable content after a browser parse.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'onsubmit, onfocus; DOM clobbering: children'
+  expected_upstream: <form><input>123</form>
+- id: XSS-DP-0155
+  class: dom-clobbering
+  payload: <form onsubmit=alert(1)><input onfocus=alert(2) name=nodeName>123</form>
+  expect: No event handler survives, and the clobbering structure does not re-form executable content after a browser parse.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'onsubmit, onfocus; DOM clobbering: nodeName'
+  expected_upstream: <form><input>123</form>
+- id: XSS-DP-0156
+  class: dom-clobbering
+  payload: <form onsubmit=alert(1)><input onfocus=alert(2) name=nodeType>123</form>
+  expect: No event handler survives, and the clobbering structure does not re-form executable content after a browser parse.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'onsubmit, onfocus; DOM clobbering: nodeType'
+  expected_upstream: <form><input>123</form>
+- id: XSS-DP-0157
+  class: dom-clobbering
+  payload: <form onsubmit=alert(1)><input onfocus=alert(2) name=removeAttributeNode>123</form>
+  expect: No event handler survives, and the clobbering structure does not re-form executable content after a browser parse.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'onsubmit, onfocus; DOM clobbering: removeAttributeNode'
+  expected_upstream: <form><input>123</form>
+- id: XSS-DP-0158
+  class: dom-clobbering
+  payload: <form onsubmit=alert(1)><input onfocus=alert(2) name=removeChild>123</form>
+  expect: No event handler survives, and the clobbering structure does not re-form executable content after a browser parse.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'onsubmit, onfocus; DOM clobbering: removeChild'
+  expected_upstream: <form><input>123</form>
+- id: XSS-DP-0159
+  class: dom-clobbering
+  payload: <form onsubmit=alert(1)><input onfocus=alert(2) name=setAttribute>123</form>
+  expect: No event handler survives, and the clobbering structure does not re-form executable content after a browser parse.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'onsubmit, onfocus; DOM clobbering: setAttribute'
+  expected_upstream: <form><input>123</form>
+- id: XSS-DP-0160
+  class: dom-clobbering
+  payload: <form><input name="attributes"></form>
+  expect: No event handler survives, and the clobbering structure does not re-form executable content after a browser parse.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0161
+  class: dom-clobbering
+  payload: <form><input name="parentNode"></form>
+  expect: No event handler survives, and the clobbering structure does not re-form executable content after a browser parse.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0162
+  class: dom-clobbering
+  payload: <form><input name=hasChildNodes>
+  expect: No event handler survives, and the clobbering structure does not re-form executable content after a browser parse.
+  core: true
+  source_file: test/fixtures/expect.mjs
+  title: 'DOM clobbering: hasChildNodes'
+  expected_upstream: <form><input></form>
+- id: XSS-DP-0163
+  class: dom-clobbering
+  payload: <form><input name=namespaceURI>
+  expect: No event handler survives, and the clobbering structure does not re-form executable content after a browser parse.
+  core: true
+  source_file: test/fixtures/expect.mjs
+  title: Fixed an exception coming from missing clobbering protection
+  expected_upstream:
+  - ''
+  - <form><input></form>
+- id: XSS-DP-0164
+  class: dom-clobbering
+  payload: <form><math><mtext></form><form><mglyph><style><img src=x onerror=alert(1)>
+  expect: No event handler survives, and the clobbering structure does not re-form executable content after a browser parse.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Tests against nesting-based mXSS behavior 1/5
+  expected_upstream: <form><math><mtext><form></form></mtext></math></form>
+- id: XSS-DP-0165
+  class: dom-clobbering
+  payload: <form><math><mtext></form><form><mglyph><svg><mtext><style><path id="</style><img onerror=alert(1) src>">
+  expect: No event handler survives, and the clobbering structure does not re-form executable content after a browser parse.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Tests against nesting-based mXSS behavior 4/5
+  expected_upstream: <form><math><mtext><form></form></mtext></math></form>
+- id: XSS-DP-0166
+  class: dom-clobbering
+  payload: <header><h1>Movie website</h1><search><form action="./search/"><label for="movie">Find a Movie</label><input type="search" id="movie" name="q" /><button type="submit">Search</button></form></search></header>
+  expect: No event handler survives, and the clobbering structure does not re-form executable content after a browser parse.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Testing support for search
+  expected_upstream: <header><h1>Movie website</h1><search><form action="./search/"><label for="movie">Find a Movie</label><input type="search" id="movie" name="q"><button type="submit">Search</button></form></search></header>
+- id: XSS-DP-0167
+  class: event-handler-basic
+  payload: <![><img src="]><img src=x onerror=alert(39)//">
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - <img>
+  - <img src="]><img src=x onerror=alert(39)//">
+  - <img src="]&gt;&lt;img src=x onerror=alert(39)//">
+- id: XSS-DP-0168
+  class: event-handler-basic
+  payload: <a onclick="alert(1)">x</a>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0169
+  class: event-handler-basic
+  payload: <a>123</a><option><style><img src=x onerror=alert(1)>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0170
+  class: event-handler-basic
+  payload: <b><noscript><!-- </noscript><img src=x onerror=alert(1) --></noscript>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Img element inside noscript terminated inside comment
+  expected_upstream: <b></b>
+- id: XSS-DP-0171
+  class: event-handler-basic
+  payload: <b><noscript><a alt="</noscript><img src=x onerror=alert(1)>"></noscript>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Img element inside noscript terminated inside attribute
+  expected_upstream:
+  - <b></b>
+  - <b><img src="x">"&gt;</b>
+  - <b><a alt="</noscript><img src=x onerror=alert(1)>"></a></b>
+  - <b><a alt="&lt;/noscript&gt;&lt;img src=x onerror=alert(1)&gt;"></a></b>
+- id: XSS-DP-0172
+  class: event-handler-basic
+  payload: <b><style><style/><img src=x onerror=alert(1)>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Image after style to trick jQuery tag-completion
+  expected_upstream: <b></b>
+- id: XSS-DP-0173
+  class: event-handler-basic
+  payload: '<b><style><style/><img src=xx: onerror=alert(1)>'
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0174
+  class: event-handler-basic
+  payload: '<div id="108"><!-- IE 5-8 standards mode -->
+
+    <a href=http://foo.bar/#x=`y></a><img alt="`><img src=xx onerror=alert(108)></a>">
+
+    <!-- IE 5-9 standards mode -->
+
+    <!a foo=x=`y><img alt="`><img src=xx onerror=alert(2)//">
+
+    <?a foo=x=`y><img alt="`><img src=xx onerror=alert(3)//">//["''`-->]]>]</div>'
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - '<div id="108">
+
+    <a href="http://foo.bar/#x=`y"></a><img alt="`&gt;&lt;img src=xx onerror=alert(108)&gt;&lt;/a&gt;">
+
+
+    <img alt="`&gt;&lt;img src=xx onerror=alert(2)//">
+
+    <img alt="`&gt;&lt;img src=xx onerror=alert(3)//">//["''`--&gt;]]&gt;]</div>'
+  - '<div id="108">
+
+    <a href="http://foo.bar/#x=`y"></a><img alt="`><img src=xx onerror=alert(108)></a>">
+
+
+    <img alt="`><img src=xx onerror=alert(2)//">
+
+    <img alt="`><img src=xx onerror=alert(3)//">//["''`--&gt;]]&gt;]</div>'
+  - '<div id="108">
+
+    <a href="http://foo.bar/#x=%60y"></a><img alt="`&gt;&lt;img src=xx onerror=alert(108)&gt;&lt;/a&gt;">
+
+
+    <img alt="`&gt;&lt;img src=xx onerror=alert(2)//">
+
+    <img alt="`&gt;&lt;img src=xx onerror=alert(3)//">//["''`--&gt;]]&gt;]</div>'
+  - '<div id="108">
+
+    <a href="http://foo.bar/#x=`y"></a>
+
+
+    <img alt="`><img src=xx onerror=alert(2)//">
+
+    <img alt="`><img src=xx onerror=alert(3)//">//["''`--&gt;]]&gt;]</div>'
+  - '<div id="108">
+
+    <a href="http://foo.bar/#x=`y"></a>
+
+
+    <img alt="`&gt;&lt;img src=xx onerror=alert(2)//">
+
+    <img alt="`&gt;&lt;img src=xx onerror=alert(3)//">//["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0175
+  class: event-handler-basic
+  payload: "<div id=\"116\"><div id=\"x\">x</div>\n<xml:namespace prefix=\"t\">\n<import namespace=\"t\" implementation=\"#default#time2\">\n<t:set attributeName=\"innerHTML\" targetElement=\"x\" to=\"<img\vsrc=x\vonerror\v=alert(116)>\">//[\"'`-->]]>]</div>"
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: XML
+  expected_upstream: '<div id="116"><div id="x">x</div>
+
+
+
+    //["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0176
+  class: event-handler-basic
+  payload: "<div id=\"118\"><div draggable=\"true\" ondragstart=\"event.dataTransfer.setData('text/plain','malicious code');\">\n    <h1>Drop me</h1>\n</div>\n<iframe src=\"http://www.example.org/dropHere.html\"></iframe>//[\"'`-->]]>]</div>"
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Drag & drop
+  expected_upstream: "<div id=\"118\"><div draggable=\"true\">\n    <h1>Drop me</h1>\n</div>\n//[\"'`--&gt;]]&gt;]</div>"
+- id: XSS-DP-0177
+  class: event-handler-basic
+  payload: <div id="12"><body onscroll=alert(12)><br><br><br><br><br><br>...<br><br><br><br><input autofocus>//["'`-->]]>]</div>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="12"><br><br><br><br><br><br>...<br><br><br><br><input>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0178
+  class: event-handler-basic
+  payload: '<div id="126"><object id="x" classid="clsid:CB927D12-4FF7-4a9e-A169-56E4B8A75598"></object>
+
+    <object classid="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" onqt_error="alert(126)" style="behavior:url(#x);"><param name=postdomevents /></object>//["''`-->]]>]</div>'
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: '<div id="126">
+
+    //["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0179
+  class: event-handler-basic
+  payload: <div id="133"><!-- `<img/src=xxx onerror=alert(133)//--!>//["'`-->]]>]</div>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="133">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0180
+  class: event-handler-basic
+  payload: <div id="16">X<x style=`behavior:url(#default#time2)` onbegin=`alert(16)` >//["'`-->]]>]</div>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="16">X//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0181
+  class: event-handler-basic
+  payload: <div id="22"><input onblur=focus() autofocus><input>//["'`-->]]>]</div>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="22"><input><input>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0182
+  class: event-handler-basic
+  payload: <div id="23"><form id=foobar onforminput=alert(23)><input></form><button form=test onformchange=alert(2)>X</button>//["'`-->]]>]</div>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - <div id="23"><form id="foobar"><input></form><button>X</button>//["'`--&gt;]]&gt;]</div>
+  - <div id="23"><form id="foobar"><input><button>X</button>//["'`--&gt;]]&gt;]</form></div>
+- id: XSS-DP-0183
+  class: event-handler-basic
+  payload: <div id="31"><frameset onload=alert(31)>//["'`-->]]>]</div>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: ''
+- id: XSS-DP-0184
+  class: event-handler-basic
+  payload: <div id="37"><!--<img src="--><img src=x onerror=alert(37)//">//["'`-->]]>]</div>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="37"><img src="x">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0185
+  class: event-handler-basic
+  payload: <div id="38"><comment><img src="</comment><img src=x onerror=alert(38)//">//["'`-->]]>]</div><div id="39"><!-- up to Opera 11.52, FF 3.6.28 -->
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - <div id="38"><img src="</comment><img src=x onerror=alert(38)//">//["'`--&gt;]]&gt;]</div><div id="39"></div>
+  - <div id="38"><img src="&lt;/comment&gt;&lt;img src=x onerror=alert(38)//">//["'`--&gt;]]&gt;]</div><div id="39"></div>
+- id: XSS-DP-0186
+  class: event-handler-basic
+  payload: <div id="41"><li style=list-style:url() onerror=alert(41)></li>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="41"><li style="list-style:url()"></li></div>
+- id: XSS-DP-0187
+  class: event-handler-basic
+  payload: <div id="55"><video><source onerror="alert(55)">//["'`-->]]>]</div>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="55"><video><source>//["'`--&gt;]]&gt;]</video></div>
+- id: XSS-DP-0188
+  class: event-handler-basic
+  payload: <div id="56"><video onerror="alert(56)"><source></source></video>//["'`-->]]>]</div>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="56"><video><source></video>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0189
+  class: event-handler-basic
+  payload: '<div id="62"><!-- IE 6-8 -->
+
+    <x ''="foo"><x foo=''><img src=x onerror=alert(62)//''>
+
+    <!-- IE 6-9 -->
+
+    <! ''="foo"><x foo=''><img src=x onerror=alert(2)//''>
+
+    <? ''="foo"><x foo=''><img src=x onerror=alert(3)//''>//["''`-->]]>]</div>'
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: '<div id="62">
+
+
+
+
+    //["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0190
+  class: event-handler-basic
+  payload: <div id="7"><input onfocus=alert(7) autofocus>//["'`-->]]>]</div>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="7"><input>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0191
+  class: event-handler-basic
+  payload: <div id="70"><div style=width:1px;filter:glow onfilterchange=alert(70)>x</div>//["'`-->]]>]</div>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="70"><div style="width:1px;filter:glow">x</div>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0192
+  class: event-handler-basic
+  payload: <div id="73"><event-source src="event.php" onload="alert(73)">//["'`-->]]>]</div>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="73">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0193
+  class: event-handler-basic
+  payload: <div id="8"><input onblur=alert(8) autofocus><input autofocus>//["'`-->]]>]</div>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="8"><input><input>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0194
+  class: event-handler-basic
+  payload: <div style=content:url(data:image/svg+xml,%3Csvg/%3E);visibility:hidden onload=alert(41)></div>//["'`-->]]>]</div>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div style="content:url(data:image/svg+xml,%3Csvg/%3E);visibility:hidden"></div>//["'`--&gt;]]&gt;]
+- id: XSS-DP-0195
+  class: event-handler-basic
+  payload: <div wow=removeme onmouseover=alert(1)>text
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Bypass using unknown attributes III
+  expected_upstream: <div>text</div>
+- id: XSS-DP-0196
+  class: event-handler-basic
+  payload: <div><selectedcontent><img src=x onerror=alert(1)>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0197
+  class: event-handler-basic
+  payload: <FONT-FACE onclick="alert(1)">x</FONT-FACE>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0198
+  class: event-handler-basic
+  payload: <img data-trusted="1" src="x" onerror="ok()">
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0199
+  class: event-handler-basic
+  payload: <img src="x" onerror="alert(
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0200
+  class: event-handler-basic
+  payload: <img src="x" onerror="alert(1)">
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0201
+  class: event-handler-basic
+  payload: <img src=x id/=' onerror=alert(1)//'>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: mXSS Variation II
+  expected_upstream: <img src="x" id="">
+- id: XSS-DP-0202
+  class: event-handler-basic
+  payload: <img src=x onerror="alert(1)">
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0203
+  class: event-handler-basic
+  payload: <img src=x ONERROR=alert(1)>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0204
+  class: event-handler-basic
+  payload: <input type=checkbox checked><input type=checkbox onclick>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'Don''t remove binary attributes if considered safe (see #168)'
+  expected_upstream: <input type="checkbox" checked=""><input type="checkbox">
+- id: XSS-DP-0205
+  class: event-handler-basic
+  payload: <listing>&lt;img onerror="alert(1);//" src=x&gt;<t t></listing>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: mXSS Variation I
+  expected_upstream: '&lt;img onerror="alert(1);//" src=x&gt;'
+- id: XSS-DP-0206
+  class: event-handler-basic
+  payload: <xmp><b>x</b></xmp><img src=n onerror=alert(1)>
+  expect: The event handler attribute is stripped; this is the floor test every sanitizer passes or the review stops here.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0207
+  class: form-action-scheme
+  payload: <div id="1"><form id="foobar"></form><button form="foobar" formaction="javascript:alert(1)">X</button>//["'`-->]]>]</div>
+  expect: The formaction URL with a dangerous scheme is removed or the element is stripped.
+  core: true
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="1"><form id="foobar"></form><button>X</button>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0208
+  class: form-action-scheme
+  payload: <div id="72"><form><button formaction="javascript:alert(72)">X</button>//["'`-->]]>]</div>
+  expect: The formaction URL with a dangerous scheme is removed or the element is stripped.
+  core: true
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="72"><form><button>X</button>//["'`--&gt;]]&gt;]</form></div>
+- id: XSS-DP-0209
+  class: mathml-injection-point
+  payload: <a><math><mi>x</mi></math></a>
+  expect: No script element, executable href, or event handler survives inside or around the MathML content.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0210
+  class: mathml-injection-point
+  payload: '<div id="130"><math href="javascript:alert(130)">CLICKME</math>
+
+    <math>
+
+    <!-- up to FF 13 -->
+
+    <maction actiontype="statusline#http://google.com" xlink:href="javascript:alert(2)">CLICKME</maction>
+
+
+    <!-- FF 14+ -->
+
+    <maction actiontype="statusline" xlink:href="javascript:alert(3)">CLICKME<mtext>http://http://google.com</mtext></maction>
+
+    </math>//["''`-->]]>]</div>'
+  expect: No script element, executable href, or event handler survives inside or around the MathML content.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: MathML
+  expected_upstream:
+  - '<div id="130"><math>CLICKME</math>
+
+    <math>
+
+
+
+
+
+
+    </math>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="130"><math>CLICKME</math>
+
+    <math>
+
+
+    CLICKME
+
+
+
+    CLICKME<mtext>http://http://google.com</mtext>
+
+    </math>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="130"><math>CLICKME</math>
+
+    //["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0211
+  class: mathml-injection-point
+  payload: <div><math></math></div>
+  expect: No script element, executable href, or event handler survives inside or around the MathML content.
+  core: true
+  source_file: test/fixtures/expect.mjs
+  title: Tests against proper handling of empty MathML containers
+  expected_upstream: <div><math></math></div>
+- id: XSS-DP-0212
+  class: mathml-injection-point
+  payload: <h1>HELLO</h1><math class="foo"><mi></mi></math>
+  expect: No script element, executable href, or event handler survives inside or around the MathML content.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0213
+  class: mathml-injection-point
+  payload: <h1>HELLO</h1><math></math>
+  expect: No script element, executable href, or event handler survives inside or around the MathML content.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0214
+  class: mathml-injection-point
+  payload: <h1>HELLO</h1><math><mi></mi></math>
+  expect: No script element, executable href, or event handler survives inside or around the MathML content.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0215
+  class: mathml-injection-point
+  payload: "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mrow>\n    <menclose notation=\"box\"><mi>a</mi></menclose><mo>,</mo>\n    <menclose notation=\"box\"><mi mathcolor=\"#FF0000\">a</mi></menclose><mo>,</mo>\n    <menclose notation=\"box\" mathcolor=\"#FF0000\"><mi>a</mi></menclose><mo>,</mo>\n    <menclose notation=\"box\" mathbackground=\"#80FF80\"><mi mathcolor=\"#FF0000\">a</mi></menclose><mo>,</mo>\n    <menclose notation=\"box\" mathcolor=\"#FF0000\" mathbackground=\"#80FF80\"><mi>a</mi></menclose><mo>,</mo>\n    <menclose notation=\"box\"><mi mathbackground=\"#80FF80\">a</mi></menclose>\n  </mrow>\n</math>"
+  expect: No script element, executable href, or event handler survives inside or around the MathML content.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: MathML example
+  expected_upstream:
+  - "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mrow>\n    <menclose notation=\"box\"><mi>a</mi></menclose><mo>,</mo>\n    <menclose notation=\"box\"><mi mathcolor=\"#FF0000\">a</mi></menclose><mo>,</mo>\n    <menclose mathcolor=\"#FF0000\" notation=\"box\"><mi>a</mi></menclose><mo>,</mo>\n    <menclose mathbackground=\"#80FF80\" notation=\"box\"><mi mathcolor=\"#FF0000\">a</mi></menclose><mo>,</mo>\n    <menclose mathbackground=\"#80FF80\" mathcolor=\"#FF0000\" notation=\"box\"><mi>a</mi></menclose><mo>,</mo>\n    <menclose notation=\"box\"><mi mathbackground=\"#80FF80\">a</mi></menclose>\n  </mrow>\n</math>"
+  - "<math xmlns=\"http://www.w3.org/1998/Math/MathML\" display=\"block\">\n  <mrow>\n    <menclose notation=\"box\"><mi>a</mi></menclose><mo>,</mo>\n    <menclose notation=\"box\"><mi mathcolor=\"#FF0000\">a</mi></menclose><mo>,</mo>\n    <menclose notation=\"box\" mathcolor=\"#FF0000\"><mi>a</mi></menclose><mo>,</mo>\n    <menclose notation=\"box\" mathbackground=\"#80FF80\"><mi mathcolor=\"#FF0000\">a</mi></menclose><mo>,</mo>\n    <menclose notation=\"box\" mathcolor=\"#FF0000\" mathbackground=\"#80FF80\"><mi>a</mi></menclose><mo>,</mo>\n    <menclose notation=\"box\"><mi mathbackground=\"#80FF80\">a</mi></menclose>\n  </mrow>\n</math>"
+- id: XSS-DP-0216
+  class: mathml-injection-point
+  payload: '<svg><image id="v-146" width="500" height="500" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;utf8,%3Csvg%20viewBox%3D%220%200%20100%20100%22%20height%3D%22100%22%20width%3D%22100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20data-name%3D%22Layer%201%22%20id%3D%22Layer_1%22%3E%0A%20%20%3Ctitle%3ECompute%3C%2Ftitle%3E%0A%20%20%3Cg%3E%0A%20%20%20%20%3Crect%20fill%3D%22%239d5025%22%20ry%3D%229.12%22%20rx%3D%229.12%22%20height%3D%2253%22%20width%3D%2253%22%20y%3D%2224.74%22%20x%3D%2223.5%22%3E%3C%2Frect%3E%0A%20%20%20%20%3Crect%20fill%3D%22%23f58536%22%20ry%3D%229.12%22%20rx%3D%229.12%22%20height%3D%2253%22%20width%3D%2253%22%20y%3D%2222.26%22%20x%3D%2223.5%22%3E%3C%2Frect%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E" preserveratio="true" style="border-color: rgb(51, 51, 51); box-sizing: border-box; color: rgb(51, 51, 51); cursor: move; font-family: sans-serif; font-size: 14px; line-height: 20px; outline-color: rgb(51, 51, 51); text-size-adjust: 100%; column-rule-color: rgb(51, 51, 51); -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-text-emphasis-color: rgb(51, 51, 51); -webkit-text-fill-color: rgb(51, 51, 51); -webkit-text-stroke-color: rgb(51, 51, 51); user-select: none; vector-effect: non-scaling-stroke;"></image></svg>'
+  expect: No script element, executable href, or event handler survives inside or around the MathML content.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'Don''t remove data URIs from SVG images (see #205)'
+  expected_upstream: '<svg><image id="v-146" width="500" height="500" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="data:image/svg+xml;utf8,%3Csvg%20viewBox%3D%220%200%20100%20100%22%20height%3D%22100%22%20width%3D%22100%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20data-name%3D%22Layer%201%22%20id%3D%22Layer_1%22%3E%0A%20%20%3Ctitle%3ECompute%3C%2Ftitle%3E%0A%20%20%3Cg%3E%0A%20%20%20%20%3Crect%20fill%3D%22%239d5025%22%20ry%3D%229.12%22%20rx%3D%229.12%22%20height%3D%2253%22%20width%3D%2253%22%20y%3D%2224.74%22%20x%3D%2223.5%22%3E%3C%2Frect%3E%0A%20%20%20%20%3Crect%20fill%3D%22%23f58536%22%20ry%3D%229.12%22%20rx%3D%229.12%22%20height%3D%2253%22%20width%3D%2253%22%20y%3D%2222.26%22%20x%3D%2223.5%22%3E%3C%2Frect%3E%0A%20%20%3C%2Fg%3E%0A%3C%2Fsvg%3E" style="border-color: rgb(51, 51, 51); box-sizing: border-box; color: rgb(51, 51, 51); cursor: move; font-family: sans-serif; font-size: 14px; line-height: 20px; outline-color: rgb(51, 51, 51); text-size-adjust: 100%; column-rule-color: rgb(51, 51, 51); -webkit-font-smoothing: antialiased; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-text-emphasis-color: rgb(51, 51, 51); -webkit-text-fill-color: rgb(51, 51, 51); -webkit-text-stroke-color: rgb(51, 51, 51); user-select: none; vector-effect: non-scaling-stroke;"></image></svg>'
+- id: XSS-DP-0217
+  class: mutation-xss-namespace
+  payload: <div id="128"><svg><style><img/src=x onerror=alert(128)// </b>//["'`-->]]>]</div>
+  expect: Namespace shuffling between HTML, SVG, and MathML must not resurrect executable content after a serialize and reparse round trip.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - <div id="128"><svg><style></style></svg><img src="x">//["'`--&gt;]]&gt;]</div>
+  - <div id="128"><svg><style><img src="x">//["'`--&gt;]]&gt;]</img></style></svg></div>
+  - <div id="128"><svg><style><img src="x"></style></svg></div>
+- id: XSS-DP-0218
+  class: mutation-xss-namespace
+  payload: <math></p><textarea><mi><style></textarea><img src=x onerror=alert(1)></mi></math>
+  expect: Namespace shuffling between HTML, SVG, and MathML must not resurrect executable content after a serialize and reparse round trip.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Tests against mXSS behavior with MathML in Chrome 77 and alike
+  expected_upstream:
+  - ''
+  - <math></math><p></p><textarea>&lt;mi&gt;&lt;style&gt;</textarea><img src="x">
+  - <math></math><p></p><img src="x">
+  - <math></math>
+- id: XSS-DP-0219
+  class: mutation-xss-namespace
+  payload: <math><annotation-xml encoding="text/html"><p><style><p title="</style><iframe onload&#x3d;alert(1)<!--"></style>
+  expect: Namespace shuffling between HTML, SVG, and MathML must not resurrect executable content after a serialize and reparse round trip.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Tests against attribute-based mXSS behavior 3/3
+  expected_upstream: <math></math>
+- id: XSS-DP-0220
+  class: mutation-xss-namespace
+  payload: <math><mtext><h1><a><h6></a></h6><mglyph><svg><mtext><style><a title="</style><img src onerror='alert(1)'>"></style></h1>
+  expect: Namespace shuffling between HTML, SVG, and MathML must not resurrect executable content after a serialize and reparse round trip.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Tests against additional problems regarding HTML inside MathML 1/2
+  expected_upstream: <math><mtext><h1><a></a><h6><a></a></h6></h1></mtext></math>
+- id: XSS-DP-0221
+  class: mutation-xss-namespace
+  payload: <math><mtext><option><FAKEFAKE><option></option><mglyph><svg><mtext><style><a title="</style><img src='#' onerror='alert(1)'>">
+  expect: Namespace shuffling between HTML, SVG, and MathML must not resurrect executable content after a serialize and reparse round trip.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Test against fake-element-based namepsace-confusion abusing mXSS attacks 2/2
+  expected_upstream: <math><mtext><option><option></option></option></mtext></math>
+- id: XSS-DP-0222
+  class: mutation-xss-namespace
+  payload: <math><mtext><table><mglyph><style><!--</style><img title="--&gt;&lt;img src=1 onerror=alert(1)&gt;">
+  expect: Namespace shuffling between HTML, SVG, and MathML must not resurrect executable content after a serialize and reparse round trip.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Tests against nesting-based mXSS behavior 3/5
+  expected_upstream: <math><mtext><table></table></mtext></math>
+- id: XSS-DP-0223
+  class: mutation-xss-namespace
+  payload: <math><mtext><table><mglyph><style><math href=javascript:alert(1)>CLICKME</math>
+  expect: Namespace shuffling between HTML, SVG, and MathML must not resurrect executable content after a serialize and reparse round trip.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Tests against nesting-based mXSS behavior 2/5
+  expected_upstream: <math><mtext><table></table></mtext></math>
+- id: XSS-DP-0224
+  class: mutation-xss-namespace
+  payload: <math><mtext><table><mglyph><svg><mtext><style><path id="</style><img onerror=alert(1) src>">
+  expect: Namespace shuffling between HTML, SVG, and MathML must not resurrect executable content after a serialize and reparse round trip.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Tests against nesting-based mXSS behavior 5/5
+  expected_upstream:
+  - ''
+  - <math><mtext><table></table></mtext></math>
+  - <math></math>
+- id: XSS-DP-0225
+  class: mutation-xss-namespace
+  payload: <noembed><svg><b><style><b title='</style><img>'>
+  expect: Namespace shuffling between HTML, SVG, and MathML must not resurrect executable content after a serialize and reparse round trip.
+  core: true
+  source_file: test/fixtures/expect.mjs
+  title: Tests against removal-based mXSS behavior 2/2
+  expected_upstream: ''
+- id: XSS-DP-0226
+  class: mutation-xss-namespace
+  payload: <style>&lt;/style&gt;&lt;img src=x onerror=alert(1)&gt;<a></a></style>
+  expect: Namespace shuffling between HTML, SVG, and MathML must not resurrect executable content after a serialize and reparse round trip.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0227
+  class: mutation-xss-namespace
+  payload: <svg></p><math><title><style><img src=x onerror=alert(1)></style></title>
+  expect: Namespace shuffling between HTML, SVG, and MathML must not resurrect executable content after a serialize and reparse round trip.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Tests against mXSS behavior with embedded MathML/SVG
+  expected_upstream:
+  - ''
+  - <svg></svg>
+  - <svg></svg><p></p><math></math><img src="x">
+  - <svg></svg><p></p><img src="x">
+  - <svg xmlns="http://www.w3.org/2000/svg" />
+- id: XSS-DP-0228
+  class: mutation-xss-namespace
+  payload: <svg></p><textarea><title><style></textarea><img src=x onerror=alert(1)></style></title></svg>
+  expect: Namespace shuffling between HTML, SVG, and MathML must not resurrect executable content after a serialize and reparse round trip.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Tests against mXSS behavior with SVG in Chrome 77 and alike 1/2
+  expected_upstream:
+  - ''
+  - <svg></svg><p></p><textarea>&lt;title&gt;&lt;style&gt;</textarea><img src="x">
+  - <svg></svg>
+  - <svg></svg><p></p><img src="x">
+  - <svg xmlns="http://www.w3.org/2000/svg" />
+- id: XSS-DP-0229
+  class: mutation-xss-namespace
+  payload: <svg></p><title><a id="</title><img src=x onerror=alert()>"></textarea></svg>
+  expect: Namespace shuffling between HTML, SVG, and MathML must not resurrect executable content after a serialize and reparse round trip.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Tests against mXSS behavior with SVG in Chrome 77 and alike 2/2
+  expected_upstream:
+  - ''
+  - <svg></svg><p></p><title>&lt;a id="</title><img src="x">"&gt;
+  - <svg><title><a id="</title><img src=x onerror=alert()>"></a></title></svg>
+  - <svg xmlns="http://www.w3.org/2000/svg"><title><a id="</title><img src=x onerror=alert()>"></a></title></svg>
+  - <svg xmlns="http://www.w3.org/2000/svg"><title><a id="</title><img src=x onerror=alert()>"></a></title></title></svg></svg>
+  - <svg><title></title></svg>
+- id: XSS-DP-0230
+  class: mutation-xss-namespace
+  payload: <svg><foreignobject><p><style><p title="</style><iframe onload&#x3d;alert(1)<!--"></style>
+  expect: Namespace shuffling between HTML, SVG, and MathML must not resurrect executable content after a serialize and reparse round trip.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Tests against attribute-based mXSS behavior 2/3
+  expected_upstream: <svg></svg>
+- id: XSS-DP-0231
+  class: mutation-xss-namespace
+  payload: <svg><p><style><g title="</style><img src=x onerror=alert(1)>">
+  expect: Namespace shuffling between HTML, SVG, and MathML must not resurrect executable content after a serialize and reparse round trip.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Tests against attribute-based mXSS behavior 1/3
+  expected_upstream:
+  - <svg></svg><p></p><style><g title="</style><img src="x">"&gt;
+  - <svg></svg><p></p><img src="x">"&gt;
+  - <svg></svg><p><img src="x">"&gt;</p>
+- id: XSS-DP-0232
+  class: mutation-xss-namespace
+  payload: '<svg><style>.some-class {fill: #fff}</style></svg>'
+  expect: Namespace shuffling between HTML, SVG, and MathML must not resurrect executable content after a serialize and reparse round trip.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0233
+  class: mutation-xss-namespace
+  payload: <xmp><svg><b><style><b title='</style><img>'>
+  expect: Namespace shuffling between HTML, SVG, and MathML must not resurrect executable content after a serialize and reparse round trip.
+  core: true
+  source_file: test/fixtures/expect.mjs
+  title: Tests against removal-based mXSS behavior 1/2
+  expected_upstream: ''
+- id: XSS-DP-0234
+  class: nesting-structure
+  payload: "<?xml-stylesheet type=\"text/xsl\" href=\"data:,%3Cxsl:transform version='1.0' xmlns:xsl='http://www.w3.org/1999/XSL/Transform' id='xss'%3E%3Cxsl:output method='html'/%3E%3Cxsl:template match='/'%3E%3Cscript%3Ealert(66)%3C/script%3E%3C/xsl:template%3E%3C/xsl:transform%3E\"?>\n<root/>//[\"'`-->]]>]</div>\n<div id=\"67\"><!DOCTYPE x [\n    <!ATTLIST img xmlns CDATA \"http://www.w3.org/1999/xhtml\" src CDATA \"xx\"\n onerror CDATA \"alert(67)\"\n onload CDATA \"alert(2)\">\n]><img />//[\"'`-->]]>]</div>"
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: '//["''`--&gt;]]&gt;]
+
+    <div id="67">
+
+    ]&gt;<img>//["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0235
+  class: nesting-structure
+  payload: <div id="105"><iframe src="data:image/svg-xml,%1F%8B%08%00%00%00%00%00%02%03%B3)N.%CA%2C(Q%A8%C8%CD%C9%2B%B6U%CA())%B0%D2%D7%2F%2F%2F%D7%2B7%D6%CB%2FJ%D77%B4%B4%B4%D4%AF%C8(%C9%CDQ%B2K%CCI-*%D10%D4%B4%D1%87%E8%B2%03"></iframe>//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - <div id="105">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0236
+  class: nesting-structure
+  payload: <div id="106"><img src onerror /" '"= alt=alert(106)//">//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: true
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - <div id="106"><img src="">//["'`--&gt;]]&gt;]</div>
+  - <div id="106"><img>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0237
+  class: nesting-structure
+  payload: '<div id="109"><svg xmlns="http://www.w3.org/2000/svg">
+
+    <a id="x"><rect fill="white" width="1000" height="1000"/></a>
+
+    <rect  fill="white" style="clip-path:url(test3.svg#a);fill:url(#b);filter:url(#c);marker:url(#d);mask:url(#e);stroke:url(#f);"/>
+
+    </svg>//["''`-->]]>]</div>'
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - '<div id="109"><svg xmlns="http://www.w3.org/2000/svg">
+
+    <a id="x"><rect fill="white" width="1000" height="1000"></rect></a>
+
+    <rect fill="white" style="clip-path:url(test3.svg#a);fill:url(#b);filter:url(#c);marker:url(#d);mask:url(#e);stroke:url(#f);"></rect>
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="109"><svg xmlns="http://www.w3.org/2000/svg">
+
+    <a id="x"><rect fill="white" width="1000" height="1000" /></a>
+
+    <rect style="clip-path:url(test3.svg#a);fill:url(#b);filter:url(#c);marker:url(#d);mask:url(#e);stroke:url(#f);" fill="white" />
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="109"><svg xmlns="http://www.w3.org/2000/svg">
+
+    <a id="x"><rect fill="white" width="1000" height="1000" FILL="white" /></a>
+
+    <rect style="clip-path:url(test3.svg#a);fill:url(#b);filter:url(#c);marker:url(#d);mask:url(#e);stroke:url(#f);" fill="white" FILL="white" />
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="109"><svg xmlns="http://www.w3.org/2000/svg">
+
+    <a id="x"><rect fill="white" width="1000" height="1000" /></a>
+
+    <rect style="filter: url(&quot;#c&quot;); clip-path: url(&quot;test3.svg#a&quot;); fill: url(#b); marker-end: url(&quot;#d&quot;); marker-mid: url(&quot;#d&quot;); marker-start: url(&quot;#d&quot;); mask: url(&quot;#e&quot;); stroke: url(#f);" fill="white" />
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="109"><svg xmlns="http://www.w3.org/2000/svg">
+
+    <a id="x"><rect fill="white" width="1000" height="1000" /></a>
+
+    <rect style="clip-path: url(&quot;test3.svg#a&quot;); fill: url(#b); marker-end: url(&quot;#d&quot;); marker-mid: url(&quot;#d&quot;); marker-start: url(&quot;#d&quot;); mask: url(&quot;#e&quot;); stroke: url(#f);" fill="white" />
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0238
+  class: nesting-structure
+  payload: '<div id="110"><svg xmlns="http://www.w3.org/2000/svg">
+
+    <path d="M0,0" style="marker-start:url(test4.svg#a)"/>
+
+    </svg>//["''`-->]]>]</div>'
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - '<div id="110"><svg xmlns="http://www.w3.org/2000/svg">
+
+    <path d="M0,0" style="marker-start:url(test4.svg#a)"></path>
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="110"><svg xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg">
+
+    <path d="M 0 0" style="marker-start: url(&quot;test4.svg#a&quot;);" />
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="110"><svg xmlns="http://www.w3.org/2000/svg">
+
+    <path d="M 0 0" style="marker-start:url(test4.svg#a)" />
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="110"><svg xmlns="http://www.w3.org/2000/svg">
+
+    <path d="M 0 0" style="marker-start: url(&quot;test4.svg#a&quot;);" />
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0239
+  class: nesting-structure
+  payload: <div id="111"><div style="background:url(/f#[a]oo/;color:red/*/foo.jpg);">X</div>//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - <div id="111"><div style="background:url(/f#[a]oo/;color:red/*/foo.jpg);">X</div>//["'`--&gt;]]&gt;]</div>
+  - '<div id="111"><div style=''background: url("/f#[a]oo/;color:red/*/foo.jpg");''>X</div>//["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0240
+  class: nesting-structure
+  payload: "<div id=\"117\"><a href=\"http://attacker.org\">\n    <iframe src=\"http://example.org/\"></iframe>\n</a>//[\"'`-->]]>]</div>"
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: iframe
+  expected_upstream: "<div id=\"117\"><a href=\"http://attacker.org\">\n    \n</a>//[\"'`--&gt;]]&gt;]</div>"
+- id: XSS-DP-0241
+  class: nesting-structure
+  payload: "<div id=\"121\"><html xmlns=\"http://www.w3.org/1999/xhtml\"\nxmlns:svg=\"http://www.w3.org/2000/svg\">\n<body style=\"background:gray\">\n<iframe src=\"http://example.com/\" style=\"width:800px; height:350px; border:none; mask: url(#maskForClickjacking);\"/>\n<svg:svg>\n<svg:mask id=\"maskForClickjacking\" maskUnits=\"objectBoundingBox\" maskContentUnits=\"objectBoundingBox\">\n    <svg:rect x=\"0.0\" y=\"0.0\" width=\"0.373\" height=\"0.3\" fill=\"white\"/>\n    <svg:circle cx=\"0.45\" cy=\"0.7\" r=\"0.075\" fill=\"white\"/>\n</svg:mask>\n</svg:svg>\n</body>\n</html>//[\"'`-->]]>]</div>"
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - "<div id=\"121\">\n\n\n\n\n    \n    \n\n\n\n//[\"'`--&gt;]]&gt;]</div>"
+  - "<div id=\"121\">\n\n\n&lt;svg:svg&gt;\n&lt;svg:mask id=\"maskForClickjacking\" maskUnits=\"objectBoundingBox\" maskContentUnits=\"objectBoundingBox\"&gt;\n    &lt;svg:rect x=\"0.0\" y=\"0.0\" width=\"0.373\" height=\"0.3\" fill=\"white\"/&gt;\n    &lt;svg:circle cx=\"0.45\" cy=\"0.7\" r=\"0.075\" fill=\"white\"/&gt;\n&lt;/svg:mask&gt;\n&lt;/svg:svg&gt;\n&lt;/body&gt;\n&lt;/html&gt;//[\"'`--&gt;]]&gt;]&lt;/div&gt;</div>"
+  - '<div id="121">
+
+
+    </div>'
+- id: XSS-DP-0242
+  class: nesting-structure
+  payload: <div id="122"><iframe sandbox="allow-same-origin allow-forms allow-scripts" src="http://example.org/"></iframe>//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: iframe (sandboxed)
+  expected_upstream: <div id="122">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0243
+  class: nesting-structure
+  payload: '<div id="127"><svg xmlns="http://www.w3.org/2000/svg" id="x">
+
+    <listener event="load" handler="#y" xmlns="http://www.w3.org/2001/xml-events" observer="x"/>
+
+    <handler id="y">alert(127)</handler>
+
+    </svg>//["''`-->]]>]</div>'
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - '<div id="127"><svg xmlns="http://www.w3.org/2000/svg" id="x">
+
+
+    alert(127)
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="127"><svg xmlns="http://www.w3.org/2000/svg" id="x">
+
+
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0244
+  class: nesting-structure
+  payload: <div id="13"><x repeat="template" repeat-start="999999">0<y repeat="template" repeat-start="999999">1</y></x>//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="13">01//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0245
+  class: nesting-structure
+  payload: <div id="14"><input pattern=^((a+.)a)+$ value=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!>//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="14"><input pattern="^((a+.)a)+$" value="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa!">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0246
+  class: nesting-structure
+  payload: <div id="19"><meta charset="x-mac-farsi">¼script ¾alert(19)//¼/script ¾//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="19">¼script ¾alert(19)//¼/script ¾//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0247
+  class: nesting-structure
+  payload: <div id="2"><meta charset="x-imap4-modified-utf7">&ADz&AGn&AG0&AEf&ACA&AHM&AHI&AGO&AD0&AGn&ACA&AG8Abg&AGUAcgByAG8AcgA9AGEAbABlAHIAdAAoADEAKQ&ACAAPABi//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="2">&amp;ADz&amp;AGn&amp;AG0&amp;AEf&amp;ACA&amp;AHM&amp;AHI&amp;AGO&amp;AD0&amp;AGn&amp;ACA&amp;AG8Abg&amp;AGUAcgByAG8AcgA9AGEAbABlAHIAdAAoADEAKQ&amp;ACAAPABi//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0248
+  class: nesting-structure
+  payload: <div id="24">1<set/xmlns=`urn:schemas-microsoft-com:time` style=`behAvior:url(#default#time2)` attributename=`innerhtml` to=`<img/src="x"onerror=alert(24)>`>//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="24">1`&gt;//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0249
+  class: nesting-structure
+  payload: <div id="26">+ADw-html+AD4APA-body+AD4APA-div+AD4-top secret+ADw-/div+AD4APA-/body+AD4APA-/html+AD4-.toXMLString().match(/.*/m),alert(RegExp.input);//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="26">+ADw-html+AD4APA-body+AD4APA-div+AD4-top secret+ADw-/div+AD4APA-/body+AD4APA-/html+AD4-.toXMLString().match(/.*/m),alert(RegExp.input);//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0250
+  class: nesting-structure
+  payload: <div id="29"><link rel=stylesheet href=data:,*%7bx:expression(alert(29))%7d//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="29">]]&gt;]</div>
+- id: XSS-DP-0251
+  class: nesting-structure
+  payload: <div id="34">1<vmlframe xmlns=urn:schemas-microsoft-com:vml style=behavior:url(#default#vml);position:absolute;width:100%;height:100% src=test.vml#xss></vmlframe>//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="34">1//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0252
+  class: nesting-structure
+  payload: <div id="45"><div style="font-family:'foo[a];color:red;';">XXX</div>//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="45"><div style="font-family:'foo[a];color:red;';">XXX</div>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0253
+  class: nesting-structure
+  payload: <div id="46"><div style="font-family:foo}color=red;">XXX</div>//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="46"><div style="font-family:foo}color=red;">XXX</div>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0254
+  class: nesting-structure
+  payload: <div id="52"><x style="behavior:url(test.sct)">//["'`-->]]>]</div><div id="53"><xml id="xss" src="test.htc"></xml>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="52">//["'`--&gt;]]&gt;]</div><div id="53"></div>
+- id: XSS-DP-0255
+  class: nesting-structure
+  payload: <div id="60"><div style="[a]color[b]:[c]red">XXX</div>//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: true
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="60"><div style="[a]color[b]:[c]red">XXX</div>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0256
+  class: nesting-structure
+  payload: <div id="64"><!DOCTYPE x[<!ENTITY x SYSTEM "http://html5sec.org/test.xxe">]><y>&x;</y>//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="64">]&gt;&amp;x;//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0257
+  class: nesting-structure
+  payload: "<div id=\"71\"><// style=x:expression\x028alert(71)\x029>//[\"'`-->]]>]</div>"
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: true
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="71">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0258
+  class: nesting-structure
+  payload: <div id="76"><?xml-stylesheet type="text/css"?><!DOCTYPE x SYSTEM "test.dtd"><x>&x;</x>//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="76">&amp;x;//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0259
+  class: nesting-structure
+  payload: <div id="77"><?xml-stylesheet type="text/css"?><root style="x:expression(alert(77))"/>//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="77">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0260
+  class: nesting-structure
+  payload: <div id="78"><?xml-stylesheet type="text/xsl" href="#"?><img xmlns="x-schema:test.xdr"/>//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="78"><img xmlns="x-schema:test.xdr">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0261
+  class: nesting-structure
+  payload: <div id="79"><object allowscriptaccess="always" data="x"></object>//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="79">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0262
+  class: nesting-structure
+  payload: <div id="82"><?xml-stylesheet type="text/css" href="data:,*%7bx:expression(write(2));%7d"?>//["'`-->]]>]</div><div id="83"><x:template xmlns:x="http://www.wapforum.org/2001/wml"  x:ontimer="$(x:unesc)j$(y:escape)a$(z:noecs)v$(x)a$(y)s$(z)cript$x:alert(83)"><x:timer value="1"/></x:template>//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="82">//["'`--&gt;]]&gt;]</div><div id="83">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0263
+  class: nesting-structure
+  payload: <div id="85"><x xmlns:ev="http://www.w3.org/2001/xml-events" ev:event="load" ev:handler="test.evt#x"/>//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="85">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0264
+  class: nesting-structure
+  payload: '<div id="89"><svg xmlns="http://www.w3.org/2000/svg">
+
+    <set attributeName="onmouseover" to="alert(89)"/>
+
+    <animate attributeName="onunload" to="alert(89)"/>
+
+    </svg>//["''`-->]]>]</div>'
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: '<div id="89"><svg xmlns="http://www.w3.org/2000/svg">
+
+
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0265
+  class: nesting-structure
+  payload: '<div id="90"><!-- Up to Opera 10.63 -->
+
+    <div style=content:url(test2.svg)></div>
+
+
+    <!-- Up to Opera 11.64 - see link below -->
+
+
+    <!-- Up to Opera 12.x -->
+
+    <div style="background:url(test5.svg)">PRESS ENTER</div>//["''`-->]]>]</div>'
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: '<div id="90">
+
+    <div style="content:url(test2.svg)"></div>
+
+
+
+
+
+    <div style="background:url(test5.svg)">PRESS ENTER</div>//["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0266
+  class: nesting-structure
+  payload: <div id="92"><div style="background:url(http://foo.f/f oo/;color:red/*/foo.jpg);">X</div>//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="92"><div style="background:url(http://foo.f/f oo/;color:red/*/foo.jpg);">X</div>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0267
+  class: nesting-structure
+  payload: '<div id="94"><svg xmlns="http://www.w3.org/2000/svg">
+
+    <handler xmlns:ev="http://www.w3.org/2001/xml-events" ev:event="load">alert(94)</handler>
+
+    </svg>//["''`-->]]>]</div>'
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - '<div id="94"><svg xmlns="http://www.w3.org/2000/svg">
+
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="94"><svg xmlns="http://www.w3.org/2000/svg">
+
+    alert(94)
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="94"><svg xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg">
+
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0268
+  class: nesting-structure
+  payload: '<div id="95"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <feImage>
+
+    <set attributeName="xlink:href" to="data:image/svg+xml;charset=utf-8;base64,
+
+    PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxzY3JpcHQ%2BYWxlcnQoMSk8L3NjcmlwdD48L3N2Zz4NCg%3D%3D"/>
+
+    </feImage>
+
+    </svg>//["''`-->]]>]</div>'
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - '<div id="95"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <feImage>
+
+
+    </feImage>
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="95"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" >
+
+
+    <feImage>
+
+
+    </feImage>
+
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="95"><svg xmlns="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
+    <feImage>
+
+
+    </feImage>
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0269
+  class: nesting-structure
+  payload: '<div id="96"><iframe src=mhtml:http://html5sec.org/test.html!xss.html></iframe>
+
+    <iframe src=mhtml:http://html5sec.org/test.gif!xss.html></iframe>//["''`-->]]>]</div>'
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: '<div id="96">
+
+    //["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0270
+  class: nesting-structure
+  payload: <label dataformatas="html" datasrc="#xss" datafld="payload"></label>//["'`-->]]>]</div>
+  expect: Malformed or nested structure is normalized to inert content; parser repair produces nothing executable.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <label></label>//["'`--&gt;]]&gt;]
+- id: XSS-DP-0271
+  class: rawtext-breakout
+  payload: <a>{{123}}{{456}}<b><style><% alert(1) %><% 123 %></style>456</b></a>
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0272
+  class: rawtext-breakout
+  payload: <a>{{123}}abc{{456}}<b><style><% alert(1) %>def<% 123 %></style>456</b></a>
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0273
+  class: rawtext-breakout
+  payload: <a>123{{<b>456}}</b><style><% alert(1) %></style>456</a>
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0274
+  class: rawtext-breakout
+  payload: <a>123{{45{{6}}<b><style><% alert(1)%> %></style>456</b></a>
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0275
+  class: rawtext-breakout
+  payload: <a>123{{45}}6}}<b><style><% <%alert(1) %></style>456</b></a>
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0276
+  class: rawtext-breakout
+  payload: <a>123{{456}}<b><style><% alert(1) %></style>456</b></a>
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0277
+  class: rawtext-breakout
+  payload: <a>123<% <b>456}}</b><style>{{ alert(1) }}</style>456 %></a>
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0278
+  class: rawtext-breakout
+  payload: <b><style><style////><img src=x onerror=alert(1)></style>
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Image after self-closing style to trick jQuery tag-completion
+  expected_upstream: <b></b>
+- id: XSS-DP-0279
+  class: rawtext-breakout
+  payload: <div id="107"><title onpropertychange=alert(107)></title><title title=></title>//["'`-->]]>]</div>
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - <div id="107"><title></title><title title=""></title>//["'`--&gt;]]&gt;]</div>
+  - <div id="107">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0280
+  class: rawtext-breakout
+  payload: '<div id="112"><div style="font-family:foo{bar;background:url(http://foo.f/oo};color:red/*/foo.jpg);">X</div>//["''`-->]]>]</div><div id="113"><div id="x">XXX</div>
+
+    <style>
+
+
+    #x{font-family:foo[bar;color:green;}
+
+
+    #y];color:red;{}
+
+
+    </style>//["''`-->]]>]</div>'
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - '<div id="112"><div style="font-family:foo{bar;background:url(http://foo.f/oo};color:red/*/foo.jpg);">X</div>//["''`--&gt;]]&gt;]</div><div id="113"><div id="x">XXX</div>
+
+    <style>
+
+
+    #x{font-family:foo[bar;color:green;}
+
+
+    #y];color:red;{}
+
+
+    </style>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="112"><div>X</div>//["''`--&gt;]]&gt;]</div><div id="113"><div id="x">XXX</div>
+
+    <style>
+
+
+    #x{font-family:foo[bar;color:green;}
+
+
+    #y];color:red;{}
+
+
+    </style>//["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0281
+  class: rawtext-breakout
+  payload: '<div id="134"><xmp>
+
+    <%
+
+    </xmp>
+
+    <img alt=''%></xmp><img src=xx onerror=alert(134)//''>
+
+
+    <script>
+
+    x=''<%''
+
+    </script> %>/
+
+    alert(2)
+
+    </script>
+
+
+    XXX
+
+    <style>
+
+    *[''<!--'']{}
+
+    </style>
+
+    -->{}
+
+    *{color:red}</style>//["''`-->]]>]</div>'
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: XMP
+  expected_upstream:
+  - "<div id=\"134\">\n<img alt=\"%></xmp><img src=xx onerror=alert(134)//\">\n\n %&gt;/\nalert(2)\n\n\nXXX\n<style>\n*['<!--']{}\n</style>\n--&gt;{}\n*{color:red}//[\"'`--&gt;]]&gt;]</div>"
+  - "<div id=\"134\">\n<img alt=\"%&gt;&lt;/xmp&gt;&lt;img src=xx onerror=alert(134)//\">\n\n %&gt;/\nalert(2)\n\n\nXXX\n<style>\n*['<!--']{}\n</style>\n-&gt;{}\n*{color:red}//[\"'`--&gt;]]&gt;]</div>"
+  - "<div id=\"134\">\n<img alt=\"%></xmp><img src=xx onerror=alert(134)//\">\n\n %&gt;/\nalert(2)\n\n\nXXX\n\n--&gt;{}\n*{color:red}//[\"'`--&gt;]]&gt;]</div>"
+  - "<div id=\"134\">\n<img alt=\"%&gt;&lt;/xmp&gt;&lt;img src=xx onerror=alert(134)//\">\n\n %&gt;/\nalert(2)\n\n\nXXX\n\n--&gt;{}\n*{color:red}//[\"'`--&gt;]]&gt;]</div>"
+  - "<div id=\"134\">\n<img>\n\n %&gt;/\nalert(2)\n\n\nXXX\n\n--&gt;{}\n*{color:red}//[\"'`--&gt;]]&gt;]</div>"
+- id: XSS-DP-0282
+  class: rawtext-breakout
+  payload: <div id="27"><style>p[foo=bar{}*{-o-link:'javascript:alert(27)'}{}*{-o-link-source:current}*{background:red}]{background:green};</style>//["'`-->]]>]</div><div id="28">1<animate/xmlns=urn:schemas-microsoft-com:time style=behavior:url(#default#time2)  attributename=innerhtml values=<img/src="."onerror=alert(28)>>//["'`-->]]>]</div>
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="27"><style>p[foo=bar{}*{-o-link:'javascript:alert(27)'}{}*{-o-link-source:current}*{background:red}]{background:green};</style>//["'`--&gt;]]&gt;]</div><div id="28">1&gt;//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0283
+  class: rawtext-breakout
+  payload: <div id="30"><style>@import "data:,*%7bx:expression(alert(30))%7D";</style>//["'`-->]]>]</div>
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="30"><style>@import "data:,*%7bx:expression(alert(30))%7D";</style>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0284
+  class: rawtext-breakout
+  payload: <div id="40"><style><img src="</style><img src=x onerror=alert(40)//">//["'`-->]]>]</div>
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="40"><img src="x">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0285
+  class: rawtext-breakout
+  payload: '<div id="44"><style>*[{}@import''test.css?]{color: green;}</style>X//["''`-->]]>]</div>'
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: '<div id="44"><style>*[{}@import''test.css?]{color: green;}</style>X//["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0286
+  class: rawtext-breakout
+  payload: <div id="80"><style>*{x:ｅｘｐｒｅｓｓｉｏｎ(alert(80))}</style>//["'`-->]]>]</div>
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="80"><style>*{x:ｅｘｐｒｅｓｓｉｏｎ(alert(80))}</style>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0287
+  class: rawtext-breakout
+  payload: "<div id=\"99\">XXX<style>\n\n*{color:gre/**/en !/**/important} /* IE 6-9 Standards mode */\n\n<!--\n--><!--*{color:red}   /* all UA */\n\n*{background:url(xx //**/\red/*)} /* IE 6-7 Standards mode */\n\n</style>//[\"'`-->]]>]</div>"
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - '<div id="99">XXX<style>
+
+
+    *{color:gre/**/en !/**/important} /* IE 6-9 Standards mode */
+
+
+    <!--
+
+    --><!--*{color:red}   /* all UA */
+
+
+    *{background:url(xx //**/
+
+    ed/*)} /* IE 6-7 Standards mode */
+
+
+    </style>//["''`--&gt;]]&gt;]</div>'
+  - <div id="99">XXX//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0288
+  class: rawtext-breakout
+  payload: '<html xmlns="http://www.w3.org/1999/xhtml">
+
+    <head>
+
+    <style type="text/css">
+
+    @font-face {font-family: y; src: url("font.svg#x") format("svg");} body {font: 100px "y";}
+
+    </style>
+
+    </head>
+
+    <body>Hello</body>
+
+    </html>//["''`-->]]>]</div>'
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: 'Hello
+
+    //["''`--&gt;]]&gt;]'
+- id: XSS-DP-0289
+  class: rawtext-breakout
+  payload: "\x01<option><style></option></select><b><img src=x onerror=alert(1)></style></option>"
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Img inside style inside broken option element
+  expected_upstream: "\x01<option></option>"
+- id: XSS-DP-0290
+  class: rawtext-breakout
+  payload: '<option><style></option></select><b><img src=xx: onerror=alert(1)></style></option>'
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0291
+  class: rawtext-breakout
+  payload: '<style>*{color: red}</style>'
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: '&gt;style&lt;'
+  expected_upstream: ''
+- id: XSS-DP-0292
+  class: rawtext-breakout
+  payload: <style>*{color:red}</style>
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0293
+  class: rawtext-breakout
+  payload: <style>&lt;/style&gt;&lt;img src=x onerror=alert(1)&gt;</style>
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0294
+  class: rawtext-breakout
+  payload: <style>123</style>
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0295
+  class: rawtext-breakout
+  payload: <style>p{color:red}</style>
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0296
+  class: rawtext-breakout
+  payload: <textarea type="text" cols="50" rows="10"></textarea>//["'`-->]]>]</div>
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <textarea type="text" cols="50" rows="10"></textarea>//["'`--&gt;]]&gt;]
+- id: XSS-DP-0297
+  class: rawtext-breakout
+  payload: <textarea>@shafigullin</textarea><!--</textarea><img src=x onerror=alert(1)>-->
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Textarea and comments enabling img element
+  expected_upstream: <textarea>@shafigullin</textarea>
+- id: XSS-DP-0298
+  class: rawtext-breakout
+  payload: 123<style>*{color:red}</style>
+  expect: Rawtext content (style, title, textarea) cannot break out into executable markup in the sanitized output.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0299
+  class: script-element
+  payload: <a class="0" x="1">123<b y="1">456<script>alert(1)</script></b></a>789
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0300
+  class: script-element
+  payload: <a>123<b x="1">456<script y="1">alert(1)</script></b></a>789
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0301
+  class: script-element
+  payload: <a>123<b>456<script>alert(1)</script></b></a>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0302
+  class: script-element
+  payload: <a>123<b>456<script>alert(1)</script></b></a>789
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0303
+  class: script-element
+  payload: <b>{{evil<script>alert(1)</script><form><img src=x name=textContent></form>}}</b>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0304
+  class: script-element
+  payload: <b>he{{evil<script>alert(1)</script><form><img src=x name=textContent></form>}}ya</b>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0305
+  class: script-element
+  payload: <b>ok</b><script>alert(2)</script>
+  expect: No script element survives sanitization.
+  core: true
+  source_file: test/bootstrap-test-suite.js
+- id: XSS-DP-0306
+  class: script-element
+  payload: <div id="102"><img src="x` `<script>alert(102)</script>"` `>//["'`-->]]>]</div>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - <div id="102"><img src="x` `&lt;script&gt;alert(102)&lt;/script&gt;">//["'`--&gt;]]&gt;]</div>
+  - <div id="102"><img src="x` `<script>alert(102)</script>">//["'`--&gt;]]&gt;]</div>
+  - <div id="102"><img src="x%60%20%60%3Cscript%3Ealert%28102%29%3C/script%3E">//["'`--&gt;]]&gt;]</div>
+  - <div id="102">//["'`--&gt;]]&gt;]</div>
+  - <div id="102"><img>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0307
+  class: script-element
+  payload: '<div id="103"><script>history.pushState(0,0,''/i/am/somewhere_else'');</script>//["''`-->]]>]</div><div id="104"><svg xmlns="http://www.w3.org/2000/svg" id="foo">
+
+    <x xmlns="http://www.w3.org/2001/xml-events" event="load" observer="foo" handler="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Chandler%20xml%3Aid%3D%22bar%22%20type%3D%22application%2Fecmascript%22%3E alert(104) %3C%2Fhandler%3E%0A%3C%2Fsvg%3E%0A#bar"/>
+
+    </svg>//["''`-->]]>]</div>'
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - '<div id="103">//["''`--&gt;]]&gt;]</div><div id="104"><svg id="foo" xmlns="http://www.w3.org/2000/svg">
+
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="103">//["''`--&gt;]]&gt;]</div><div id="104"><svg xmlns="http://www.w3.org/2000/svg" id="foo" xmlns="http://www.w3.org/2000/svg">
+
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="103">//["''`--&gt;]]&gt;]</div><div id="104"><svg xmlns="http://www.w3.org/2000/svg" id="foo">
+
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+  - <div id="103">//["'`--&gt;]]&gt;]</div><div id="104">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0308
+  class: script-element
+  payload: '<div id="114"><x style="background:url(''x[a];color:red;/*'')">XXX</x>//["''`-->]]>]</div><div id="115"><!--[if]><script>alert(115)</script -->
+
+    <!--[if<img src=x onerror=alert(2)//]> -->//["''`-->]]>]</div>'
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: '<div id="114">XXX//["''`--&gt;]]&gt;]</div><div id="115">
+
+    //["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0309
+  class: script-element
+  payload: "<div id=\"120\"><script>\nfunction makePopups(){\n    for (i=1;i<6;i++) {\n        window.open('popup.html','spam'+i,'width=50,height=50');\n    }\n}\n</script>\n<body>\n<a href=\"#\" onclick=\"makePopups()\">Spam</a>//[\"'`-->]]>]</div>"
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: window.open
+  expected_upstream: '<div id="120">
+
+
+    <a href="#">Spam</a>//["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0310
+  class: script-element
+  payload: '<div id="123"><span class=foo>Some text</span>
+
+    <a class=bar href="http://www.example.org">www.example.org</a>
+
+    <script src="http://code.jquery.com/jquery-1.4.4.js"></script>
+
+    <script>
+
+    $("span.foo").click(function() {
+
+    alert(''foo'');
+
+    $("a.bar").click();
+
+    });
+
+    $("a.bar").click(function() {
+
+    alert(''bar'');
+
+    location="http://html5sec.org";
+
+    });
+
+    </script>//["''`-->]]>]</div>'
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - '<div id="123"><span class="foo">Some text</span>
+
+    <a href="http://www.example.org" class="bar">www.example.org</a>
+
+
+    //["''`--&gt;]]&gt;]</div>'
+  - '<div id="123"><span class="foo">Some text</span>
+
+    <a class="bar" href="http://www.example.org">www.example.org</a>
+
+
+    //["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0311
+  class: script-element
+  payload: "<div id=\"124\"><script src=\"/example.com\foo.js\"></script> // Safari 5.0, Chrome 9, 10\n<script src=\"\\example.com\foo.js\"></script> // Safari 5.0//[\"'`-->]]>]</div>"
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: "<div id=\"124\"> // Safari 5.0, Chrome 9, 10\n // Safari 5.0//[\"'`--&gt;]]&gt;]</div>"
+- id: XSS-DP-0312
+  class: script-element
+  payload: '<div id="129"><svg><image style=''filter:url("data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22><script>parent.alert(129)</script></svg>")''>
+
+    <!--
+
+    Same effect with
+
+    <image filter=''...''>
+
+    -->
+
+    </svg>//["''`-->]]>]</div>'
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Inline SVG (data-uri)
+  expected_upstream:
+  - '<div id="129"><svg><image style="filter:url(&quot;data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22&gt;&lt;script&gt;parent.alert(129)&lt;/script&gt;&lt;/svg&gt;&quot;)">
+
+
+    </image></svg>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="129"><svg><image style="filter:url(&quot;data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22><script>parent.alert(129)</script></svg>&quot;)">
+
+
+    </image></svg>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="129"><svg><image>
+
+
+    </image></svg>//["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0313
+  class: script-element
+  payload: <div id="15"><script>({0:#0=alert/#0#/#0#(0)})</script>//["'`-->]]>]</div>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="15">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0314
+  class: script-element
+  payload: <div id="18"><script xmlns="http://www.w3.org/1999/xhtml">alert(1)</script>//["'`-->]]>]</div>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="18">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0315
+  class: script-element
+  payload: <div id="20"><script>ReferenceError.prototype.__defineGetter__('name', function(){alert(20)}),x</script>//["'`-->]]>]</div>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="20">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0316
+  class: script-element
+  payload: <div id="21"><script>Object.__noSuchMethod__ = Function,[{}][0].constructor._('alert(21)')()</script>//["'`-->]]>]</div>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="21">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0317
+  class: script-element
+  payload: <div id="25"><script src="#">{alert(25)}</script>;1//["'`-->]]>]</div>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="25">;1//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0318
+  class: script-element
+  payload: <div id="3"><meta charset="x-imap4-modified-utf7">&<script&S1&TS&1>alert&A7&(1)&R&UA;&&<&A9&11/script&X&>//["'`-->]]>]</div>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="3">&amp;alert&amp;A7&amp;(1)&amp;R&amp;UA;&amp;&amp;&lt;&amp;A9&amp;11/script&amp;X&amp;&gt;//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0319
+  class: script-element
+  payload: <div id="4">0?<script>Worker("#").onmessage=function(_)eval(_.data)</script> :postMessage(importScripts('data:;base64,cG9zdE1lc3NhZ2UoJ2FsZXJ0KDEpJyk'))//["'`-->]]>]</div>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="4">0? :postMessage(importScripts('data:;base64,cG9zdE1lc3NhZ2UoJ2FsZXJ0KDEpJyk'))//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0320
+  class: script-element
+  payload: <div id="47"><svg xmlns="http://www.w3.org/2000/svg"><script>alert(47)</script></svg>//["'`-->]]>]</div>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="47"><svg xmlns="http://www.w3.org/2000/svg"></svg>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0321
+  class: script-element
+  payload: <div id="48"><SCRIPT FOR=document EVENT=onreadystatechange>alert(48)</SCRIPT>//["'`-->]]>]</div>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="48">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0322
+  class: script-element
+  payload: <div id="5"><script>crypto.generateCRMFRequest('CN=0',0,0,null,'alert(5)',384,null,'rsa-dual-use')</script>//["'`-->]]>]</div>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="5">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0323
+  class: script-element
+  payload: <div id="54"><script>[{'a':Object.prototype.__defineSetter__('b',function(){alert(arguments[0])}),'b':['secret']}]</script>//["'`-->]]>]</div>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="54">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0324
+  class: script-element
+  payload: <div id="57"><b <script>alert(57)//</script>0</script></b>//["'`-->]]>]</div>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="57"><b>alert(57)//0</b>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0325
+  class: script-element
+  payload: <div id="58"><b><script<b></b><alert(58)</script </b></b>//["'`-->]]>]</div>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="58"><b></b>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0326
+  class: script-element
+  payload: <div id="59"><div id="div1"><input value="``onmouseover=alert(59)"></div> <div id="div2"></div><script>document.getElementById("div2").innerHTML = document.getElementById("div1").innerHTML;</script>//["'`-->]]>]</div>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="59"><div id="div1"><input value="``onmouseover=alert(59)"></div> <div id="div2"></div>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0327
+  class: script-element
+  payload: <div id="6"><script>({set/**/$($){_/**/setter=$,_=1}}).$=alert</script>//["'`-->]]>]</div>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="6">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0328
+  class: script-element
+  payload: <div id="75"><script<{alert(75)}/></script </>//["'`-->]]>]</div>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="75">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0329
+  class: script-element
+  payload: '<div id="91">[A]
+
+    <? foo="><script>alert(91)</script>">
+
+    <! foo="><script>alert(91)</script>">
+
+    </ foo="><script>alert(91)</script>">
+
+    [B]
+
+    <? foo="><x foo=''?><script>alert(91)</script>''>">
+
+    [C]
+
+    <! foo="[[[x]]"><x foo="]foo><script>alert(91)</script>">
+
+    [D]
+
+    <% foo><x foo="%><script>alert(91)</script>">//["''`-->]]>]</div>'
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: '<div id="91">[A]
+
+    "&gt;
+
+    "&gt;
+
+    "&gt;
+
+    [B]
+
+    "&gt;
+
+    [C]
+
+
+    [D]
+
+    &lt;% foo&gt;//["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0330
+  class: script-element
+  payload: '<div id="97"><!-- IE 5-9 -->
+
+    <div id=d><x xmlns="><iframe onload=alert(97)"></div>
+
+    <script>d.innerHTML+='''';</script>
+
+    <!-- IE 10 in IE5-9 Standards mode -->
+
+    <div id=d><x xmlns=''"><iframe onload=alert(2)//''></div>
+
+    <script>d.innerHTML+='''';</script>//["''`-->]]>]</div>'
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: '<div id="97">
+
+    <div id="d"></div>
+
+
+
+    <div id="d"></div>
+
+    //["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0331
+  class: script-element
+  payload: "<div id=\"98\"><div id=d><div style=\"font-family:'sans\x17\x02F\x02A\x12\x02A\x02F\x03B color\x03Ared\x03B'\">X</div></div>\n<script>with(document.getElementById(\"d\"))innerHTML=innerHTML</script>//[\"'`-->]]>]</div>"
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - "<div id=\"98\"><div id=\"d\"><div style=\"font-family:'sans\x17\x02F\x02A\x12\x02A\x02F\x03B color\x03Ared\x03B'\">X</div></div>\n//[\"'`--&gt;]]&gt;]</div>"
+  - '<div id="98"><div id="d"><div style=''font-family: "sans&#23;&#2;F&#2;A&#18;&#2;A&#2;F&#3;B color&#3;Ared&#3;B";''>X</div></div>
+
+    //["''`--&gt;]]&gt;]</div>'
+  - '<div id="98"><div id="d"><div style="font-family:''sans&#23;&#2;F&#2;A&#18;&#2;A&#2;F&#3;B color&#3;Ared&#3;B''">X</div></div>
+
+    //["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0332
+  class: script-element
+  payload: <div><script src=x></script></div>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/bootstrap-test-suite.js
+- id: XSS-DP-0333
+  class: script-element
+  payload: <option><iframe></select><b><script>alert(1)</script>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs, test/test-suite.js
+  title: Iframe inside option element
+  expected_upstream: <option></option>
+- id: XSS-DP-0334
+  class: script-element
+  payload: <script>123</script>
+  expect: No script element survives sanitization.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0335
+  class: script-element
+  payload: <script>var a = 1;</script><p><b>no not preserve me</b></p><a><i>preserve me</i></a>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0336
+  class: script-element
+  payload: <svg><script>1</script></svg>
+  expect: No script element survives sanitization.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0337
+  class: script-element
+  payload: <svg><script>alert(1)</script></svg>
+  expect: No script element survives sanitization.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0338
+  class: svg-event-handler
+  payload: '<!-- IE9+, FF4+, Opera 11.60+, Safari 4.0.4+, GC7+  -->
+
+    <svg><![CDATA[><image xlink:href="]]><img src=x onerror=alert(2)//"></svg>//["''`-->]]>]</div>'
+  expect: No SVG event attribute (onbegin, onload, or peers) survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <svg>&gt;&lt;image xlink:href="</svg><img src="x">//["'`--&gt;]]&gt;]
+- id: XSS-DP-0339
+  class: svg-event-handler
+  payload: <div id="11"><svg xmlns="http://www.w3.org/2000/svg"><g onload="javascript:alert(11)"></g></svg>//["'`-->]]>]</div>
+  expect: No SVG event attribute (onbegin, onload, or peers) survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="11"><svg xmlns="http://www.w3.org/2000/svg"><g></g></svg>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0340
+  class: svg-event-handler
+  payload: <div id="65"><svg onload="javascript:alert(65)" xmlns="http://www.w3.org/2000/svg"></svg>//["'`-->]]>]</div><div id="66"><?xml version="1.0"?>
+  expect: No SVG event attribute (onbegin, onload, or peers) survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="65"><svg xmlns="http://www.w3.org/2000/svg"></svg>//["'`--&gt;]]&gt;]</div><div id="66"></div>
+- id: XSS-DP-0341
+  class: svg-event-handler
+  payload: '<div id="86"><body oninput=alert(86)><input autofocus>//["''`-->]]>]</div><div id="87"><svg xmlns="http://www.w3.org/2000/svg">
+
+    <a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="javascript:alert(87)"><rect width="1000" height="1000" fill="white"/></a>
+
+    </svg>//["''`-->]]>]</div>'
+  expect: No SVG event attribute (onbegin, onload, or peers) survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: '<div id="86"><input>//["''`--&gt;]]&gt;]</div><div id="87"><svg xmlns="http://www.w3.org/2000/svg">
+
+    <a xmlns:xlink="http://www.w3.org/1999/xlink"><rect width="1000" height="1000" fill="white"></rect></a>
+
+    </svg>//["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0342
+  class: svg-event-handler
+  payload: <image name=activeElement><svg onload=alert(1)>
+  expect: No SVG event attribute (onbegin, onload, or peers) survives sanitization.
+  core: true
+  source_file: test/fixtures/expect.mjs
+  title: DOM clobbering attack using activeElement
+  expected_upstream: <img><svg></svg>
+- id: XSS-DP-0343
+  class: svg-event-handler
+  payload: <image name=body><image name=adoptNode>@mmrupp<image name=firstElementChild><svg onload=alert(1)>
+  expect: No SVG event attribute (onbegin, onload, or peers) survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: DOM clobbering attack using name=body
+  expected_upstream: <img><img>@mmrupp<img><svg></svg>
+- id: XSS-DP-0344
+  class: svg-event-handler
+  payload: <image name=body><img src=x><svg onload=alert(1); autofocus>, <keygen onfocus=alert(1); autofocus>
+  expect: No SVG event attribute (onbegin, onload, or peers) survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: DOM clobbering attack using name=body and injecting SVG + keygen
+  expected_upstream: <img><img src="x"><svg>, </svg>
+- id: XSS-DP-0345
+  class: svg-event-handler
+  payload: '<input x=javascript: autofocus onfocus=alert(1)><svg id=1 onload=alert(1)></svg>'
+  expect: No SVG event attribute (onbegin, onload, or peers) survives sanitization.
+  core: true
+  source_file: test/fixtures/expect.mjs
+  title: Bypass using unknown attributes IV
+  expected_upstream: <input><svg id="1"></svg>
+- id: XSS-DP-0346
+  class: svg-event-handler
+  payload: <svg onload=alert(1)><filter><feGaussianBlur /></filter></svg>
+  expect: No SVG event attribute (onbegin, onload, or peers) survives sanitization.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0347
+  class: svg-event-handler
+  payload: <svg><foreignobject><xmp><img src=x onerror=alert(1)></xmp></foreignobject></svg>
+  expect: No SVG event attribute (onbegin, onload, or peers) survives sanitization.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0348
+  class: svg-event-handler
+  payload: 1<script>alert(1)</script><svg onload=alert(1)><filter><feGaussianBlur /></filter></svg>
+  expect: No SVG event attribute (onbegin, onload, or peers) survives sanitization.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0349
+  class: svg-event-handler
+  payload: a<svg><xss><desc><noscript>&lt;/noscript>&lt;/desc>&lt;s>&lt/s>&lt;style>&lt;a title="&lt;/style>&lt;img src onerror=alert(1)>">
+  expect: No SVG event attribute (onbegin, onload, or peers) survives sanitization.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Test against fake-element-based namepsace-confusion abusing mXSS attacks 1/2
+  expected_upstream: a<svg><desc></desc></svg>
+- id: XSS-DP-0350
+  class: template-content
+  payload: <body><template><s><template><s><img src=x onerror=alert(1)>@shafigullin</s></template></s></template>
+  expect: Template content is sanitized too, not skipped as inert.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Img element inside shadow DOM template
+  expected_upstream: <template><s><template><s><img src="x">@shafigullin</s></template></s></template>
+- id: XSS-DP-0351
+  class: template-content
+  payload: '<div id="135"><?xml-stylesheet type="text/xsl" href="#" ?>
+
+    <stylesheet xmlns="http://www.w3.org/TR/WD-xsl">
+
+    <template match="/">
+
+    <eval>new ActiveXObject(''htmlfile'').parentWindow.alert(135)</eval>
+
+    <if expr="new ActiveXObject(''htmlfile'').parentWindow.alert(2)"></if>
+
+    </template>
+
+    </stylesheet>//["''`-->]]>]</div>'
+  expect: Template content is sanitized too, not skipped as inert.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: SVG
+  expected_upstream:
+  - '<div id="135">
+
+
+    <template>
+
+
+
+    </template>
+
+    //["''`--&gt;]]&gt;]</div>'
+  - '<div id="135">
+
+
+    <template>
+
+    new ActiveXObject(''htmlfile'').parentWindow.alert(135)
+
+
+    </template>
+
+    //["''`--&gt;]]&gt;]</div>'
+  - '<div id="135">
+
+
+    <template>
+
+    new ActiveXObject(''htmlfile'').parentWindow.alert(135)
+
+    <head></head><body></body>
+
+    </template>
+
+    //["''`--&gt;]]&gt;]</div>'
+  - '<div id="135">
+
+
+
+    //["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0352
+  class: template-content
+  payload: <math></br><textarea><mtext><template><style></textarea><img src=x onerror=alert(1)>
+  expect: Template content is sanitized too, not skipped as inert.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Tests against mXSS behavior with MathML Templates in Chrome 77 and alike
+  expected_upstream:
+  - ''
+  - <math></math>
+  - <math></math><br><textarea>&lt;mtext&gt;&lt;template&gt;&lt;style&gt;</textarea><img src="x">
+  - <math></math><br><img src="x">
+- id: XSS-DP-0353
+  class: template-content
+  payload: <section><template shadowrootmode="open">
+  expect: Template content is sanitized too, not skipped as inert.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0354
+  class: template-content
+  payload: <select><template><img src=x onerror=alert(1)></template></select>
+  expect: Template content is sanitized too, not skipped as inert.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Tests against removal of templates inside select elements
+  expected_upstream: <select><template><img src="x"></template></select>
+- id: XSS-DP-0355
+  class: template-content
+  payload: <svg></p><title><template><style></title><img src=x onerror=alert(1)>
+  expect: Template content is sanitized too, not skipped as inert.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Tests against mXSS behavior with SVG Templates in Chrome 77 and alike
+  expected_upstream:
+  - ''
+  - <svg></svg><p></p><title>&lt;template&gt;&lt;style&gt;</title><img src="x">
+  - <svg></svg><p></p><img src="x">
+  - <svg><title><template></template></title></svg>
+  - <svg xmlns="http://www.w3.org/2000/svg"><title><template></template></title></svg>
+  - <svg xmlns="http://www.w3.org/2000/svg"><title><template></template></title></title></svg></svg>
+  - <svg><title></title></svg>
+- id: XSS-DP-0356
+  class: template-content
+  payload: <template for="account-panel"><b>x</b></template>
+  expect: Template content is sanitized too, not skipped as inert.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0357
+  class: template-content
+  payload: <template><s>000</s></template>
+  expect: Template content is sanitized too, not skipped as inert.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0358
+  class: template-content
+  payload: 1<template><s>000</s></template>2
+  expect: Template content is sanitized too, not skipped as inert.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0359
+  class: unclassified
+  payload: <div id="119"><iframe src="view-source:http://www.example.org/" frameborder="0" style="width:400px;height:180px"></iframe>
+  expect: The payload executable content (script, handlers, dangerous schemes) must be gone or inert in the output; class assigned by manual review pending.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: view-source
+  expected_upstream: <div id="119"></div>
+- id: XSS-DP-0360
+  class: unclassified
+  payload: <iframe src="https://evil.com"></iframe>
+  expect: The payload executable content (script, handlers, dangerous schemes) must be gone or inert in the output; class assigned by manual review pending.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0361
+  class: unclassified
+  payload: <iframe src="x"></iframe>
+  expect: The payload executable content (script, handlers, dangerous schemes) must be gone or inert in the output; class assigned by manual review pending.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0362
+  class: unclassified
+  payload: <iframe>Hello</iframe>
+  expect: The payload executable content (script, handlers, dangerous schemes) must be gone or inert in the output; class assigned by manual review pending.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0363
+  class: unclassified
+  payload: <object data="x"></object>
+  expect: The payload executable content (script, handlers, dangerous schemes) must be gone or inert in the output; class assigned by manual review pending.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0364
+  class: uri-scheme
+  payload: <a href="{{}}javascript:alert(1)">x</a>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0365
+  class: uri-scheme
+  payload: <a href="}}javascript:alert(1)"></a>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0366
+  class: uri-scheme
+  payload: <a href="javascript:123" onclick="alert(1)">CLICK ME (bypass by @shafigullin)</a>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Bypass using DOM bugs when dealing with JS URIs in arbitrary attributes
+  expected_upstream: <a>CLICK ME (bypass by @shafigullin)</a>
+- id: XSS-DP-0367
+  class: uri-scheme
+  payload: "<a href=\"\x01java\x03script:alert(1)\">@shafigullin<a>"
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Low-range-ASCII obfuscated JavaScript URI
+  expected_upstream: <a>@shafigullin</a><a></a>
+- id: XSS-DP-0368
+  class: uri-scheme
+  payload: <a href="javascript:alert(1)">x</a>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: true
+  source_file: test/test-suite.js
+- id: XSS-DP-0369
+  class: uri-scheme
+  payload: <a href="x}}javascript:alert(1)">y</a>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0370
+  class: uri-scheme
+  payload: <b href="javascript:alert(1)" title="javascript:alert(2)"></b>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: 'safe usage of URI-like attribute values (see #135)'
+  expected_upstream: <b title="javascript:alert(2)"></b>
+- id: XSS-DP-0371
+  class: uri-scheme
+  payload: <button remove=me onmousedown="javascript:alert(1);" onclick="javascript:alert(1)" >@giutro
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Bypass using event handlers and unknown attributes
+  expected_upstream: <button>@giutro</button>
+- id: XSS-DP-0372
+  class: uri-scheme
+  payload: '<div id="125"><?xml version="1.0"?><?xml-stylesheet type="text/xml" href="#stylesheet"?><!DOCTYPE doc [<!ATTLIST xsl:stylesheet  id    ID    #REQUIRED>]><svg xmlns="http://www.w3.org/2000/svg">    <xsl:stylesheet id="stylesheet" version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">        <xsl:template match="/">            <iframe xmlns="http://www.w3.org/1999/xhtml" src="javascript:alert(125)"></iframe>        </xsl:template>    </xsl:stylesheet>    <circle fill="red" r="40"></circle></svg>//["''`-->]]>]</div>'
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - <div id="125">]&gt;<svg xmlns="http://www.w3.org/2000/svg">        <circle fill="red" r="40"></circle></svg>//["'`--&gt;]]&gt;]</div>
+  - <div id="125">]&gt;<svg xmlns="http://www.w3.org/2000/svg">                                        <circle fill="red" r="40"></circle></svg>//["'`--&gt;]]&gt;]</div>
+  - <div id="125">]&gt;<svg xmlns="http://www.w3.org/2000/svg">        <circle fill="red" r="40" /></svg>//["'`--&gt;]]&gt;]</div>
+  - <div id="125">]&gt;<svg xmlns="http://www.w3.org/2000/svg">                                        <circle fill="red" r="40" /></svg>//["'`--&gt;]]&gt;]</div>
+  - <div id="125">]&gt;//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0373
+  class: uri-scheme
+  payload: '<div id="137"><svg>
+
+    <a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="?">
+
+    <circle r="400"></circle>
+
+    <animate attributeName="xlink:href" begin="0" from="javascript:alert(137)" to="&" />
+
+    </a>//["''`-->]]>]</div>'
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: SVG
+  expected_upstream: '<div id="137"><svg>
+
+    <a xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="?">
+
+    <circle r="400"></circle>
+
+
+    </a>//["''`--&gt;]]&gt;]</svg></div>'
+- id: XSS-DP-0374
+  class: uri-scheme
+  payload: <div id="17"><?xml-stylesheet href="javascript:alert(17)"?><root/>//["'`-->]]>]</div>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="17">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0375
+  class: uri-scheme
+  payload: <div id="32"><table background="javascript:alert(32)"></table>//["'`-->]]>]</div>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="32"><table></table>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0376
+  class: uri-scheme
+  payload: <div id="33"><a style="pointer-events:none;position:absolute;"><a style="position:absolute;" onclick="alert(33);">XXX</a></a><a href="javascript:alert(2)">XXX</a>//["'`-->]]>]</div>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="33"><a style="pointer-events:none;position:absolute;"></a><a style="position:absolute;">XXX</a><a>XXX</a>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0377
+  class: uri-scheme
+  payload: <div id="35">1<a href=#><line xmlns=urn:schemas-microsoft-com:vml style=behavior:url(#default#vml);position:absolute href=javascript:alert(35) strokecolor=white strokeweight=1000px from=0 to=1000 /></a>//["'`-->]]>]</div>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="35">1<a href="#"></a>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0378
+  class: uri-scheme
+  payload: <div id="36"><a style="behavior:url(#default#AnchorClick);" folder="javascript:alert(36)">XXX</a>//["'`-->]]>]</div>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="36"><a style="behavior:url(#default#AnchorClick);">XXX</a>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0379
+  class: uri-scheme
+  payload: <div id="42"><head><base href="javascript://"/></head><body><a href="/. /,alert(42)//#">XXX</a></body>//["'`-->]]>]</div>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="42"><a href="/. /,alert(42)//#">XXX</a>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0380
+  class: uri-scheme
+  payload: <div id="49"><OBJECT CLASSID="clsid:333C7BC4-460F-11D0-BC04-0080C7055A83"><PARAM NAME="DataURL" VALUE="javascript:alert(49)"></OBJECT>//["'`-->]]>]</div>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="49">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0381
+  class: uri-scheme
+  payload: <div id="50"><object data="data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg=="></object>//["'`-->]]>]</div>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="50">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0382
+  class: uri-scheme
+  payload: <div id="51"><embed src="data:text/html;base64,PHNjcmlwdD5hbGVydCgxKTwvc2NyaXB0Pg=="></embed>//["'`-->]]>]</div>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="51">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0383
+  class: uri-scheme
+  payload: '<div id="63"><embed src="javascript:alert(63)"></embed> // O10.10↓, OM10.0↓, GC6↓, FF
+
+    <img src="javascript:alert(2)">
+
+    <image src="javascript:alert(2)"> // IE6, O10.10↓, OM10.0↓
+
+    <script src="javascript:alert(3)"></script> // IE6, O11.01↓, OM10.1↓//["''`-->]]>]</div>'
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: "<div id=\"63\"> // O10.10↓, OM10.0↓, GC6↓, FF\n<img>\n<img> // IE6, O10.10↓, OM10.0↓\n // IE6, O11.01↓, OM10.1↓//[\"'`--&gt;]]&gt;]</div>"
+- id: XSS-DP-0384
+  class: uri-scheme
+  payload: "<div id=\"68\"><doc xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:html=\"http://www.w3.org/1999/xhtml\">\n    <html:style /><x xlink:href=\"javascript:alert(68)\" xlink:type=\"simple\">XXX</x>\n</doc>//[\"'`-->]]>]</div>"
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: "<div id=\"68\">\n    XXX\n//[\"'`--&gt;]]&gt;]</div>"
+- id: XSS-DP-0385
+  class: uri-scheme
+  payload: <div id="69"><card xmlns="http://www.wapforum.org/2001/wml"><onevent type="ontimer"><go href="javascript:alert(69)"/></onevent><timer value="1"/></card>//["'`-->]]>]</div>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="69">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0386
+  class: uri-scheme
+  payload: <div id="74"><a href="javascript:alert(74)"><event-source src="data:application/x-dom-event-stream,Event:click%0Adata:XXX%0A%0A" /></a>//["'`-->]]>]</div>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="74"><a></a>//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0387
+  class: uri-scheme
+  payload: <div id="81"><x xmlns:xlink="http://www.w3.org/1999/xlink" xlink:actuate="onLoad" xlink:href="javascript:alert(81)" xlink:type="simple"/>//["'`-->]]>]</div>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="81">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0388
+  class: uri-scheme
+  payload: <div id="84"><x xmlns:ev="http://www.w3.org/2001/xml-events" ev:event="load" ev:handler="javascript:alert(84)//#x"/>//["'`-->]]>]</div>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <div id="84">//["'`--&gt;]]&gt;]</div>
+- id: XSS-DP-0389
+  class: uri-scheme
+  payload: '<div id="9"><a style="-o-link:''javascript:alert(9)'';-o-link-source:current">X</a>//["''`-->]]>]</div>
+
+
+    <div id="10"><video poster=javascript:alert(10)//></video>//["''`-->]]>]</div>'
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream:
+  - '<div id="9"><a style="-o-link:''javascript:alert(9)'';-o-link-source:current">X</a>//["''`--&gt;]]&gt;]</div>
+
+
+    <div id="10"><video></video>//["''`--&gt;]]&gt;]</div>'
+  - '<div id="9"><a style=''-o-link: "javascript:alert(9)"; -o-link-source: current;''>X</a>//["''`--&gt;]]&gt;]</div>
+
+
+    <div id="10"><video></video>//["''`--&gt;]]&gt;]</div>'
+- id: XSS-DP-0390
+  class: uri-scheme
+  payload: "<div id=\"93\"><div style=\"list-style:url(http://foo.f)\x10url(javascript:alert(93));\">X</div>//[\"'`-->]]>]</div>"
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: "<div id=\"93\"><div style=\"list-style:url(http://foo.f)\x10url(javascript:alert(93));\">X</div>//[\"'`--&gt;]]&gt;]</div>"
+- id: XSS-DP-0391
+  class: uri-scheme
+  payload: '<div onmouseout="javascript:alert(/superevr/)" x=yscript: n>@superevr</div>'
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Bypass using multiple unknown attributes
+  expected_upstream: <div>@superevr</div>
+- id: XSS-DP-0392
+  class: uri-scheme
+  payload: '<form action="javasc
+
+    ript:alert(1)"><button>XXX</button></form>'
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  expected_upstream: <form><button>XXX</button></form>
+- id: XSS-DP-0393
+  class: uri-scheme
+  payload: <img src='javascript:while(1){}'>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: true
+  source_file: test/fixtures/expect.mjs
+  title: Image with JavaScript URI src (DoS on Firefox)
+  expected_upstream: <img>
+- id: XSS-DP-0394
+  class: uri-scheme
+  payload: <isindex src="javascript:" onmouseover="alert(1)" label="bypass by @giutro" />
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Bypass using unknown attributes V
+  expected_upstream: '<form><hr><label>This is a searchable index. Enter search keywords: <input name="isindex" label="bypass by @giutro"></label><hr></form>'
+- id: XSS-DP-0395
+  class: uri-scheme
+  payload: <isindex x="javascript:" onmouseover="alert(1)" label="variation of bypass by @giutro">
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: Bypass using DOM bugs when dealing with JS URIs in arbitrary attributes (II)
+  expected_upstream: '<form><hr><label>This is a searchable index. Enter search keywords: <input label="variation of bypass by @giutro" name="isindex"></label><hr></form>'
+- id: XSS-DP-0396
+  class: uri-scheme
+  payload: <x-a onclick="alert(1)" href="javascript:alert(1)"><img src=x onerror=alert(1)></x-a>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/test-suite.js
+- id: XSS-DP-0397
+  class: uri-scheme
+  payload: '123<a href=''     javascript:alert(1)''>I am a dolphin too!</a>'
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: JavaScript URIs using Unicode LS/PS II
+  expected_upstream: 123<a>I am a dolphin too!</a>
+- id: XSS-DP-0398
+  class: uri-scheme
+  payload: '123<a href=''     javascript:alert(1)''>I am a dolphin!</a>'
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: JavaScript URIs using Unicode LS/PS I
+  expected_upstream: 123<a>I am a dolphin!</a>
+- id: XSS-DP-0399
+  class: uri-scheme
+  payload: 123<a href=' javascript:alert(1)'>CLICK</a><a href='&#xA0javascript:alert(1)'>CLICK</a><a href='&#x1680;javascript:alert(1)'>CLICK</a><a href='&#x180E;javascript:alert(1)'>CLICK</a><a href='&#x2000;javascript:alert(1)'>CLICK</a><a href='&#x2001;javascript:alert(1)'>CLICK</a><a href='&#x2002;javascript:alert(1)'>CLICK</a><a href='&#x2003;javascript:alert(1)'>CLICK</a><a href='&#x2004;javascript:alert(1)'>CLICK</a><a href='&#x2005;javascript:alert(1)'>CLICK</a><a href='&#x2006;javascript:alert(1)'>CLICK</a><a href='&#x2006;javascript:alert(1)'>CLICK</a><a href='&#x2007;javascript:alert(1)'>CLICK</a><a href='&#x2008;javascript:alert(1)'>CLICK</a><a href='&#x2009;javascript:alert(1)'>CLICK</a><a href='&#x200A;javascript:alert(1)'>CLICK</a><a href='&#x200B;javascript:alert(1)'>CLICK</a><a href='&#x205f;javascript:alert(1)'>CLICK</a><a href='&#x3000;javascript:alert(1)'>CLICK</a>
+  expect: The dangerous scheme (javascript:, vbscript:, data:text/html) does not survive in any URL attribute.
+  core: false
+  source_file: test/fixtures/expect.mjs
+  title: JavaScript URIs using Unicode Whitespace
+  expected_upstream: 123<a>CLICK</a><a>CLICK</a><a>CLICK</a><a>CLICK</a><a>CLICK</a><a>CLICK</a><a>CLICK</a><a>CLICK</a><a>CLICK</a><a>CLICK</a><a>CLICK</a><a>CLICK</a><a>CLICK</a><a>CLICK</a><a>CLICK</a><a>CLICK</a><a>CLICK</a><a>CLICK</a><a>CLICK</a>
+notes:
+- Expect text states the invariant, not the exact output string; sanitizers differ in serialization, and the evidence is the invariant holding after a parse of the output, not byte equality.
+- expected_upstream, where present, is DOMPurify's own expected sanitized output (or the acceptable set) from test/fixtures/expect.mjs, kept for reviewer context; the gate verdict uses the invariant, not byte comparison against it.
+- Classification is heuristic (extract-corpus.mjs); per-class counts and the unclassified residue are reported in the lane report of the fix-all program.

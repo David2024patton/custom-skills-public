@@ -1,0 +1,58 @@
+# nextjs.yaml - Critic language file: Next.js.
+# Loaded into every critic brief when stack detection reports the nextjs stack
+# (critic.manifest.json stacks[].languageFile; SOUL section 2 brief assembly).
+# Loads alongside react.yaml and the javascript or typescript file; this file
+# carries the Next.js-specific surface only. Carries verified_as_of and
+# expires 90 days later under the staleness law (SOUL 8.15).
+version: 1
+stack: nextjs
+display_name: "Next.js"
+verified_as_of: "2026-10-28"
+expires: "2027-01-26"
+detection:
+  markers: ["next.config.*", "package.json containing \"next\""]
+  notes: "Fires on a next.config file within depth 2 or a next dependency. The stack's own security script set exists (scripts/nextjs/security.sh); use it."
+toolchain:
+  build: "next build via the project's build script"
+  test: "the family test script"
+  lint: "eslint with the Next.js rule set via the family lint script"
+  format: "the family format script"
+  debug: "diagnostic seam per the family debug rules; debug-check.sh greps for the seam"
+gates:
+  manifest_gates: ["nextjs-lint", "nextjs-debug-check", "nextjs-test"]
+  script_dir: "scripts/nextjs"
+  extra_scripts: ["format.sh", "security.sh", "debug-add.sh"]
+sanitizer:
+  status: canonical
+  canonical: "DOMPurify through isomorphic-dompurify (one import for server and client)"
+  package: "isomorphic-dompurify"
+  license: "MIT for the wrapper; Apache-2.0 or MPL-2.0 for DOMPurify (choose Apache-2.0)"
+  latest_known: {version: "3.4.17 (DOMPurify)", as_of: "2026-10-28"}
+  currency_rule: "Same as javascript.yaml for DOMPurify. The wrapper's jsdom is part of the trusted surface: the wrapper's own known-issues list records that jsdom 28 breaks CommonJS environments such as Next.js on Vercel with ERR_REQUIRE_ESM, with a documented workaround of pinning jsdom to 25.0.1 through package manager overrides; a Next.js project hitting that error and pinning an old jsdom for it must still satisfy the jsdom currency rule in javascript.yaml, and the tension is reported, not silently resolved."
+  config_checks:
+    - "Sanitize on the server for server-rendered HTML and on the client for client-only rendering, with one shared configuration; divergent server and client configs are a finding."
+    - "Every react.yaml check applies (dangerouslySetInnerHTML inventory, markdown pipeline order)."
+  dangerous_sinks:
+    - "dangerouslySetInnerHTML in server components fed by CMS, database, or API content assumed trusted"
+    - "Route handlers or server actions returning user-derived HTML responses without a sanitize pass"
+    - "next.config rewrites or redirects that take user input into Location headers unsanitized (open redirect and header injection surface)"
+  verdict_rules:
+    - "Same as react.yaml; server-side trust assumptions about stored content are reviewed as claims, not facts."
+security_tooling:
+  - "scripts/nextjs/security.sh (headers and configuration checks)"
+  - "osv-scanner and npm audit over package-lock.json"
+  - "the family's web gates (a11y-axe, perf-lhci, visual-diff)"
+dangerous_patterns:
+  - "Security headers absent or weakened in next.config (no CSP, or a CSP with unsafe-inline and unsafe-eval on script-src without a nonce strategy)"
+  - "Image optimization or remote patterns opened to arbitrary hosts"
+  - "Middleware that authenticates by cookie presence rather than session validity"
+review_can:
+  - "Run the gate triple, the format script, and the security script"
+  - "Verify one shared sanitizer configuration across server and client paths"
+review_cannot:
+  - "The nextjs industrial gates were DID-NOT-RUN in the family's own proof-run environment (see untested); verdicts needing them cap per the capability contract"
+untested:
+  - "In the proof run on the critic family itself, the nextjs industrial gates were DID-NOT-RUN in that environment. Carried from laneD lane-report via the critic inventory 2026-10-28."
+sources:
+  - "isomorphic-dompurify repository README (known issues, jsdom pinning), read 2026-10-28"
+  - "Critic inventory 2026-10-28 (gate and UNTESTED records)"

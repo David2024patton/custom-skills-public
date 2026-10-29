@@ -1,0 +1,60 @@
+# dart.yaml - Critic language file: Dart (pure Dart, no Flutter).
+# Loaded into every critic brief when stack detection reports the dart stack
+# (critic.manifest.json stacks[].languageFile; SOUL section 2 brief assembly).
+# Detection separates dart from flutter; the gate set is shared
+# (scripts/dart-flutter) and flutter.yaml is the sibling file. Carries
+# verified_as_of and expires 90 days later under the staleness law (SOUL 8.15).
+version: 1
+stack: dart
+display_name: "Dart"
+verified_as_of: "2026-10-28"
+expires: "2027-01-26"
+detection:
+  markers: ["pubspec.yaml without a flutter section"]
+  notes: "A pubspec.yaml within depth 4 declares the pair; the manifest's negative marker removes dart when the pubspec contains flutter:, leaving the flutter stack. Pure Dart here means CLI, server (shelf and similar), and package code."
+toolchain:
+  build: "dart compile where the project ships binaries; dart analyze is the standing gate"
+  test: "dart test via the family test script"
+  lint: "dart analyze with the project's analysis_options; the family lint script drives it"
+  format: "dart format; a file it would rewrite is a finding"
+  debug: "logging based diagnostic seam; debug-check.sh greps for the seam"
+gates:
+  manifest_gates: ["dart-flutter-lint", "dart-flutter-debug-check", "dart-flutter-test"]
+  script_dir: "scripts/dart-flutter"
+  extra_scripts: ["vuln.sh", "debug-add.sh"]
+  shared_with: "flutter (one gate set serves both stacks)"
+sanitizer:
+  status: weak
+  canonical: "sanitize_html (pub.dev), with reservations stated below"
+  package: "sanitize_html"
+  license: "BSD-3-Clause (package license; verify at refresh)"
+  latest_known: {version: "unversioned in this file", as_of: "2026-10-28"}
+  currency_rule: "The package's maintenance is rated poor in current Flutter ecosystem listings (read 2026-10-28). Treat sanitize_html as a weak control: acceptable for markdown-rendered content at small scope, never the sole defense for a rich user HTML surface."
+  preferred_pattern: "Sanitize at the server layer in a stack with a canonical sanitizer (Go and bluemonday, in the go language file) before the HTML ever reaches Dart code. Dart-side sanitization is the fallback, not the plan."
+  config_checks:
+    - "sanitize_html follows GitHub's markdown sanitizing rules and strips all CSS; content that needs styling through sanitization is a design smell to surface, not to work around by loosening the sanitizer."
+    - "Regex-based HTML stripping anywhere in Dart code is a finding on sight; the ecosystem contains regex sanitizers and they are not equivalent to a parser-based allowlist."
+  dangerous_sinks:
+    - "dart:html setInnerHtml or innerHtml assignment without a NodeValidator or sanitizer (web-compiled Dart)"
+    - "Server responses (shelf and similar) writing user strings as text/html without escaping"
+    - "Process or file APIs fed by web input on a Dart server"
+  verdict_rules:
+    - "User HTML rendered in Dart web code with no parser-based sanitize pass: finding, high."
+    - "A regex strip standing in for a sanitizer: finding, high, with the parser-based replacement named."
+security_tooling:
+  - "scripts/dart-flutter/vuln.sh (dart pub outdated based; see untested)"
+  - "osv-scanner over pubspec.lock"
+dangerous_patterns:
+  - "dynamic dispatch on JSON from the wire without a decoding boundary"
+  - "FFI (dart:ffi) pointer handling outside a justified, reviewed hotspot"
+review_can:
+  - "Run the shared gate triple (real dart analyze runs were done against the local Flutter install during the refinement pass)"
+  - "Verify sanitizer presence and class (parser-based vs regex) from source and pubspec"
+review_cannot:
+  - "A real vulnerability scan verdict from the family script in the sandbox (see untested)"
+untested:
+  - "The real dart pub outdated and vuln scan path is UNTESTED (sandbox blocker); exit-2 paths verified. Carried from laneA via the critic inventory 2026-10-28."
+sources:
+  - "sanitize_html package documentation on pub.dev, read 2026-10-28 (sanitizing model, GitHub rules basis)"
+  - "Flutter ecosystem listings, read 2026-10-28 (maintenance rating)"
+  - "Critic inventory 2026-10-28 (gate and UNTESTED records)"
